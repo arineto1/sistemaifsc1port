@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumo Definitivo: Ortografia e Acentuação - IFAM/CEFETMINAS</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #1f2937; /* Cinza escuro, alto contraste */
+            --accent-color: #0c4a6e; /* Azul petróleo para seriedade */
+            --secondary-accent: #0284c7; /* Azul mais vivo para destaques */
+            --highlight-bg: #fffbeb; /* Fundo creme suave */
+            --highlight-border: #fcd34d;
+            --border-color: #e5e7eb;
+            --success-bg: #dcfce7;
+            --success-text: #166534;
+            --danger-bg: #fee2e2;
+            --danger-text: #991b1b;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 20px 60px 20px;
+        }
+
+        /* --- Audio Player --- */
+        .audio-container {
+            background-color: #f8fafc;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .audio-title {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        audio { width: 100%; max-width: 600px; height: 40px; }
+
+        /* --- Typography --- */
+        h1 {
+            color: var(--accent-color);
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 10px;
+            border-bottom: 3px solid var(--secondary-accent);
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            color: var(--accent-color);
+            background-color: #f0f9ff;
+            padding: 10px 15px;
+            border-left: 6px solid var(--secondary-accent);
+            border-radius: 0 8px 8px 0;
+            margin-top: 50px;
+            font-size: 1.6rem;
+        }
+
+        h3 {
+            color: #374151;
+            font-size: 1.25rem;
+            margin-top: 30px;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        p, li { font-size: 1.05rem; }
+
+        /* --- Highlights & Text Effects --- */
+        .destaque {
+            background-color: #fef08a; /* Amarelo marca-texto suave */
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .alert-box {
+            background-color: var(--highlight-bg);
+            border: 1px solid var(--highlight-border);
+            border-left: 5px solid #f59e0b;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+
+        .alert-title {
+            display: block;
+            color: #92400e;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+
+        .example {
+            font-family: 'Consolas', monospace;
+            color: #4b5563;
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+
+        .correct { color: var(--success-text); font-weight: bold; }
+        .wrong { color: var(--danger-text); font-weight: bold; text-decoration: line-through; }
+
+        /* --- Tables --- */
+        .table-wrapper {
+            width: 100%;
+            margin: 20px 0;
+            overflow-x: hidden; /* Evita scroll horizontal */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed; /* Força quebra de linha nas células */
+            font-size: 0.95rem;
+            background: #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background-color: var(--accent-color);
+            color: #fff;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+            word-wrap: break-word;
+        }
+
+        tr:nth-child(even) { background-color: #f9fafb; }
+
+        /* --- Navigation Index --- */
+        .toc {
+            background-color: #fff;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+        .toc h3 { margin-top: 0; border: none; font-size: 1.1rem; }
+        .toc ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+        .toc li a {
+            text-decoration: none;
+            color: var(--secondary-accent);
+            font-weight: 600;
+            background: #f0f9ff;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .toc li a:hover { background: var(--secondary-accent); color: #fff; }
+
+        /* --- Footer Button --- */
+        .footer-action {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 2px solid #f3f4f6;
+        }
+        .btn-quiz {
+            display: inline-block;
+            background-color: var(--secondary-accent);
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 700;
+            padding: 18px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        .btn-quiz:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Áudio -->
+    <div class="audio-container">
+        <span class="audio-title">🎧 Áudio da Aula Completa (Resumo em MP3)</span>
+        <!-- Espaço para o nome do arquivo -->
+        <audio controls>
+            <source src="9ortografia.mp3" type="audio/mpeg">
+            Seu navegador não suporta a reprodução de áudio.
+        </audio>
+    </div>
+
+    <h1>Acentuação e Ortografia para o IFAM</h1>
+    <p style="text-align: center; color: #555; margin-top: -10px;">Foco: Banca Fundação CEFETMINAS | Cargo EBTT</p>
+
+    <!-- Índice Rápido -->
+    <div class="toc">
+        <h3>Navegação Rápida:</h3>
+        <ul>
+            <li><a href="#acentuacao">1. Acentuação Gráfica</a></li>
+            <li><a href="#hifen">2. Uso do Hífen</a></li>
+            <li><a href="#letras">3. Ortografia (Letras)</a></li>
+            <li><a href="#porques">4. Os 4 Porquês</a></li>
+            <li><a href="#cefet">5. Raio-X CEFETMINAS</a></li>
+        </ul>
+    </div>
+
+    <p>Este material condensa as regras eliminatórias. A CEFETMINAS preza pela norma culta rígida. Domine as regras abaixo para transformar dúvidas em pontos.</p>
+
+    <!-- SEÇÃO 1: ACENTUAÇÃO -->
+    <h2 id="acentuacao">1. Acentuação Gráfica (O Algoritmo)</h2>
+    
+    <div class="alert-box">
+        <span class="alert-title">Regra de Ouro da Proparoxítona</span>
+        <p><strong>TODAS</strong> são acentuadas. Sem exceção.<br>
+        Ex: <span class="example">Mé-di-co, Lâm-pa-da, In-ter-im</span> (cuidado com essa!).</p>
+    </div>
+
+    <h3>Monossílabos Tônicos vs. Oxítonas</h3>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 40%">Regra</th>
+                    <th style="width: 30%">Monossílabos<br><small>(1 sílaba forte)</small></th>
+                    <th style="width: 30%">Oxítonas<br><small>(Última forte)</small></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Terminados em <strong>A(s), E(s), O(s)</strong></td>
+                    <td><span class="correct">ACENTUA</span><br>Pá, Pé, Pó</td>
+                    <td><span class="correct">ACENTUA</span><br>Sofá, Café, Cipó</td>
+                </tr>
+                <tr>
+                    <td>Terminados em <strong>EM, ENS</strong></td>
+                    <td><span class="wrong">NÃO ACENTUA</span><br>Trem, Bens</td>
+                    <td><span class="correct">ACENTUA</span><br>Amém, Parabéns</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Paroxítonas (A Regra da Exclusão)</h3>
+    <p>Acentuam-se as paroxítonas terminadas em: <strong>L, N, R, X, PS, Ã(s), ÃO(s), I(s), U(s), UM/UNS e Ditongo</strong>.</p>
+    <p><strong>Macete:</strong> Se acentua na oxítona (a, e, o, em, ens), <span class="destaque">NÃO</span> acentua na paroxítona.</p>
+    <ul>
+        <li><span class="example">Mesa</span> (termina em A -> não acentua).</li>
+        <li><span class="example">Hífen</span> (termina em N -> acentua).</li>
+        <li><span class="example">Hifens</span> (termina em ENS -> não acentua). <strong>PEGUINHA CLÁSSICO!</strong></li>
+    </ul>
+
+    <h3>Regras Especiais (Novo Acordo)</h3>
+    <div class="table-wrapper">
+        <table>
+            <tr>
+                <th>Caso</th>
+                <th>Como Ficou</th>
+                <th>Exemplos</th>
+            </tr>
+            <tr>
+                <td><strong>Ditongos Abertos (ÉI, ÓI)</strong></td>
+                <td>Caiu acento nas <br><strong>Paroxítonas</strong></td>
+                <td><span class="example">Idéia</span> &rarr; <span class="correct">Ideia</span><br><span class="example">Jibóia</span> &rarr; <span class="correct">Jiboia</span><br>⚠️ <em>Herói</em> (oxítona) mantém!</td>
+            </tr>
+            <tr>
+                <td><strong>Hiato (EE / OO)</strong></td>
+                <td>Perdeu o acento</td>
+                <td><span class="correct">Creem, deem, leem, voo, enjoo</span></td>
+            </tr>
+            <tr>
+                <td><strong>Hiato I e U Tônicos</strong></td>
+                <td>Acentua-se se estiver sozinho ou com 's'</td>
+                <td><span class="correct">Sa-í-da, Ba-ú, Pa-ís</span><br>⚠️ <em>Ra-i-nha</em> (antes de NH não acentua)<br>⚠️ <em>Fei-u-ra</em> (após ditongo na paroxítona não acentua)</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 id="hifen">2. O Uso do Hífen</h2>
+    <p>Memorize a lógica geral para prefixos e as exceções que a banca adora.</p>
+
+    <h3>Regra Geral: Os Opostos se Atraem</h3>
+    <ul>
+        <li><strong>Letras Iguais = Separa (-)</strong>: <span class="example">Micro-ondas, Anti-inflamatório.</span></li>
+        <li><strong>Letras Diferentes = Junta</strong>: <span class="example">Autoescola, Infraestrutura, Extraoficial.</span></li>
+        <li><strong>Prefixo + R/S = Junta e Dobra</strong>: <span class="example">Antissocial, Minissaia.</span></li>
+    </ul>
+
+    <h3>Tabela de Exceções Obrigatórias</h3>
+    <div class="table-wrapper">
+        <table>
+            <tbody>
+                <tr>
+                    <td style="width: 30%;"><strong>Prefixo "CO" e "RE"</strong></td>
+                    <td>Sempre <strong>JUNTO</strong>, mesmo com letras iguais.<br><span class="correct">Coordenar, Reestimar, Reescrever.</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Prefixo "SUB"</strong></td>
+                    <td>Usa hífen diante de <strong>B</strong>, <strong>R</strong> ou <strong>H</strong>.<br><span class="correct">Sub-base, Sub-região, Sub-humano.</span></td>
+                </tr>
+                <tr>
+                    <td><strong>CIRCUM e PAN</strong></td>
+                    <td>Usa hífen diante de <strong>Vogal, M, N e H</strong>.<br><span class="correct">Pan-americano, Circum-navegação.</span></td>
+                </tr>
+                <tr>
+                    <td><strong>MAL</strong></td>
+                    <td>Hífen antes de <strong>Vogal, H ou L</strong>.<br><span class="correct">Mal-estar, Mal-humorado, Mal-limpo.</span><br>Nos outros casos, junta: <span class="correct">Malcriado.</span></td>
+                </tr>
+                <tr>
+                    <td><strong>H (Muro)</strong></td>
+                    <td>O H sempre pede hífen após prefixo.<br><span class="correct">Super-homem, Anti-higiênico.</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2 id="letras">3. Ortografia Oficial (Letras Problemáticas)</h2>
+    <p>A Fundação CEFETMINAS gosta de testar sua memória visual.</p>
+
+    <div class="table-wrapper">
+        <table>
+            <tr>
+                <th>Regra</th>
+                <th>Explicação e Exemplos</th>
+            </tr>
+            <tr>
+                <td><strong>S vs Z</strong> (Sufixos)</td>
+                <td>
+                    <strong>-ÊS/-ESA</strong> (Origem/Título): <span class="example">Português, Baronesa</span> (com S).<br>
+                    <strong>-EZ/-EZA</strong> (Substantivo abstrato de adjetivo): <span class="example">Belo &rarr; Beleza, Rápido &rarr; Rapidez</span> (com Z).<br>
+                    <strong>-ISAR vs -IZAR</strong>: Se a raiz tem S, mantém S (<span class="example">Análise &rarr; Analisar</span>). Se não tem, usa Z (<span class="example">Atual &rarr; Atualizar</span>).
+                </td>
+            </tr>
+            <tr>
+                <td><strong>X vs CH</strong></td>
+                <td>
+                    Usa-se <strong>X</strong> após ditongos (<span class="example">Caixa, Peixe</span>).<br>
+                    Usa-se <strong>X</strong> após "EN-" (<span class="example">Enxada, Enxame</span>). <em>Exceção: Encher (vem de cheio).</em><br>
+                    Usa-se <strong>X</strong> após "ME-" (<span class="example">Mexer, Mexicano</span>). <em>Exceção: Mecha (cabelo).</em>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>G vs J</strong></td>
+                <td>
+                    <strong>Viagem</strong> (Substantivo) vs <strong>Viajem</strong> (Verbo).<br>
+                    Verbos em <strong>-JAR</strong> mantêm o J: <span class="example">Arranjar &rarr; Arranjem; Viajar &rarr; Viajem.</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 id="porques">4. O Uso dos Porquês</h2>
+    <p>Este quadro mata 90% das questões de múltipla escolha.</p>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 25%">Forma</th>
+                    <th style="width: 35%">Quando usar</th>
+                    <th style="width: 40%">Exemplo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Por que</strong><br>(Separado/Sem acento)</td>
+                    <td>Início de pergunta ou substituível por <em>"pelo qual"</em> / <em>"por qual razão"</em>.</td>
+                    <td><span class="example">Por que você estuda?</span><br><span class="example">O caminho por que passei.</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Por quê</strong><br>(Separado/Com acento)</td>
+                    <td>Final de frase ou isolado (perto do ponto).</td>
+                    <td><span class="example">Estuda muito, por quê?</span><br><span class="example">Ele não veio. Não sei por quê.</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Porque</strong><br>(Junto/Sem acento)</td>
+                    <td>Respostas, explicações, causas (Pois).</td>
+                    <td><span class="example">Estudo porque quero passar.</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Porquê</strong><br>(Junto/Com acento)</td>
+                    <td>Substantivo (o motivo). Vem com artigo.</td>
+                    <td><span class="example">Não sei o porquê de tanta dúvida.</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2 id="cefet">5. Raio-X: Tendências CEFETMINAS</h2>
+    
+    <div class="alert-box" style="border-left-color: var(--accent-color);">
+        <span class="alert-title" style="color: var(--accent-color);">COMO CAI NA PROVA</span>
+        <ul>
+            <li><strong>Contextualização:</strong> A banca raramente pergunta "qual está errada" isoladamente. Ela retira um trecho do texto suporte e pergunta se a alteração de uma palavra manteria a correção gramatical.</li>
+            <li><strong>Vocabulário Técnico:</strong> Para professores de Informática, atenção redobrada em termos como:
+                <ul>
+                    <li><span class="example">Mussarela</span> (incorreto popularmente, o oficial é <strong>Muçarela</strong>, mas cuidado se o texto for técnico).</li>
+                    <li><span class="example">Backup</span> (estrangeirismo, deve vir em itálico ou aspas se o enunciado pedir norma culta rigorosa).</li>
+                    <li><span class="example">Leiaute</span> (aportuguesamento de Layout).</li>
+                </ul>
+            </li>
+            <li><strong>A Pegadinha do "Que":</strong> Confusão entre "Por que" (preposição + pronome) e "Porque" (conjunção) em frases longas. Substitua sempre por "Pela qual razão" para testar.</li>
+            <li><strong>Reescrita:</strong> Em questões de reescrita, verifique primeiro a Crase e depois a Acentuação dos verbos no plural (Tem/Têm, Vem/Vêm).</li>
+        </ul>
+    </div>
+
+    <div class="footer-action">
+        <a href="9questoes.html" class="btn-quiz">Ir para Banco de Questões</a>
+        <p style="margin-top: 15px; font-size: 0.9em; color: #666;">Teste seus conhecimentos imediatamente após a leitura.</p>
+    </div>
+
+</div>
+
+</body>
+</html>

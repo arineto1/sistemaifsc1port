@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado CEFETMINAS: Morfologia e Sintaxe</title>
+    <!-- Tailwind CSS para layout e utilitários -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fontes otimizadas para leitura longa: Merriweather (Serifa) e Inter (Sans) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Merriweather', serif;
+            background-color: #fcfbf9; /* Fundo papel suave */
+            color: #2d3748;
+        }
+        h1, h2, h3, button, .sans-font {
+            font-family: 'Inter', sans-serif;
+        }
+        .question-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        .question-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+        .option-label {
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .option-label:hover {
+            background-color: #f7fafc;
+        }
+        input[type="radio"]:checked + div {
+            border-color: #4a5568;
+            background-color: #edf2f7;
+            font-weight: 700;
+        }
+        .quote-box {
+            background-color: #f0f4f8;
+            border-left: 4px solid #4a5568;
+            font-style: italic;
+        }
+        .resolution-box {
+            display: none; /* Oculto inicialmente */
+            border-top: 4px solid #38a169;
+        }
+        .correct-answer-highlight {
+            color: #2f855a;
+            font-weight: bold;
+        }
+        .incorrect-answer-highlight {
+            color: #c53030;
+            text-decoration: line-through;
+        }
+        /* Estilo para impressão do relatório */
+        @media print {
+            .no-print { display: none; }
+            .resolution-box { display: block !important; }
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen pb-12">
+
+    <!-- Cabeçalho -->
+    <header class="bg-slate-900 text-white py-8 px-4 shadow-lg mb-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-3xl md:text-4xl font-bold mb-2 tracking-tight">Simulado Avançado de Morfologia</h1>
+            <p class="text-slate-300 text-lg sans-font">Foco na Banca Fundação CEFETMINAS • Modos e Tempos Verbais</p>
+        </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-4 sm:px-6">
+        
+        <form id="quizForm" class="space-y-12">
+            
+            <!-- Questão 1 -->
+            <div class="question-card rounded-lg p-6 md:p-8" id="q1">
+                <div class="flex justify-between items-center mb-4 border-b pb-2">
+                    <span class="text-sm font-bold text-slate-500 sans-font tracking-wide">QUESTÃO 1</span>
+                    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Difícil</span>
+                </div>
+                <p class="mb-4 text-lg">Leia o fragmento a seguir, extraído de uma crônica reflexiva sobre a passagem do tempo:</p>
+                <blockquote class="quote-box p-4 my-4 rounded text-slate-700">
+                    "Se a memória não nos <strong>falhasse</strong> tanto, talvez a nostalgia não <strong>tivesse</strong> o poder corrosivo que ostenta. Nós <strong>reconstruímos</strong> o passado com tijolos que a imaginação nos <strong>fornece</strong>, e, nesse processo, o que era dor se <strong>atenua</strong>, virando apenas uma cicatriz que <strong>compraz</strong> o portador."
+                </blockquote>
+                <p class="mb-6 font-medium">Considerando a correlação de tempos e modos verbais, bem como a morfologia das formas destacadas, analise as afirmativas abaixo e assinale a alternativa correta:</p>
+                
+                <div class="space-y-3 sans-font text-base">
+                    <label class="block">
+                        <input type="radio" name="q1" value="A" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">A)</span> A forma verbal "falhasse" encontra-se no Pretérito Imperfeito do Subjuntivo e estabelece uma oração condicional contrafactual; sua correlação canônica exigiria "teria", mas o autor optou pelo Subjuntivo ("tivesse") devido à modalidade epistêmica dubitativa de "talvez".
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q1" value="B" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">B)</span> O verbo "reconstruímos" é ambíguo (Presente ou Pretérito Perfeito), mas a presença de "fornece" elimina a ambiguidade, fixando a leitura como hábito atemporal e desqualificando qualquer interpretação de evento concluído.
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q1" value="C" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">C)</span> A forma "compraz" está conjugada incorretamente; segundo a norma culta, deveria ser "compraze", seguindo o modelo regular no Presente do Indicativo para verbos terminados em "-azer".
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q1" value="D" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">D)</span> O uso de "tivesse" na oração principal fere a norma padrão, pois orações principais não admitem o Modo Subjuntivo; a correção exigiria a substituição por "teria", independentemente do advérbio.
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q1" value="E" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">E)</span> O verbo "atenua" apresenta irregularidade na mudança de timbre da vogal temática no Presente do Indicativo, diferentemente de "continuar", o que o classifica como anômalo.
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Questão 2 -->
+            <div class="question-card rounded-lg p-6 md:p-8" id="q2">
+                <div class="flex justify-between items-center mb-4 border-b pb-2">
+                    <span class="text-sm font-bold text-slate-500 sans-font tracking-wide">QUESTÃO 2</span>
+                    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Médio</span>
+                </div>
+                <p class="mb-4 font-medium">Analise a tirinha e o texto verbal nela contido:</p>
+                <div class="bg-gray-100 p-4 rounded mb-4 text-sm font-mono border border-gray-300">
+                    <p><strong>A:</strong> "Quando você <strong>vir</strong> o diretor, entregue estes papéis."</p>
+                    <p><strong>B:</strong> "E se ele não <strong>vier</strong> hoje?"</p>
+                    <p><strong>A:</strong> "Então, <strong>mantenhamos</strong> a calma e <strong>proponhamos</strong> uma nova data."</p>
+                </div>
+                <p class="mb-6 font-medium">Acerca da flexão dos verbos irregulares e seus derivados presentes no diálogo, assinale a assertiva correta:</p>
+                
+                <div class="space-y-3 sans-font text-base">
+                    <label class="block">
+                        <input type="radio" name="q2" value="A" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">A)</span> A forma "vir" no primeiro balão é um erro; tratando-se do verbo "ver", a forma correta do Futuro do Subjuntivo deveria ser "ver" para concordar com "você".
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q2" value="B" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">B)</span> "Vier" corresponde à 3ª pessoa do singular do Futuro do Subjuntivo de "vir"; caso o verbo fosse "intervir", a forma correspondente correta seria "intervier".
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q2" value="C" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">C)</span> "Mantenhamos" e "proponhamos" derivam diretamente do Presente do Indicativo "mantemos" e "propomos", sofrendo apenas a supressão da desinência "-s".
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q2" value="D" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">D)</span> Se o Personagem B utilizasse "rever", a frase correta seria: "Quando você rever o diretor...", para evitar cacofonia no Futuro do Subjuntivo.
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q2" value="E" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">E)</span> O verbo "proponhamos" adota o radical "proponh-", o que é uma idiossincrasia exclusiva dos compostos, não encontrada no primitivo "pôr" (ponamos).
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Questão 3 -->
+            <div class="question-card rounded-lg p-6 md:p-8" id="q3">
+                <div class="flex justify-between items-center mb-4 border-b pb-2">
+                    <span class="text-sm font-bold text-slate-500 sans-font tracking-wide">QUESTÃO 3</span>
+                    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Médio</span>
+                </div>
+                <blockquote class="quote-box p-4 my-4 rounded text-slate-700">
+                    "É imprescindível que os candidatos <strong>se atenham</strong> às regras do edital e <strong>não intervenham</strong> na ordem dos trabalhos, para que a lisura do processo <strong>seja mantida</strong>."
+                </blockquote>
+                <p class="mb-6 font-medium">No que tange à morfologia verbal, vozes verbais e a sintaxe de concordância, é correto afirmar:</p>
+                
+                <div class="space-y-3 sans-font text-base">
+                    <label class="block">
+                        <input type="radio" name="q3" value="A" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">A)</span> A locução "seja mantida" poderia ser convertida para a voz passiva sintética "se mantenha" sem prejuízo gramatical, desde que o sujeito fosse posposto ("se mantenha a lisura").
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q3" value="B" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">B)</span> O verbo "atenham" está no Presente do Subjuntivo, derivado de "ter" (tenha); a forma de terceira pessoa do plural "atenham" está morfologicamente correta e concorda com "candidatos".
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q3" value="C" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">C)</span> A forma "intervenham" está incorreta; sendo derivado de "vir", deveria apresentar a forma "intervenham" (com 'e' aberto) ou "interviam"; a grafia correta seria "intervinham".
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q3" value="D" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">D)</span> Se "manter" fosse substituído por "suspender", a forma correta do particípio na voz passiva analítica seria "suspendida" (regular com ser/estar).
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q3" value="E" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">E)</span> A substituição de "se atenham" por "possuam" exigiria o modo Indicativo, visto que "possuir" denota certeza incompatível com a oração "É imprescindível".
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Questão 4 -->
+            <div class="question-card rounded-lg p-6 md:p-8" id="q4">
+                <div class="flex justify-between items-center mb-4 border-b pb-2">
+                    <span class="text-sm font-bold text-slate-500 sans-font tracking-wide">QUESTÃO 4</span>
+                    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Difícil</span>
+                </div>
+                <p class="mb-4">Leia o texto publicitário ficcional:</p>
+                <blockquote class="quote-box p-4 my-4 rounded text-slate-700">
+                    "Se você <strong>quer</strong> economizar, <strong>venha</strong> para a nossa loja. Não <strong>perca</strong> tempo, <strong>invista</strong> no seu futuro!"
+                </blockquote>
+                <p class="mb-6 font-medium">Transpondo para "Tu" (2ª pessoa singular), mantendo fidelidade aos modos originais, a reescrita correta é:</p>
+                
+                <div class="space-y-3 sans-font text-base">
+                    <label class="block">
+                        <input type="radio" name="q4" value="A" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">A)</span> "Se tu <strong>queres</strong> economizar, <strong>vem</strong> para a nossa loja. Não <strong>percas</strong> tempo, <strong>invista</strong> no teu futuro!"
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q4" value="B" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">B)</span> "Se tu <strong>quer</strong> economizar, <strong>venha</strong> para a nossa loja. Não <strong>perde</strong> tempo, <strong>invista</strong> no teu futuro!"
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q4" value="C" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">C)</span> "Se tu <strong>queres</strong> economizar, <strong>vêm</strong> para a nossa loja. Não <strong>perca</strong> tempo, <strong>invista</strong> no teu futuro!"
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q4" value="D" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">D)</span> "Se tu <strong>queres</strong> economizar, <strong>vem</strong> para a nossa loja. Não <strong>perdes</strong> tempo, <strong>investe</strong> no teu futuro!"
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q4" value="E" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">E)</span> "Se tu <strong>queres</strong> economizar, <strong>vem</strong> para a nossa loja. Não <strong>percas</strong> tempo, <strong>investe</strong> no teu futuro!"
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Questão 5 -->
+            <div class="question-card rounded-lg p-6 md:p-8" id="q5">
+                <div class="flex justify-between items-center mb-4 border-b pb-2">
+                    <span class="text-sm font-bold text-slate-500 sans-font tracking-wide">QUESTÃO 5</span>
+                    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Fácil</span>
+                </div>
+                <blockquote class="quote-box p-4 my-4 rounded text-slate-700">
+                    "Enquanto a chuva <strong>caía</strong> lá fora, ele <strong>leu</strong> todo o relatório que <strong>escrevera</strong> na juventude."
+                </blockquote>
+                <p class="mb-6 font-medium">Sobre o aspecto verbal e o uso dos tempos do pretérito no trecho, assinale a análise correta:</p>
+                
+                <div class="space-y-3 sans-font text-base">
+                    <label class="block">
+                        <input type="radio" name="q5" value="A" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">A)</span> "Caía" denota um aspecto perfectivo, indicando uma ação pontual que ocorreu simultaneamente à leitura.
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q5" value="B" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">B)</span> "Leu" e "caía" estabelecem um contraste aspectual: o primeiro indica a ação concluída (figura), enquanto o segundo indica a ação durativa de fundo (fundo).
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q5" value="C" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">C)</span> "Escrevera" poderia ser substituído por "tinha escrito", porém essa substituição acarretaria uma mudança de sentido para uma ação posterior a "leu".
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q5" value="D" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">D)</span> O uso do Pretérito Mais-que-perfeito simples ("escrevera") é considerado um erro de registro em textos modernos, devendo ser evitado.
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q5" value="E" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">E)</span> Se substituíssemos "caía" por "caiu", o sentido global permaneceria inalterado, pois a relação de simultaneidade independe do aspecto.
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Questão 6 -->
+            <div class="question-card rounded-lg p-6 md:p-8" id="q6">
+                <div class="flex justify-between items-center mb-4 border-b pb-2">
+                    <span class="text-sm font-bold text-slate-500 sans-font tracking-wide">QUESTÃO 6</span>
+                    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Médio</span>
+                </div>
+                <blockquote class="quote-box p-4 my-4 rounded text-slate-700">
+                    "Terminada a <strong>batalha</strong>, os soldados, <strong>exaustos</strong>, retornaram ao acampamento."
+                </blockquote>
+                <p class="mb-6 font-medium">A oração reduzida de particípio "Terminada a batalha" equivale semanticamente a:</p>
+                
+                <div class="space-y-3 sans-font text-base">
+                    <label class="block">
+                        <input type="radio" name="q6" value="A" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">A)</span> "Quando a batalha terminou" (Oração Subordinada Adverbial Temporal).
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q6" value="B" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">B)</span> "Porque a batalha terminou" (Oração Subordinada Adverbial Causal).
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q6" value="C" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">C)</span> "Embora a batalha tenha terminado" (Oração Subordinada Adverbial Concessiva).
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q6" value="D" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">D)</span> "Para que a batalha terminasse" (Oração Subordinada Adverbial Final).
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q6" value="E" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">E)</span> "Se a batalha terminasse" (Oração Subordinada Adverbial Condicional).
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Questão 7 -->
+            <div class="question-card rounded-lg p-6 md:p-8" id="q7">
+                <div class="flex justify-between items-center mb-4 border-b pb-2">
+                    <span class="text-sm font-bold text-slate-500 sans-font tracking-wide">QUESTÃO 7</span>
+                    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Difícil</span>
+                </div>
+                <blockquote class="quote-box p-4 my-4 rounded text-slate-700">
+                    "<strong>Havia</strong> meses que não chovia no sertão. Devem <strong>haver</strong> razões climáticas para isso, mas o povo dizia que <strong>haviam</strong> promessas não cumpridas."
+                </blockquote>
+                <p class="mb-6 font-medium">Identifique a alternativa que avalia corretamente a concordância e a impessoalidade verbal:</p>
+                
+                <div class="space-y-3 sans-font text-base">
+                    <label class="block">
+                        <input type="radio" name="q7" value="A" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">A)</span> O primeiro "Havia" está correto; "Devem haver" está incorreto, devendo ser "Devem haverem"; "haviam" está correto.
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q7" value="B" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">B)</span> O primeiro "Havia" está correto; "Devem haver" está incorreto (o auxiliar deve assumir a impessoalidade: "Deve haver"); "haviam" está incorreto (haver existencial não tem plural).
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q7" value="C" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">C)</span> Todas as ocorrências estão incorretas; a norma exige a substituição por "fazer" ou "existir".
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q7" value="D" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">D)</span> O primeiro "Havia" deveria ser "Haviam"; os demais estão corretos, pois a impessoalidade do verbo "haver" foi abolida no Brasil.
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q7" value="E" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">E)</span> A locução "Devem haver" está correta, pois a impessoalidade de "haver" não se transmite ao auxiliar "dever".
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Questão 8 -->
+            <div class="question-card rounded-lg p-6 md:p-8" id="q8">
+                <div class="flex justify-between items-center mb-4 border-b pb-2">
+                    <span class="text-sm font-bold text-slate-500 sans-font tracking-wide">QUESTÃO 8</span>
+                    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Difícil</span>
+                </div>
+                <p class="mb-6 font-medium">Assinale a alternativa em que a classificação do verbo quanto à predicação e a voz passiva estão em conformidade com a norma padrão:</p>
+                
+                <div class="space-y-3 sans-font text-base">
+                    <label class="block">
+                        <input type="radio" name="q8" value="A" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">A)</span> <strong>Obedecer</strong>: "O regulamento foi obedecido pelos alunos." (Verbo transitivo indireto que aceita voz passiva analítica, uma exceção clássica).
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q8" value="B" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">B)</span> <strong>Gostar</strong>: "O filme foi gostado por todos." (Verbo transitivo indireto que admite passiva pela carga afetiva).
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q8" value="C" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">C)</span> <strong>Ter</strong>: "Muitos carros são tidos pela família." (Verbo transitivo direto de posse que aceita livremente a voz passiva).
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q8" value="D" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">D)</span> <strong>Haver</strong>: "Muitos problemas foram havidos durante a obra." (Verbo impessoal que se torna pessoal na passiva).
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q8" value="E" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">E)</span> <strong>Chegar</strong>: "O destino foi chegado pelos viajantes." (Verbo intransitivo que admite passiva em contextos poéticos).
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Questão 9 -->
+            <div class="question-card rounded-lg p-6 md:p-8" id="q9">
+                <div class="flex justify-between items-center mb-4 border-b pb-2">
+                    <span class="text-sm font-bold text-slate-500 sans-font tracking-wide">QUESTÃO 9</span>
+                    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Avançado</span>
+                </div>
+                <p class="mb-6 font-medium">Assinale a alternativa onde a mudança estrutural (artigo, posição) implica mudança na classificação do modo verbal (Subjuntivo/Indicativo):</p>
+                
+                <div class="space-y-3 sans-font text-base">
+                    <label class="block">
+                        <input type="radio" name="q9" value="A" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">A)</span> "Procuro um funcionário que <strong>fale</strong> inglês." (Indeterminado) vs. "Procuro o funcionário que <strong>fala</strong> inglês." (Determinado).
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q9" value="B" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">B)</span> "Ele é um homem <strong>pobre</strong>." vs. "Ele é um <strong>pobre</strong> homem."
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q9" value="C" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">C)</span> "As crianças, que estavam cansadas, dormiram." vs. "As crianças que estavam cansadas dormiram."
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q9" value="D" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">D)</span> "Recebi a notícia <strong>triste</strong>." vs. "Recebi a <strong>triste</strong> notícia."
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q9" value="E" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">E)</span> "Não encontrei ninguém que <strong>soubesse</strong> a resposta." vs. "Não encontrei ninguém que <strong>sabia</strong> a resposta."
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Questão 10 -->
+            <div class="question-card rounded-lg p-6 md:p-8" id="q10">
+                <div class="flex justify-between items-center mb-4 border-b pb-2">
+                    <span class="text-sm font-bold text-slate-500 sans-font tracking-wide">QUESTÃO 10</span>
+                    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Médio</span>
+                </div>
+                <blockquote class="quote-box p-4 my-4 rounded text-slate-700">
+                    "Se eu <strong>soubesse</strong> que tu não <strong>vinhas</strong>, não teria encomendado o bolo."
+                </blockquote>
+                <p class="mb-6 font-medium">A reescrita que preserva a <em>Correlação Verbal da Norma Culta</em> para uma situação de <strong>futuro do pretérito</strong> na oração principal é:</p>
+                
+                <div class="space-y-3 sans-font text-base">
+                    <label class="block">
+                        <input type="radio" name="q10" value="A" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">A)</span> "Se eu <strong>sabia</strong> que tu não <strong>vinhas</strong>, não tinha encomendado o bolo."
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q10" value="B" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">B)</span> "Caso eu <strong>soubesse</strong> que tu não <strong>virias</strong>, não teria encomendado o bolo."
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q10" value="C" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">C)</span> "Se eu <strong>saiba</strong> que tu não <strong>venhas</strong>, não terei encomendado o bolo."
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q10" value="D" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">D)</span> "Se eu <strong>tivesse sabido</strong> que tu não <strong>vinhas</strong>, não teria encomendado o bolo."
+                        </div>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q10" value="E" class="hidden peer">
+                        <div class="option-label p-4 rounded border border-slate-200 peer-checked:border-slate-600 peer-checked:bg-slate-50">
+                            <span class="font-bold mr-2">E)</span> "Se eu <strong>soubesse</strong> que tu não <strong>viesse</strong>, não teria encomendado o bolo."
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Botão Enviar -->
+            <div class="text-center pt-8">
+                <button type="button" onclick="calcularResultado()" class="bg-slate-800 hover:bg-slate-900 text-white font-bold py-4 px-12 rounded-full shadow-lg transition-transform transform hover:-translate-y-1 text-lg sans-font">
+                    Finalizar Quiz e Ver Resoluções
+                </button>
+            </div>
+        </form>
+
+        <!-- Seção de Resultados e Resoluções (Oculta inicialmente) -->
+        <div id="resultSection" class="hidden mt-12 mb-20 fade-in">
+            
+            <!-- Placar -->
+            <div class="bg-white border-2 border-slate-800 rounded-lg p-8 text-center mb-12 shadow-xl">
+                <h2 class="text-3xl font-bold mb-4 text-slate-800">Resultado Final</h2>
+                <div class="text-5xl font-black text-slate-900 mb-2">
+                    <span id="scoreDisplay">0</span>/10
+                </div>
+                <p id="feedbackMessage" class="text-lg text-slate-600 font-serif italic"></p>
+                <div class="mt-4 text-sm text-slate-500 sans-font">Confira abaixo as resoluções detalhadas de cada questão.</div>
+            </div>
+
+            <!-- Resoluções Dinâmicas -->
+            <div class="space-y-12">
+                
+                <!-- Resolução Q1 -->
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow resolution-box" id="res1">
+                    <h3 class="text-xl font-bold mb-4 text-green-800 sans-font">Resolução da Questão 1</h3>
+                    <p class="mb-4"><strong>Gabarito: Letra A</strong></p>
+                    <div class="prose max-w-none text-slate-700">
+                        <p class="mb-3">A questão exige que você reconheça que a regra "Se + Imperfeito Subj. -> Futuro Pret. Ind." pode ser flexionada por advérbios de dúvida ("Talvez") que exigem o Subjuntivo na oração principal.</p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>Análise da correta (A):</strong> O verbo "falhasse" está no Pretérito Imperfeito do Subjuntivo e indica hipótese. A correlação normal exigiria "teria" na oração principal, mas o advérbio "talvez" atrai o verbo para o Subjuntivo ("tivesse"), criando uma modalidade dubitativa.</li>
+                            <li><strong>Erros das demais:</strong> "Reconstruímos" é Presente (não ambíguo pelo contexto); "Compraz" é a forma correta da 3ª pessoa (não existe "compraze"); Orações principais admitem subjuntivo com dúvida/desejo; "Atenua" é regular foneticamente.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Resolução Q2 -->
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow resolution-box" id="res2">
+                    <h3 class="text-xl font-bold mb-4 text-green-800 sans-font">Resolução da Questão 2</h3>
+                    <p class="mb-4"><strong>Gabarito: Letra B</strong></p>
+                    <div class="prose max-w-none text-slate-700">
+                        <p class="mb-3">O foco é a derivação verbal. Verbos derivados seguem a conjugação dos primitivos.</p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>Verbo Vir (Movimento):</strong> Futuro do Subjuntivo é "Vier". Logo, Intervir -> Intervier.</li>
+                            <li><strong>Verbo Ver (Visão):</strong> Futuro do Subjuntivo é "Vir".</li>
+                            <li>A alternativa B está correta ao afirmar que "Vier" é futuro de Vir e "Intervier" seria a forma derivada correta.</li>
+                            <li><strong>Erro comum:</strong> "Quando você ver" (errado) vs "Quando você vir" (correto para visão).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Resolução Q3 -->
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow resolution-box" id="res3">
+                    <h3 class="text-xl font-bold mb-4 text-green-800 sans-font">Resolução da Questão 3</h3>
+                    <p class="mb-4"><strong>Gabarito: Letra B</strong></p>
+                    <div class="prose max-w-none text-slate-700">
+                        <p class="mb-3">Aborda morfologia de derivados de "Ter" e "Vir".</p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>Correta (B):</strong> "Ater-se" deriva de "Ter". Se "Ter" faz "Tenham" no presente do subjuntivo, "Ater" faz "Atenham".</li>
+                            <li><strong>Erro da A:</strong> A ênclise ("mantenha-se") seria proibida pela conjunção "para que", que atrai o pronome.</li>
+                            <li><strong>Erro da D:</strong> A voz passiva com "Ser" exige particípio irregular (Suspenso), não regular (Suspendido).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Resolução Q4 -->
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow resolution-box" id="res4">
+                    <h3 class="text-xl font-bold mb-4 text-green-800 sans-font">Resolução da Questão 4</h3>
+                    <p class="mb-4"><strong>Gabarito: Letra E</strong></p>
+                    <div class="prose max-w-none text-slate-700">
+                        <p class="mb-3">Uniformidade de tratamento (Tu vs Você).</p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>Regra do Tu:</strong>
+                                <ul class="list-circle pl-5 mt-1">
+                                    <li>Imperativo Afirmativo: Presente do Indicativo sem 's' (Tu queres -> Quer tu; Tu vens -> Vem tu; Tu investes -> Investe tu).</li>
+                                    <li>Imperativo Negativo: Presente do Subjuntivo (Que tu percas -> Não percas tu).</li>
+                                </ul>
+                            </li>
+                            <li>A alternativa E segue rigorosamente: "Vem", "Não percas", "Investe".</li>
+                            <li>A alternativa A erra ao misturar "invista" (Você) no final.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Resolução Q5 -->
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow resolution-box" id="res5">
+                    <h3 class="text-xl font-bold mb-4 text-green-800 sans-font">Resolução da Questão 5</h3>
+                    <p class="mb-4"><strong>Gabarito: Letra B</strong></p>
+                    <div class="prose max-w-none text-slate-700">
+                        <p class="mb-3">Aspecto verbal em narrativa.</p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>Pretérito Imperfeito (Caía):</strong> Ação durativa, inconclusa, serve de "fundo" (background).</li>
+                            <li><strong>Pretérito Perfeito (Leu):</strong> Ação pontual, concluída, é a "figura" (foreground) que avança a história.</li>
+                            <li>A alternativa B descreve exatamente esse contraste aspectual clássico.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Resolução Q6 -->
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow resolution-box" id="res6">
+                    <h3 class="text-xl font-bold mb-4 text-green-800 sans-font">Resolução da Questão 6</h3>
+                    <p class="mb-4"><strong>Gabarito: Letra A</strong></p>
+                    <div class="prose max-w-none text-slate-700">
+                        <p class="mb-3">Orações Reduzidas.</p>
+                        <p>"Terminada a batalha" indica o momento em que a ação principal ocorreu. Equivale a uma Oração Subordinada Adverbial Temporal ("Quando a batalha terminou"). O particípio concorda com o sujeito da reduzida ("batalha").</p>
+                    </div>
+                </div>
+
+                <!-- Resolução Q7 -->
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow resolution-box" id="res7">
+                    <h3 class="text-xl font-bold mb-4 text-green-800 sans-font">Resolução da Questão 7</h3>
+                    <p class="mb-4"><strong>Gabarito: Letra B</strong></p>
+                    <div class="prose max-w-none text-slate-700">
+                        <p class="mb-3">Impessoalidade do verbo Haver.</p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>Haver (Tempo/Existir):</strong> Sempre singular. "Havia meses" (Correto).</li>
+                            <li><strong>Locução Verbal:</strong> O auxiliar herda a impessoalidade. "Devem haver razões" -> "Deve haver razões". O auxiliar vai para o singular.</li>
+                            <li><strong>Plural:</strong> "Haviam promessas" está errado. Deve ser "Havia promessas".</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Resolução Q8 -->
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow resolution-box" id="res8">
+                    <h3 class="text-xl font-bold mb-4 text-green-800 sans-font">Resolução da Questão 8</h3>
+                    <p class="mb-4"><strong>Gabarito: Letra A</strong></p>
+                    <div class="prose max-w-none text-slate-700">
+                        <p class="mb-3">Voz Passiva e Transitividade.</p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Regra Geral: Apenas VTD aceita passiva.</li>
+                            <li><strong>Exceção (A):</strong> O verbo "Obedecer" é Transitivo Indireto (Obedecer a algo), mas aceita voz passiva na norma culta ("O regulamento foi obedecido").</li>
+                            <li>Erro da C: O verbo "Ter" (posse) é VTD mas não aceita passiva ("Carros são tidos" é agramatical).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Resolução Q9 -->
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow resolution-box" id="res9">
+                    <h3 class="text-xl font-bold mb-4 text-green-800 sans-font">Resolução da Questão 9</h3>
+                    <p class="mb-4"><strong>Gabarito: Letra A</strong></p>
+                    <div class="prose max-w-none text-slate-700">
+                        <p class="mb-3">Semântica do Modo (Indicativo vs Subjuntivo) atrelada à determinação.</p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>Indeterminado (Um funcionário):</strong> Não sei se existe, é hipotético -> Subjuntivo ("que fale").</li>
+                            <li><strong>Determinado (O funcionário):</strong> Sei quem é, é fato -> Indicativo ("que fala").</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Resolução Q10 -->
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow resolution-box" id="res10">
+                    <h3 class="text-xl font-bold mb-4 text-green-800 sans-font">Resolução da Questão 10</h3>
+                    <p class="mb-4"><strong>Gabarito: Letra B</strong></p>
+                    <div class="prose max-w-none text-slate-700">
+                        <p class="mb-3">Correlação Verbal avançada.</p>
+                        <p>A frase original "Se eu soubesse que tu não vinhas" usa o imperfeito do indicativo coloquial para indicar futuro do pretérito. Na norma culta, para projetar um futuro a partir de um passado ("soubesse"), usa-se o Futuro do Pretérito: "que tu não <strong>virias</strong>".</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // Gabarito Oficial
+        const correctAnswers = {
+            q1: 'A',
+            q2: 'B',
+            q3: 'B',
+            q4: 'E',
+            q5: 'B',
+            q6: 'A',
+            q7: 'B',
+            q8: 'A',
+            q9: 'A',
+            q10: 'B'
+        };
+
+        function calcularResultado() {
+            let score = 0;
+            const form = document.getElementById('quizForm');
+            const totalQuestions = 10;
+            
+            // Loop para verificar cada questão
+            for (let i = 1; i <= totalQuestions; i++) {
+                const qName = 'q' + i;
+                const selectedOption = form.querySelector(`input[name="${qName}"]:checked`);
+                const card = document.getElementById(qName);
+                const resolutionBox = document.getElementById(`res${i}`);
+                
+                // Resetar estilos anteriores (caso o usuário clique novamente)
+                const options = card.querySelectorAll('.option-label');
+                options.forEach(opt => {
+                    opt.classList.remove('bg-green-100', 'bg-red-100', 'border-green-500', 'border-red-500');
+                    // Resetar texto
+                    const textSpan = opt.querySelector('span'); // A), B), etc.
+                    textSpan.classList.remove('text-green-700', 'text-red-700');
+                });
+
+                // Lógica de verificação
+                if (selectedOption) {
+                    const answer = selectedOption.value;
+                    const correct = correctAnswers[qName];
+                    const parentDiv = selectedOption.nextElementSibling; // A div .option-label
+
+                    if (answer === correct) {
+                        score++;
+                        // Estilo Correto Visual
+                        parentDiv.classList.add('bg-green-100', 'border-green-500');
+                        parentDiv.querySelector('span').classList.add('text-green-700');
+                    } else {
+                        // Estilo Errado Visual
+                        parentDiv.classList.add('bg-red-100', 'border-red-500');
+                        parentDiv.querySelector('span').classList.add('text-red-700');
+                    }
+                }
+                
+                // Sempre destacar a correta visualmente após o submit
+                const correctInput = card.querySelector(`input[value="${correctAnswers[qName]}"]`);
+                if (correctInput) {
+                    const correctLabel = correctInput.nextElementSibling;
+                    // Adiciona um ícone ou borda extra para mostrar qual era a certa
+                    if (!correctInput.checked) {
+                         correctLabel.classList.add('ring-2', 'ring-green-400', 'ring-offset-2');
+                    }
+                }
+
+                // Mostrar resolução
+                resolutionBox.style.display = 'block';
+            }
+
+            // Exibir Seção de Resultados
+            const resultSection = document.getElementById('resultSection');
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const feedbackMessage = document.getElementById('feedbackMessage');
+            
+            resultSection.classList.remove('hidden');
+            scoreDisplay.innerText = score;
+            
+            // Mensagem de feedback baseada na nota
+            if (score === 10) feedbackMessage.innerText = "Excelente! Domínio total da norma culta.";
+            else if (score >= 8) feedbackMessage.innerText = "Muito bom! Você tem um ótimo conhecimento.";
+            else if (score >= 5) feedbackMessage.innerText = "Bom, mas atenção aos detalhes dos verbos irregulares.";
+            else feedbackMessage.innerText = "Vale a pena revisar a morfologia verbal com calma.";
+
+            // Scroll suave até o resultado
+            resultSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado CEFETMINAS: Pronomes</title>
+    <style>
+        :root {
+            --bg-color: #fdfdfd;
+            --text-color: #2d2d2d;
+            --accent-color: #2c5282; /* Azul sóbrio */
+            --border-color: #e2e8f0;
+            --card-bg: #ffffff;
+            --highlight-bg: #f7fafc;
+            --success-color: #2f855a;
+            --error-color: #c53030;
+            --font-main: 'Merriweather', 'Georgia', serif;
+            --font-ui: 'Segoe UI', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        h1 {
+            font-family: var(--font-ui);
+            color: var(--accent-color);
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-family: var(--font-ui);
+            color: #718096;
+            font-size: 1.1rem;
+        }
+
+        .question-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            transition: transform 0.2s ease;
+        }
+
+        .question-header {
+            font-family: var(--font-ui);
+            font-weight: 700;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .question-text {
+            font-size: 1.15rem;
+            margin-bottom: 25px;
+        }
+
+        .base-text {
+            background-color: var(--highlight-bg);
+            border-left: 4px solid var(--accent-color);
+            padding: 20px;
+            margin-bottom: 25px;
+            font-style: italic;
+            color: #4a5568;
+        }
+
+        .options-group {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        .option-item {
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: flex-start;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: var(--font-ui);
+            font-size: 1rem;
+        }
+
+        .option-label:hover {
+            background-color: #edf2f7;
+            border-color: #cbd5e0;
+        }
+
+        input[type="radio"] {
+            margin-top: 6px;
+            margin-right: 15px;
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+
+        /* Estados de Feedback (pós-submissão) */
+        .option-item.correct .option-label {
+            background-color: #c6f6d5;
+            border-color: #9ae6b4;
+            color: #22543d;
+        }
+
+        .option-item.incorrect .option-label {
+            background-color: #fed7d7;
+            border-color: #feb2b2;
+            color: #742a2a;
+        }
+
+        .resolution-box {
+            display: none; /* Escondido inicialmente */
+            margin-top: 25px;
+            padding: 25px;
+            background-color: #f0f4f8;
+            border-radius: 8px;
+            border-top: 3px solid var(--accent-color);
+            font-size: 1rem;
+        }
+
+        .resolution-title {
+            font-family: var(--font-ui);
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .actions {
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        button.btn-primary {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(44, 82, 130, 0.3);
+            transition: all 0.3s;
+            font-family: var(--font-ui);
+        }
+
+        button.btn-primary:hover {
+            background-color: #1a365d;
+            transform: translateY(-2px);
+        }
+
+        #score-panel {
+            display: none;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        #score-panel h2 {
+            margin: 0;
+            font-family: var(--font-ui);
+        }
+
+        strong {
+            font-weight: 700;
+        }
+        
+        .code-snippet {
+            font-family: 'Courier New', monospace;
+            background: #eee;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            .question-card {
+                padding: 25px;
+            }
+        }
+    </style>
+    <!-- Import Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Simulado CEFETMINAS</h1>
+            <div class="subtitle">Emprego de Pronomes e Colocação Pronominal na Norma Culta</div>
+        </header>
+
+        <div id="score-panel">
+            <h2>Seu Resultado: <span id="score-value">0</span>/10</h2>
+            <p id="score-message">Confira as resoluções detalhadas abaixo.</p>
+        </div>
+
+        <form id="quiz-form">
+            <!-- As questões serão injetadas aqui via JavaScript -->
+            <div id="questions-container"></div>
+
+            <div class="actions">
+                <button type="button" class="btn-primary" onclick="submitQuiz()">Finalizar Simulado e Ver Resoluções</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Banco de Dados das Questões
+        const quizData = [
+            {
+                id: 1,
+                title: "Questão 01 (Adaptação Estilo CEFET-MG)",
+                baseText: `"A inteligência artificial, <strong>que</strong> se insere no cotidiano de forma silenciosa, transforma as relações de trabalho. Os algoritmos tomam decisões <strong>cujas</strong> lógicas muitas vezes desconhecemos. Se não <strong>nos</strong> atentarmos aos princípios éticos, a tecnologia, <strong>essa</strong> ferramenta poderosa, poderá tornar-se um instrumento de exclusão."`,
+                question: `No trecho "Se não <strong>nos</strong> atentarmos...", a posição do pronome oblíquo átono justifica-se pela mesma regra que determina a colocação pronominal em:`,
+                options: [
+                    "Deus <strong>te</strong> guie por caminhos seguros nesta jornada.",
+                    "Aquilo <strong>me</strong> deixou extremamente preocupado com o futuro.",
+                    "Em <strong>se</strong> tratando de inovação, o Brasil ainda engatinha.",
+                    "Jamais <strong>o</strong> vi tão apreensivo com as mudanças globais."
+                ],
+                correctIndex: 3, // D
+                resolution: `<strong>Gabarito: D</strong><br><br>
+                <strong>Análise Detalhada:</strong><br>
+                O foco da questão é identificar o <strong>fator de atração (próclise)</strong>.<br>
+                <ul>
+                    <li><strong>Texto Base:</strong> "Se não <strong>nos</strong> atentarmos...". Temos aqui a palavra "não", um advérbio de negação. Na hierarquia da próclise, palavras negativas são atratores obrigatórios absolutos.</li>
+                    <li><strong>Alternativa A:</strong> "Deus te guie...". Oração optativa (exprime desejo). A próclise ocorre pela natureza da oração, não por atração negativa.</li>
+                    <li><strong>Alternativa B:</strong> "Aquilo me deixou...". "Aquilo" é pronome substantivo. Embora atraia, a regra do "não" é mais específica.</li>
+                    <li><strong>Alternativa C:</strong> "Em se tratando...". Regra fixa de gerúndio precedido da preposição "EM".</li>
+                    <li><strong>Alternativa D (Correta):</strong> "Jamais o vi...". "Jamais" é advérbio de tempo com sentido negativo (como "nunca"). Ele atua exatamente como o "não" do texto base, exercendo atração obrigatória sobre o pronome "o".</li>
+                </ul>`
+            },
+            {
+                id: 2,
+                title: "Questão 02",
+                baseText: `"O cientista apresentou os resultados à diretoria. Explicou aos diretores que o projeto era viável, mas dependia de novos investimentos. A diretoria, embora reticente, aprovou a verba solicitada."`,
+                question: `Assinale a alternativa que apresenta a reescrita correta do período, substituindo os termos sublinhados (<strong>aos diretores</strong> e <strong>a verba solicitada</strong>) pelos pronomes oblíquos correspondentes, respeitando a regência e a colocação padrão:<br><em>Frase para reescrita:</em> "Explicou <strong>aos diretores</strong>... aprovou <strong>a verba solicitada</strong>."`,
+                options: [
+                    "Explicou-lhes... aprovou-a.",
+                    "Explicou-os... aprovou-lhe.",
+                    "Lhes explicou... a aprovou.",
+                    "Explicou-lhes... aprovou-la."
+                ],
+                correctIndex: 0, // A
+                resolution: `<strong>Gabarito: A</strong><br><br>
+                <strong>Análise Detalhada:</strong><br>
+                1. <strong>"Explicou aos diretores":</strong> Quem explica, explica <em>algo</em> a <em>alguém</em>. "Aos diretores" é Objeto Indireto. O pronome oblíquo para O.I. de 3ª pessoa é <strong>lhe/lhes</strong>. Verbo inicia oração: ênclise obrigatória -> <strong>Explicou-lhes</strong>.<br>
+                2. <strong>"Aprovou a verba solicitada":</strong> Quem aprova, aprova <em>algo</em> (V.T.D.). "A verba" é Objeto Direto. Pronome: <strong>a</strong>. O verbo termina em vogal ("aprovou"), logo, não há alteração fonética no pronome. -> <strong>Aprovou-a</strong>.<br>
+                A opção D ("aprovou-la") está incorreta pois o "L" só aparece se o verbo terminar em R, S ou Z.`
+            },
+            {
+                id: 3,
+                title: "Questão 03",
+                baseText: `"Amar-te-ei até o fim dos tempos / Não te deixarei jamais / Se me buscares, estarei aqui."`,
+                question: `Considere o fragmento poético acima e as afirmações sobre a colocação pronominal:<br><br>
+                I. Em "Amar-te-ei", a mesóclise é obrigatória segundo a norma culta, pois o verbo está no futuro do presente e inicia a oração.<br>
+                II. Em "Não te deixarei", a próclise é obrigatória devido ao advérbio de negação "Não", que atrai o pronome e impede a mesóclise.<br>
+                III. Em "Se me buscares", a ênclise ("buscares-me") seria facultativa, pois a conjunção "Se" não é um fator de atração forte.<br><br>
+                Estão corretas as análises:`,
+                options: [
+                    "Apenas I.",
+                    "Apenas I e II.",
+                    "Apenas II e III.",
+                    "I, II e III."
+                ],
+                correctIndex: 1, // B
+                resolution: `<strong>Gabarito: B</strong><br><br>
+                <strong>Análise Detalhada:</strong><br>
+                <ul>
+                    <li><strong>I (Correto):</strong> "Amar-te-ei". Verbo no Futuro do Presente iniciando oração exige mesóclise. Próclise ("Te amarei") ou Ênclise ("Amarei-te") são incorretas na norma padrão.</li>
+                    <li><strong>II (Correto):</strong> "Não te deixarei". O "Não" é fator de atração (próclise). A próclise tem prioridade sobre a mesóclise.</li>
+                    <li><strong>III (Incorreto):</strong> "Se me buscares". "Se" é conjunção subordinativa condicional, fator de <strong>próclise obrigatória</strong>. A ênclise ("buscares-me") seria um erro.</li>
+                </ul>`
+            },
+            {
+                id: 4,
+                title: "Questão 04",
+                baseText: `"A floresta amazônica, <strong>onde</strong> a biodiversidade é imensa, sofre com o desmatamento. As ONGs, <strong>cujas</strong> atuações são vitais, denunciam os crimes ambientais."`,
+                question: `Assinale a alternativa que apresenta uma análise <strong>incorreta</strong> segundo a norma padrão:`,
+                options: [
+                    "O pronome \"onde\" está bem empregado, pois retoma \"floresta amazônica\", que é um lugar físico.",
+                    "O pronome \"cujas\" estabelece uma relação de posse entre \"atuações\" e \"ONGs\" e concorda em gênero e número com \"atuações\".",
+                    "Poder-se-ia substituir \"onde\" por \"na qual\" sem prejuízo gramatical ou semântico.",
+                    "A substituição de \"cujas\" por \"que as\" (\"As ONGs, que as atuações são vitais...\") manteria a correção gramatical do período."
+                ],
+                correctIndex: 3, // D
+                resolution: `<strong>Gabarito: D</strong><br><br>
+                <strong>Análise Detalhada:</strong><br>
+                A alternativa D está incorreta (e portanto é o gabarito). A construção "As ONGs, que as atuações são vitais..." rompe a coesão sintática. O relativo "que" não estabelece relação de posse. A norma culta exige o pronome relativo possessivo <strong>cujo/cuja</strong> para ligar o possuidor (ONGs) ao possuído (atuações). O uso de "que as" ("que a atuação dela") é um coloquialismo rejeitado em exames formais.`
+            },
+            {
+                id: 5,
+                title: "Questão 05",
+                baseText: `— Pedro, você entregou o relatório para a chefe?<br>— Entreguei ele ontem mesmo.<br>— E ela disse o quê?<br>— Disse que ia ler ele depois.`,
+                question: `Para adequar o diálogo à <strong>norma padrão culta</strong>, as formas pronominais destacadas deveriam ser substituídas, respectivamente, por:`,
+                options: [
+                    "Entreguei-o — lê-lo.",
+                    "Entreguei-lhe — ler-lhe.",
+                    "O entreguei — o ler.",
+                    "Entreguei-o — ler ele."
+                ],
+                correctIndex: 0, // A
+                resolution: `<strong>Gabarito: A</strong><br><br>
+                <strong>Análise Detalhada:</strong><br>
+                1. <strong>"Entreguei ele":</strong> Pronomes retos (eu, tu, ele) não funcionam como objeto direto. O correto é o oblíquo "o". Como o verbo termina em vogal, usa-se a ênclise simples: <strong>Entreguei-o</strong>.<br>
+                2. <strong>"Ler ele":</strong> Verbo "Ler" termina em -R. Na ênclise com o/a/os/as, corta-se o R e adiciona-se L ao pronome. O verbo ganha acento circunflexo (monossílabo tônico terminado em e). -> <strong>Lê-lo</strong>.`
+            },
+            {
+                id: 6,
+                title: "Questão 06",
+                baseText: `"Este é o cargo ______ aspiro, mas esta é a empresa ______ diretrizes discordo."`,
+                question: `As lacunas devem ser preenchidas, correta e respectivamente, por:`,
+                options: [
+                    "que — cujas.",
+                    "a que — de cujas.",
+                    "ao qual — com cujas.",
+                    "cujo — que as."
+                ],
+                correctIndex: 1, // B
+                resolution: `<strong>Gabarito: B</strong><br><br>
+                <strong>Análise Detalhada:</strong><br>
+                1. <strong>Regência de Aspirar:</strong> No sentido de desejar, é Transitivo Indireto e exige a preposição "A". Logo: "o cargo <strong>a que</strong> aspiro".<br>
+                2. <strong>Regência de Discordar + Posse:</strong> Quem discorda, discorda <strong>DE</strong> algo. Há relação de posse entre empresa e diretrizes. Logo, usa-se a preposição + pronome possessivo relativo: "<strong>de cujas</strong> diretrizes".`
+            },
+            {
+                id: 7,
+                title: "Questão 07",
+                baseText: null,
+                question: `Em relação à colocação pronominal nas locuções verbais, assinale a alternativa em que a construção fere a norma culta, sendo considerada <strong>agramatical</strong> em contextos formais.`,
+                options: [
+                    "Os alunos não <strong>tinham preparado-se</strong> para a avaliação.",
+                    "O professor <strong>deve ter-se</strong> enganado com a data.",
+                    "Eu não <strong>quero incomodar-te</strong> com meus problemas.",
+                    "Eles <strong>estão a chamar-nos</strong> para a reunião."
+                ],
+                correctIndex: 0, // A
+                resolution: `<strong>Gabarito: A</strong><br><br>
+                <strong>Análise Detalhada:</strong><br>
+                A construção "tinham preparado-se" é agramatical. Em tempos compostos formados por Ter/Haver + Particípio, a ênclise ao particípio é <strong>proibida</strong>. O pronome nunca deve vir após o particípio. As formas aceitas seriam "tinham se preparado" ou "se tinham preparado" (devido ao fator de atração "não").`
+            },
+            {
+                id: 8,
+                title: "Questão 08",
+                baseText: `"O Século XIX e o Século XX foram marcados por grandes revoluções industriais. <strong>Este</strong> trouxe a computação e a internet, enquanto <strong>aquele</strong> consolidou a máquina a vapor e a eletricidade. Ambos moldaram o mundo <strong>em que</strong> vivemos."`,
+                question: `O uso de "Este" e "Aquele" no texto promove:`,
+                options: [
+                    "Uma ambiguidade, pois não se sabe a qual século cada pronome se refere.",
+                    "Uma referência catafórica, anunciando os séculos que serão explicados.",
+                    "Uma coesão anafórica precisa: \"Este\" retoma o elemento mais próximo (Século XX) e \"Aquele\" o mais distante (Século XIX).",
+                    "Um erro de concordância, pois deveriam ser usados \"Esse\" e \"Aquele\"."
+                ],
+                correctIndex: 2, // C
+                resolution: `<strong>Gabarito: C</strong><br><br>
+                <strong>Análise Detalhada:</strong><br>
+                Na coesão referencial da norma culta:<br>
+                - <strong>Este:</strong> Retoma o último elemento citado (o mais próximo no texto) -> Século XX.<br>
+                - <strong>Aquele:</strong> Retoma o primeiro elemento citado (o mais distante no texto) -> Século XIX.<br>
+                O texto usa os pronomes corretamente para distribuir as informações sem repetir os nomes dos séculos.`
+            },
+            {
+                id: 9,
+                title: "Questão 09",
+                baseText: null,
+                question: `(Estilo "Onde" vs "Aonde") Assinale a alternativa em que o emprego do pronome relativo destacado está em <strong>desacordo</strong> com a norma padrão:`,
+                options: [
+                    "A cidade <strong>aonde</strong> irei nas férias é muito tranquila.",
+                    "Não conheço o prédio <strong>onde</strong> você trabalha.",
+                    "A situação <strong>onde</strong> me encontro é bastante complicada.",
+                    "O porto <strong>aonde</strong> o navio chegou estava lotado."
+                ],
+                correctIndex: 2, // C
+                resolution: `<strong>Gabarito: C</strong><br><br>
+                <strong>Análise Detalhada:</strong><br>
+                O pronome relativo <strong>onde</strong> deve ser usado apenas para lugares físicos/espaciais. "Situação" é um conceito abstrato. Para contextos abstratos, a norma culta exige <strong>em que</strong>, <strong>na qual</strong> ou <strong>no qual</strong>. O uso de "onde" aqui é considerado um vício de linguagem.`
+            },
+            {
+                id: 10,
+                title: "Questão 10",
+                baseText: `"A mãe <strong>penteou-se</strong> antes de sair."`,
+                question: `Analise a função sintática do pronome oblíquo na oração acima. O pronome "se" classifica-se como:`,
+                options: [
+                    "Reflexivo (Objeto Direto).",
+                    "Recíproco (Objeto Direto).",
+                    "Parte integrante do verbo.",
+                    "Partícula apassivadora."
+                ],
+                correctIndex: 0, // A
+                resolution: `<strong>Gabarito: A</strong><br><br>
+                <strong>Análise Detalhada:</strong><br>
+                Na oração "A mãe penteou-se", o sujeito (mãe) pratica a ação de pentear e a recebe ao mesmo tempo. Portanto, é voz reflexiva. Como o verbo pentear é Transitivo Direto (quem penteia, penteia algo/alguém), o pronome "se" atua sintaticamente como <strong>Objeto Direto Reflexivo</strong>.`
+            }
+        ];
+
+        // Função para Renderizar o Quiz
+        function renderQuiz() {
+            const container = document.getElementById('questions-container');
+            
+            quizData.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                card.id = `q-card-${index}`;
+
+                // Header
+                let htmlContent = `<span class="question-header">${item.title}</span>`;
+                
+                // Base Text (se houver)
+                if (item.baseText) {
+                    htmlContent += `<div class="base-text">${item.baseText}</div>`;
+                }
+
+                // Pergunta
+                htmlContent += `<div class="question-text">${item.question}</div>`;
+
+                // Opções
+                htmlContent += `<ul class="options-group">`;
+                item.options.forEach((opt, optIndex) => {
+                    // Letras A, B, C, D
+                    const letter = String.fromCharCode(65 + optIndex);
+                    htmlContent += `
+                        <li class="option-item" id="q${index}-opt${optIndex}">
+                            <label class="option-label">
+                                <input type="radio" name="question-${index}" value="${optIndex}">
+                                <span><strong>${letter})</strong> ${opt}</span>
+                            </label>
+                        </li>
+                    `;
+                });
+                htmlContent += `</ul>`;
+
+                // Resolução (Oculta)
+                htmlContent += `
+                    <div class="resolution-box" id="res-${index}">
+                        <span class="resolution-title">Resolução e Gabarito</span>
+                        ${item.resolution}
+                    </div>
+                `;
+
+                card.innerHTML = htmlContent;
+                container.appendChild(card);
+            });
+        }
+
+        // Função para Processar Respostas
+        function submitQuiz() {
+            let score = 0;
+            let answeredCount = 0;
+            const total = quizData.length;
+
+            // Desabilitar botão para evitar múltiplos cliques
+            const btn = document.querySelector('button');
+            btn.disabled = true;
+            btn.innerText = "Resultado Calculado";
+
+            quizData.forEach((item, index) => {
+                const options = document.getElementsByName(`question-${index}`);
+                let selected = -1;
+                let card = document.getElementById(`q-card-${index}`);
+
+                // Encontrar selecionado
+                for(let i=0; i < options.length; i++) {
+                    if(options[i].checked) {
+                        selected = parseInt(options[i].value);
+                        break;
+                    }
+                    options[i].disabled = true; // Desabilitar inputs
+                }
+
+                // Lógica de Correção visual
+                const correctIndex = item.correctIndex;
+                const correctLi = document.getElementById(`q${index}-opt${correctIndex}`);
+                
+                // Marcar a correta sempre
+                correctLi.classList.add('correct');
+
+                if (selected === correctIndex) {
+                    score++;
+                } else if (selected !== -1) {
+                    // Se errou, marcar a selecionada como incorreta
+                    const wrongLi = document.getElementById(`q${index}-opt${selected}`);
+                    wrongLi.classList.add('incorrect');
+                }
+
+                // Mostrar Resolução
+                const resBox = document.getElementById(`res-${index}`);
+                resBox.style.display = 'block';
+            });
+
+            // Mostrar Painel de Pontuação no Topo
+            const scorePanel = document.getElementById('score-panel');
+            const scoreValue = document.getElementById('score-value');
+            const scoreMsg = document.getElementById('score-message');
+            
+            scoreValue.innerText = score;
+            scorePanel.style.display = 'block';
+
+            if (score === 10) {
+                scoreMsg.innerText = "Parabéns! Domínio total da norma culta.";
+            } else if (score >= 7) {
+                scoreMsg.innerText = "Ótimo resultado! Revise os detalhes nas resoluções abaixo.";
+            } else {
+                scoreMsg.innerText = "Bom treino. Estude atentamente as resoluções abaixo para fixar as regras.";
+            }
+
+            // Scroll suave para o topo
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', renderQuiz);
+
+    </script>
+</body>
+</html>

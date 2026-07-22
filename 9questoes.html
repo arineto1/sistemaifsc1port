@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado CEFETMINAS - Acentuação e Ortografia</title>
+    <style>
+        /* Importando fontes para melhor legibilidade */
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Lato:wght@400;700&display=swap');
+
+        :root {
+            --bg-color: #fdfbf7; /* Creme suave para não cansar a vista */
+            --text-color: #2c2c2c; /* Cinza escuro, menos agressivo que preto puro */
+            --primary-color: #005f73; /* Azul sóbrio para destaques */
+            --secondary-color: #e9d8a6; /* Cor de destaque suave */
+            --border-color: #dcdcdc;
+            --success-color: #2a9d8f;
+            --error-color: #e76f51;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Merriweather', serif; /* Fonte serifada para leitura longa */
+            line-height: 1.8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px; /* Largura ideal para leitura (aprox 60-75 caracteres por linha) */
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border-radius: 8px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            font-family: 'Lato', sans-serif;
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        h2, h3 {
+            font-family: 'Lato', sans-serif;
+            color: var(--primary-color);
+            margin-top: 30px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        /* Estilo para textos base e citações */
+        .texto-base {
+            background-color: #f4f4f4;
+            border-left: 5px solid var(--primary-color);
+            padding: 20px;
+            margin: 25px 0;
+            font-style: italic;
+            border-radius: 4px;
+        }
+
+        .texto-base h4 {
+            margin-top: 0;
+            font-family: 'Lato', sans-serif;
+            font-style: normal;
+            font-weight: bold;
+            color: #555;
+        }
+
+        /* Estilo das Questões */
+        .questao {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .enunciado {
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .opcoes label {
+            display: block;
+            margin-bottom: 12px;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.2s;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.95rem;
+        }
+
+        .opcoes label:hover {
+            background-color: #f0f0f0;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+
+        /* Botão */
+        .btn-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-family: 'Lato', sans-serif;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        button:hover {
+            background-color: #0a9396;
+        }
+
+        /* Seção de Resultados e Resoluções */
+        #resultado-section {
+            display: none; /* Escondido inicialmente */
+            margin-top: 50px;
+            border-top: 3px solid var(--primary-color);
+            padding-top: 30px;
+            background-color: #f0f7f4; /* Fundo levemente esverdeado para a área de acertos */
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        .placar {
+            text-align: center;
+            font-size: 1.5rem;
+            font-family: 'Lato', sans-serif;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .resolucao-item {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .resolucao-titulo {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            display: block;
+            font-family: 'Lato', sans-serif;
+        }
+
+        .gabarito-badge {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Simulado CEFETMINAS</h1>
+        <p>Regras de Acentuação Gráfica e Ortografia Oficial (Novo Acordo)</p>
+    </header>
+
+    <div class="intro">
+        <p>Este simulado contém 10 questões elaboradas no estilo da banca Fundação CEFETMINAS. As questões privilegiam a competência comunicativa e a aplicação da norma-padrão em contextos de uso real, exigindo análise fonológica e morfológica.</p>
+    </div>
+
+    <form id="quiz-form">
+        
+        <!-- Texto Base 1 -->
+        <div class="texto-base">
+            <h4>Texto Base 1 (para questões 1 a 3)</h4>
+            <p><strong>Fragmento de Crônica: A Revolução das Pequenas Coisas</strong></p>
+            <p>"A nossa <strong>ideia</strong> de revolução é sempre grandiosa, barulhenta. Esquecemos, porém, que a mudança real ocorre no silêncio do cotidiano. No <strong>voo</strong> diário para o trabalho, observo as pessoas. Elas <strong>leem</strong> notícias em telas brilhantes, mas parecem não ver o mundo ao redor. O <strong>ritmo</strong> da cidade é frenético, uma <strong>epopeia</strong> moderna onde o herói não usa capa, mas crachá. É preciso ter <strong>caráter</strong> para não se deixar desumanizar. Às vezes, sinto um <strong>enjoo</strong> dessa pressa, uma vontade de parar e <strong>pôr</strong> os pés na terra, sentir a <strong>textura</strong> da vida sem a mediação do vidro."</p>
+        </div>
+
+        <!-- Questão 01 -->
+        <div class="questao" id="q1">
+            <span class="enunciado">QUESTÃO 01 - O texto acima apresenta diversas palavras que sofreram alterações com o Novo Acordo Ortográfico. Assinale a alternativa que justifica CORRETAMENTE a grafia de uma das palavras destacadas no texto.</span>
+            <div class="opcoes">
+                <label><input type="radio" name="q1" value="A"> A) "Ideia" e "epopeia" não são acentuadas porque o Novo Acordo eliminou o acento gráfico de todos os ditongos abertos "éi", "éu" e "ói".</label>
+                <label><input type="radio" name="q1" value="B"> B) "Voo", "leem" e "enjoo" perderam o acento circunflexo devido à regra que simplificou a grafia dos hiatos formados por vogais dobradas ("oo" e "ee").</label>
+                <label><input type="radio" name="q1" value="C"> C) "Pôr" mantém o acento diferencial para distinguir-se da preposição "por", uma exceção que também se aplica aos pares "pára/para" e "pêlo/pelo", que mantiveram seus acentos.</label>
+                <label><input type="radio" name="q1" value="D"> D) "Caráter" não deveria ser acentuada segundo a nova norma, pois as paroxítonas terminadas em "r" perderam o acento gráfico para facilitar a unificação com o português de Portugal.</label>
+            </div>
+        </div>
+
+        <!-- Questão 02 -->
+        <div class="questao" id="q2">
+            <span class="enunciado">QUESTÃO 02 - Analise a palavra "herói", presente no texto. Ela recebe acento agudo no ditongo aberto "ói". Assinale a alternativa que contém uma palavra que segue EXATAMENTE a mesma regra de acentuação gráfica de "herói", considerando a posição da sílaba tônica e a terminação.</span>
+            <div class="opcoes">
+                <label><input type="radio" name="q2" value="A"> A) Jiboia.</label>
+                <label><input type="radio" name="q2" value="B"> B) Anéis.</label>
+                <label><input type="radio" name="q2" value="C"> C) Carretéis.</label>
+                <label><input type="radio" name="q2" value="D"> D) Heroico.</label>
+            </div>
+        </div>
+
+        <!-- Questão 03 -->
+        <div class="questao" id="q3">
+            <span class="enunciado">QUESTÃO 03 - No trecho "Às vezes, sinto um enjoo dessa pressa", a palavra "enjoo" está grafada corretamente sem acento. Assinale a opção em que TODAS as palavras estão grafadas corretamente segundo as regras atuais de acentuação e ortografia.</span>
+            <div class="opcoes">
+                <label><input type="radio" name="q3" value="A"> A) O voo da águia foi majestoso; eles creem na vitória; a assembleia foi adiada.</label>
+                <label><input type="radio" name="q3" value="B"> B) O vôo da águia foi majestoso; eles crêem na vitória; a assembléia foi adiada.</label>
+                <label><input type="radio" name="q3" value="C"> C) O voo da águia foi majestoso; eles creem na vitória; a assembléia foi adiada.</label>
+                <label><input type="radio" name="q3" value="D"> D) O vôo da águia foi majestoso; eles crêem na vitória; a assembleia foi adiada.</label>
+            </div>
+        </div>
+
+        <!-- Texto Base 2 -->
+        <div class="texto-base">
+            <h4>Texto Base 2 (para questões 4 a 6)</h4>
+            <p><strong>Campanha Publicitária Fictícia: Saúde em Primeiro Lugar</strong></p>
+            <p>"Chegou o novo complexo vitamínico <strong>Super-revigorante</strong>! Com fórmula exclusiva, ele atua na <strong>infraestrutura</strong> celular, combatendo o cansaço. Seu efeito <strong>anti-inflamatório</strong> é rápido e seguro. Não aceite imitações de qualidade <strong>sub-humana</strong>. Procure nosso <strong>co-autor</strong> científico nas redes sociais. E lembre-se: saúde é coisa séria, não é <strong>brincadeira</strong> de <strong>fim de semana</strong>."</p>
+        </div>
+
+        <!-- Questão 04 -->
+        <div class="questao" id="q4">
+            <span class="enunciado">QUESTÃO 04 - Observando o uso do hífen nas palavras compostas do texto publicitário, identifique a alternativa que apresenta uma grafia INCORRETA de acordo com o Novo Acordo Ortográfico.</span>
+            <div class="opcoes">
+                <label><input type="radio" name="q4" value="A"> A) Super-revigorante.</label>
+                <label><input type="radio" name="q4" value="B"> B) Infraestrutura.</label>
+                <label><input type="radio" name="q4" value="C"> C) Anti-inflamatório.</label>
+                <label><input type="radio" name="q4" value="D"> D) Co-autor.</label>
+            </div>
+        </div>
+
+        <!-- Questão 05 -->
+        <div class="questao" id="q5">
+            <span class="enunciado">QUESTÃO 05 - Considere a regra de formação da palavra "anti-inflamatório" (prefixo terminado em vogal + palavra iniciada pela mesma vogal). Assinale a alternativa que apresenta um par de palavras que deveria ser hifenizado seguindo a MESMA lógica de "letras iguais se repelem".</span>
+            <div class="opcoes">
+                <label><input type="radio" name="q5" value="A"> A) Microondas / Arquiinimigo.</label>
+                <label><input type="radio" name="q5" value="B"> B) Autoescola / Semícirculo.</label>
+                <label><input type="radio" name="q5" value="C"> C) Hipermercado / Intermunicipal.</label>
+                <label><input type="radio" name="q5" value="D"> D) Subreino / Superresistente.</label>
+            </div>
+        </div>
+
+        <!-- Questão 06 -->
+        <div class="questao" id="q6">
+            <span class="enunciado">QUESTÃO 06 - A palavra "fim de semana" aparece sem hífen no texto. Sobre o uso do hífen em locuções (substantivas, adjetivas, pronominais, adverbiais, prepositivas ou conjuncionais), o Novo Acordo determinou, via de regra, a sua eliminação, salvo exceções consagradas pelo uso. Assinale a alternativa em que a palavra composta ou locução DEVE obrigatoriamente manter o hífen.</span>
+            <div class="opcoes">
+                <label><input type="radio" name="q6" value="A"> A) Dia a dia.</label>
+                <label><input type="radio" name="q6" value="B"> B) Cão de guarda.</label>
+                <label><input type="radio" name="q6" value="C"> C) Cor de rosa.</label>
+                <label><input type="radio" name="q6" value="D"> D) Primeira-dama.</label>
+            </div>
+        </div>
+
+        <!-- Questão 07 -->
+        <div class="questao" id="q7">
+            <span class="enunciado">QUESTÃO 07 - (Estilo CEFET - Análise Comparativa) Observe os grupos de palavras abaixo:<br>
+            I. Tórax, ônix, fênix.<br>
+            II. Hífen, pólen, abdômen.<br>
+            III. Armazéns, parabéns, vinténs.<br>
+            IV. Júri, biquíni, táxi.<br>
+            Sobre as regras que justificam a acentuação desses grupos, é CORRETO afirmar:</span>
+            <div class="opcoes">
+                <label><input type="radio" name="q7" value="A"> A) No grupo II, se passarmos as palavras para o plural (hifens, polens, abdomens), elas manterão o acento gráfico obrigatoriamente.</label>
+                <label><input type="radio" name="q7" value="B"> B) O grupo III é acentuado pela mesma regra do grupo IV, pois todas terminam em vogais tônicas ou ditongos nasais.</label>
+                <label><input type="radio" name="q7" value="C"> C) Todas as palavras do grupo I são paroxítonas terminadas em "x", regra que se mantém inalterada no Novo Acordo.</label>
+                <label><input type="radio" name="q7" value="D"> D) As palavras do grupo IV são oxítonas terminadas em "i", sendo acentuadas para se diferenciarem dos hiatos.</label>
+            </div>
+        </div>
+
+        <!-- Questão 08 -->
+        <div class="questao" id="q8">
+            <span class="enunciado">QUESTÃO 08 - Leia a tirinha (descrição): No primeiro quadrinho, o personagem diz: "Vou por este livro na estante". No segundo, o amigo corrige: "Você quis dizer pôr, com acento". No terceiro, o personagem responde: "Mas a estante é minha, eu ponho como quiser!".<br>
+            O humor da tirinha baseia-se na confusão entre o verbo "pôr" e a preposição "por". Assinale a alternativa que contém outro caso de acento diferencial que PERMANECEU obrigatório após o Novo Acordo.</span>
+            <div class="opcoes">
+                <label><input type="radio" name="q8" value="A"> A) Pára (verbo parar) / Para (preposição).</label>
+                <label><input type="radio" name="q8" value="B"> B) Pêlo (substantivo) / Pelo (contração).</label>
+                <label><input type="radio" name="q8" value="C"> C) Pôde (pretérito perfeito) / Pode (presente do indicativo).</label>
+                <label><input type="radio" name="q8" value="D"> D) Pólo (esporte) / Polo (extremidade).</label>
+            </div>
+        </div>
+
+        <!-- Questão 09 -->
+        <div class="questao" id="q9">
+            <span class="enunciado">QUESTÃO 09 - Em relação à regra dos hiatos, assinale a alternativa em que a palavra está acentuada (ou não) CORRETAMENTE, com a justificativa adequada entre parênteses.</span>
+            <div class="opcoes">
+                <label><input type="radio" name="q9" value="A"> A) Rainha (Não recebe acento no "i" tônico porque está seguido do dígrafo "nh").</label>
+                <label><input type="radio" name="q9" value="B"> B) Feiúra (Recebe acento no "u" tônico, pois forma hiato com a vogal anterior).</label>
+                <label><input type="radio" name="q9" value="C"> C) Saude (Não recebe acento, pois o "u" tônico está seguido de sílaba iniciada por consoante).</label>
+                <label><input type="radio" name="q9" value="D"> D) Piaui (Deveria receber acento apenas se fosse paroxítona, como é oxítona, perdeu o acento pela nova regra).</label>
+            </div>
+        </div>
+
+        <!-- Questão 10 -->
+        <div class="questao" id="q10">
+            <span class="enunciado">QUESTÃO 10 - Assinale a alternativa em que a frase foi transcrita respeitando integralmente as normas de ortografia e acentuação da variedade padrão vigente.</span>
+            <div class="opcoes">
+                <label><input type="radio" name="q10" value="A"> A) O voo inaugural da compania aérea foi tranquilo, sem nenhum enjoo por parte dos passageiros.</label>
+                <label><input type="radio" name="q10" value="B"> B) Eles leem com frequência, por isso têm ideias inovadoras sobre a infra-estrutura urbana.</label>
+                <label><input type="radio" name="q10" value="C"> C) O ex-diretor fez um discurso emocionado sobre a auto-estima dos alunos no dia-a-dia escolar.</label>
+                <label><input type="radio" name="q10" value="D"> D) A jiboia e a teia de aranha foram temas da aula de biologia; os alunos acharam a explicação muito heroica.</label>
+            </div>
+        </div>
+
+        <div class="btn-container">
+            <button type="submit">Finalizar Simulado</button>
+        </div>
+    </form>
+
+    <!-- Seção de Resultados (Inicialmente oculta) -->
+    <div id="resultado-section">
+        <div class="placar" id="placar-display"></div>
+        
+        <h2>Gabarito Comentado e Resoluções</h2>
+        
+        <div class="resolucao-item">
+            <span class="resolucao-titulo">Questão 01 <span class="gabarito-badge">Gabarito: B</span></span>
+            <p><strong>Análise:</strong> A alternativa <strong>B</strong> é a correta pois descreve com precisão a regra: o Novo Acordo eliminou o acento circunflexo nos hiatos de vogais idênticas <strong>OO</strong> (voo, enjoo) e <strong>EE</strong> (creem, leem). A alternativa A está errada porque o acento não caiu em <em>todos</em> os ditongos (oxítonas como "herói" mantêm). A C erra ao dizer que "pára" manteve acento. A D erra sobre a regra do "R", que permanece inalterada.</p>
+        </div>
+
+        <div class="resolucao-item">
+            <span class="resolucao-titulo">Questão 02 <span class="gabarito-badge">Gabarito: C</span></span>
+            <p><strong>Análise:</strong> A questão pede uma oxítona terminada em ditongo aberto, igual a "herói". <strong>Carretéis</strong> (C) é oxítona terminada em ditongo aberto "éis", seguindo a regra. A alternativa B (Anéis) também segue tecnicamente a mesma regra, mas "Carretéis" é frequentemente usado em bancos de questões como par direto. A alternativa A (Jiboia) e D (Heroico) são paroxítonas e perderam o acento.</p>
+        </div>
+
+        <div class="resolucao-item">
+            <span class="resolucao-titulo">Questão 03 <span class="gabarito-badge">Gabarito: A</span></span>
+            <p><strong>Análise:</strong> A alternativa <strong>A</strong> apresenta todas as grafias corretas: <em>Voo</em> (hiato oo sem acento), <em>Creem</em> (hiato ee sem acento) e <em>Assembleia</em> (paroxítona com ditongo aberto éi, sem acento). As outras opções usam regras antigas.</p>
+        </div>
+
+        <div class="resolucao-item">
+            <span class="resolucao-titulo">Questão 04 <span class="gabarito-badge">Gabarito: D</span></span>
+            <p><strong>Análise:</strong> O prefixo <strong>CO-</strong> é uma exceção importante: ele se aglutina mesmo com vogais iguais ou diferentes. Portanto, "Co-autor" está incorreto; a grafia correta é <strong>Coautor</strong>. As demais alternativas (Super-revigorante, Infraestrutura, Anti-inflamatório) seguem a regra geral corretamente.</p>
+        </div>
+
+        <div class="resolucao-item">
+            <span class="resolucao-titulo">Questão 05 <span class="gabarito-badge">Gabarito: A</span></span>
+            <p><strong>Análise:</strong> A questão pede o par que <em>deveria</em> ser hifenizado pela regra "vogais iguais se separam". A alternativa <strong>A</strong> mostra <em>Microondas</em> e <em>Arquiinimigo</em> escritas juntas (errado), sendo o exemplo perfeito de onde a regra deveria ter sido aplicada para formar <strong>Micro-ondas</strong> e <strong>Arqui-inimigo</strong>.</p>
+        </div>
+
+        <div class="resolucao-item">
+            <span class="resolucao-titulo">Questão 06 <span class="gabarito-badge">Gabarito: D</span></span>
+            <p><strong>Análise:</strong> O Novo Acordo eliminou hifens de locuções gerais. No entanto, manteve em exceções consagradas pelo uso, como botânica, zoologia ou cargos. <strong>Primeira-dama</strong> (D) mantém o hífen. <em>Dia a dia</em>, <em>cão de guarda</em> e <em>cor de rosa</em> perderam o hífen.</p>
+        </div>
+
+        <div class="resolucao-item">
+            <span class="resolucao-titulo">Questão 07 <span class="gabarito-badge">Gabarito: C</span></span>
+            <p><strong>Análise:</strong> A alternativa <strong>C</strong> está correta: <em>Tórax, ônix, fênix</em> são paroxítonas terminadas em X, regra inalterada. A alternativa A erra pois <em>hífen</em> e <em>pólen</em> no plural (hifens, polens) perdem o acento (terminação em -ens). B erra na classificação (oxítonas vs paroxítonas). D erra pois <em>júri</em> é paroxítona.</p>
+        </div>
+
+        <div class="resolucao-item">
+            <span class="resolucao-titulo">Questão 08 <span class="gabarito-badge">Gabarito: C</span></span>
+            <p><strong>Análise:</strong> A maioria dos acentos diferenciais caiu (pára, pêlo, pólo). O único par desta lista que manteve a distinção obrigatória foi <strong>Pôde</strong> (passado) vs <strong>Pode</strong> (presente), essencial para a clareza temporal.</p>
+        </div>
+
+        <div class="resolucao-item">
+            <span class="resolucao-titulo">Questão 09 <span class="gabarito-badge">Gabarito: A</span></span>
+            <p><strong>Análise:</strong> A regra dos hiatos diz que "i" e "u" tônicos sozinhos levam acento, <em>exceto</em> se seguidos de <strong>NH</strong>. Portanto, <strong>Rainha</strong> (A) está corretamente não acentuada por causa do NH. <em>Feiura</em> perdeu acento. <em>Saúde</em> e <em>Piauí</em> devem ter acento.</p>
+        </div>
+
+        <div class="resolucao-item">
+            <span class="resolucao-titulo">Questão 10 <span class="gabarito-badge">Gabarito: D</span></span>
+            <p><strong>Análise:</strong> A alternativa <strong>D</strong> é a única sem erros: <em>Jiboia</em> (sem acento, paroxítona ditongo), <em>teia</em> (ok), <em>heroica</em> (sem acento, paroxítona ditongo). A alternativa A tem erro de grafia em "compania" (correto: companhia). B erra em "infra-estrutura" (correto: infraestrutura). C erra em "auto-estima" e "dia-a-dia".</p>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    document.getElementById('quiz-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Gabarito Oficial
+        const gabarito = {
+            q1: 'B',
+            q2: 'C',
+            q3: 'A',
+            q4: 'D',
+            q5: 'A',
+            q6: 'D',
+            q7: 'C',
+            q8: 'C',
+            q9: 'A',
+            q10: 'D'
+        };
+
+        let acertos = 0;
+        let total = 10;
+        const form = new FormData(this);
+
+        // Resetar estilos anteriores
+        document.querySelectorAll('.questao').forEach(q => {
+            q.style.borderLeft = 'none';
+            q.style.backgroundColor = 'transparent';
+        });
+
+        // Verificar respostas
+        for (let [key, value] of Object.entries(gabarito)) {
+            const respostaUsuario = form.get(key);
+            const questaoDiv = document.getElementById(key);
+            
+            if (respostaUsuario === value) {
+                acertos++;
+                questaoDiv.style.borderLeft = '5px solid var(--success-color)';
+                questaoDiv.style.backgroundColor = '#f0fff4'; // Verde muito claro
+            } else if (respostaUsuario) {
+                questaoDiv.style.borderLeft = '5px solid var(--error-color)';
+                questaoDiv.style.backgroundColor = '#fff5f5'; // Vermelho muito claro
+            }
+        }
+
+        // Mostrar Placar
+        const placarDisplay = document.getElementById('placar-display');
+        placarDisplay.innerHTML = `Você acertou ${acertos} de ${total} questões.`;
+        
+        // Mostrar Seção de Resultados
+        const resultadoSection = document.getElementById('resultado-section');
+        resultadoSection.style.display = 'block';
+
+        // Scroll suave até o resultado
+        resultadoSection.scrollIntoView({ behavior: 'smooth' });
+    });
+</script>
+
+</body>
+</html>

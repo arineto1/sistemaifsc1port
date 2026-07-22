@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFSC - Língua Portuguesa | Menu Concurso</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #f7f9fa;
+            --text-color: #3c3c3c;
+            --text-muted: #777777;
+            --card-bg: #ffffff;
+            --card-border: #e5e5e5;
+            
+            /* Cores estilo Duolingo */
+            --duo-green: #58cc02;
+            --duo-green-shadow: #46a302;
+            --duo-blue: #1cb0f6;
+            --duo-blue-shadow: #1899d6;
+            --duo-orange: #ff9600;
+            --duo-orange-shadow: #e08400;
+            --duo-purple: #ce82ff;
+            --duo-purple-shadow: #b366e0;
+            --duo-yellow: #ffc800;
+            --duo-yellow-shadow: #e5b200;
+            --duo-red: #ff4b4b;
+            --duo-red-shadow: #ea2b2b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 16px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .header-tag {
+            display: inline-block;
+            background-color: #e5f6df;
+            color: var(--duo-green-shadow);
+            font-weight: 800;
+            font-size: 14px;
+            padding: 6px 16px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 900;
+            color: #4b4b4b;
+            margin-bottom: 6px;
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        /* Suporte responsivo mantendo prioridade para telas médias e grandes */
+        @media (max-width: 1024px) {
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .topic-card {
+            background-color: var(--card-bg);
+            border: 2px solid var(--card-border);
+            border-bottom: 5px solid var(--card-border);
+            border-radius: 20px;
+            padding: 20px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            text-align: center;
+            transition: transform 0.1s ease, border-color 0.2s ease;
+            position: relative;
+        }
+
+        .topic-card:hover {
+            border-color: #cecece;
+        }
+
+        /* Botão principal estilo 3D Duolingo */
+        .duo-button {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 900;
+            color: #ffffff;
+            position: relative;
+            margin-bottom: 16px;
+            transition: all 0.1s ease;
+            user-select: none;
+        }
+
+        .duo-button:active {
+            transform: translateY(4px);
+            box-shadow: none !important;
+        }
+
+        .theme-green {
+            background-color: var(--duo-green);
+            box-shadow: 0 5px 0 var(--duo-green-shadow);
+        }
+
+        .theme-blue {
+            background-color: var(--duo-blue);
+            box-shadow: 0 5px 0 var(--duo-blue-shadow);
+        }
+
+        .theme-orange {
+            background-color: var(--duo-orange);
+            box-shadow: 0 5px 0 var(--duo-orange-shadow);
+        }
+
+        .theme-purple {
+            background-color: var(--duo-purple);
+            box-shadow: 0 5px 0 var(--duo-purple-shadow);
+        }
+
+        .theme-yellow {
+            background-color: var(--duo-yellow);
+            box-shadow: 0 5px 0 var(--duo-yellow-shadow);
+        }
+
+        .theme-red {
+            background-color: var(--duo-red);
+            box-shadow: 0 5px 0 var(--duo-red-shadow);
+        }
+
+        .topic-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: #4b4b4b;
+            line-height: 1.4;
+            margin-bottom: 16px;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .topic-access-info {
+            background-color: #f1f3f4;
+            border-radius: 12px;
+            padding: 6px 12px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .clock-icon {
+            font-size: 12px;
+        }
+
+        .file-hint {
+            font-size: 10px;
+            color: #a0a0a0;
+            margin-top: 6px;
+            font-family: monospace;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <span class="header-tag">Concurso IFSC</span>
+        <h1>Língua Portuguesa</h1>
+        <p>Selecione um conteúdo para estudar</p>
+    </header>
+
+    <!-- Contêiner da grade onde os botões serão inseridos dinamicamente -->
+    <main class="menu-grid" id="menuGrid"></main>
+
+    <script>
+        const topics = [
+            "Regras de acentuação gráfica e ortografia oficial conforme o Novo Acordo Ortográfico da Língua Portuguesa.",
+            "Morfologia e flexão de classes de palavras com ênfase em emprego de modos e tempos verbais.",
+            "Emprego de pronomes e regras de colocação pronominal aplicada ao texto de acordo com a norma culta.",
+            "Análise sintática dos termos da oração e a estrutura fundamental de frase, oração e período.",
+            "Vozes Verbais e Conversão de Voz Ativa para Voz Passiva",
+            "Sintaxe do período composto por coordenação e subordinação e as relações lógico-semânticas e argumentativas.",
+            "Regras de concordância e regência verbal e nominal aplicadas ao texto e ao padrão culto da língua.",
+            "Pronomes Relativos com Regência Verbal e Nominal",
+            "Emprego e regras do acento indicativo de crase em diferentes contextos de regência e sintaxe.",
+            "Relações semânticas entre palavras (sinonimia, antonimia, hiponimia, hiperonimia, polissemia).",
+            "Significação contextual de palavras e expressões com foco em polissemia, sinonímia e antonímia.",
+            "Diferença entre denotação e conotação e o uso de figuras de linguagem e sentido figurado no texto.",
+            "Ambiguidade Estrutural e Vícios de Linguagem para Concursos",
+            "Elementos de coesão e coerência textual e o uso de sinais de pontuação como fatores de sequenciação.",
+            "Sequências textuais: narrativa, descritiva, argumentativa, explicativa, injuntiva e dialogal.",
+            "Relações sintático-semântico-discursivas no processo argumentativo.",
+            "Compreensão e interpretação de variados gêneros discursivos e tipologia textual de circulação social.",
+            "Identificação de informações implícitas e explícitas e análise do ponto de vista do autor em textos.",
+            "Leitura, compreensão e interpretação de textos;",
+            "Reescrita de Frases e Parágrafos para Concursos"
+        ];
+
+        const themeClasses = ['theme-green', 'theme-blue', 'theme-orange', 'theme-purple', 'theme-yellow', 'theme-red'];
+        const icons = ['📖', '✏️', '📝', '🔍', '💡', '🎯', '📚', '🔗', '📍', '🔤', '💬', '🎨', '⚠️', '🧩', '📄', '🗣️', '📰', '🕵️', '📘', '✍️'];
+
+        function getFileName(topicText, index) {
+            const cleanText = topicText
+                .toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .replace(/[^a-z0-9]/g, "-")
+                .replace(/-+/g, "-")
+                .replace(/^-|-$/g, "");
+
+            return `${cleanText}.html`;
+        }
+
+        function getTimeAgoText(timestamp) {
+            if (!timestamp) return 'Nunca acessado';
+
+            const now = Date.now();
+            const elapsedSeconds = Math.floor((now - parseInt(timestamp, 10)) / 1000);
+
+            if (elapsedSeconds < 10) {
+                return 'Acessado agora';
+            }
+            if (elapsedSeconds < 60) {
+                return `Acessado há ${elapsedSeconds}s`;
+            }
+
+            const elapsedMinutes = Math.floor(elapsedSeconds / 60);
+            if (elapsedMinutes < 60) {
+                return `Acessado há ${elapsedMinutes} min`;
+            }
+
+            const elapsedHours = Math.floor(elapsedMinutes / 60);
+            if (elapsedHours < 24) {
+                return `Acessado há ${elapsedHours}h`;
+            }
+
+            const elapsedDays = Math.floor(elapsedHours / 24);
+            if (elapsedDays < 30) {
+                return `Acessado há ${elapsedDays} dia${elapsedDays > 1 ? 's' : ''}`;
+            }
+
+            const elapsedMonths = Math.floor(elapsedDays / 30);
+            return `Acessado há ${elapsedMonths} mês${elapsedMonths > 1 ? 'es' : ''}`;
+        }
+
+        function handleButtonClick(index, targetFile) {
+            // Salva a marca de tempo atual no localStorage
+            localStorage.setItem(`ifsc_pt_access_time_${index}`, Date.now().toString());
+            
+            // Redirecionamento instantâneo sem alertas ou confirmações
+            window.location.href = targetFile;
+        }
+
+        function renderMenu() {
+            const grid = document.getElementById('menuGrid');
+            grid.innerHTML = '';
+
+            topics.forEach((topicText, index) => {
+                const targetFile = getFileName(topicText, index);
+                const themeClass = themeClasses[index % themeClasses.length];
+                const icon = icons[index % icons.length];
+                const accessTimestamp = localStorage.getItem(`ifsc_pt_access_time_${index}`);
+                const timeAgo = getTimeAgoText(accessTimestamp);
+
+                const card = document.createElement('div');
+                card.className = 'topic-card';
+
+                card.innerHTML = `
+                    <button class="duo-button ${themeClass}" title="Acessar aula" onclick="handleButtonClick(${index}, '${targetFile}')">
+                        ${icon}
+                    </button>
+                    <div class="topic-title">
+                        ${topicText}
+                    </div>
+                    <div class="topic-access-info">
+                        <span class="clock-icon">⏱️</span>
+                        <span id="counter-${index}">${timeAgo}</span>
+                    </div>
+                    <div class="file-hint">${targetFile}</div>
+                `;
+
+                grid.appendChild(card);
+            });
+        }
+
+        function updateCounters() {
+            topics.forEach((_, index) => {
+                const counterElement = document.getElementById(`counter-${index}`);
+                if (counterElement) {
+                    const accessTimestamp = localStorage.getItem(`ifsc_pt_access_time_${index}`);
+                    counterElement.textContent = getTimeAgoText(accessTimestamp);
+                }
+            });
+        }
+
+        window.onload = function() {
+            renderMenu();
+            // Atualiza os contadores a cada 5 segundos para dinamismo
+            setInterval(updateCounters, 5000);
+        };
+    </script>
+</body>
+</html>

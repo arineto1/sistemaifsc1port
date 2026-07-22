@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula Completa: Morfologia e Verbos - IFAM (FCM)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Merriweather', serif;
+            color: #111827;
+        }
+
+        .highlighter {
+            background-color: #fef08a; /* Amarelo um pouco mais intenso para destaque */
+            padding: 0 4px;
+            border-radius: 2px;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .section-box {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .topic-header {
+            border-left: 4px solid #374151;
+            padding-left: 12px;
+            margin-bottom: 16px;
+        }
+
+        /* Otimização de Tabela */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed; /* Evita scroll horizontal */
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+            word-wrap: break-word; /* Quebra palavras longas */
+        }
+
+        th {
+            background-color: #f3f4f6;
+            font-weight: 700;
+            color: #374151;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="max-w-4xl mx-auto px-4 py-8 md:px-8">
+        
+        <!-- HEADER -->
+        <header class="mb-10 text-center pb-6 border-b border-gray-300">
+            <h1 class="text-3xl md:text-4xl font-bold mb-3">Resumo Mestre: Morfologia & Verbos</h1>
+            <p class="text-gray-600 text-lg">Foco Total: IFAM - Banca Fundação CEFETMINAS (FCM)</p>
+        </header>
+
+        <!-- REPRODUTOR DE ÁUDIO -->
+        <div class="mb-10 section-box bg-gray-50 border-gray-200">
+            <div class="flex flex-col items-center">
+                <label class="mb-3 font-semibold text-gray-700 flex items-center gap-2">
+                    <i class="fas fa-headphones-alt"></i> Ouça a Aula em Áudio
+                </label>
+                <!-- SUBSTITUA 'nome_do_arquivo.mp3' PELO NOME DO SEU ARQUIVO -->
+                <audio controls class="w-full md:w-3/4 shadow-sm rounded-full">
+                    <source src="11morfologia.mp3" type="audio/mpeg">
+                    Seu navegador não suporta o elemento de áudio.
+                </audio>
+                <p class="text-xs text-gray-400 mt-2">Nome do arquivo esperado: aula_morfologia.mp3</p>
+            </div>
+        </div>
+
+        <!-- 1. CONTEXTUALIZAÇÃO -->
+        <section class="section-box">
+            <h2 class="text-2xl font-bold mb-4 topic-header">1. Visão Geral: Morfologia</h2>
+            <p class="mb-4">Para a FCM, é vital distinguir classes variáveis de invariáveis para resolver questões de concordância.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-gray-50 p-4 rounded border border-gray-200">
+                    <h3 class="font-bold text-lg mb-2">Variáveis (Flexionam)</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                        <li><strong>Substantivo</strong> (Nome)</li>
+                        <li><strong>Adjetivo</strong> (Característica)</li>
+                        <li><strong>Artigo</strong> (Determinante)</li>
+                        <li><strong>Numeral</strong> (Quantidade)</li>
+                        <li><strong>Pronome</strong> (Acompanha/Substitui)</li>
+                        <li><span class="highlighter">Verbo</span> (Ação/Estado - O mais complexo)</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-50 p-4 rounded border border-gray-200">
+                    <h3 class="font-bold text-lg mb-2">Invariáveis (Não flexionam)</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                        <li><strong>Advérbio</strong> (Circunstância)</li>
+                        <li><strong>Preposição</strong> (Conectivo nominal)</li>
+                        <li><strong>Conjunção</strong> (Conectivo oracional)</li>
+                        <li><strong>Interjeição</strong> (Emoção)</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="mt-4 text-sm text-gray-600 italic">Dica: Se a palavra varia em gênero ou número, ela NÃO é advérbio, preposição ou conjunção (exceto "todo", "bastante" que podem mudar de classe).</p>
+        </section>
+
+        <!-- 2. ESTRUTURA DO VERBO -->
+        <section class="section-box">
+            <h2 class="text-2xl font-bold mb-4 topic-header">2. Estrutura Interna do Verbo</h2>
+            <ul class="space-y-4 text-gray-700">
+                <li>
+                    <strong>Radical:</strong> A base do significado.
+                </li>
+                <li>
+                    <strong>Vogal Temática (VT):</strong> Define a conjugação.
+                    <span class="block text-sm ml-4 mt-1 text-gray-500">A (1ª conjugação), E (2ª conjugação), I (3ª conjugação).</span>
+                </li>
+                <li>
+                    <strong>Desinência Modo-Temporal (DMT):</strong> Indica TEMPO e MODO.
+                    <div class="mt-2 grid grid-cols-2 gap-2 text-sm">
+                        <span class="bg-gray-100 p-1 rounded border">-VA-/-IA- (Pret. Imperfeito Ind.)</span>
+                        <span class="bg-gray-100 p-1 rounded border">-RA- (Pret. Mais-que-perfeito)</span>
+                        <span class="bg-gray-100 p-1 rounded border">-SSE- (Pret. Imperfeito Subj.)</span>
+                        <span class="bg-gray-100 p-1 rounded border">-R- (Futuro Subj.)</span>
+                    </div>
+                </li>
+                <li>
+                    <strong>Desinência Número-Pessoal (DNP):</strong> Indica PESSOA (eu, tu, ele...).
+                    <span class="block text-sm ml-4 mt-1 text-gray-500">Ex: -s (tu), -mos (nós), -m (eles).</span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- 3. ALGORITMO DE DERIVAÇÃO (Expandido) -->
+        <section class="section-box">
+            <h2 class="text-2xl font-bold mb-4 topic-header">3. O Algoritmo da Conjugação (Tempos Primitivos)</h2>
+            <p class="mb-6">Não decore verbos isolados. Entenda a derivação.</p>
+
+            <!-- Primitivo 1 -->
+            <div class="mb-8 pb-6 border-b border-gray-200">
+                <h3 class="text-xl font-bold mb-2">A. Primitivo: Presente do Indicativo (1ª Pessoa - "EU")</h3>
+                <p class="mb-3 text-gray-700">Gera o <span class="highlighter">Presente do Subjuntivo</span> e o <span class="highlighter">Imperativo</span>.</p>
+                
+                <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500 mb-4">
+                    <h4 class="font-bold text-blue-900 mb-2">O Segredo do Imperativo</h4>
+                    <p class="text-sm mb-2 text-blue-800">Cai muito na FCM: "Passe o verbo para o Imperativo Afirmativo".</p>
+                    <ul class="list-disc list-inside text-sm text-blue-900 space-y-1">
+                        <li><strong>Tu / Vós:</strong> Vêm do Presente do Indicativo <span class="highlighter">SEM O "S"</span>.</li>
+                        <li><strong>Você / Nós / Vocês:</strong> Vêm do Presente do Subjuntivo (Cópia fiel).</li>
+                        <li><strong>Imperativo Negativo:</strong> TUDO vem do Presente do Subjuntivo.</li>
+                    </ul>
+                </div>
+                
+                <p class="text-sm">Exemplo (Verbo Fazer):</p>
+                <ul class="text-sm ml-4 mt-1">
+                    <li>Ind: Tu fazes -> Imp: <span class="font-bold">Faze tu</span> (Tira o S).</li>
+                    <li>Subj: Que ele faça -> Imp: <span class="font-bold">Faça você</span>.</li>
+                </ul>
+            </div>
+
+            <!-- Primitivo 2 -->
+            <div>
+                <h3 class="text-xl font-bold mb-2">B. Primitivo: Pretérito Perfeito (3ª Pessoa - "ELES")</h3>
+                <p class="mb-2 text-gray-700">Base: Eles disseram (tema: <em>disser-</em>). Elimine o "-am".</p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-center text-sm">
+                    <div class="bg-gray-100 p-2 rounded">
+                        <strong>Mais-que-perfeito</strong><br>Ele dissera
+                    </div>
+                    <div class="bg-gray-100 p-2 rounded">
+                        <strong>Imp. Subjuntivo</strong><br>Se ele dissesse
+                    </div>
+                    <div class="bg-gray-100 p-2 rounded">
+                        <strong>Futuro Subjuntivo</strong><br>Quando ele disser
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. VOZES VERBAIS -->
+        <section class="section-box">
+            <h2 class="text-2xl font-bold mb-4 topic-header">4. Vozes Verbais: A Transformação</h2>
+            <p class="mb-4">Questões de reescrita da FCM exigem saber converter Ativa para Passiva.</p>
+
+            <div class="bg-white border border-gray-300 rounded-lg p-4">
+                <h3 class="font-bold text-lg mb-2">Regra de Ouro da Conversão</h3>
+                <p class="mb-2"><em>"O sujeito sofre a ação e o objeto vira sujeito."</em></p>
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm bg-gray-50 p-3 rounded">
+                    <div class="text-center">
+                        <p class="font-bold text-green-700">Voz Ativa</p>
+                        <p>O diretor <span class="highlighter">assinou</span> o documento.</p>
+                    </div>
+                    <i class="fas fa-arrow-right text-gray-400"></i>
+                    <div class="text-center">
+                        <p class="font-bold text-blue-700">Voz Passiva Analítica</p>
+                        <p>O documento <span class="highlighter">foi assinado</span> pelo diretor.</p>
+                    </div>
+                </div>
+                <div class="mt-3 text-sm text-gray-600">
+                    <strong>Atenção ao Tempo:</strong> Se o verbo ativo está no Pretérito Perfeito ("assinou"), o verbo auxiliar SER também deve ir para o Pretérito Perfeito ("foi"). Mantenha a fidelidade temporal!
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. PEGUINHAS (TRAPS) -->
+        <section class="section-box">
+            <h2 class="text-2xl font-bold mb-4 topic-header">5. As 4 Armadilhas da FCM (Checklist de Erros)</h2>
+            <p class="mb-4 text-gray-700">Estas questões decidem a vaga.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Trap 1 -->
+                <div class="border p-4 rounded hover:bg-gray-50">
+                    <h3 class="font-bold text-red-700 mb-1">1. VER vs VIR (Futuro do Subj.)</h3>
+                    <p class="text-sm text-gray-800">
+                        VER (olhar) ➝ Quando eu <span class="highlighter">VIR</span>.<br>
+                        VIR (chegar) ➝ Quando eu <span class="highlighter">VIER</span>.
+                    </p>
+                </div>
+                <!-- Trap 2 -->
+                <div class="border p-4 rounded hover:bg-gray-50">
+                    <h3 class="font-bold text-red-700 mb-1">2. Acentos (Ter/Vir e derivados)</h3>
+                    <p class="text-sm text-gray-800">
+                        Ele tem / Eles têm.<br>
+                        Ele mantém / Eles <span class="highlighter">mantêm</span>.<br>
+                        Ele provém / Eles <span class="highlighter">provêm</span>.
+                    </p>
+                </div>
+                <!-- Trap 3 -->
+                <div class="border p-4 rounded hover:bg-gray-50">
+                    <h3 class="font-bold text-red-700 mb-1">3. Verbo PROVER</h3>
+                    <p class="text-sm text-gray-800">
+                        No particípio é regular: <span class="highlighter">PROVIDO</span>.<br>
+                        (Não confunda com "previsto" que vem de prever/ver).
+                    </p>
+                </div>
+                <!-- Trap 4 -->
+                <div class="border p-4 rounded hover:bg-gray-50">
+                    <h3 class="font-bold text-red-700 mb-1">4. Particípios "Falsos"</h3>
+                    <p class="text-sm text-gray-800">
+                        Chegar e Trazer NÃO têm forma curta.<br>
+                        Correto: Tinha <span class="highlighter">chegado</span>, Tinha <span class="highlighter">trazido</span>.
+                        <br><span class="text-xs text-red-500">(Nunca use "chego" ou "trago" no particípio).</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. TABELA DE CORRELAÇÃO -->
+        <section class="section-box">
+            <h2 class="text-2xl font-bold mb-4 topic-header">6. Correlação Verbal (Semântica e Sintaxe)</h2>
+            <p class="mb-4">Garanta a coerência entre as orações.</p>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="w-1/3">Oração Principal</th>
+                            <th class="w-1/3">Oração Subordinada (Condição)</th>
+                            <th class="w-1/3">Exemplo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-white">
+                            <td>Presente Indicativo</td>
+                            <td>Futuro Subjuntivo</td>
+                            <td class="italic text-gray-600">"Eu <strong>faço</strong> se ele <strong>pedir</strong>."</td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td>Futuro do Presente</td>
+                            <td>Futuro Subjuntivo</td>
+                            <td class="italic text-gray-600">"Eu <strong>farei</strong> se ele <strong>pedir</strong>."</td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td>Pretérito Imperfeito (Ind)</td>
+                            <td>Pretérito Imperfeito (Subj)</td>
+                            <td class="italic text-gray-600">"Eu <strong>fazia</strong> sempre que ele <strong>pedia</strong>."</td>
+                        </tr>
+                        <tr class="bg-yellow-50">
+                            <td class="font-bold text-gray-900">Futuro do Pretérito</td>
+                            <td class="font-bold text-gray-900">Pretérito Imperfeito (Subj)</td>
+                            <td class="italic text-gray-900">"Eu <span class="highlighter">faria</span> se ele <span class="highlighter">pedisse</span>."</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!-- 7. FORMAS NOMINAIS -->
+        <section class="section-box">
+            <h2 class="text-2xl font-bold mb-4 topic-header">7. Formas Nominais</h2>
+            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                <li><strong>Infinitivo (-r):</strong> O nome do verbo. Pode ser Pessoal (flexionado) ou Impessoal. <br><em>Ex: "Para passarmos na prova."</em></li>
+                <li><strong>Gerúndio (-ndo):</strong> Indica processo/continuidade. <br><em>Ex: "Estudando, aprende-se."</em> (Evite o gerundismo: "Vou estar enviando").</li>
+                <li><strong>Particípio (-do/TO/SO):</strong> Indica resultado/conclusão. <br><em>Ex: "Estudado o tema, descanse."</em></li>
+            </ul>
+        </section>
+
+        <!-- BOTÃO DE AÇÃO FIXO MOBILE -->
+        <div class="h-20 md:h-8"></div> <!-- Espaçador -->
+        <div class="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 p-4 md:static md:bg-transparent md:border-0 md:p-0 md:mt-8 text-center">
+            <a href="11questoes.html" class="block md:inline-block w-full md:w-auto bg-gray-900 hover:bg-black text-white font-bold py-4 px-12 rounded-lg shadow-lg transition-transform transform hover:-translate-y-1">
+                <i class="fas fa-edit mr-2"></i> Resolver Questões de Fixação
+            </a>
+        </div>
+
+    </div>
+</body>
+</html>

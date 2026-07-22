@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumo de Elite IFAM - Pronomes (Completo)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fcfcfc;
+            color: #1f2937;
+            line-height: 1.7;
+        }
+        h1, h2, h3, h4 {
+            color: #111827;
+        }
+        .highlight {
+            background-color: #fffac1; /* Amarelo leitura */
+            padding: 0 4px;
+            border-radius: 3px;
+            font-weight: 600;
+            color: #1f2937;
+        }
+        .correct {
+            color: #166534; /* Verde escuro */
+            font-weight: 700;
+        }
+        .wrong {
+            color: #991b1b; /* Vermelho escuro */
+            font-weight: 700;
+            text-decoration: line-through;
+            margin-right: 6px;
+        }
+        .note-box {
+            background-color: #f3f4f6;
+            border-left: 4px solid #4b5563;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            font-size: 0.95rem;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #e5e7eb;
+            padding: 14px;
+            text-align: left;
+            vertical-align: middle;
+        }
+        th {
+            background-color: #f9fafb;
+            font-weight: 700;
+            color: #374151;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+        
+        /* Responsividade para Tabelas - Sem Scroll Horizontal */
+        @media (max-width: 768px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            tr { 
+                border: 1px solid #e5e7eb; 
+                margin-bottom: 1.5rem; 
+                border-radius: 8px;
+                background: white;
+                box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            }
+            td {
+                border: none;
+                border-bottom: 1px solid #f3f4f6;
+                position: relative;
+                padding-left: 40%;
+                padding-top: 12px;
+                padding-bottom: 12px;
+                white-space: normal;
+                text-align: right;
+            }
+            td:last-child { border-bottom: none; }
+            td:before {
+                position: absolute;
+                top: 12px;
+                left: 12px;
+                width: 35%;
+                white-space: nowrap;
+                font-weight: 700;
+                color: #6b7280;
+                text-align: left;
+                font-size: 0.85rem;
+            }
+
+            /* Labels Específicos para cada tabela */
+            #table-atrator td:nth-of-type(1):before { content: "Atrator"; }
+            #table-atrator td:nth-of-type(2):before { content: "Exemplos"; }
+            #table-atrator td:nth-of-type(3):before { content: "Regra FCM"; }
+
+            #table-subst td:nth-of-type(1):before { content: "Função"; }
+            #table-subst td:nth-of-type(2):before { content: "Verbo"; }
+            #table-subst td:nth-of-type(3):before { content: "Pronome"; }
+            #table-subst td:nth-of-type(4):before { content: "Cuidado"; }
+
+            #table-relativos td:nth-of-type(1):before { content: "Pronome"; }
+            #table-relativos td:nth-of-type(2):before { content: "Uso"; }
+            #table-relativos td:nth-of-type(3):before { content: "Erro Comum"; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen pb-20">
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
+        
+        <!-- Header -->
+        <header class="mb-10 border-b border-gray-200 pb-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <span class="inline-block px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-xs font-bold tracking-wide uppercase mb-2">Professor EBTT - IFAM</span>
+                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">Morfossintaxe dos Pronomes</h1>
+                    <p class="text-lg text-gray-600 mt-2">Colocação Pronominal e Coesão Textual (Banca FCM)</p>
+                </div>
+            </div>
+            
+            <!-- Player -->
+            <div class="mt-8 bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex items-center gap-4">
+                <div class="bg-gray-100 p-3 rounded-full hidden sm:block">
+                    <i class="fas fa-headphones text-gray-600 text-xl"></i>
+                </div>
+                <div class="w-full">
+                    <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Áudio da Aula Completa</label>
+                    <audio controls class="w-full h-8">
+                        <source src="12emprego.mp3" type="audio/mpeg">
+                        Seu navegador não suporta áudio.
+                    </audio>
+                </div>
+            </div>
+        </header>
+
+        <!-- 1. Perfil da Banca -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                <span class="bg-gray-800 text-white w-8 h-8 rounded-lg flex items-center justify-center text-sm mr-3">1</span>
+                Perfil da Banca (CEFETMINAS)
+            </h2>
+            <div class="prose text-gray-700 max-w-none">
+                <p>A Fundação CEFETMINAS não cobra "decoreba" isolada. A cobrança é <strong>sintático-semântica</strong>.</p>
+                <div class="grid md:grid-cols-2 gap-4 mt-4">
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <h3 class="font-bold text-gray-900 mb-2">Bibliografia Base</h3>
+                        <p class="text-sm">Gramática de <strong>Cereja & Cochar</strong>. Qualquer recurso deve ser fundamentado nesta obra ou em Bechara/Celso Cunha (auxiliares).</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <h3 class="font-bold text-gray-900 mb-2">Peguinha Clássico</h3>
+                        <p class="text-sm">Uso coloquial em charges. Se a questão pede "norma culta", ignore o contexto humorístico e corrija a gramática.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Colocação Pronominal -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-gray-800 text-white w-8 h-8 rounded-lg flex items-center justify-center text-sm mr-3">2</span>
+                Colocação Pronominal: Regras de Ouro
+            </h2>
+
+            <div class="mb-8">
+                <h3 class="text-lg font-bold text-gray-800 mb-3 border-b pb-2">A. Fatores de Próclise (Obrigatória)</h3>
+                <p class="text-gray-600 mb-4 text-sm">Estas palavras funcionam como ímãs, puxando o pronome para antes do verbo.</p>
+                <table id="table-atrator">
+                    <thead>
+                        <tr>
+                            <th width="30%">Atrator</th>
+                            <th width="40%">Exemplos</th>
+                            <th width="30%">Aplicação na Prova</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Palavras Negativas</strong></td>
+                            <td>Não, nunca, jamais, ninguém, nem.</td>
+                            <td><span class="correct">Não se engane.</span><br><span class="wrong">Não engane-se.</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pronomes Relativos</strong></td>
+                            <td>Que, quem, o qual (e variações), onde.</td>
+                            <td>"O aluno <strong>que se</strong> dedicou passou."<br>(O "que" atrai o "se").</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Conjunções Subordinativas</strong></td>
+                            <td>Se, quando, embora, conforme, logo que.</td>
+                            <td>"Embora <strong>me</strong> convidassem..."<br>"Quando <strong>nos</strong> virem..."</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Advérbios (Sem vírgula)</strong></td>
+                            <td>Hoje, aqui, talvez, sempre.</td>
+                            <td><span class="highlight">Com vírgula:</span> Hoje, sabe-se.<br><span class="highlight">Sem vírgula:</span> Hoje se sabe.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>"Em" + Gerúndio</strong></td>
+                            <td>Em se tratando, Em se plantando.</td>
+                            <td>Fixo: "<strong>Em se</strong> tratando de leis..."</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white p-5 rounded-lg border border-gray-200 shadow-sm">
+                    <h3 class="font-bold text-red-700 mb-3"><i class="fas fa-ban mr-2"></i>Proibições Fatais</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start">
+                            <i class="fas fa-times text-red-500 mt-1 mr-2"></i>
+                            <span>Iniciar oração com pronome oblíquo.<br><span class="wrong">Me empresta</span> → <span class="correct">Empresta-me</span></span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-times text-red-500 mt-1 mr-2"></i>
+                            <span>Ênclise após Particípio (-ado, -ido).<br><span class="wrong">Tinha contado-lhe</span> → <span class="correct">Tinha-lhe contado</span></span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-times text-red-500 mt-1 mr-2"></i>
+                            <span>Ênclise após Futuro do Presente/Pretérito.<br><span class="wrong">Farei-o</span> → <span class="correct">Fá-lo-ei</span> (Mesóclise)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-5 rounded-lg border border-gray-200 shadow-sm">
+                    <h3 class="font-bold text-green-700 mb-3"><i class="fas fa-check-circle mr-2"></i>A Exceção do Infinitivo</h3>
+                    <p class="text-sm text-gray-600 mb-3">Se o verbo principal estiver no <strong>infinitivo (-ar, -er, -ir)</strong>, a ênclise é <strong>SEMPRE</strong> aceita, mesmo que haja palavra atrativa antes.</p>
+                    <div class="bg-green-50 p-3 rounded text-sm">
+                        <p class="mb-2"><strong>Exemplo:</strong> "Para não..." (O "não" atrai)</p>
+                        <p>1. Para não <strong>o</strong> dizer. <span class="font-bold text-green-700">(Certo - Próclise)</span></p>
+                        <p>2. Para não dizer-<strong>o</strong>. <span class="font-bold text-green-700">(Certo - Ênclise no Infinitivo)</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Locuções Verbais -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-gray-800 text-white w-8 h-8 rounded-lg flex items-center justify-center text-sm mr-3">3</span>
+                Locuções Verbais (Auxiliar + Principal)
+            </h2>
+            <div class="note-box">
+                <p class="text-sm"><strong>Regra Geral:</strong> O pronome pode ficar no meio (ênclise ao auxiliar) ou no fim (ênclise ao principal), exceto se houver atração explícita antes do conjunto.</p>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="border-l-4 border-gray-300 pl-4 py-1">
+                    <h4 class="font-bold text-gray-800">Auxiliar + Gerúndio (-ndo)</h4>
+                    <p class="text-sm text-gray-600"><em>Estou lendo o livro.</em></p>
+                    <ul class="mt-1 text-sm space-y-1">
+                        <li><span class="correct">Estou-<strong>o</strong> lendo.</span> (Ênclise ao Auxiliar)</li>
+                        <li><span class="correct">Estou lendo-<strong>o</strong>.</span> (Ênclise ao Principal)</li>
+                    </ul>
+                </div>
+                <div class="border-l-4 border-gray-300 pl-4 py-1">
+                    <h4 class="font-bold text-gray-800">Auxiliar + Particípio (-ado/-ido)</h4>
+                    <p class="text-sm text-gray-600"><em>Tenho comprado livros.</em></p>
+                    <ul class="mt-1 text-sm space-y-1">
+                        <li><span class="correct">Tenho-<strong>os</strong> comprado.</span> (Ênclise ao Auxiliar)</li>
+                        <li><span class="wrong">Tenho comprado-<strong>os</strong>.</span> <span class="text-red-600 font-bold text-xs uppercase ml-2">Proibido! Particípio repele.</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Regência e Substituição -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-gray-800 text-white w-8 h-8 rounded-lg flex items-center justify-center text-sm mr-3">4</span>
+                Substituição Pronominal (O vs LHE)
+            </h2>
+            <p class="text-gray-600 mb-4 text-sm">Este é o ponto de maior incidência de erros. Identifique a transitividade do verbo.</p>
+
+            <table id="table-subst">
+                <thead>
+                    <tr>
+                        <th width="25%">Função Sintática</th>
+                        <th width="15%">Verbo</th>
+                        <th width="20%">Pronome</th>
+                        <th width="40%">Cuidado / Exceção</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Objeto Direto</strong><br>(Complemento sem preposição)</td>
+                        <td>VTD</td>
+                        <td><strong>o, a, os, as</strong></td>
+                        <td>Se verbo termina em R/S/Z: corta e põe L (+acento).<br><em>Fazer a lição</em> → <span class="correct">Fazê-la</span>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Objeto Indireto</strong><br>(Complemento com preposição "A" ou "PARA")</td>
+                        <td>VTI</td>
+                        <td><strong>lhe, lhes</strong></td>
+                        <td>Usa-se apenas para <strong>Pessoas</strong>.<br><em>"Dei o livro ao aluno"</em> → <span class="correct">Dei-lhe o livro</span>.<br><em>"Obedecemos à lei"</em> (Coisa) → <span class="correct">Obedecemos a ela</span>.</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="bg-yellow-50 border border-yellow-200 p-4 rounded-lg mt-4">
+                <h4 class="font-bold text-yellow-800 text-sm uppercase mb-1">Verbos "Traiçoeiros" da FCM</h4>
+                <ul class="text-sm space-y-1 text-yellow-900">
+                    <li>• <strong>Assistir (ver):</strong> VTI → Exige <strong>LHE</strong> (ou "a ele"). <em>"Assistimos ao filme" → "Assistimos a ele" (preferência moderna) ou "Assistimos-lhe".</em></li>
+                    <li>• <strong>Visar (almejar):</strong> VTI → Exige <strong>LHE</strong>. <em>"Viso ao cargo" → "Viso-lhe".</em></li>
+                    <li>• <strong>Aspirar (desejar):</strong> VTI → Exige <strong>A ELE</strong> (Não aceita LHE). <em>"Aspiro ao cargo" → "Aspiro a ele".</em></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 5. Pronomes Relativos -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-gray-800 text-white w-8 h-8 rounded-lg flex items-center justify-center text-sm mr-3">5</span>
+                Pronomes Relativos e Coesão
+            </h2>
+            
+            <table id="table-relativos">
+                <thead>
+                    <tr>
+                        <th width="20%">Pronome</th>
+                        <th width="40%">Uso Correto</th>
+                        <th width="40%">Erro Comum (Pegadinha)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>CUJO</strong><br>(Cujo, cuja, cujos, cujas)</td>
+                        <td>Indica <strong>POSSE</strong>. Liga dois substantivos.<br><em>"O menino <strong>cuja</strong> mãe chegou..."</em></td>
+                        <td>Nunca aceita artigo depois!<br><span class="wrong">Cujo o pai</span> → <span class="correct">Cujo pai</span>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ONDE</strong></td>
+                        <td>Apenas para <strong>Lugar Físico</strong> e estático.<br><em>"A casa <strong>onde</strong> moro."</em></td>
+                        <td>Usar para situações/tempo.<br><span class="wrong">Na reunião onde falamos</span> → <span class="correct">Na reunião em que...</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>AONDE</strong></td>
+                        <td>Lugar + Verbo de <strong>Movimento</strong> (Ir, Chegar).<br><em>"O lugar <strong>aonde</strong> vou."</em></td>
+                        <td>Usar com verbos estáticos.<br><span class="wrong">Aonde você mora?</span> → <span class="correct">Onde você mora?</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 6. Tratamento e Uniformidade -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-gray-800 text-white w-8 h-8 rounded-lg flex items-center justify-center text-sm mr-3">6</span>
+                Tratamento e Uniformidade
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-bold text-gray-800 mb-2">Concordância de Tratamento</h3>
+                    <p class="text-sm text-gray-600 mb-2">Pronomes de tratamento (Vossa Senhoria, Vossa Excelência) exigem verbo e pronomes na <strong>3ª Pessoa</strong> (ele/ela/seu/sua), nunca na 2ª (tu/teu/vosso).</p>
+                    <div class="bg-white border p-3 rounded text-sm">
+                        <span class="wrong">Vossa Excelência e vossos filhos.</span><br>
+                        <span class="correct">Vossa Excelência e <strong>seus</strong> filhos.</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-bold text-gray-800 mb-2">Uniformidade de Tratamento</h3>
+                    <p class="text-sm text-gray-600 mb-2">Não misture TU com VOCÊ na mesma frase.</p>
+                    <div class="bg-white border p-3 rounded text-sm">
+                        <span class="wrong">Quando <strong>você</strong> vier, traga <strong>teus</strong> livros.</span><br>
+                        <span class="correct">Quando <strong>você</strong> vier, traga <strong>seus</strong> livros.</span><br>
+                        <span class="correct">Quando <strong>tu</strong> vieres, traze <strong>teus</strong> livros.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Botão Final -->
+        <div class="flex justify-center mb-16 mt-10">
+            <a href="12questoes.html" class="group relative inline-flex items-center justify-start px-8 py-4 overflow-hidden font-bold rounded-full cursor-pointer bg-gray-900 text-white transition-all hover:bg-gray-800 shadow-xl hover:shadow-2xl hover:-translate-y-1">
+                <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-full group-hover:w-56 group-hover:h-56 opacity-10"></span>
+                <span class="relative flex items-center">
+                    <i class="fas fa-edit mr-3"></i>
+                    Praticar com Questões
+                </span>
+            </a>
+        </div>
+
+    </main>
+
+    <footer class="text-center py-8 text-gray-400 text-sm border-t bg-white">
+        <p>Material elaborado para revisão focada - Concurso IFAM / Banca FCM</p>
+    </footer>
+
+</body>
+</html>
