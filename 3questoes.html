@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado: Significação Contextual - CEFETMINAS</title>
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #2d3436;
+            --accent-color: #0984e3;
+            --border-color: #dfe6e9;
+            --correct-color: #27ae60;
+            --wrong-color: #c0392b;
+            --box-bg: #ffffff;
+            --quote-bg: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.65;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+
+        h1 { font-size: 2rem; color: #1e272e; margin-bottom: 10px; }
+        p.subtitle { color: #636e72; font-style: italic; }
+
+        .text-block {
+            background-color: var(--quote-bg);
+            border-left: 4px solid var(--accent-color);
+            padding: 20px;
+            margin: 30px 0;
+            font-size: 1.05rem;
+            color: #444;
+        }
+
+        .question-card {
+            background: var(--box-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .question-number {
+            font-weight: bold;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .question-text {
+            font-weight: 600;
+            font-size: 1.15rem;
+            margin: 15px 0 20px 0;
+        }
+
+        .options-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .option-item {
+            margin-bottom: 12px;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .option-item:hover {
+            background-color: #f1f2f6;
+            border-color: var(--accent-color);
+        }
+
+        .option-item input {
+            margin-right: 15px;
+            margin-top: 5px;
+        }
+
+        /* Styles para resultado */
+        .option-item.correct {
+            background-color: #e3f9e5 !important;
+            border-color: var(--correct-color) !important;
+            color: #1b5e20;
+        }
+
+        .option-item.wrong {
+            background-color: #fdeaea !important;
+            border-color: var(--wrong-color) !important;
+            color: #7f0000;
+        }
+
+        .resolution {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f0f7ff;
+            border-radius: 6px;
+            border-left: 4px solid var(--accent-color);
+            font-size: 0.95rem;
+        }
+
+        .resolution h4 {
+            margin-top: 0;
+            color: var(--accent-color);
+        }
+
+        .btn-submit {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 50px auto;
+            padding: 15px 30px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #0771c1;
+        }
+
+        #result-summary {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border: 2px solid var(--accent-color);
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+
+        .score {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        strong { color: #000; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Questões CEFETMINAS: Semântica e Contexto</h1>
+        <p class="subtitle">Foco em Polissemia, Sinonímia e Antonímia</p>
+    </header>
+
+    <div id="quiz-form">
+        
+        <!-- Bloco de Texto 01 -->
+        <div class="text-block">
+            <strong>Texto para as questões 01 e 02</strong><br><br>
+            "Gosto em especial da palavra ronha – e de praticá-la. A palavra parece outra coisa, e de fato já foi: uma espécie de sarna, e, também, uma doença de plantas. Ninguém mais usa nesse sentido. A expressão 'ficar na ronha' se refere à prática de abrir os olhos, mas permanecer na cama. Não imaginam minha excitação ao descobrir que existe uma palavra pro meu esporte preferido. A arte da ronha consiste em acordar sem, no entanto, se levantar. É um estado intermediário entre o sono e a vigília, uma espécie de purgatório delicioso onde a culpa não entra."<br>
+            <small>(DUVIVIER, Gregório. Caviar é uma ova. Folha de S. Paulo. Adaptado.)</small>
+        </div>
+
+        <!-- Questão 01 -->
+        <div class="question-card" data-correct="C">
+            <span class="question-number">Questão 01</span>
+            <div class="question-text">O texto de Gregório Duvivier explora a dinâmica evolutiva da língua portuguesa... assinale a alternativa que descreve corretamente o fenômeno linguístico predominante:</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="q1" value="A"> A) A homonímia perfeita, uma vez que o autor demonstra que a "ronha" (doença) e a "ronha" (preguiça) são palavras de origens distintas.</label>
+                <label class="option-item"><input type="radio" name="q1" value="B"> B) A restrição semântica absoluta, processo no qual o significado original foi completamente suprimido do léxico.</label>
+                <label class="option-item"><input type="radio" name="q1" value="C"> C) A exploração estilística da polissemia, na qual o autor resgata o sentido original para estabelecer um contraste irônico com o neologismo semântico.</label>
+                <label class="option-item"><input type="radio" name="q1" value="D"> D) A antonímia contextual, visto que o sentido de "doença" provoca repulsa física, enquanto "permanecer na cama" evoca prazer.</label>
+                <label class="option-item"><input type="radio" name="q1" value="E"> E) A sinonímia cognitiva, sugerindo que o estado de inércia da doença é idêntico ao estado de sonolência matinal.</label>
+            </div>
+            <div class="resolution">
+                <h4>Resolução:</h4>
+                O autor faz uso da <strong>polissemia</strong> (existência de vários sentidos para um mesmo termo) como recurso estilístico. Ele resgata o sentido de doença (patológico) para criar um contraste irônico com o prazer da preguiça matinal.
+            </div>
+        </div>
+
+        <!-- Questão 02 -->
+        <div class="question-card" data-correct="C">
+            <span class="question-number">Questão 02</span>
+            <div class="question-text">No período "A arte da ronha consiste em acordar sem, <strong>no entanto</strong>, se levantar", a substituição adequada para manter o sentido é:</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="q2" value="A"> A) por conseguinte.</label>
+                <label class="option-item"><input type="radio" name="q2" value="B"> B) conquanto.</label>
+                <label class="option-item"><input type="radio" name="q2" value="C"> C) contudo.</label>
+                <label class="option-item"><input type="radio" name="q2" value="D"> D) porquanto.</label>
+                <label class="option-item"><input type="radio" name="q2" value="E"> E) dessarte.</label>
+            </div>
+            <div class="resolution">
+                <h4>Resolução:</h4>
+                "No entanto" e "Contudo" são conjunções coordenativas adversativas que indicam oposição ou contraste. "Contudo" preserva integralmente o sentido e a estrutura sintática.
+            </div>
+        </div>
+
+        <!-- Texto 02 -->
+        <div class="text-block">
+            <strong>Texto para a questão 03</strong><br><br>
+            "Tenho muita pena de não usarmos a palavra javardo. Trata-se de um sinônimo pra javali, mas que nunca será usado pra designar o animal propriamente dito. Chamam de javardo alguém que se comporta como um javali, ou melhor, que se comporta como imaginamos que um javali se comportaria: de forma grosseira, estúpida, abjeta..."<br>
+            <small>(DUVIVIER, Gregório. Folha de S. Paulo. Adaptado.)</small>
+        </div>
+
+        <!-- Questão 03 -->
+        <div class="question-card" data-correct="C">
+            <span class="question-number">Questão 03</span>
+            <div class="question-text">Com base na leitura do texto e nos conceitos de significação das palavras, é correto afirmar que:</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="q3" value="A"> A) "Javardo" e "javali" constituem um par de sinônimos absolutos.</label>
+                <label class="option-item"><input type="radio" name="q3" value="B"> B) O termo "javardo" sofreu um processo de especialização técnica na veterinária.</label>
+                <label class="option-item"><input type="radio" name="q3" value="C"> C) A palavra "javardo" preservou socialmente sua carga conotativa pejorativa, enquanto seu sentido denotativo original caiu em desuso.</label>
+                <label class="option-item"><input type="radio" name="q3" value="D"> D) O autor sugere que "javardo" funciona como um antônimo de "javali".</label>
+                <label class="option-item"><input type="radio" name="q3" value="E"> E) A relação entre os vocábulos é de paronímia.</label>
+            </div>
+            <div class="resolution">
+                <h4>Resolução:</h4>
+                O termo preservou o sentido figurado (conotativo) de insulto, enquanto o sentido literal (denotativo/referencial) de animal deixou de ser utilizado pelo falante comum, inviabilizando sua função primária de nomear o bicho.
+            </div>
+        </div>
+
+        <!-- Texto 03 -->
+        <div class="text-block">
+            <strong>Texto para as questões 04 e 05 (Tirinha Armandinho)</strong><br><br>
+            Pai: No Nordeste, aipim se chama macaxeira.<br>
+            Armandinho: E mandioca?<br>
+            Pai: Também. Depende da região e, às vezes, do preparo e da espécie.<br>
+            Armandinho: Que confuso! E como se chama a raiz que não tem nome nenhum?<br>
+            Pai: Inexistente?
+        </div>
+
+        <!-- Questão 04 -->
+        <div class="question-card" data-correct="B">
+            <span class="question-number">Questão 04</span>
+            <div class="question-text">O fenômeno linguístico ilustrado entre "aipim", "macaxeira" e "mandioca" é:</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="q4" value="A"> A) Antonímia contextual.</label>
+                <label class="option-item"><input type="radio" name="q4" value="B"> B) Variação diatópica geradora de sinonímia.</label>
+                <label class="option-item"><input type="radio" name="q4" value="C"> C) Polissemia regional.</label>
+                <label class="option-item"><input type="radio" name="q4" value="D"> D) Homonímia sintática.</label>
+                <label class="option-item"><input type="radio" name="q4" value="E"> E) Adequação diafásica.</label>
+            </div>
+            <div class="resolution">
+                <h4>Resolução:</h4>
+                Trata-se de variação <strong>diatópica</strong> (geográfica). Significantes diferentes remetem ao mesmo objeto (sinonímia) dependendo da região do país.
+            </div>
+        </div>
+
+        <!-- Questão 05 -->
+        <div class="question-card" data-correct="B">
+            <span class="question-number">Questão 05</span>
+            <div class="question-text">O humor no desfecho da tirinha ("Inexistente?") decorre de:</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="q5" value="A"> A) Recurso a um antônimo direto de "raiz".</label>
+                <label class="option-item"><input type="radio" name="q5" value="B"> B) Ruptura de expectativa baseada na metalinguagem, deslocando o foco da taxonomia para a condição ontológica do objeto.</label>
+                <label class="option-item"><input type="radio" name="q5" value="C"> C) Regionalismo pouco conhecido para raízes ruins.</label>
+                <label class="option-item"><input type="radio" name="q5" value="D"> D) Falha de coesão referencial no pronome "que".</label>
+                <label class="option-item"><input type="radio" name="q5" value="E"> E) Uso do sentido conotativo para criticar a ignorância do filho.</label>
+            </div>
+            <div class="resolution">
+                <h4>Resolução:</h4>
+                O humor nasce da quebra de expectativa: o filho espera um nome de vegetal, mas o pai responde sobre a existência do ser (ontologia). Se algo não tem nome na língua, socialmente ele não existe.
+            </div>
+        </div>
+
+        <!-- Questão 06 -->
+        <div class="question-card" data-correct="B">
+            <span class="question-number">Questão 06</span>
+            <div class="question-text">Na expressão "Chupa essa manga", explorando o som idêntico entre a fruta e o desafio, o recurso é:</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="q6" value="A"> A) Sinestesia.</label>
+                <label class="option-item"><input type="radio" name="q6" value="B"> B) Paranomásia.</label>
+                <label class="option-item"><input type="radio" name="q6" value="C"> C) Catacrese.</label>
+                <label class="option-item"><input type="radio" name="q6" value="D"> D) Eufemismo.</label>
+                <label class="option-item"><input type="radio" name="q6" value="E"> E) Prosopopeia.</label>
+            </div>
+            <div class="resolution">
+                <h4>Resolução:</h4>
+                A <strong>paranomásia</strong> é a aproximação de palavras de sons semelhantes (ou idênticos no caso da homonímia perfeita) para criar trocadilhos e intensificar o sentido pelo plano fonético.
+            </div>
+        </div>
+
+        <!-- Questão 07 -->
+        <div class="question-card" data-correct="C">
+            <span class="question-number">Questão 07</span>
+            <div class="question-text">Classifique: I. Coração de pedra; II. Águas pingavam; III. Horas pingavam:</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="q7" value="A"> A) Conotativo – Conotativo – Denotativo.</label>
+                <label class="option-item"><input type="radio" name="q7" value="B"> B) Denotativo – Denotativo – Conotativo.</label>
+                <label class="option-item"><input type="radio" name="q7" value="C"> C) Conotativo – Denotativo – Conotativo.</label>
+                <label class="option-item"><input type="radio" name="q7" value="D"> D) Denotativo – Conotativo – Denotativo.</label>
+                <label class="option-item"><input type="radio" name="q7" value="E"> E) Conotativo – Conotativo – Conotativo.</label>
+            </div>
+            <div class="resolution">
+                <h4>Resolução:</h4>
+                I. "Coração de pedra" é figurado (insensibilidade). II. "Águas pingavam" é o fato físico literal (denotativo). III. "Horas pingavam" é metáfora para a lentidão do tempo (conotativo).
+            </div>
+        </div>
+
+        <!-- Questão 08 -->
+        <div class="question-card" data-correct="B">
+            <span class="question-number">Questão 08</span>
+            <div class="question-text">Em Saramago, o fenômeno que permite a manutenção da unidade temática sem marcas gráficas de diálogo é:</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="q8" value="A"> A) Ambiguidade lexical proposital.</label>
+                <label class="option-item"><input type="radio" name="q8" value="B"> B) Coesão referencial e sequencial.</label>
+                <label class="option-item"><input type="radio" name="q8" value="C"> C) Polissemia estrutural diatônica.</label>
+                <label class="option-item"><input type="radio" name="q8" value="D"> D) Onomatopeia sintática.</label>
+                <label class="option-item"><input type="radio" name="q8" value="E"> E) Variação diacrônica da pontuação.</label>
+            </div>
+            <div class="resolution">
+                <h4>Resolução:</h4>
+                A coesão referencial (uso de vocativos e pronomes) e a sequencial (lógica da conversa) garantem que o leitor identifique quem fala, mesmo sem travessões ou parágrafos.
+            </div>
+        </div>
+
+        <!-- Questão 09 -->
+        <div class="question-card" data-correct="B">
+            <span class="question-number">Questão 09</span>
+            <div class="question-text">Analise "nas últimas" em: I. Negociação nas últimas; II. Nas últimas férias:</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="q9" value="A"> A) Em I, sentido locativo; em II, sentido temporal passado.</label>
+                <label class="option-item"><input type="radio" name="q9" value="B"> B) Em I, sentido conotativo (estado terminal); em II, sentido denotativo (determinante temporal).</label>
+                <label class="option-item"><input type="radio" name="q9" value="C"> C) Em I, denotação pura; em II, conotação de "férias derradeiras".</label>
+                <label class="option-item"><input type="radio" name="q9" value="D"> D) Em I, sinônimo de "recentes"; em II, antônimo de "primeiras".</label>
+                <label class="option-item"><input type="radio" name="q9" value="E"> E) Em ambos, advérbio de modo.</label>
+            </div>
+            <div class="resolution">
+                <h4>Resolução:</h4>
+                No item I, a expressão é metafórica para "prestes a acabar". No item II, é apenas um adjetivo de tempo indicando o evento mais recente.
+            </div>
+        </div>
+
+        <!-- Questão 10 -->
+        <div class="question-card" data-correct="B">
+            <span class="question-number">Questão 10</span>
+            <div class="question-text">Assinale a alternativa empregada EXCLUSIVAMENTE em sentido denotativo:</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="q10" value="A"> A) Aquele candidato é uma <strong>raposa</strong> velha na política.</label>
+                <label class="option-item"><input type="radio" name="q10" value="B"> B) Os <strong>espinhos</strong> daquela roseira feriram a mão do jardineiro.</label>
+                <label class="option-item"><input type="radio" name="q10" value="C"> C) O empresário carregava o <strong>peso do mundo</strong> nos ombros.</label>
+                <label class="option-item"><input type="radio" name="q10" value="D"> D) A <strong>chama</strong> da esperança apagou-se.</label>
+                <label class="option-item"><input type="radio" name="q10" value="E"> E) Ela sempre demonstrou ter um <strong>coração de ouro</strong>.</label>
+            </div>
+            <div class="resolution">
+                <h4>Resolução:</h4>
+                Na alternativa B, "espinhos" refere-se à estrutura botânica real e "feriram" ao dano físico literal. Todas as outras opções usam metáforas.
+            </div>
+        </div>
+
+        <div id="result-summary">
+            <h2>Resultado Final</h2>
+            <div class="score" id="final-score">0 / 10</div>
+            <p id="score-msg"></p>
+        </div>
+
+        <button type="button" class="btn-submit" onclick="finishQuiz()">Finalizar e Ver Resoluções</button>
+    </div>
+</div>
+
+<script>
+    function finishQuiz() {
+        const questions = document.querySelectorAll('.question-card');
+        let score = 0;
+        let answeredAll = true;
+
+        questions.forEach((card, index) => {
+            const correct = card.getAttribute('data-correct');
+            const selected = card.querySelector('input[type="radio"]:checked');
+            const options = card.querySelectorAll('.option-item');
+            const resolution = card.querySelector('.resolution');
+
+            // Mostrar resolução
+            resolution.style.display = 'block';
+
+            if (selected) {
+                if (selected.value === correct) {
+                    score++;
+                    selected.parentElement.classList.add('correct');
+                } else {
+                    selected.parentElement.classList.add('wrong');
+                    // Destacar a correta para o usuário aprender
+                    options.forEach(opt => {
+                        if (opt.querySelector('input').value === correct) {
+                            opt.classList.add('correct');
+                        }
+                    });
+                }
+            } else {
+                answeredAll = false;
+                // Destacar a correta mesmo sem resposta
+                options.forEach(opt => {
+                    if (opt.querySelector('input').value === correct) {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+        });
+
+        // Mostrar Sumário
+        const summary = document.getElementById('result-summary');
+        const scoreDisplay = document.getElementById('final-score');
+        const scoreMsg = document.getElementById('score-msg');
+        
+        summary.style.display = 'block';
+        scoreDisplay.innerText = `${score} / 10`;
+        
+        if (score >= 8) scoreMsg.innerText = "Excelente desempenho! Você domina os conceitos de semântica.";
+        else if (score >= 5) scoreMsg.innerText = "Bom trabalho. Revise as resoluções para fixar os pontos de dúvida.";
+        else scoreMsg.innerText = "Continue estudando. A análise contextual exige prática constante.";
+
+        // Rolar para o topo do resultado
+        summary.scrollIntoView({ behavior: 'smooth' });
+
+        // Desabilitar inputs
+        document.querySelectorAll('input').forEach(input => input.disabled = true);
+        document.querySelector('.btn-submit').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>

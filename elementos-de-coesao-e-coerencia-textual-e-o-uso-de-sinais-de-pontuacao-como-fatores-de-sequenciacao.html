@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumo Estruturado IFAM - Língua Portuguesa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #1f2937;
+            line-height: 1.7;
+        }
+
+        .highlight {
+            background-color: #fef08a;
+            font-weight: 600;
+            padding: 0 2px;
+        }
+
+        .important-border {
+            border-left: 4px solid #1e293b;
+            background-color: #f8fafc;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        /* Garantir que tabelas não gerem scroll horizontal */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            color: #0f172a;
+            font-weight: 700;
+        }
+
+        .audio-player {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 1rem;
+            border-bottom: 2px solid #edf2f7;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            margin-top: 2.5rem;
+            color: #111827;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #e2e8f0;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body class="p-0 m-0">
+
+    <!-- Player de Áudio -->
+    <div class="audio-player">
+        <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center gap-4">
+            <div class="flex items-center gap-2">
+                <span class="text-xl">🎙️</span>
+                <span class="font-bold text-gray-700">AudioAula:</span>
+            </div>
+            <audio controls class="w-full">
+                <!-- Espaço para o nome do arquivo mp3 -->
+                <source src="7elementos.mp3" type="audio/mpeg">
+                Seu navegador não suporta áudio.
+            </audio>
+        </div>
+    </div>
+
+    <main class="max-w-4xl mx-auto p-6 md:p-12">
+        
+        <div class="text-center mb-12">
+            <span class="tag">Concurso IFAM - Professor EBTT</span>
+            <h1 class="text-3xl md:text-5xl font-extrabold text-gray-900 leading-tight">
+                Elementos de Coesão, Coerência e Pontuação
+            </h1>
+            <p class="text-gray-500 mt-4 text-lg italic underline">Tutor Especialista: Foco em Fundação CEFETMINAS</p>
+        </div>
+
+        <!-- Seção 1: Definições e Características -->
+        <section>
+            <h2 class="text-2xl font-bold">1. Definição e Características Essenciais</h2>
+            <p class="mt-4">
+                O texto não é um amontoado de frases. A <span class="highlight">Coesão</span> é a conexão gramatical (superfície), enquanto a <span class="highlight">Coerência</span> é a harmonia de sentidos (profundidade). Para a CEFETMINAS, o foco está na <span class="highlight">sequenciação textual</span>: como o autor faz o texto progredir sem perder o fio da meada.
+            </p>
+            
+            <div class="important-border">
+                <strong>Características da Coerência:</strong>
+                <ul class="list-disc ml-5 mt-2">
+                    <li><strong>Não-Contradição:</strong> O texto não pode afirmar "A" e "não A" no mesmo contexto.</li>
+                    <li><strong>Relevância:</strong> Os tópicos devem ser pertinentes ao tema central.</li>
+                    <li><strong>Informatividade:</strong> O texto deve trazer dados novos (progressão).</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Seção 2: Coesão Referencial e Sequencial -->
+        <section>
+            <h2 class="text-2xl font-bold">2. Tipos de Coesão (Ponto de Prova)</h2>
+            <p class="mt-2">A banca adora classificar os mecanismos que garantem a fluidez.</p>
+            
+            <h3 class="font-bold mt-4 text-gray-700">A. Coesão Referencial (Ponteiros)</h3>
+            <p>Substituição de termos para evitar repetições desnecessárias:</p>
+            <ul class="list-disc ml-5 mb-6">
+                <li><strong>Anáfora:</strong> Retoma o que veio antes. <span class="italic">(Ex: O IFAM abriu vagas. <u>Ele</u> é uma ótima instituição).</span></li>
+                <li><strong>Catáfora:</strong> Antecipa o que virá. <span class="italic">(Ex: Só quero <u>isto</u>: sua aprovação).</span></li>
+                <li><strong>Coesão Lexical:</strong> Uso de sinônimos, hiperônimos ou antônimos.</li>
+            </ul>
+
+            <h3 class="font-bold mt-4 text-gray-700">B. Coesão Sequencial (Motores de Progressão)</h3>
+            <p>Responsável pelo avanço do texto através de conectivos (conjunções) e tempos verbais.</p>
+            
+            <div class="table-responsive mt-4">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Relação Lógica</th>
+                            <th>Conectivos Chave (CEFETMINAS)</th>
+                            <th>Valor na Sequenciação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-semibold">Adversidade</td>
+                            <td>Mas, porém, contudo, <span class="highlight">todavia</span>, entretanto.</td>
+                            <td>Ruptura de expectativa / Oposição.</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Concessão</td>
+                            <td>Embora, <span class="highlight">conquanto</span>, malgrado, posto que.</td>
+                            <td>Ressalva que não impede a ação principal.</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Conclusão</td>
+                            <td>Logo, portanto, <span class="highlight">porseguinte</span>, destarte.</td>
+                            <td>Fechamento de um raciocínio anterior.</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Explicação</td>
+                            <td>Porque, que, pois, <span class="highlight">porquanto</span>.</td>
+                            <td>Justificativa ou fundamentação.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Seção 3: Pontuação como Fator de Sequenciação -->
+        <section>
+            <h2 class="text-2xl font-bold">3. Sinais de Pontuação na Sequenciação</h2>
+            <p class="mt-4">
+                A pontuação não serve apenas para "pausas". Ela organiza a hierarquia das informações.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                <div class="p-4 border border-gray-200 rounded">
+                    <h4 class="font-bold text-blue-800">Dois-Pontos (:)</h4>
+                    <p class="text-sm italic">Fator de <strong>catáfora sequencial</strong>. Introduz uma enumeração que detalha o termo anterior ou uma síntese conclusiva.</p>
+                </div>
+                <div class="p-4 border border-gray-200 rounded">
+                    <h4 class="font-bold text-blue-800">Ponto e Vírgula (;)</h4>
+                    <p class="text-sm italic">Separa itens em uma lista complexa ou orações coordenadas que já possuem vírgulas internas. <span class="highlight">Cria uma pausa de transição média.</span></p>
+                </div>
+                <div class="p-4 border border-gray-200 rounded">
+                    <h4 class="font-bold text-blue-800">Travessão (—)</h4>
+                    <p class="text-sm italic">Pode substituir vírgulas para <span class="highlight">dar ênfase</span> a um aposto ou isolar explicações, interrompendo o fluxo principal para inserir um comentário.</p>
+                </div>
+                <div class="p-4 border border-gray-200 rounded">
+                    <h4 class="font-bold text-blue-800">Vírgula (,)</h4>
+                    <p class="text-sm italic">O principal sequenciador. Desloca adjuntos adverbiais, isola elementos e marca a elipse (omissão de verbos).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção 4: "Peguinhas" CEFETMINAS -->
+        <section class="mt-12">
+            <h2 class="text-2xl font-bold text-red-700">4. Tendências e "Peguinhas" da CEFETMINAS</h2>
+            <div class="important-border bg-red-50 border-red-200">
+                <ul class="space-y-4">
+                    <li>
+                        <strong>1. Substituição "Salva-Vidas":</strong> A banca perguntará se a troca de "conquanto" por "embora" altera o sentido. <span class="font-bold underline">Não altera.</span> Mas se trocar por "contudo", altera (Concessiva vs Adversativa).
+                    </li>
+                    <li>
+                        <strong>2. A Vírgula e o Sentido:</strong> "Os alunos, que estudam, passam." (Todos os alunos estudam - Explicativa). "Os alunos que estudam passam." (Apenas os que estudam - Restritiva). <span class="highlight">Cuidado com essa mudança de sentido sem erro gramatical!</span>
+                    </li>
+                    <li>
+                        <strong>3. Polissemia do "Pois":</strong>
+                        <br>— <span class="italic">Pois</span> no início = Explicativo.
+                        <br>— <span class="italic">Pois</span> após o verbo (entre vírgulas) = Conclusivo.
+                    </li>
+                    <li>
+                        <strong>4. Referenciação Exofórica:</strong> Quando o termo refere-se a algo fora do texto (situação real). A banca usa muito isso em textos de tecnologia/informática.
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Seção 5: Resumo para Memorização (Flash-Cards Mentais) -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold">5. Check-list de Memorização</h2>
+            <div class="bg-gray-900 text-white p-6 rounded-lg">
+                <ul class="space-y-3 font-mono text-sm">
+                    <li class="flex items-center gap-2"><span class="text-green-400">✔</span> COESÃO = Conexão de superfície (Gramática).</li>
+                    <li class="flex items-center gap-2"><span class="text-green-400">✔</span> COERÊNCIA = Conexão de sentido (Lógica).</li>
+                    <li class="flex items-center gap-2"><span class="text-green-400">✔</span> PORQUANTO = Porque (Causa).</li>
+                    <li class="flex items-center gap-2"><span class="text-green-400">✔</span> CONQUANTO = Embora (Concessão).</li>
+                    <li class="flex items-center gap-2"><span class="text-green-400">✔</span> ADJUNTO ADVERBIAL DESLOCADO = Vírgula facultativa se for curto, obrigatória se for longo.</li>
+                    <li class="flex items-center gap-2"><span class="text-green-400">✔</span> DOIS PONTOS = Anunciam citação, enumeração ou explicação.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Botão de Ação -->
+        <div class="text-center py-10">
+            <p class="text-gray-500 mb-4 font-semibold italic">Terminou a revisão? Teste seus conhecimentos agora!</p>
+            <a href="7questoes.html" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-12 rounded-full transition duration-300 shadow-lg hover:shadow-xl">
+                🔥 Ver Questões de Fixação
+            </a>
+        </div>
+
+    </main>
+
+    <footer class="bg-gray-100 py-6 text-center text-sm text-gray-500 border-t">
+        Conteúdo otimizado para cargos EBTT (Ensino Básico, Técnico e Tecnológico).
+    </footer>
+
+</body>
+</html>

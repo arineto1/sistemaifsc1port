@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Completo de Memorização: Reescrita de Frases FAURGS | IFSC EBTT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            900: '#14532d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Highlight markers simulating physical highlighters on light background */
+        mark.hl-yellow {
+            background-color: #fef08a;
+            color: #713f12;
+            padding: 0.15rem 0.35rem;
+            border-radius: 0.2rem;
+            font-weight: 600;
+        }
+        mark.hl-green {
+            background-color: #dcfce7;
+            color: #14532d;
+            padding: 0.15rem 0.35rem;
+            border-radius: 0.2rem;
+            font-weight: 600;
+        }
+        mark.hl-blue {
+            background-color: #e0f2fe;
+            color: #0c4a6e;
+            padding: 0.15rem 0.35rem;
+            border-radius: 0.2rem;
+            font-weight: 600;
+        }
+        mark.hl-rose {
+            background-color: #ffe4e6;
+            color: #881337;
+            padding: 0.15rem 0.35rem;
+            border-radius: 0.2rem;
+            font-weight: 600;
+        }
+        /* Table cell wrapping to prevent horizontal scrolling on mobile */
+        td, th {
+            word-break: break-word;
+            overflow-wrap: anywhere;
+        }
+    </style>
+</head>
+<body class="bg-white text-slate-800 font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-yellow-200 selection:text-yellow-900">
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
+        <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+                <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-emerald-100 text-emerald-800 font-black text-xs tracking-wider border border-emerald-200">
+                    IFSC
+                </span>
+                <div>
+                    <h1 class="text-xs font-bold text-slate-900 uppercase tracking-wider">Professor de Informática (EBTT)</h1>
+                    <p class="text-[11px] text-slate-500 font-medium">Banca FAURGS &bull; Língua Portuguesa</p>
+                </div>
+            </div>
+            <a href="questoes.html" class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-800 bg-slate-100 hover:bg-slate-200 px-3.5 py-2 rounded-lg transition-colors border border-slate-300">
+                <span>Ir para Questões</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-4xl mx-auto px-4 py-8 flex-grow w-full space-y-10">
+
+        <!-- Audio Player Block -->
+        <section class="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-6 shadow-sm">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-sm">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7m-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>
+                    </div>
+                    <div>
+                        <h2 class="text-base font-bold text-slate-900">Audioaula de Fixação em MP3</h2>
+                        <p class="text-xs text-slate-600">Acompanhe a revisão teórica e mentalize os gatilhos de prova</p>
+                    </div>
+                </div>
+
+                <!-- Input to configure audio filename -->
+                <div class="w-full sm:w-auto flex flex-col gap-1">
+                    <label for="audioFileName" class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Caminho / Nome do MP3:</label>
+                    <div class="flex items-center gap-1.5">
+                        <input type="text" id="audioFileName" value="aula-reescrita.mp3" placeholder="Ex: aula-reescrita.mp3" class="text-xs bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-slate-800 w-full sm:w-52 font-mono">
+                        <button onclick="updateAudioSource()" class="text-xs bg-slate-800 hover:bg-slate-900 text-white px-3 py-1.5 rounded-lg font-semibold transition-colors shrink-0">Carregar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HTML5 Audio Element -->
+            <div class="bg-white p-2 border border-slate-200 rounded-xl shadow-inner">
+                <audio id="mainAudioPlayer" controls class="w-full">
+                    <source id="audioSource" src="aula-reescrita.mp3" type="audio/mpeg">
+                    Seu navegador não suporta o reprodutor de áudio HTML5.
+                </audio>
+            </div>
+            <p class="text-[11px] text-slate-500 mt-2 text-center sm:text-left">
+                <span class="font-semibold text-slate-700">Nota:</span> Se o arquivo MP3 estiver na mesma pasta deste arquivo HTML, basta digitar o nome do arquivo no campo acima e clicar em "Carregar".
+            </p>
+        </section>
+
+        <!-- Document Main Header -->
+        <div class="border-b border-slate-200 pb-6 text-center sm:text-left">
+            <span class="inline-block bg-amber-100 text-amber-900 text-xs font-extrabold px-3 py-1 rounded-full mb-3 uppercase tracking-wider border border-amber-200">
+                Guia de Memorização Integral &bull; Edital IFSC EBTT
+            </span>
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                Reescrita de Frases e Parágrafos
+            </h1>
+            <p class="text-base text-slate-600 mt-2 font-medium">
+                Sintaxe, Semântica, Transposição Verbal, Conectivos e Pegadinhas Exclusivas da Banca FAURGS
+            </p>
+        </div>
+
+        <!-- SECTION 1: ESTRUTURA DO CONCURSO -->
+        <section class="space-y-4">
+            <div class="flex items-center gap-2 border-l-4 border-slate-800 pl-3">
+                <h2 class="text-xl font-bold text-slate-900">1. O Filtro de Sobrevivência (IFSC / EBTT)</h2>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 sm:p-5 text-sm leading-relaxed">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                        <span class="text-xs font-bold text-slate-500 block uppercase tracking-wider">Estrutura Global</span>
+                        <p class="text-sm font-extrabold text-slate-900 mt-1">50 questões objetivas</p>
+                        <p class="text-xs text-slate-600 mt-1.5"><mark class="hl-yellow">5 questões de Língua Portuguesa</mark> (Peso decisivo de corte).</p>
+                    </div>
+                    <div class="bg-amber-50/80 p-4 rounded-xl border border-amber-200 shadow-sm">
+                        <span class="text-xs font-bold text-amber-800 block uppercase tracking-wider">Cláusula de Barreira</span>
+                        <p class="text-sm font-black text-amber-950 mt-1">Mínimo de <mark class="hl-yellow">2 acertos (40%)</mark></p>
+                        <p class="text-xs text-amber-900 mt-1.5">Eliminação sumária do candidato caso acerte menos de 2 questões em Português.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                        <span class="text-xs font-bold text-slate-500 block uppercase tracking-wider">Perfil da Banca FAURGS</span>
+                        <p class="text-sm font-bold text-slate-900 mt-1">Literal &amp; Formalista</p>
+                        <p class="text-xs text-slate-600 mt-1.5"><mark class="hl-yellow">Foco na engenharia sintática</mark> e contagem milimétrica de alterações.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: SINTAXE VS SEMÂNTICA -->
+        <section class="space-y-4">
+            <div class="flex items-center gap-2 border-l-4 border-slate-800 pl-3">
+                <h2 class="text-xl font-bold text-slate-900">2. Sintaxe vs. Semântica: O Triângulo de Decisão</h2>
+            </div>
+            <p class="text-sm text-slate-600">
+                Ao analisar opções de reescrita, a FAURGS exige a avaliação independente dos três vértices abaixo:
+            </p>
+
+            <!-- Table 1: Triângulo de Decisão -->
+            <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                <table class="w-full text-left text-xs sm:text-sm border-collapse">
+                    <thead>
+                        <tr class="bg-slate-100 border-b border-slate-200 text-slate-800 font-bold uppercase tracking-wider">
+                            <th class="p-3 sm:p-4 w-1/4">Vértice</th>
+                            <th class="p-3 sm:p-4 w-5/12">Foco da Avaliação</th>
+                            <th class="p-3 sm:p-4 w-1/3">Armadilha Típica FAURGS</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 leading-relaxed">
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 sm:p-4 font-bold text-slate-900">
+                                <span class="inline-flex items-center gap-1.5">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
+                                    1. Correção
+                                </span>
+                            </td>
+                            <td class="p-3 sm:p-4">
+                                Obediência cega à <mark class="hl-yellow">norma-padrão</mark> (concordância, regência, crase, pontuação e colocação).
+                            </td>
+                            <td class="p-3 sm:p-4 text-slate-700 bg-red-50/40">
+                                Inserir erro invisível de concordância ou regência na nova estrutura.
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 sm:p-4 font-bold text-slate-900">
+                                <span class="inline-flex items-center gap-1.5">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span>
+                                    2. Sentido
+                                </span>
+                            </td>
+                            <td class="p-3 sm:p-4">
+                                Equivalência semântica exata e preservação da <mark class="hl-blue">intenção comunicativa original</mark>.
+                            </td>
+                            <td class="p-3 sm:p-4 text-slate-700 bg-red-50/40">
+                                Alterar o sentido criando uma frase que permanece <span class="font-semibold underline">gramaticalmente correta</span>.
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 sm:p-4 font-bold text-slate-900">
+                                <span class="inline-flex items-center gap-1.5">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
+                                    3. Coerência
+                                </span>
+                            </td>
+                            <td class="p-3 sm:p-4">
+                                <mark class="hl-yellow">Lógica interna do texto</mark> e encadeamento coerente dos argumentos do parágrafo.
+                            </td>
+                            <td class="p-3 sm:p-4 text-slate-700 bg-red-50/40">
+                                Inverter a relação de causa e efeito trocando conectivos sem ajustar a ordem.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Matriz de Combinações de Resposta -->
+            <div class="bg-amber-50/60 border border-amber-200 rounded-xl p-4 text-xs sm:text-sm space-y-2">
+                <span class="font-bold text-amber-950 uppercase tracking-wider block">Atenção ao Enunciado! Matriz de Decisão:</span>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-800">
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <strong class="text-slate-900">"Mantém o sentido E a correção":</strong> Precisa gabaritar os 3 vértices.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <strong class="text-slate-900">"Mantém a correção (embora mude o sentido)":</strong> Válido em trocas de adjetivas (restritiva vs. explicativa).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: OS 5 PILARES GRAMATICAIS -->
+        <section class="space-y-6">
+            <div class="flex items-center gap-2 border-l-4 border-slate-800 pl-3">
+                <h2 class="text-xl font-bold text-slate-900">3. Os 5 Pilares Gramaticais de Reescrita (Gatilhos de Prova)</h2>
+            </div>
+
+            <!-- Pilar I -->
+            <div class="border border-slate-200 rounded-xl p-4 sm:p-6 bg-white shadow-sm space-y-4">
+                <div class="flex items-center gap-2">
+                    <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Pilar I</span>
+                    <h3 class="text-base font-bold text-slate-900">Regência Verbal / Nominal e o Pronome Relativo</h3>
+                </div>
+                <div class="bg-amber-50/80 border-l-4 border-amber-400 p-3.5 rounded-r-md text-xs sm:text-sm">
+                    <span class="font-bold text-amber-950 uppercase tracking-wide">Regra do Rastreamento Regente:</span>
+                    Se o termo posposto ao pronome relativo exigir preposição, ela <mark class="hl-yellow">DEVE ser deslocada para ANTES do pronome relativo</mark>.
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs sm:text-sm">
+                    <div class="bg-slate-50 p-3.5 rounded-lg border border-slate-200">
+                        <span class="font-bold text-slate-900 block mb-1">Construções Corretas da FAURGS:</span>
+                        <p class="text-slate-700">• "...o meio <mark class="hl-yellow">de que</mark> dispõe..." <span class="text-slate-500">(Quem dispõe, dispõe DE)</span></p>
+                        <p class="text-slate-700">• "...o abraço <mark class="hl-yellow">em que</mark> se envolvem..." <span class="text-slate-500">(Envolver-se EM)</span></p>
+                        <p class="text-slate-700">• "...o projeto <mark class="hl-yellow">a cujo</mark> teor se opôs..." <span class="text-slate-500">(Opor-se A)</span></p>
+                    </div>
+                    <div class="bg-slate-50 p-3.5 rounded-lg border border-slate-200">
+                        <span class="font-bold text-slate-900 block mb-1">Verbos Pronominais (Lembrar / Esquecer):</span>
+                        <p class="text-slate-700">• <strong>Com Pronome (VTI):</strong> <em>"Esqueceu-<b>se do</b> compromisso"</em></p>
+                        <p class="text-slate-700">• <strong>Sem Pronome (VTD):</strong> <em>"Esqueceu <b>o</b> compromisso"</em></p>
+                        <p class="text-red-700 font-semibold mt-1">&cross; Erro FAURGS: Misturar as duas regências (ex: <em>"esqueceu do compromisso"</em>).</p>
+                    </div>
+                </div>
+
+                <!-- Tabela de Regências Notáveis -->
+                <div class="bg-white border border-slate-200 rounded-lg overflow-hidden">
+                    <table class="w-full text-left text-xs sm:text-sm">
+                        <thead class="bg-slate-100 text-slate-800 font-bold uppercase text-[11px]">
+                            <tr>
+                                <th class="p-2.5 w-1/4">Verbo</th>
+                                <th class="p-2.5 w-1/3">Regência Exigida na Norma</th>
+                                <th class="p-2.5 w-5/12">Reescrita Correta</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr>
+                                <td class="p-2.5 font-bold text-slate-900">Implicar</td>
+                                <td class="p-2.5 text-slate-700">VTD (Sentido de acarretar - <mark class="hl-rose">SEM preposição "em"</mark>)</td>
+                                <td class="p-2.5 font-mono text-xs">"A medida implica reestruturação."</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 font-bold text-slate-900">Visar / Aspirar</td>
+                                <td class="p-2.5 text-slate-700">VTI (Sentido de objetivo/almejar - <mark class="hl-yellow">PREPOSIÇÃO A</mark>)</td>
+                                <td class="p-2.5 font-mono text-xs">"Aspirava ao cargo de professor."</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 font-bold text-slate-900">Preferir</td>
+                                <td class="p-2.5 text-slate-700"> Exige <mark class="hl-yellow">"A"</mark> (Proibido usar "do que" ou "mais que")</td>
+                                <td class="p-2.5 font-mono text-xs">"Prefere ensinar a burocratizar."</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Pilar II -->
+            <div class="border border-slate-200 rounded-xl p-4 sm:p-6 bg-white shadow-sm space-y-4">
+                <div class="flex items-center gap-2">
+                    <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Pilar II</span>
+                    <h3 class="text-base font-bold text-slate-900">Concordância Verbal / Nominal e Flexão de Número</h3>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
+                    <div class="bg-slate-50 p-3.5 rounded-lg border border-slate-200">
+                        <span class="font-bold text-slate-900 block mb-1">Expressões Partitivas e Porcentagens:</span>
+                        <p class="text-slate-600 mb-2 font-medium"><em>(A maioria de, a metade de, grande parte de)</em> &rarr; Concordância facultativa com o núcleo ou com o especificador.</p>
+                        <p class="bg-white p-2 rounded border border-slate-200 font-mono text-[11px] text-slate-800">
+                            "A maioria dos alunos <mark class="hl-yellow">passou</mark>"<br>OU<br>"A maioria dos alunos <mark class="hl-yellow">passaram</mark>"<br><span class="text-emerald-700 font-bold">(Ambas corretas)</span>
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-50 p-3.5 rounded-lg border border-slate-200">
+                        <span class="font-bold text-slate-900 block mb-1">Verbos Impessoais (Haver e Fazer):</span>
+                        <p class="text-slate-600 mb-2 font-medium"><em>Haver</em> (existir/ocorrer) e <em>Fazer</em> (tempo decorrido) não possuem sujeito &rarr; <mark class="hl-yellow">Ficam SEMPRE no singular</mark>.</p>
+                        <p class="bg-white p-2 rounded border border-slate-200 text-[11px]">
+                            &cross; Erro: <em>"Houveram muitos recursos"</em><br>
+                            &check; Correto: <strong class="text-emerald-800">"Houve muitos recursos"</strong><br>
+                            &check; Locução: <strong class="text-emerald-800">"Deve haver muitos recursos"</strong> (Auxiliar também fica no singular).
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 p-3.5 rounded-lg border border-slate-200 text-xs sm:text-sm">
+                    <span class="font-bold text-slate-900 block mb-1">Acentuação Diferencial de Número (Verbos TER e VIR e Derivados):</span>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+                        <div class="bg-white p-2.5 rounded border border-slate-200">
+                            <span class="font-bold text-slate-800">Singular (&acute; Agudo nos derivados):</span>
+                            <p class="text-slate-600 font-mono text-xs">Ele tem | Ele vem | Ele det&eacute;m | Ele mant&eacute;m</p>
+                        </div>
+                        <div class="bg-white p-2.5 rounded border border-slate-200">
+                            <span class="font-bold text-slate-800">Plural (&circ; Circunflexo):</span>
+                            <p class="text-slate-600 font-mono text-xs">Eles t&ecirc;m | Eles v&ecirc;m | Eles det&ecirc;m | Eles mant&ecirc;m</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pilar III -->
+            <div class="border border-slate-200 rounded-xl p-4 sm:p-6 bg-white shadow-sm space-y-4">
+                <div class="flex items-center gap-2">
+                    <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Pilar III</span>
+                    <h3 class="text-base font-bold text-slate-900">Transposição de Vozes Verbais (Ativa &leftrightarrow; Passiva)</h3>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-600">
+                    A FAURGS testa constantemente a reescrita de voz ativa para passiva. O tempo e o modo verbal <mark class="hl-yellow">DEVEM ser mantidos estritamente idênticos</mark>.
+                </p>
+
+                <!-- Tabela de Transposição de Tempos Verbais -->
+                <div class="bg-white border border-slate-200 rounded-lg overflow-hidden">
+                    <table class="w-full text-left text-xs sm:text-sm border-collapse">
+                        <thead>
+                            <tr class="bg-slate-100 border-b border-slate-200 text-slate-800 font-bold uppercase tracking-wider text-[11px]">
+                                <th class="p-2.5 w-1/3">Voz Ativa</th>
+                                <th class="p-2.5 w-1/3">Voz Passiva Analítica</th>
+                                <th class="p-2.5 w-1/3">Tempo Verbal Mantido</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 font-mono text-xs">
+                            <tr>
+                                <td class="p-2.5 text-slate-900">O professor <b>analisa</b> o texto.</td>
+                                <td class="p-2.5 text-emerald-800 font-semibold">O texto <b>é analisado</b> pelo professor.</td>
+                                <td class="p-2.5 text-slate-600 font-sans">Presente do Indicativo</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 text-slate-900">O professor <b>analisou</b> o texto.</td>
+                                <td class="p-2.5 text-emerald-800 font-semibold">O texto <b>foi analisado</b> pelo professor.</td>
+                                <td class="p-2.5 text-slate-600 font-sans">Pretérito Perfeito</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 text-slate-900">O professor <b>analisava</b> o texto.</td>
+                                <td class="p-2.5 text-emerald-800 font-semibold">O texto <b>era analisado</b> pelo professor.</td>
+                                <td class="p-2.5 text-slate-600 font-sans">Pretérito Imperfeito</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 text-slate-900">O professor <b>analisará</b> o texto.</td>
+                                <td class="p-2.5 text-emerald-800 font-semibold">O texto <b>será analisado</b> pelo professor.</td>
+                                <td class="p-2.5 text-slate-600 font-sans">Futuro do Presente</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="bg-amber-50/70 p-3 rounded-lg border border-amber-200 text-xs sm:text-sm">
+                    <span class="font-bold text-amber-950 block mb-1">Voz Passiva Sintética vs. Partícula Indeterminadora:</span>
+                    <p class="text-slate-700">&bull; <strong>Com VTD + SE (Passiva Sintética):</strong> O verbo concorda com o sujeito paciente &rarr; <em>"Aprovaram-se as diretrizes"</em> / <em>"Aprovou-se a diretriz"</em>.</p>
+                    <p class="text-slate-700">&bull; <strong>Com VTI/VI + SE (Índice de Indeterminação):</strong> O verbo fica obrigatoriamente no SINGULAR &rarr; <em>"Precisa-se de professores"</em> (Jamais <em>"Precisam-se"</em>).</p>
+                </div>
+            </div>
+
+            <!-- Pilar IV -->
+            <div class="border border-slate-200 rounded-xl p-4 sm:p-6 bg-white shadow-sm space-y-4">
+                <div class="flex items-center gap-2">
+                    <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Pilar IV</span>
+                    <h3 class="text-base font-bold text-slate-900">Conectivos, Troca de Conjunções e Modo Verbal</h3>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-600">
+                    Na substituição de conjunções, atente para o <mark class="hl-yellow">modo verbal exato</mark> exigido pelo novo conectivo:
+                </p>
+
+                <!-- Tabela de Conectivos Equivalentes -->
+                <div class="bg-white border border-slate-200 rounded-lg overflow-hidden">
+                    <table class="w-full text-left text-xs sm:text-sm border-collapse">
+                        <thead>
+                            <tr class="bg-slate-100 border-b border-slate-200 text-slate-800 font-bold uppercase tracking-wider text-[11px]">
+                                <th class="p-2.5 w-1/4">Sentido</th>
+                                <th class="p-2.5 w-5/12">Conectivos Equivalentes</th>
+                                <th class="p-2.5 w-1/3">Impacto no Modo Verbal</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 leading-relaxed">
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-2.5 font-bold text-slate-900">Concessão</td>
+                                <td class="p-2.5 text-slate-700"><em>Embora, conquanto, ainda que, posto que, se bem que, apesar de que</em></td>
+                                <td class="p-2.5 text-slate-800 font-semibold"><mark class="hl-yellow">Exige Subjuntivo</mark> (ex: embora <em>faça</em>)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-2.5 font-bold text-slate-900">Causa</td>
+                                <td class="p-2.5 text-slate-700"><em>Como (anteposto), já que, visto que, porquanto, uma vez que</em></td>
+                                <td class="p-2.5 text-slate-800 font-semibold">Exige Indicativo (ex: já que <em>faz</em>)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-2.5 font-bold text-slate-900">Adversidade</td>
+                                <td class="p-2.5 text-slate-700"><em>Mas, porém, contudo, todavia, entretanto, no entanto</em></td>
+                                <td class="p-2.5 text-slate-800 font-semibold">Exige Indicativo (<em>Mas</em> não aceita vírgula depois)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Parônimos Frequentes -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
+                    <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
+                        <p class="font-bold text-slate-900 mb-1">Em vez de vs. Ao invés de</p>
+                        <p class="text-slate-700"><b>Em vez de:</b> Substituição geral (ex: <em>Em vez de café, tomou chá</em>).</p>
+                        <p class="text-slate-700"><b>Ao invés de:</b> <mark class="hl-yellow">Oposição direta / Antítese</mark> (ex: <em>Ao invés de subir, desceu</em>).</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
+                        <p class="font-bold text-slate-900 mb-1">Ao encontro de vs. De encontro a</p>
+                        <p class="text-slate-700"><b>Ao encontro de:</b> Concordância / Aproximação (<em>"Foi ao encontro do pai"</em>).</p>
+                        <p class="text-slate-700"><b>De encontro a:</b> <mark class="hl-yellow">Colisão / Oposição</mark> (<em>"Chocou-se de encontro ao poste"</em>).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pilar V -->
+            <div class="border border-slate-200 rounded-xl p-4 sm:p-6 bg-white shadow-sm space-y-4">
+                <div class="flex items-center gap-2">
+                    <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Pilar V</span>
+                    <h3 class="text-base font-bold text-slate-900">Pontuação, Discurso e Colocação Pronominal</h3>
+                </div>
+                <div class="space-y-3 text-xs sm:text-sm">
+                    <div class="bg-slate-50 p-3.5 rounded-lg border border-slate-200">
+                        <span class="font-bold text-slate-900 block mb-1">Orações Adjetivas e a Vírgula:</span>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+                            <div class="bg-white p-2.5 rounded border border-slate-200">
+                                <span class="font-bold text-slate-900">Restritiva (Sem Vírgulas):</span>
+                                <p class="text-slate-600 mt-1">Limita a parte de um todo.</p>
+                            </div>
+                            <div class="bg-white p-2.5 rounded border border-slate-200">
+                                <span class="font-bold text-slate-900">Explicativa (Com Vírgulas):</span>
+                                <p class="text-slate-600 mt-1">Generaliza para a totalidade.</p>
+                            </div>
+                        </div>
+                        <div class="mt-2 bg-amber-100/70 p-2 rounded text-amber-950 font-semibold text-xs">
+                            &starf; Regra de Ouro FAURGS: Inserir ou retirar vírgulas em orações adjetivas <mark class="hl-yellow">ALTERA O SENTIDO</mark>, mas <mark class="hl-green">MANTÉM A CORREÇÃO GRAMATICAL</mark>.
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-3.5 rounded-lg border border-slate-200">
+                        <span class="font-bold text-slate-900 block mb-1">Transposição de Discurso (Direto &rarr; Indireto):</span>
+                        <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                            <li>Presente do Indicativo &rarr; <mark class="hl-blue">Pretérito Imperfeito</mark> (ex: <em>"Estudo"</em> &rarr; <em>Disse que estudava</em>)</li>
+                            <li>Futuro do Presente &rarr; <mark class="hl-blue">Futuro do Pretérito</mark> (ex: <em>"Aprovarei"</em> &rarr; <em>Disse que aprovaria</em>)</li>
+                            <li>Advérbios de Lugar/Tempo: <em>Aqui / Hoje / Ontem</em> &rarr; <em>Ali / Naquele dia / No dia anterior</em></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: ALGORITMO DE RESOLUÇÃO -->
+        <section class="space-y-4">
+            <div class="flex items-center gap-2 border-l-4 border-slate-800 pl-3">
+                <h2 class="text-xl font-bold text-slate-900">4. O Algoritmo de Resolução: "Quantas outras palavras..."</h2>
+            </div>
+            <p class="text-sm text-slate-600">
+                Esta é a <mark class="hl-yellow">questão clássica e exclusiva da banca FAURGS</mark>. Para garantir acerto 100% mecânico no rascunho:
+            </p>
+
+            <!-- Passo a Passo Visual do Algoritmo -->
+            <div class="space-y-2.5">
+                <div class="flex items-start gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+                    <span class="w-7 h-7 rounded-full bg-slate-800 text-white font-bold text-xs flex items-center justify-center shrink-0">1</span>
+                    <div class="text-xs sm:text-sm">
+                        <p class="font-bold text-slate-900">Risco a palavra principal que o enunciado mandou trocar</p>
+                        <p class="text-slate-600">O termo base em si <mark class="hl-yellow">NÃO ENTRA na contagem</mark> das "outras palavras".</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+                    <span class="w-7 h-7 rounded-full bg-slate-800 text-white font-bold text-xs flex items-center justify-center shrink-0">2</span>
+                    <div class="text-xs sm:text-sm">
+                        <p class="font-bold text-slate-900">Circulo os determinantes nominais conectados</p>
+                        <p class="text-slate-600">Verifique artigos, adjetivos, pronomes adjetivos e particípios que dependem desse substantivo.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+                    <span class="w-7 h-7 rounded-full bg-slate-800 text-white font-bold text-xs flex items-center justify-center shrink-0">3</span>
+                    <div class="text-xs sm:text-sm">
+                        <p class="font-bold text-slate-900">Localizo o verbo do qual o termo é núcleo do sujeito</p>
+                        <p class="text-slate-600">Se alterar de singular para plural (ou vice-versa), o verbo obrigatoriamente muda de forma.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+                    <span class="w-7 h-7 rounded-full bg-slate-800 text-white font-bold text-xs flex items-center justify-center shrink-0">4</span>
+                    <div class="text-xs sm:text-sm">
+                        <p class="font-bold text-slate-900">Rastreio pronomes anafóricos e elementos de retomada</p>
+                        <p class="text-slate-600">Confira se no restante do período há pronomes relativas ou pessoais referenciando o termo.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3 bg-emerald-50 p-3.5 rounded-xl border border-emerald-200">
+                    <span class="w-7 h-7 rounded-full bg-emerald-700 text-white font-bold text-xs flex items-center justify-center shrink-0">5</span>
+                    <div class="text-xs sm:text-sm">
+                        <p class="font-bold text-emerald-950">Reescrevo no rascunho e conto somente os itens circulados</p>
+                        <p class="text-emerald-800 font-medium">Faça a checagem individual por dedada antes de marcar a alternativa no gabarito.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Casos Reais de Prova -->
+            <div class="bg-white border border-slate-200 rounded-xl p-4 sm:p-5 space-y-3 shadow-sm">
+                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider">Casos Reais Resolvidos para Memorizar:</h3>
+                
+                <div class="space-y-3 text-xs sm:text-sm">
+                    <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-900 mb-1">Caso A: Substituir "<mark class="hl-yellow">aluno</mark>" por "<mark class="hl-yellow">aluna</mark>":</p>
+                        <p class="italic text-slate-700 bg-white p-2.5 rounded border border-slate-200 mb-2 font-serif">
+                            "...<span class="underline font-bold">o</span> aluno <span class="underline font-bold">novo</span> já estava sendo <span class="underline font-bold">chamado</span> de <span class="underline font-bold">Gaúcho</span>..."
+                        </p>
+                        <p class="text-slate-700">Palavras alteradas além de aluno: <b>o</b> (a), <b>novo</b> (nova), <b>chamado</b> (chamada), <b>Gaúcho</b> (Gaúcha).</p>
+                        <p class="text-emerald-800 font-bold mt-1">&rArr; Total: Exatamente 4 outras palavras.</p>
+                    </div>
+
+                    <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-900 mb-1">Caso B: Substituir "<mark class="hl-yellow">Quem</mark>" por "<mark class="hl-yellow">As pessoas que</mark>":</p>
+                        <p class="text-slate-700">Força a flexão para o plural dos verbos que concordavam diretamente com "Quem" no singular.</p>
+                        <p class="text-emerald-800 font-bold mt-1">&rArr; Total: Exatamente 2 outras palavras (os verbos concordantes).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: CRASE NA REESCRITA -->
+        <section class="space-y-4">
+            <div class="flex items-center gap-2 border-l-4 border-slate-800 pl-3">
+                <h2 class="text-xl font-bold text-slate-900">5. Tabela de Salvação: Crase na Reescrita FAURGS</h2>
+            </div>
+            <p class="text-sm text-slate-600">
+                Guia rápido de verificação de crase ao reescrever estruturas na prova:
+            </p>
+
+            <!-- Table 2: Regras de Crase -->
+            <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                <table class="w-full text-left text-xs sm:text-sm border-collapse">
+                    <thead>
+                        <tr class="bg-slate-100 border-b border-slate-200 text-slate-800 font-bold uppercase tracking-wider text-[11px]">
+                            <th class="p-3 sm:p-4 w-5/12">Estrutura Reescrita</th>
+                            <th class="p-3 sm:p-4 w-3/12">Uso da Crase</th>
+                            <th class="p-3 sm:p-4 w-4/12">Justificativa Gramatical</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 leading-relaxed">
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 sm:p-4 font-mono font-medium text-slate-900">"...dedicado <b>a essa</b> causa..."</td>
+                            <td class="p-3 sm:p-4 font-extrabold text-red-700 bg-red-50/30">PROIBIDO</td>
+                            <td class="p-3 sm:p-4 text-slate-700">Pronomes demonstrativos (<em>essa, esta</em>) repelem artigo "a".</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 sm:p-4 font-mono font-medium text-slate-900">"...se dedicassem <b>a tarefas</b>..."</td>
+                            <td class="p-3 sm:p-4 font-extrabold text-red-700 bg-red-50/30">PROIBIDO</td>
+                            <td class="p-3 sm:p-4 text-slate-700">"A" no singular antes de palavra no plural é preposição pura.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 sm:p-4 font-mono font-medium text-slate-900">"...oposição <b>a mudar</b>..."</td>
+                            <td class="p-3 sm:p-4 font-extrabold text-red-700 bg-red-50/30">PROIBIDO</td>
+                            <td class="p-3 sm:p-4 text-slate-700">Não ocorre crase antes de verbos no infinitivo.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 sm:p-4 font-mono font-medium text-slate-900">"De segunda <b>a</b> sexta"</td>
+                            <td class="p-3 sm:p-4 font-extrabold text-red-700 bg-red-50/30">PROIBIDO</td>
+                            <td class="p-3 sm:p-4 text-slate-700">Correlação simples (sem artigo no primeiro termo "De").</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 sm:p-4 font-mono font-medium text-slate-900">"<b>Da</b> segunda <b>à</b> sexta"</td>
+                            <td class="p-3 sm:p-4 font-extrabold text-emerald-700 bg-emerald-50/40">OBRIGATÓRIO</td>
+                            <td class="p-3 sm:p-4 text-slate-700">A presença da contração (<em>da = de + a</em>) exige crase no segundo termo.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECTION 6: CHECKLIST METODOLÓGICO -->
+        <section class="space-y-4">
+            <div class="flex items-center gap-2 border-l-4 border-slate-800 pl-3">
+                <h2 class="text-xl font-bold text-slate-900">6. Checklist Metodológico para a Hora da Prova</h2>
+            </div>
+            
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 sm:p-5 space-y-3 text-xs sm:text-sm">
+                <span class="font-bold text-slate-900 block text-sm border-b border-slate-200 pb-2">Antes de assinalar a alternativa de reescrita, verifique nesta ordem:</span>
+                <ul class="space-y-2 text-slate-800">
+                    <li class="flex items-center gap-2">
+                        <span class="w-5 h-5 rounded-md bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center justify-center shrink-0">&check;</span>
+                        <span><strong>1. Regência do Relativo:</strong> O verbo que vem depois do "que" exige preposição? Ela está antes do "que"?</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="w-5 h-5 rounded-md bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center justify-center shrink-0">&check;</span>
+                        <span><strong>2. Concordância do Sujeito:</strong> Identifiquei o verdadeiro núcleo do sujeito e flexionei o verbo corretamente?</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="w-5 h-5 rounded-md bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center justify-center shrink-0">&check;</span>
+                        <span><strong>3. Modo do Conectivo:</strong> Troquei a conjunção mantendo a exigência de Indicativo ou Subjuntivo?</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="w-5 h-5 rounded-md bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center justify-center shrink-0">&check;</span>
+                        <span><strong>4. Verbo Impessoal:</strong> Tem verbo "haver" ou "fazer"? Garanti que permaneceu no singular?</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="w-5 h-5 rounded-md bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center justify-center shrink-0">&check;</span>
+                        <span><strong>5. Pontuação de Adjetiva:</strong> A inserção/retirada de vírgulas alterou a classificação entre restritiva e explicativa?</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="w-5 h-5 rounded-md bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center justify-center shrink-0">&check;</span>
+                        <span><strong>6. Contagem de Palavras:</strong> Descartei a palavra trocada e contei rigorosamente apenas as demais alteradas?</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ACTION SECTION / BUTTON TO QUESTOES.HTML -->
+        <div class="pt-8 pb-4 text-center border-t border-slate-200 space-y-4">
+            <p class="text-sm text-slate-600 font-semibold">
+                Pronto para treinar a retenção destes gatilhos gramaticais em questões?
+            </p>
+            <a href="questoesreescrita.html" id="btnQuestoes" class="inline-flex items-center justify-center gap-3 bg-slate-900 hover:bg-slate-800 text-white font-bold text-base px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 w-full sm:w-auto border border-slate-800">
+                <span>Ir para Questões de Fixação</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-50 border-t border-slate-200 py-6 text-center text-xs text-slate-500">
+        <div class="max-w-4xl mx-auto px-4 space-y-1">
+            <p class="font-medium text-slate-700">Guia Definitivo de Memorização &bull; Concurso Professor de Informática (IFSC EBTT)</p>
+            <p>Preparatório Específico para a Banca FAURGS &bull; Língua Portuguesa</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Audio Script -->
+    <script>
+        function updateAudioSource() {
+            var inputVal = document.getElementById('audioFileName').value.trim();
+            if(!inputVal) return;
+            
+            var player = document.getElementById('mainAudioPlayer');
+            var source = document.getElementById('audioSource');
+            
+            source.src = inputVal;
+            player.load();
+        }
+    </script>
+</body>
+</html>

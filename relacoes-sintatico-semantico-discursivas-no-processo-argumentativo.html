@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumo Completo - Português Instituto AOCP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Configurações de Tipografia e Cor */
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+        
+        h1 { color: #111827; font-weight: 800; letter-spacing: -0.025em; }
+        h2 { color: #1f2937; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; border-bottom: 2px solid #e5e7eb; padding-bottom: 0.5rem; }
+        h3 { color: #374151; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+
+        /* O Efeito Marca-Texto (Amarelo Suave) */
+        .highlight {
+            background-color: #fff59d; /* Amarelo suave, estilo marca-texto */
+            padding: 0 4px;
+            border-radius: 3px;
+            color: #000;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+        }
+
+        /* Caixas de Destaque / Atenção */
+        .alert-box {
+            background-color: #fff1f2; /* Fundo avermelhado muito leve */
+            border-left: 4px solid #e11d48;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .tip-box {
+            background-color: #f0f9ff; /* Azul muito leve */
+            border-left: 4px solid #0284c7;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* Tabelas sem Scroll Horizontal */
+        .table-container {
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden; /* Mantém bordas arredondadas */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed; /* Essencial para não estourar a largura */
+        }
+        
+        th, td {
+            border-bottom: 1px solid #e5e7eb;
+            padding: 12px 15px;
+            text-align: left;
+            vertical-align: top;
+            word-wrap: break-word; /* Quebra palavras longas */
+            overflow-wrap: break-word;
+            hyphens: auto; /* Hifenização automática se necessário */
+        }
+
+        th {
+            background-color: #f9fafb;
+            color: #111827;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Áudio Player */
+        .audio-player-container {
+            background-color: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        /* Botão Final */
+        .btn-final {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 18px;
+            background-color: #2563eb;
+            color: white;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-final:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Listas */
+        ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
+        li { margin-bottom: 0.5rem; }
+        
+        /* Utilitário para código/exemplo */
+        .code-snippet {
+            font-family: monospace;
+            background-color: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #be185d;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-12 max-w-5xl mx-auto">
+
+    <!-- PLAYER DE ÁUDIO -->
+    <div class="audio-player-container">
+        <div class="flex items-center mb-3">
+            <span class="text-2xl mr-2">🎧</span>
+            <h3 class="m-0 font-bold text-gray-800">Resumo em Áudio (Aula)</h3>
+        </div>
+        <audio controls class="w-full outline-none focus:ring-2 focus:ring-blue-500 rounded">
+            <source src="lp-relacoes-sintatico-semantico.mp3" type="audio/mpeg">
+            Seu navegador não suporta o player de áudio.
+        </audio>
+        <p class="text-xs text-gray-500 mt-2 text-right">Arquivo: <em>resumo_audio.mp3</em></p>
+    </div>
+
+    <header class="text-center mb-12">
+        <h1 class="text-3xl md:text-4xl mb-3 text-gray-900">Relações Sintático-Semântico-Discursivas</h1>
+        <p class="text-lg text-gray-600 font-medium">Resumo Focado para <span class="highlight">Instituto AOCP (IFPB)</span></p>
+    </header>
+
+    <main>
+        <!-- TÓPICO 1 -->
+        <section>
+            <h2>1. Perfil da Banca e Estratégia</h2>
+            <p>O Instituto AOCP não perdoa "achismos". A prova exige domínio da <span class="highlight">Norma Padrão</span> e da <span class="highlight">Lógica Argumentativa</span>.</p>
+            <div class="tip-box">
+                <strong>Dica de Ouro:</strong> A banca mistura perguntas de <em>gramática</em> com <em>interpretação</em> no mesmo enunciado. Exemplo: "A substituição de X por Y mantém a correção gramatical e o sentido original?". Você precisa validar <span class="highlight">ambos</span>.
+            </div>
+        </section>
+
+        <!-- TÓPICO 2 -->
+        <section>
+            <h2>2. Coesão vs. Coerência (A Base do Texto)</h2>
+            <p>Muitos candidatos confundem. Entenda a diferença para não cair em pegadinhas teóricas.</p>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="20%">Conceito</th>
+                            <th width="40%">Definição</th>
+                            <th width="40%">Onde se manifesta?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Coesão</strong></td>
+                            <td>É a <span class="highlight">costura superficial</span> do texto. Ligação gramatical entre palavras e frases.</td>
+                            <td>Uso de conectivos, pronomes (este/esse), elipses, sinônimos.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Coerência</strong></td>
+                            <td>É a <span class="highlight">lógica profunda</span>. O sentido global. Não contradição.</td>
+                            <td>Ideias compatíveis, progressão temática, conhecimento de mundo.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p><em>Exemplo AOCP:</em> Um texto pode ser coeso (gramaticalmente correto) mas incoerente (dizer que "subiu para baixo").</p>
+        </section>
+
+        <!-- TÓPICO 3 -->
+        <section>
+            <h2>3. Tipologia Textual e Argumentação</h2>
+            <p>Para o IFPB, foque em identificar a <strong>Predominância</strong>.</p>
+            
+            <ul>
+                <li><strong>Dissertativo-Argumentativo:</strong> O autor <span class="highlight">defende uma tese</span>. Busca convencer.
+                    <br><em>Marcas:</em> Verbos no presente, adjetivos opinativos ("lamentável", "fundamental"), conectivos lógicos.</li>
+                
+                <li><strong>Dissertativo-Expositivo:</strong> O autor <span class="highlight">apenas expõe</span> fatos/dados. Sem juízo de valor explícito.
+                    <br><em>Marcas:</em> Imparcialidade, linguagem técnica/científica.</li>
+                
+                <li><strong>Injunção vs. Prescrição (Cuidado!):</strong>
+                    <ul>
+                        <li><strong>Injuntivo:</strong> Recomendação, conselho (Ex: manuais, autoajuda).</li>
+                        <li><strong>Prescritivo:</strong> Ordem coercitiva, lei (Ex: Editais, Constituição). O Instituto AOCP costuma tratar ambos genericamente como texto instrucional, mas atente-se à força do verbo.</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <!-- TÓPICO 4 -->
+        <section>
+            <h2>4. Operadores Argumentativos (Conectivos)</h2>
+            <p>Este é o coração da prova. Você deve memorizar as equivalências e as trocas proibidas.</p>
+
+            <h3>4.1. Oposição (Adversidade x Concessão)</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Conectivos Chave</th>
+                            <th>Modo Verbal</th>
+                            <th>Efeito de Sentido</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Adversativa</strong></td>
+                            <td>Mas, porém, contudo, todavia, entretanto.</td>
+                            <td><strong>Indicativo</strong> (Fato real)</td>
+                            <td>Quebra a expectativa e <span class="highlight">anula</span> o argumento anterior. É mais forte.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Concessiva</strong></td>
+                            <td>Embora, conquanto, ainda que, mesmo que.</td>
+                            <td><strong>Subjuntivo</strong> (Possibilidade)</td>
+                            <td>Cria uma exceção, mas <span class="highlight">mantém</span> a ideia principal. É um obstáculo superado.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="alert-box">
+                <strong>Pegadinha Clássica:</strong> Nunca troque "Mas" por "Embora" sem ajustar o verbo!
+                <br>Errado: "Mas ele <em>foi</em>..." ➝ "Embora ele <em>foi</em>..."
+                <br>Correto: "Embora ele <em>tenha ido</em>..."
+            </div>
+
+            <h3>4.2. Causa e Explicação</h3>
+            <ul>
+                <li><strong>Principais:</strong> Porque, pois, visto que, já que, uma vez que.</li>
+                <li><strong>Como (Causal):</strong> Só inicia período. <span class="code-snippet">"Como choveu, não fui."</span> (= Já que choveu).</li>
+                <li><strong>Porquanto:</strong> Significa PORQUE. <span class="highlight">Não confunda com CONQUANTO (Embora).</span></li>
+            </ul>
+        </section>
+
+        <!-- TÓPICO 5 -->
+        <section>
+            <h2>5. Coesão Referencial (Anáfora e Catáfora)</h2>
+            <p>Como o texto retoma informações para não ficar repetitivo.</p>
+
+            <h3>5.1. Pronomes Demonstrativos</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="20%">Pronome</th>
+                            <th width="40%">No Espaço (Lugar)</th>
+                            <th width="40%">No Texto (Referência)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Este(s), Isto</strong></td>
+                            <td>Perto de quem fala (Aqui).</td>
+                            <td><strong>Catáfora:</strong> O que vem DEPOIS.<br>Ex: "Meu lema é <span class="highlight">este</span>: persistência."</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Esse(s), Isso</strong></td>
+                            <td>Perto de quem ouve (Aí).</td>
+                            <td><strong>Anáfora:</strong> O que veio ANTES.<br>Ex: "Persistência. <span class="highlight">Isso</span> é meu lema."</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p><strong>Referência Distributiva (Importantíssimo):</strong></p>
+            <p class="bg-gray-50 p-3 rounded border">"Machado de Assis (1) e José de Alencar (2) são gênios. <span class="highlight">Este</span> (2 - o último citado/mais perto) era romântico; <span class="highlight">Aquele</span> (1 - o primeiro citado/mais longe) era realista."</p>
+        </section>
+
+        <!-- TÓPICO 6 -->
+        <section>
+            <h2>6. Semântica e Significação das Palavras</h2>
+            <p>O Instituto AOCP adora cobrar vocabulário no contexto.</p>
+            
+            <ul>
+                <li><strong>Sinonímia:</strong> Sentido similar. Atenção ao contexto! "Quebrar o galho" pode ser sinônimo de "ajudar" ou "fraturar ramo".</li>
+                <li><strong>Hiperônimo (Geral) vs. Hipônimo (Específico):</strong>
+                    <br>Ferramenta (Hiperônimo) contém Martelo (Hipônimo).
+                    <br><span class="highlight">A coesão lexical</span> se faz substituindo um hipônimo por um hiperônimo para evitar repetição.
+                </li>
+                <li><strong>Parônimos (Parecidos mas diferentes):</strong>
+                    <br>- Ratificar (Confirmar) x Retificar (Corrigir)
+                    <br>- Iminente (Vai ocorrer) x Eminente (Ilustre/Alto)
+                    <br>- Vultoso (Volume/Grande) x Vultuoso (Inchado/Doente)
+                </li>
+            </ul>
+        </section>
+
+        <!-- TÓPICO 7 -->
+        <section>
+            <h2>7. Funções do "QUE" e "SE" (Sintaxe Argumentativa)</h2>
+            
+            <h3>7.1. A Palavra QUE</h3>
+            <ul>
+                <li><strong>Pronome Relativo:</strong> Troca-se por "O QUAL". Retoma um termo anterior. Introduz oração Adjetiva.
+                    <br>Ex: "O aluno <span class="highlight">que</span> estuda passa." (= o qual estuda).</li>
+                <li><strong>Conjunção Integrante:</strong> Troca-se a oração inteira por "ISSO". Introduz oração Substantiva.
+                    <br>Ex: "É necessário <span class="highlight">que</span> estudemos." (= É necessário ISSO).</li>
+            </ul>
+
+            <h3>7.2. A Palavra SE</h3>
+            <ul>
+                <li><strong>Conjunção Condicional:</strong> Troca-se por "CASO".
+                    <br>Ex: "Se estudar, passará."</li>
+                <li><strong>Partícula Apassivadora (PA):</strong> Verbo Transitivo Direto + SE. Concorda com o sujeito.
+                    <br>Ex: "<span class="highlight">Vendem-se</span> casas." (Casas são vendidas). Plural obrigatório!</li>
+                <li><strong>Índice de Indeterminação do Sujeito (IIS):</strong> Verbo Transitivo Indireto + SE. Verbo sempre no SINGULAR.
+                    <br>Ex: "<span class="highlight">Precisa-se</span> de programadores." (Quem precisa? Alguém. Sujeito Indeterminado).</li>
+            </ul>
+        </section>
+
+        <!-- TÓPICO 8 -->
+        <section>
+            <h2>8. Reescrita de Frases (Parafrasagem)</h2>
+            <p>Critérios para julgar se a reescrita está correta:</p>
+            <ol class="list-decimal list-inside space-y-2">
+                <li><span class="highlight">Correção Gramatical:</span> Pontuação, concordância e regência foram mantidas?</li>
+                <li><span class="highlight">Sentido Original:</span> A informação central mudou? O autor passou de uma certeza para uma dúvida? (Mudança de modo verbal altera o sentido).</li>
+                <li><strong>Voz do Verbo:</strong> Transposição da Voz Ativa para Passiva mantém o sentido, mas muda a ênfase. O Instituto AOCP considera correto desde que não haja erro gramatical.</li>
+            </ol>
+        </section>
+
+        <!-- BOTÃO FINAL -->
+        <a href="lp-relacoes-sintatico-semanticoquestoes.html" class="btn-final">
+            IR PARA O BANCO DE QUESTÕES ➜
+        </a>
+
+    </main>
+
+    <footer class="text-center text-gray-400 text-sm mt-16 pb-8 border-t pt-8">
+        <p>&copy; 2025 Material de Estudo IFPB - Informática. Foco na aprovação.</p>
+    </footer>
+
+</body>
+</html>

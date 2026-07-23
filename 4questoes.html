@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado de Língua Portuguesa - Padrão CEFETMINAS</title>
+    <style>
+        :root {
+            --bg-color: #fdfdfd;
+            --container-bg: #ffffff;
+            --text-main: #2c3e50;
+            --text-muted: #546e7a;
+            --primary: #2563eb;
+            --success: #16a34a;
+            --error: #dc2626;
+            --border: #e2e8f0;
+            --accent-bg: #f8fafc;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            max-width: 850px;
+            width: 100%;
+            background: var(--container-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin: 0;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 10px;
+        }
+
+        .question {
+            margin-bottom: 50px;
+            padding: 20px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .question-header {
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: block;
+            font-size: 1.1rem;
+        }
+
+        .text-block {
+            background: var(--accent-bg);
+            padding: 20px;
+            border-left: 4px solid var(--primary);
+            margin-bottom: 20px;
+            font-style: italic;
+            white-space: pre-line;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option:hover {
+            background-color: var(--accent-bg);
+            border-color: var(--primary);
+        }
+
+        .option input {
+            margin-right: 15px;
+            transform: scale(1.2);
+        }
+
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 40px;
+        }
+
+        .btn-submit:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* Results & Feedback */
+        #results-section {
+            display: none;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 4px double var(--border);
+        }
+
+        .score-box {
+            text-align: center;
+            padding: 30px;
+            background: var(--accent-bg);
+            border-radius: 12px;
+            margin-bottom: 40px;
+        }
+
+        .score-value {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .resolution-card {
+            margin-bottom: 30px;
+            padding: 25px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        .resolution-card.correct { border-left: 6px solid var(--success); }
+        .resolution-card.wrong { border-left: 6px solid var(--error); }
+
+        .res-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .res-text {
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .status-correct { background: #dcfce7; color: #166534; }
+        .status-wrong { background: #fee2e2; color: #991b1b; }
+
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .quiz-container { padding: 20px; }
+            h1 { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <header>
+        <h1>Simulado de Língua Portuguesa</h1>
+        <p class="subtitle">Foco: Denotação, Conotação e Figuras de Linguagem (Padrão Fundação CEFETMINAS)</p>
+    </header>
+
+    <div id="quiz-form">
+        <!-- Questão 01 -->
+        <div class="question" data-id="1">
+            <span class="question-header">QUESTÃO 01</span>
+            <div class="text-block">
+                "A vaidade é assim, põe o tonto no alto, retira a escada
+                Fica por perto esperando sentada
+                Mais cedo ou mais tarde ele acaba no chão
+                Mais alto o coqueiro, maior é o tombo do tonto"
+            </div>
+            <p>Nos versos "A vaidade é assim, põe o tonto no alto, retira a escada / Fica por perto esperando sentada", identifica-se o uso de um recurso estilístico que atribui intencionalidade e ações humanas a um conceito abstrato. A figura de linguagem predominante neste trecho é o(a):</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q1" value="A"> A) Hipérbole.</label>
+                <label class="option"><input type="radio" name="q1" value="B"> B) Paradoxo.</label>
+                <label class="option"><input type="radio" name="q1" value="C"> C) Metonímia.</label>
+                <label class="option"><input type="radio" name="q1" value="D"> D) Eufemismo.</label>
+                <label class="option"><input type="radio" name="q1" value="E"> E) Prosopopeia.</label>
+            </div>
+        </div>
+
+        <!-- Questão 02 -->
+        <div class="question" data-id="2">
+            <span class="question-header">QUESTÃO 02</span>
+            <div class="text-block">
+                "Pôs-se a chorar silenciosamente. No seio da noite, um apito de locomotiva ecoou <strong>como um gemido</strong>; as árvores <strong>como que estremeceram</strong>; por sobre um capinzal próximo, um pirilampo emitia a sua luz de prata azulada..."
+            </div>
+            <p>Nos trechos destacados, o autor recorre a construções sintáticas específicas para estabelecer analogias entre elementos sonoros/visuais da natureza e sentimentos humanos. Assinale a alternativa que classifica corretamente a figura de linguagem estruturada pelos conectivos em destaque.</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q2" value="A"> A) Comparação.</label>
+                <label class="option"><input type="radio" name="q2" value="B"> B) Metonímia.</label>
+                <label class="option"><input type="radio" name="q2" value="C"> C) Antítese.</label>
+                <label class="option"><input type="radio" name="q2" value="D"> D) Ironia.</label>
+                <label class="option"><input type="radio" name="q2" value="E"> E) Sinestesia.</label>
+            </div>
+        </div>
+
+        <!-- Questão 03 -->
+        <div class="question" data-id="3">
+            <span class="question-header">QUESTÃO 03</span>
+            <p>A construção de sentido de uma charge que retrata personagens ignorando uma enchente visível em favor de notícias falsas em celulares apoia-se fundamentalmente na tensão entre o discurso e a realidade. A figura de linguagem que sustenta a crítica social, ao ridicularizar a discrepância entre a crença dos personagens e a verdade objetiva, é denominada:</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q3" value="A"> A) Sinestesia.</label>
+                <label class="option"><input type="radio" name="q3" value="B"> B) Ironia.</label>
+                <label class="option"><input type="radio" name="q3" value="C"> C) Hipérbole.</label>
+                <label class="option"><input type="radio" name="q3" value="D"> D) Metonímia.</label>
+                <label class="option"><input type="radio" name="q3" value="E"> E) Pleonasmo.</label>
+            </div>
+        </div>
+
+        <!-- Questão 04 -->
+        <div class="question" data-id="4">
+            <span class="question-header">QUESTÃO 04</span>
+            <p>Observe as frases a seguir e assinale a alternativa em que o termo sublinhado encontra-se empregado em seu sentido estritamente <strong>denotativo</strong>.</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q4" value="A"> A) "E isso não se faz da <u>noite para o dia</u>."</label>
+                <label class="option"><input type="radio" name="q4" value="B"> B) "Essa distância começou a <u>deixar de existir</u>."</label>
+                <label class="option"><input type="radio" name="q4" value="C"> C) "Os aplicativos são apenas <u>ferramentas</u> de trabalho."</label>
+                <label class="option"><input type="radio" name="q4" value="D"> D) "Em novembro passado, a <u>casa</u> onde mora foi apedrejada."</label>
+                <label class="option"><input type="radio" name="q4" value="E"> E) "A jornalista <u>pintou um retrato</u> fiel da crise."</label>
+            </div>
+        </div>
+
+        <!-- Questão 05 -->
+        <div class="question" data-id="5">
+            <span class="question-header">QUESTÃO 05</span>
+            <p>Assinale a alternativa cuja frase apresenta uma expressão empregada inequivocamente em sentido <strong>figurado</strong> (Prosopopeia).</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q5" value="A"> A) Depois de bem lavadas, as frutas ficam sorridentes na fruteira.</label>
+                <label class="option"><input type="radio" name="q5" value="B"> B) Na feira livre, os legumes selecionados são bonitos.</label>
+                <label class="option"><input type="radio" name="q5" value="C"> C) No mercado, há várias opções de verduras hidropônicas.</label>
+                <label class="option"><input type="radio" name="q5" value="D"> D) Quanto mais fina for a casca da laranja, mais suculenta ela é.</label>
+                <label class="option"><input type="radio" name="q5" value="E"> E) A colheita de grãos atingiu níveis recordes este ano.</label>
+            </div>
+        </div>
+
+        <!-- Questão 06 -->
+        <div class="question" data-id="6">
+            <span class="question-header">QUESTÃO 06</span>
+            <p>Indique a oração em que a <strong>denotação</strong> (sentido literal) é o recurso predominante.</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q6" value="A"> A) Os espinhos da desilusão surgem em várias profissões.</label>
+                <label class="option"><input type="radio" name="q6" value="B"> B) Os aviões de caça semeiam muitas mortes no território.</label>
+                <label class="option"><input type="radio" name="q6" value="C"> C) A tristeza e as decepções murcharam-lhe o espírito.</label>
+                <label class="option"><input type="radio" name="q6" value="D"> D) O ortopedista dobrou o joelho do acidentado para examinar a lesão.</label>
+                <label class="option"><input type="radio" name="q6" value="E"> E) A partida repentina da noiva matou-lhe toda esperança.</label>
+            </div>
+        </div>
+
+        <!-- Questão 07 -->
+        <div class="question" data-id="7">
+            <span class="question-header">QUESTÃO 07</span>
+            <p>"Depois de fazer tantas maldades, seu coração só pode ser de <strong>pedra</strong>." Sobre o termo destacado, assinale a correta:</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q7" value="A"> A) Sentido figurado, indicando insensibilidade através de metáfora.</label>
+                <label class="option"><input type="radio" name="q7" value="B"> B) Sentido conotativo, pois mantém seu significado real geológico.</label>
+                <label class="option"><input type="radio" name="q7" value="C) C) Sentido denotativo, pois é uma propriedade física do coração.</label>
+                <label class="option"><input type="radio" name="q7" value="D"> D) Sentido próprio, referente a uma calcificação arterial literal.</label>
+                <label class="option"><input type="radio" name="q7" value="E"> E) Não tem valor semântico, apenas sintático.</label>
+            </div>
+        </div>
+
+        <!-- Questão 08 -->
+        <div class="question" data-id="8">
+            <span class="question-header">QUESTÃO 08</span>
+            <p>Em campanhas sociais que utilizam a imagem de uma flor delicada para simbolizar crianças e adolescentes, o recurso da <strong>metáfora visual</strong> tem por finalidade reforçar:</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q8" value="A"> A) O papel das datas comemorativas para o agronegócio.</label>
+                <label class="option"><input type="radio" name="q8" value="B"> B) A demanda por cuidado, delicadeza e proteção.</label>
+                <label class="option"><input type="radio" name="q8" value="C"> C) O apoio do governo a causas estritamente ambientais.</label>
+                <label class="option"><input type="radio" name="q8" value="D"> D) A importância da legislação para a segurança rural.</label>
+                <label class="option"><input type="radio" name="q8" value="E"> E) A necessidade de embelezamento dos espaços urbanos.</label>
+            </div>
+        </div>
+
+        <!-- Questão 09 -->
+        <div class="question" data-id="9">
+            <span class="question-header">QUESTÃO 09</span>
+            <p>Associe: (1) Metáfora, (2) Metonímia, (3) Antítese, (4) Ironia, (5) Hipérbole.</p>
+            <p>
+                ( ) "Li Guimarães Rosa duas vezes este ano."<br>
+                ( ) "Que anjo! Destruiu todo o trabalho em cinco minutos."<br>
+                ( ) "Estou morrendo de fome depois dessa aula."<br>
+                ( ) "A ignorância é a noite da mente."<br>
+                ( ) "O riso e o pranto alternavam-se em seu rosto."
+            </p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q9" value="A"> A) 2, 4, 5, 1, 3.</label>
+                <label class="option"><input type="radio" name="q9" value="B"> B) 1, 4, 5, 2, 3.</label>
+                <label class="option"><input type="radio" name="q9" value="C"> C) 2, 3, 5, 1, 4.</label>
+                <label class="option"><input type="radio" name="q9" value="D"> D) 3, 1, 2, 4, 5.</label>
+                <label class="option"><input type="radio" name="q9" value="E"> E) 4, 2, 1, 5, 3.</label>
+            </div>
+        </div>
+
+        <!-- Questão 10 -->
+        <div class="question" data-id="10">
+            <span class="question-header">QUESTÃO 10</span>
+            <p>"Investiga-se se o aumento de casos tem relação com a infraestrutura, visto que a população <strong>explodiu</strong> durante o verão." O termo destacado foi empregado com valor:</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q10" value="A"> A) Denotativo, descrevendo um acidente físico real.</label>
+                <label class="option"><input type="radio" name="q10" value="B"> B) Conotativo, constituindo uma hipérbole para crescimento brusco.</label>
+                <label class="option"><input type="radio" name="q10" value="C"> C) Literal, referente à violência urbana.</label>
+                <label class="option"><input type="radio" name="q10" value="D"> D) Técnico, terminologia padrão do IBGE.</label>
+                <label class="option"><input type="radio" name="q10" value="E"> E) Irônico, criticando a educação dos turistas.</label>
+            </div>
+        </div>
+
+        <button class="btn-submit" onclick="gradeQuiz()">Finalizar Simulado</button>
+    </div>
+
+    <div id="results-section">
+        <div class="score-box">
+            <h3>Seu Desempenho</h3>
+            <div class="score-value" id="score-display">0/10</div>
+            <p id="score-message"></p>
+        </div>
+
+        <h2>Resoluções Detalhadas</h2>
+        <div id="resolutions-container">
+            <!-- As resoluções serão inseridas via JS -->
+        </div>
+    </div>
+</div>
+
+<script>
+    const answers = {
+        q1: "E", q2: "A", q3: "B", q4: "D", q5: "A",
+        q6: "D", q7: "A", q8: "B", q9: "A", q10: "B"
+    };
+
+    const resolutions = {
+        q1: "A vaidade (conceito abstrato) é personificada ao realizar ações humanas como 'pôr o tonto no alto', 'retirar a escada' e 'esperar sentada'. Isso caracteriza a <strong>Prosopopeia</strong>.",
+        q2: "O uso dos conectivos 'como' e 'como que' estabelece uma relação explícita de analogia entre o apito/árvores e sentimentos humanos, configurando a <strong>Comparação</strong>.",
+        q3: "A charge utiliza a <strong>Ironia</strong> situacional para criticar a alienação: o personagem nega a realidade visível em favor de uma mentira digital, expondo o ridículo da situação.",
+        q4: "Na alternativa D, 'casa' refere-se à construção física e 'apedrejada' ao ato físico de lançar pedras. Ambos mantêm o sentido literal e objetivo (<strong>Denotação</strong>).",
+        q5: "Frutas não possuem a capacidade biológica de sorrir. O termo 'sorridentes' é usado de forma <strong>figurada</strong> para indicar uma aparência fresca e brilhante.",
+        q6: "A alternativa D descreve um procedimento médico objetivo ('dobrou o joelho', 'ortopedista', 'desmaiou') sem o uso de metáforas ou desvios de sentido.",
+        q7: "A expressão 'coracão de pedra' é uma metáfora clássica para insensibilidade. É <strong>figurada</strong> pois a pedra (mineral) empresta sua dureza para caracterizar uma emoção.",
+        q8: "A flor (frágil e delicada) funciona como uma <strong>metáfora visual</strong> para a criança, reforçando a necessidade de proteção e cuidado constante.",
+        q9: "1. Metonímia (Autor pela Obra: Guimarães Rosa); 2. Ironia (Anjo para alguém que destrói); 3. Hipérbole (Morrendo de fome); 4. Metáfora (Noite da mente); 5. Antítese (Riso x Pranto).",
+        q10: "O termo 'explodiu' indica um aumento exagerado e rápido da população. Como não houve uma detonação física, trata-se de <strong>conotação</strong> (sentido figurado/hipérbole)."
+    };
+
+    function gradeQuiz() {
+        let score = 0;
+        const userAnswers = {};
+        
+        // Coletar respostas
+        for (let i = 1; i <= 10; i++) {
+            const selected = document.querySelector(`input[name="q${i}"]:checked`);
+            userAnswers[`q${i}`] = selected ? selected.value : null;
+            if (userAnswers[`q${i}`] === answers[`q${i}`]) {
+                score++;
+            }
+        }
+
+        // Exibir Placar
+        document.getElementById('score-display').innerText = `${score}/10`;
+        const msg = score >= 7 ? "Excelente desempenho! Você domina bem o conteúdo." : "Bom esforço! Revise as resoluções abaixo para fixar os conceitos.";
+        document.getElementById('score-message').innerText = msg;
+
+        // Gerar Resoluções
+        const container = document.getElementById('resolutions-container');
+        container.innerHTML = '';
+
+        for (let i = 1; i <= 10; i++) {
+            const key = `q${i}`;
+            const isCorrect = userAnswers[key] === answers[key];
+            const card = document.createElement('div');
+            card.className = `resolution-card ${isCorrect ? 'correct' : 'wrong'}`;
+            
+            card.innerHTML = `
+                <span class="status-badge ${isCorrect ? 'status-correct' : 'status-wrong'}">
+                    ${isCorrect ? 'Acertou' : 'Errou'}
+                </span>
+                <span class="res-title">QUESTÃO 0${i} - Gabarito: ${answers[key]}</span>
+                <p class="res-text"><strong>Sua resposta:</strong> ${userAnswers[key] || "Não respondida"}</p>
+                <p class="res-text">${resolutions[key]}</p>
+            `;
+            container.appendChild(card);
+        }
+
+        // Mostrar Seção de Resultados
+        document.getElementById('results-section').style.display = 'block';
+        window.scrollTo({
+            top: document.getElementById('results-section').offsetTop - 20,
+            behavior: 'smooth'
+        });
+
+        // Desabilitar inputs após finalizar
+        const allInputs = document.querySelectorAll('input[type="radio"]');
+        allInputs.forEach(input => input.disabled = true);
+        document.querySelector('.btn-submit').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>

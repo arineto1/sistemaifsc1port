@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado CEFETMINAS - Quiz Interativo</title>
+    <style>
+        :root {
+            --bg-color: #f9f9f9;
+            --container-bg: #ffffff;
+            --text-color: #2c3e50;
+            --accent-color: #2980b9;
+            --success-color: #27ae60;
+            --error-color: #c0392b;
+            --border-color: #e0e0e0;
+            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            line-height: 1.7;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .wrapper {
+            max-width: 850px;
+            width: 100%;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        h1 { font-size: 1.8rem; color: #1a1a1a; }
+        h2 { font-size: 1.4rem; margin: 30px 0 15px; color: var(--accent-color); }
+        h3 { font-size: 1.1rem; margin-bottom: 10px; font-weight: 600; }
+
+        .text-box {
+            background: var(--container-bg);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            border-left: 5px solid var(--accent-color);
+        }
+
+        .text-box p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .text-source {
+            font-style: italic;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        .question-card {
+            background: var(--container-bg);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s;
+        }
+
+        .question-header {
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .options {
+            list-style: none;
+        }
+
+        .option-item {
+            margin-bottom: 10px;
+            padding: 12px;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: flex-start;
+            transition: background 0.2s;
+        }
+
+        .option-item:hover {
+            background-color: #f1f8ff;
+        }
+
+        .option-item input {
+            margin-right: 15px;
+            margin-top: 6px;
+        }
+
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 40px 0;
+            transition: background 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #1f6391;
+        }
+
+        #results-section {
+            display: none;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            border: 2px solid var(--accent-color);
+            margin-top: 40px;
+        }
+
+        .score-box {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        .resolution-item {
+            margin-bottom: 30px;
+            padding-top: 20px;
+            border-top: 1px dashed #ccc;
+        }
+
+        .res-correct { color: var(--success-color); font-weight: bold; }
+        .res-wrong { color: var(--error-color); font-weight: bold; }
+        
+        .correct-answer-pill {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        .explanation {
+            margin-top: 15px;
+            font-size: 0.95rem;
+            color: #444;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .text-box, .question-card { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <header>
+            <h1>Simulado de Língua Portuguesa</h1>
+            <p>Padrão Fundação CEFETMINAS (FCM)</p>
+        </header>
+
+        <section id="texts-container">
+            <div class="text-box">
+                <h3>TEXTO I</h3>
+                <strong>A Obsolescência da Memória e a Nuvem do Esquecimento</strong>
+                <p>Em tempos de armazenamento ilimitado, vivemos o paradoxo da memória curta. Antigamente, a lembrança era um ato de resistência fisiológica; dependíamos dos sulcos neurais e da repetição oral para que a história de um avô não morresse com a segunda geração. Hoje, delegamos a função de lembrar a servidores remotos, silício frio enterrado em bunkers refrigerados na Islândia ou no deserto de Nevada. A "Nuvem" não é apenas um depósito de arquivos; tornou-se, implicitamente, a nossa consciência terceirizada.</p>
+                <p>O problema dessa transferência de responsabilidade não reside na tecnologia em si, mas na mudança da natureza do "lembrar". Quando tudo está salvo, nada é verdadeiramente recordado. A memória humana é seletiva, emocional e reconstrutiva; ela edita o passado para dar sentido ao presente. Já a memória digital é cumulativa, linear e indiferente. Ao fotografarmos o prato de comida antes de prová-lo, ou gravarmos o show inteiro pela tela do celular, não estamos vivendo o momento, mas sim arquivando-o para um futuro consumo que raramente acontece. Transformamo-nos em arquivistas de vidas que não tivemos tempo de viver.</p>
+                <p>Além disso, há o perigo da curadoria algorítmica. As redes sociais, com seus "feedbacks" de anos anteriores, decidem por nós o que merece ser rememorado. Uma foto sorridente de cinco anos atrás reaparece na tela com a legenda "Veja suas lembranças", ignorando completamente o contexto doloroso que talvez existisse nos bastidores daquele sorriso. O algoritmo não entende a ironia, o luto disfarçado ou a complexidade das relações humanas; ele entende pixels, metadados e engajamento. Ao permitirmos que a máquina dite a narrativa do nosso passado, corremos o risco de nos tornarmos estranhos em nossa própria biografia, reféns de uma "felicidade" editada que nunca existiu de fato.</p>
+                <p class="text-source">(Texto elaborado para fins pedagógicos, mimetizando o estilo de artigos de opinião frequentes em provas de nível médio/técnico da FCM)</p>
+            </div>
+
+            <div class="text-box">
+                <h3>TEXTO II</h3>
+                <strong>O Relógio de Pêndulo</strong>
+                <p>A sala de jantar do Coronel Fagundes era um templo dedicado à digestão e ao silêncio, ambos sagrados. No canto, imperava o relógio de pêndulo, um monstro de jacarandá que tiquetaqueava com a autoridade de quem não tem pressa porque é dono do tempo alheio.</p>
+                <p>— O café está frio — sentenciou o Coronel, sem levantar os olhos do jornal.</p>
+                <p>Dona Eudóxia, habituada àquela meteorologia doméstica, apenas fez um sinal discreto para a mucama. Não havia surpresa, nem mágoa. O café podia estar fervendo, saindo fumaça como uma locomotiva, que para o Coronel estaria sempre "frio" se as notícias da cotação do café não fossem favoráveis.</p>
+                <p>— Frio e ralo — emendou ele, dobrando a folha com um ruído seco. — Igual à competência desse governo.</p>
+                <p>Eudóxia alisou a toalha de renda.</p>
+                <p>— O relógio parou de novo, Coronel.</p>
+                <p>Ele ergueu as sobrancelhas, duas lagartas grisalhas e espessas.</p>
+                <p>— Impossível. É um mecanismo alemão. Alemães não param.</p>
+                <p>— Parou às três e quinze.</p>
+                <p>— Então o erro é do sol, Eudóxia. O relógio está certo. O mundo é que deve ter se atrasado.</p>
+                <p>Levantou-se, a cadeira arrastando no assoalho encerado como um lamento, e foi até o móvel. Deu corda com vigor, quase com raiva, como se estivesse corrigindo a rotação da Terra na base da manivela. O pêndulo voltou a oscilar, obediente.</p>
+                <p>— Pronto. Agora o tempo pode continuar.</p>
+                <p>Saiu da sala batendo os pés, convicto de que, naquela casa, até os segundos precisavam de sua permissão para passar. Eudóxia suspirou, olhou para o relógio e viu que ele, teimoso, atrasava de novo. Mas não disse nada. Há certas ilusões que sustentam o teto de uma casa mais do que as vigas de peroba.</p>
+                <p class="text-source">(Conto ficcional inédito, estilo Realismo/Naturalismo brasileiro)</p>
+            </div>
+
+            <div class="text-box">
+                <h3>TEXTO III</h3>
+                <strong>Poema do Desencontro Urbano</strong>
+                <p>Na esquina da Avenida Pressa com a Rua Espera,<br>
+                o sinal fechou para o sonho.<br>
+                Um vidro sobe, escuro, blindado,<br>
+                separando o ar condicionado do suor do asfalto.<br>
+                Do lado de cá, o ar é gelado e estéril.<br>
+                Do lado de lá, a mão estendida vende balas de menta.<br>
+                O olho no vidro não vê o olho na rua.<br>
+                Vê apenas o reflexo de si mesmo,<br>
+                distorcido,<br>
+                no espelho da própria indiferença.<br>
+                O sinal abre. O motor ruge.<br>
+                E a cidade engole,<br>
+                em seco,<br>
+                mais um dia sem gosto.</p>
+                <p class="text-source">(Poema em verso livre, temática social urbana)</p>
+            </div>
+        </section>
+
+        <section id="quiz-container">
+            <form id="quiz-form">
+                <!-- Question 1 -->
+                <div class="question-card" data-id="1">
+                    <span class="question-header">QUESTÃO 01 (Texto I)</span>
+                    <p>No segundo parágrafo do Texto I, o autor estabelece uma distinção fundamental entre a memória humana e a memória digital. Segundo o ponto de vista defendido no texto, essa distinção baseia-se na ideia de que:</p>
+                    <div class="options">
+                        <label class="option-item"><input type="radio" name="q1" value="A"> A) A memória digital é superior à humana, pois armazena os fatos com precisão e isenção, enquanto a humana é falha e imprecisa.</label>
+                        <label class="option-item"><input type="radio" name="q1" value="B"> B) A memória humana possui uma função reconstrutiva e semântica, dando sentido ao passado, ao passo que a digital é um acúmulo passivo de dados.</label>
+                        <label class="option-item"><input type="radio" name="q1" value="C"> C) A tecnologia impede que as pessoas vivam o presente, pois a necessidade de arquivar o momento anula a experiência sensorial imediata.</label>
+                        <label class="option-item"><input type="radio" name="q1" value="D"> D) O ato de fotografar alimentos e shows é uma evolução natural da memória oral, permitindo que as futuras gerações tenham acesso à história.</label>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-card" data-id="2">
+                    <span class="question-header">QUESTÃO 02 (Texto I)</span>
+                    <p>Releia o trecho: <i>"Hoje, delegamos a função de lembrar a servidores remotos, silício frio enterrado em bunkers refrigerados na Islândia ou no deserto de Nevada."</i> O uso dos adjetivos "remotos", "frio" e a menção geográfica sugerem:</p>
+                    <div class="options">
+                        <label class="option-item"><input type="radio" name="q2" value="A"> A) A segurança e a proteção inabalável dos dados pessoais dos usuários.</label>
+                        <label class="option-item"><input type="radio" name="q2" value="B"> B) O distanciamento afetivo e a desumanização do processo de armazenamento de memórias.</label>
+                        <label class="option-item"><input type="radio" name="q2" value="C"> C) A eficiência energética e a preocupação ecológica das grandes empresas de tecnologia.</label>
+                        <label class="option-item"><input type="radio" name="q2" value="D"> D) A globalização benéfica que permite que memórias sejam acessadas de qualquer lugar do mundo.</label>
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-card" data-id="3">
+                    <span class="question-header">QUESTÃO 03 (Texto I e II)</span>
+                    <p>Comparando a visão sobre o "tempo" e a "memória" nos Textos I e II, identifica-se que:</p>
+                    <div class="options">
+                        <label class="option-item"><input type="radio" name="q3" value="A"> A) Em ambos os textos, a tecnologia é vista como uma ferramenta infalível que organiza o caos da vida humana.</label>
+                        <label class="option-item"><input type="radio" name="q3" value="B"> B) No Texto I, a tecnologia distorce a memória afetiva; no Texto II, o personagem acredita que o relógio detém uma autoridade superior à realidade natural.</label>
+                        <label class="option-item"><input type="radio" name="q3" value="C"> C) O Coronel Fagundes e o narrador do Texto I compartilham a opinião de que o passado deve ser preservado a qualquer custo.</label>
+                        <label class="option-item"><input type="radio" name="q3" value="D"> D) Dona Eudóxia representa a "memória digital" mencionada no Texto I, pois ela registra os fatos com frieza e precisão.</label>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-card" data-id="4">
+                    <span class="question-header">QUESTÃO 04 (Texto II)</span>
+                    <p>No conto "O Relógio de Pêndulo", a frase sobre o café do Coronel revela, de forma implícita, que:</p>
+                    <div class="options">
+                        <label class="option-item"><input type="radio" name="q4" value="A"> A) O Coronel Fagundes sofria de uma condição médica que alterava sua percepção térmica.</label>
+                        <label class="option-item"><input type="radio" name="q4" value="B"> B) A qualidade do café servido na casa havia decaído drasticamente devido à incompetência da mucama.</label>
+                        <label class="option-item"><input type="radio" name="q4" value="C"> C) O humor e a percepção da realidade do Coronel eram condicionados por fatores econômicos externos.</label>
+                        <label class="option-item"><input type="radio" name="q4" value="D"> D) Dona Eudóxia sabotava intencionalmente o café para provocar o marido.</label>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-card" data-id="5">
+                    <span class="question-header">QUESTÃO 05 (Texto II)</span>
+                    <p>Ao final do texto, a metáfora das "ilusões que sustentam o teto" justifica o silêncio de Dona Eudóxia sugerindo que:</p>
+                    <div class="options">
+                        <label class="option-item"><input type="radio" name="q5" value="A"> A) A integridade física da casa dependia de uma reforma estrutural urgente.</label>
+                        <label class="option-item"><input type="radio" name="q5" value="B"> B) A manutenção da autoridade ilusória do Coronel era necessária para a estabilidade familiar.</label>
+                        <label class="option-item"><input type="radio" name="q5" value="C"> C) Dona Eudóxia acreditava que o relógio voltaria a funcionar sozinho.</label>
+                        <label class="option-item"><input type="radio" name="q5" value="D"> D) As vigas de peroba eram frágeis, assim como o casamento dos dois personagens.</label>
+                    </div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-card" data-id="6">
+                    <span class="question-header">QUESTÃO 06 (Texto II)</span>
+                    <p>A fala do Coronel "O mundo é que deve ter se atrasado" exemplifica:</p>
+                    <div class="options">
+                        <label class="option-item"><input type="radio" name="q6" value="A"> A) Uma ironia fina sobre sua própria insignificância.</label>
+                        <label class="option-item"><input type="radio" name="q6" value="B"> B) Um traço de arrogância e egocentrismo.</label>
+                        <label class="option-item"><input type="radio" name="q6" value="C"> C) Um conhecimento astronômico avançado sobre a rotação da Terra.</label>
+                        <label class="option-item"><input type="radio" name="q6" value="D"> D) Uma tentativa de animar a esposa com uma piada absurda.</label>
+                    </div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-card" data-id="7">
+                    <span class="question-header">QUESTÃO 07 (Texto III)</span>
+                    <p>No poema, o verso "Vê apenas o reflexo de si mesmo" constrói uma crítica social baseada na ideia de:</p>
+                    <div class="options">
+                        <label class="option-item"><input type="radio" name="q7" value="A"> A) Narcisismo e alienação social das classes privilegiadas.</label>
+                        <label class="option-item"><input type="radio" name="q7" value="B"> B) Deficiência na infraestrutura urbana e qualidade dos vidros.</label>
+                        <label class="option-item"><input type="radio" name="q7" value="C"> C) Igualdade social entre o motorista e o vendedor de balas.</label>
+                        <label class="option-item"><input type="radio" name="q7" value="D"> D) Segurança pública e necessidade de blindagem contra a violência.</label>
+                    </div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-card" data-id="8">
+                    <span class="question-header">QUESTÃO 08 (Texto III)</span>
+                    <p>A expressão "E a cidade engole, / em seco, / mais um dia sem gosto" remete a:</p>
+                    <div class="options">
+                        <label class="option-item"><input type="radio" name="q8" value="A"> A) Uma celebração da gastronomia urbana.</label>
+                        <label class="option-item"><input type="radio" name="q8" value="B"> B) Uma sensação de saciedade e plenitude.</label>
+                        <label class="option-item"><input type="radio" name="q8" value="C"> C) Uma atmosfera de desconforto, resignação e falta de prazer vital.</label>
+                        <label class="option-item"><input type="radio" name="q8" value="D"> D) Um problema de saúde pública e falta de água potável.</label>
+                    </div>
+                </div>
+
+                <!-- Question 9 -->
+                <div class="question-card" data-id="9">
+                    <span class="question-header">QUESTÃO 09 (Geral)</span>
+                    <p>Os três textos convergem tematicamente ao abordarem:</p>
+                    <div class="options">
+                        <label class="option-item"><input type="radio" name="q9" value="A"> A) A importância da preservação ambiental.</label>
+                        <label class="option-item"><input type="radio" name="q9" value="B"> B) A relação conflituosa entre o sujeito e mecanismos que distorcem a realidade.</label>
+                        <label class="option-item"><input type="radio" name="q9" value="C"> C) A necessidade de avanços tecnológicos na comunicação.</label>
+                        <label class="option-item"><input type="radio" name="q9" value="D"> D) A celebração do passado como uma era dourada.</label>
+                    </div>
+                </div>
+
+                <!-- Question 10 -->
+                <div class="question-card" data-id="10">
+                    <span class="question-header">QUESTÃO 10 (Texto I)</span>
+                    <p>O ponto e vírgula na frase sobre o algoritmo estabelece uma relação de:</p>
+                    <div class="options">
+                        <label class="option-item"><input type="radio" name="q10" value="A"> A) Causa e consequência.</label>
+                        <label class="option-item"><input type="radio" name="q10" value="B"> B) Oposição semântica (contraste entre máquina e humano).</label>
+                        <label class="option-item"><input type="radio" name="q10" value="C"> C) Adição pura de características técnicas.</label>
+                        <label class="option-item"><input type="radio" name="q10" value="D"> D) Explicação sobre a definição de ironia.</label>
+                    </div>
+                </div>
+
+                <button type="button" class="btn-submit" onclick="finishQuiz()">Finalizar Quiz e Ver Resoluções</button>
+            </form>
+        </section>
+
+        <section id="results-section">
+            <div class="score-box">
+                <h2>Resultado Final</h2>
+                <p id="score-text"></p>
+            </div>
+            <div id="resolutions-list">
+                <!-- Resolutions will be injected here -->
+            </div>
+            <button class="btn-submit" onclick="window.location.reload()">Refazer Simulado</button>
+        </section>
+    </div>
+
+    <script>
+        const answers = {
+            q1: "B", q2: "B", q3: "B", q4: "C", q5: "B",
+            q6: "B", q7: "A", q8: "C", q9: "B", q10: "B"
+        };
+
+        const explanations = {
+            q1: "A memória humana possui uma função reconstrutiva e semântica, dando sentido ao passado, ao passo que a digital é um acúmulo passivo de dados. O autor destaca que a digital é cumulativa e indiferente, enquanto a humana edita para dar sentido.",
+            q2: "O distanciamento afetivo e a desumanização. Palavras como 'silício frio' e 'bunkers' em lugares inóspitos reforçam a ideia de que a memória se tornou algo mecânico e distante do calor humano.",
+            q3: "Intertextualidade: No Texto I, a tecnologia distorce a memória; no Texto II, o Coronel nega a realidade natural em favor da suposta perfeição do relógio alemão.",
+            q4: "O humor e a percepção do Coronel eram condicionados por fatores econômicos. O texto diz que o café estaria frio se as notícias da cotação não fossem boas, independente da temperatura real.",
+            q5: "Manutenção da autoridade. O silêncio de Eudóxia evita o colapso da 'ordem' doméstica baseada na infalibilidade do marido.",
+            q6: "Arrogância e egocentrismo. O personagem inverte a lógica do universo (o mundo atrasou, não o relógio) para proteger seu ego.",
+            q7: "Narcisismo e alienação. O vidro reflete o motorista e impede que ele veja o 'outro' (o vendedor), simbolizando a bolha social.",
+            q8: "Desconforto e resignação. 'Engolir em seco' é uma expressão de angústia e a falta de gosto remete à rotina estéril da cidade.",
+            q9: "Convergência temática: A mediação da realidade por algoritmos, relógios ou vidros que acabam distorcendo a experiência humana direta.",
+            q10: "Oposição semântica. O ponto e vírgula separa o que a máquina *não* faz (entender subjetividade) do que ela *faz* (processar dados frios)."
+        };
+
+        function finishQuiz() {
+            const form = document.getElementById('quiz-form');
+            const formData = new FormData(form);
+            let score = 0;
+            let total = 10;
+            const resContainer = document.getElementById('resolutions-list');
+            resContainer.innerHTML = '<h3>Análise Detalhada das Questões</h3>';
+
+            for (let i = 1; i <= total; i++) {
+                const qKey = 'q' + i;
+                const userAnswer = formData.get(qKey);
+                const correctAnswer = answers[qKey];
+                const isCorrect = userAnswer === correctAnswer;
+                
+                if (isCorrect) score++;
+
+                const resItem = document.createElement('div');
+                resItem.className = 'resolution-item';
+                resItem.innerHTML = `
+                    <p><strong>Questão ${i}:</strong> ${isCorrect ? '<span class="res-correct">Acertou!</span>' : '<span class="res-wrong">Errou.</span>'}</p>
+                    <p>Sua resposta: ${userAnswer || "Não respondida"} | Gabarito: <strong>${correctAnswer}</strong></p>
+                    <div class="explanation">
+                        <strong>Resolução:</strong> ${explanations[qKey]}
+                    </div>
+                `;
+                resContainer.appendChild(resItem);
+            }
+
+            document.getElementById('score-text').innerText = `Você acertou ${score} de ${total} questões.`;
+            document.getElementById('quiz-container').style.display = 'none';
+            document.getElementById('texts-container').style.display = 'none';
+            document.getElementById('results-section').style.display = 'block';
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

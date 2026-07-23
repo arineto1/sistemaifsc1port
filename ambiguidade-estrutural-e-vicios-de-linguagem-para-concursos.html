@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Memorização Completo: Ambiguidade e Vícios de Linguagem - FAURGS IFSC</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        highlight: {
+                            bg: '#fef3c7',
+                            text: '#78350f',
+                            border: '#f59e0b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        /* Estilo personalizado para grifos e destaques visuais */
+        .grifo {
+            background-color: #fef08a;
+            color: #854d0e;
+            padding: 0.15rem 0.35rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+        }
+
+        .grifo-importante {
+            background-color: #fee2e2;
+            color: #991b1b;
+            padding: 0.15rem 0.35rem;
+            border-radius: 0.25rem;
+            font-weight: 700;
+            border-bottom: 2px solid #ef4444;
+        }
+
+        .grifo-verde {
+            background-color: #dcfce7;
+            color: #166534;
+            padding: 0.15rem 0.35rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+        }
+
+        .grifo-azul {
+            background-color: #e0f2fe;
+            color: #0369a1;
+            padding: 0.15rem 0.35rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+        }
+
+        /* Tabela responsiva sem barra de rolagem horizontal */
+        .table-no-scroll {
+            width: 100%;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+
+        .table-no-scroll th, 
+        .table-no-scroll td {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+        }
+
+        /* Personalização do Slider do Player de Áudio */
+        input[type="range"]::-webkit-slider-thumb {
+            appearance: none;
+            height: 14px;
+            width: 14px;
+            border-radius: 50%;
+            background: #0284c7;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-white text-slate-800 antialiased selection:bg-amber-200 selection:text-amber-900">
+
+    <!-- Top Header Sticky Banner -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center space-x-3">
+                <span class="bg-slate-900 text-white font-bold text-xs px-2.5 py-1 rounded tracking-wide uppercase">FAURGS - IFSC</span>
+                <h1 class="text-sm md:text-base font-bold text-slate-900 truncate">Guia Completo: Ambiguidade & Vícios de Linguagem</h1>
+            </div>
+            <a href="questoes.html" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs md:text-sm px-4 py-2 rounded-lg transition-all shadow-sm hover:shadow active:scale-95">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <span>Ir para Questões</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-6 md:py-10 space-y-10">
+
+        <!-- REPRODUTOR DE ÁUDIO MP3 -->
+        <section class="bg-slate-50 border border-slate-200 rounded-2xl p-4 md:p-6 shadow-sm">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-4 pb-4 border-b border-slate-200">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-brand-500 text-white flex items-center justify-center text-lg shadow-md">
+                        <i class="fa-solid fa-headphones"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-bold text-slate-900 text-base md:text-lg leading-tight">Audioaula de Resumo do Guia</h2>
+                        <p class="text-xs text-slate-500">Ouça a narração técnica do guia completo para memorização rápida</p>
+                    </div>
+                </div>
+
+                <!-- Configuração do nome do arquivo MP3 -->
+                <div class="w-full md:w-auto flex items-center gap-2 bg-white px-3 py-1.5 rounded-lg border border-slate-300 text-xs">
+                    <i class="fa-solid fa-file-audio text-slate-400"></i>
+                    <span class="text-slate-500 font-medium">Arquivo MP3:</span>
+                    <input type="text" id="audioFileNameInput" value="aula_ambiguidade.mp3" 
+                        class="bg-transparent font-mono text-slate-700 focus:outline-none focus:ring-1 focus:ring-brand-500 rounded px-1 w-44 font-semibold text-xs border border-slate-200"
+                        title="Digite o nome do arquivo MP3 presente na mesma pasta">
+                    <button id="btnReloadAudio" class="text-brand-700 hover:text-brand-900 font-semibold text-xs px-1" title="Carregar novo arquivo">
+                        <i class="fa-solid fa-rotate"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Audio Element (Invisível) -->
+            <audio id="mainAudioPlayer" preload="metadata">
+                <source id="audioSource" src="aula_ambiguidade.mp3" type="audio/mpeg">
+                Seu navegador não suporta o elemento de áudio.
+            </audio>
+
+            <!-- Controles do Player -->
+            <div class="space-y-3">
+                <!-- Barra de Progresso -->
+                <div class="flex items-center gap-3">
+                    <span id="currentTime" class="text-xs font-mono text-slate-500 w-10 text-right">00:00</span>
+                    <input type="range" id="progressBar" value="0" min="0" max="100" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-brand-500">
+                    <span id="durationTime" class="text-xs font-mono text-slate-500 w-10">00:00</span>
+                </div>
+
+                <!-- Botões de Ação -->
+                <div class="flex items-center justify-between pt-1">
+                    <div class="flex items-center gap-2 md:gap-3">
+                        <button id="btnRewind" class="p-2 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-200/60 transition" title="Voltar 10s">
+                            <i class="fa-solid fa-rotate-left text-sm"></i> <span class="text-xs font-medium">-10s</span>
+                        </button>
+                        <button id="btnPlayPause" class="w-11 h-11 bg-brand-500 hover:bg-brand-700 text-white rounded-full flex items-center justify-center transition shadow-md active:scale-95" title="Reproduzir/Pausar">
+                            <i id="playIcon" class="fa-solid fa-play ml-0.5"></i>
+                        </button>
+                        <button id="btnForward" class="p-2 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-200/60 transition" title="Avançar 10s">
+                            <span class="text-xs font-medium">+10s</span> <i class="fa-solid fa-rotate-right text-sm"></i>
+                        </button>
+                    </div>
+
+                    <!-- Velocidade e Volume -->
+                    <div class="flex items-center gap-3">
+                        <button id="btnSpeed" class="text-xs font-bold bg-white border border-slate-300 text-slate-700 px-2.5 py-1.5 rounded-lg hover:bg-slate-100 transition shadow-sm">
+                            1.0x
+                        </button>
+                        <div class="hidden sm:flex items-center gap-2 bg-white px-2.5 py-1 rounded-lg border border-slate-200">
+                            <button id="btnMute" class="text-slate-500 hover:text-slate-800">
+                                <i id="volumeIcon" class="fa-solid fa-volume-high text-xs"></i>
+                            </button>
+                            <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="1" class="w-16 h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CABEÇALHO DO GUIA -->
+        <div class="border-b-2 border-slate-800 pb-4">
+            <div class="flex items-center gap-2 text-xs font-bold text-brand-700 uppercase tracking-widest mb-1">
+                <i class="fa-solid fa-graduation-cap"></i> Concurso Professor EBTT IFSC — Banca FAURGS
+            </div>
+            <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+                GUIA DE MEMORIZAÇÃO: AMBIGUIDADE E VÍCIOS DE LINGUAGEM
+            </h1>
+            <p class="text-sm text-slate-600 mt-1">
+                Material completo com revisão de todos os conceitos teóricos, taxonomia detalhada e estratégias de prova da FAURGS.
+            </p>
+        </div>
+
+        <!-- PÁGINA 1: TAXONOMIA COMPLETA E MECANISMOS SINTÁTICOS -->
+        <section class="space-y-6">
+            <div class="flex items-center gap-2 bg-slate-100 px-3 py-1.5 rounded-lg w-fit">
+                <span class="bg-slate-900 text-white font-bold text-xs px-2 py-0.5 rounded">PÁGINA 1</span>
+                <span class="font-bold text-sm text-slate-800">TAXONOMIA COMPLETA E MECANISMOS DE AMBIGUIDADE</span>
+            </div>
+
+            <!-- Bloco 1: Ambiguidade Lexical vs Estrutural -->
+            <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm space-y-4">
+                <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2 border-b border-slate-100 pb-2">
+                    <i class="fa-solid fa-sitemap text-brand-500"></i>
+                    1. Ambiguidade (Anfibologia): Lexical vs. Estrutural (Sintática)
+                </h2>
+                <p class="text-sm">
+                    A ambiguidade ou anfibologia é a <span class="grifo">duplicidade de sentidos não intencional</span> que compromete a clareza do enunciado. Nas provas do IFSC elaboradas pela FAURGS, a questão chave é identificar se a causa do duplo sentido é <span class="grifo-importante">vocabulária (lexical)</span> ou <span class="grifo-importante">arranjamento sintático (estrutural)</span>.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                    <!-- Lexical -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                        <h3 class="font-bold text-slate-900 text-sm flex items-center gap-1.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> Ambiguidade Lexical
+                        </h3>
+                        <p class="text-xs text-slate-700">
+                            Decorre da presença de uma <span class="grifo">palavra polissêmica</span> (vários significados) ou <span class="grifo">homônima</span> (mesmo som/grafia, origens distintas) sem contextualização suficiente.
+                        </p>
+                        <ul class="text-xs space-y-2 pt-1 text-slate-800">
+                            <li class="bg-white p-2.5 rounded border border-slate-200">
+                                <strong>Polissemia:</strong> "O docente analisou a <span class="grifo-importante">classe</span> no IFSC" <span class="text-slate-500">(turma de alunos ou classe social?)</span>.
+                            </li>
+                            <li class="bg-white p-2.5 rounded border border-slate-200">
+                                <strong>Homonímia:</strong> "Ele reservou o lugar no <span class="grifo-importante">banco</span>" <span class="text-slate-500">(instituição financeira ou assento de parque?)</span>.
+                            </li>
+                            <li class="bg-white p-2.5 rounded border border-slate-200">
+                                <strong>Fatores Abstratos:</strong> "A escolha do candidato tem o seu <span class="grifo-importante">preço</span>" <span class="text-slate-500">(valor pecuniário ou ônus social/político?)</span>.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Estrutural -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                        <h3 class="font-bold text-slate-900 text-sm flex items-center gap-1.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-brand-500"></span> Ambiguidade Estrutural (Sintática)
+                        </h3>
+                        <p class="text-xs text-slate-700">
+                            Não depende do sentido individual das palavras, mas da <span class="grifo-importante">má ordenação ou arquitetura dos termos</span> na frase, gerando múltiplos referentes sintáticos.
+                        </p>
+                        <ul class="text-xs space-y-2 pt-1 text-slate-800">
+                            <li class="bg-white p-2.5 rounded border border-slate-200">
+                                <strong>Pronomes Possessivos de 3ª Pessoa:</strong> "O chefe disse ao técnico que <span class="grifo-importante">seu</span> projeto fora aprovado" <span class="text-slate-500">(projeto do chefe ou do técnico?)</span>.
+                            </li>
+                            <li class="bg-white p-2.5 rounded border border-slate-200">
+                                <strong>Adjuntos Adverbiais Intercalados:</strong> "Os diretores declararam <span class="grifo-importante">na semana passada</span> que haveria reunião" <span class="text-slate-500">(declararam na semana passada ou a reunião seria na semana passada?)</span>.
+                            </li>
+                            <li class="bg-white p-2.5 rounded border border-slate-200">
+                                <strong>Orações Reduzidas (Gerúndio/Particípio):</strong> "Vi o aluno <span class="grifo-importante">correndo</span> no corredor" <span class="text-slate-500">(Eu estava correndo ou o aluno estava correndo?)</span>.
+                            </li>
+                            <li class="bg-white p-2.5 rounded border border-slate-200">
+                                <strong>Pronome Relativo "Que":</strong> "Conversei com a professora da turma <span class="grifo-importante">que</span> ganhou o prêmio" <span class="text-slate-500">(A professora ou a turma ganhou?)</span>.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bloco 2: As 6 Fontes Clássicas de Ambiguidade Sintática -->
+            <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm space-y-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-indigo-600"></i>
+                    Fontes Recorrentes de Ambiguidade Estrutural em Provas
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+                        <span class="font-bold text-slate-900 block mb-1">1. Pronome Pessoal / Possessivo</span>
+                        <p class="text-slate-600">Uso de <i>seu, sua, dele, dela, o, a</i> com dois substantivos da mesma pessoa gramatical na mesma oração.</p>
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+                        <span class="font-bold text-slate-900 block mb-1">2. Posicionamento do Modificador</span>
+                        <p class="text-slate-600">Adjetivos ou advérbios colocados entre dois substantivos ou verbos, podendo modificar ambos.</p>
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+                        <span class="font-bold text-slate-900 block mb-1">3. Oração Adjetiva sem Pontuação</span>
+                        <p class="text-slate-600">Indefinição entre sentido restritivo e explicativo por omissão de vírgulas exigidas no contexto.</p>
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+                        <span class="font-bold text-slate-900 block mb-1">4. Formas Nominais Reduzidas</span>
+                        <p class="text-slate-600">Orações reduzidas de gerúndio ou infinitivo sem indicação clara de quem realiza a ação.</p>
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+                        <span class="font-bold text-slate-900 block mb-1">5. Inversão Sintática (Hipérbato)</span>
+                        <p class="text-slate-600">Troca da ordem direta (Sujeito + Verbo + Objeto), fundindo sujeito e objeto direto no texto.</p>
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+                        <span class="font-bold text-slate-900 block mb-1">6. Elipse Indevida (Zeugma)</span>
+                        <p class="text-slate-600">Omissão de preposição ou conjunção essencial que deixa a relação lógica ambígua.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bloco 3: Tabela Completa de Vícios de Linguagem -->
+            <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                    <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-table text-emerald-600"></i>
+                        2. Tabela de Salvação: Todos os Vícios de Linguagem
+                    </h2>
+                    <span class="text-xs bg-emerald-100 text-emerald-800 font-medium px-2.5 py-1 rounded-full w-fit">
+                        Tabela responsiva sem rolagem horizontal
+                    </span>
+                </div>
+                <p class="text-sm">
+                    Vícios de linguagem são desvios não intencionais da norma-padrão ou inadequações que prejudicam a comunicação. Conheça a lista integral cobrada nos concursos de magistério EBTT:
+                </p>
+
+                <!-- TABELA RESPONSIVA (SEM SCROLL HORIZONTAL) -->
+                <div class="overflow-hidden border border-slate-200 rounded-xl">
+                    <table class="table-no-scroll text-left">
+                        <thead>
+                            <tr class="bg-slate-100 border-b border-slate-200 text-slate-900 font-bold text-xs">
+                                <th class="p-2.5 w-[22%]">Vício</th>
+                                <th class="p-2.5 w-[28%]">Mecanismo / Conceito</th>
+                                <th class="p-2.5 w-[25%]">Exemplo Inadequado</th>
+                                <th class="p-2.5 w-[25%]">Correção Norma-Padrão</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-xs text-slate-800">
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-2.5 font-bold text-slate-900">Barbarismo Gráfico</td>
+                                <td class="p-2.5">Erro na grafia ou ortografia das palavras.</td>
+                                <td class="p-2.5 text-red-700">"Cometeu uma <span class="grifo-importante">proesa</span>"</td>
+                                <td class="p-2.5 text-emerald-800">"Cometeu uma <span class="grifo-verde">proeza</span>"</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-2.5 font-bold text-slate-900">Barbarismo Prosódico (Silabada)</td>
+                                <td class="p-2.5">Deslocamento incorreto da acentuação tônica.</td>
+                                <td class="p-2.5 text-red-700">"Assine a <span class="grifo-importante">rúbrica</span>" / "Acesso <span class="grifo-importante">gratuíto</span>"</td>
+                                <td class="p-2.5 text-emerald-800">"Assine a <span class="grifo-verde">rubrica</span>" / "<span class="grifo-verde">Gratuito</span>"</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-2.5 font-bold text-slate-900">Barbarismo Ortóepico (Cacoépia)</td>
+                                <td class="p-2.5">Pronúncia incorreta dos fonemas de uma palavra.</td>
+                                <td class="p-2.5 text-red-700">"Aperte o <span class="grifo-importante">interfone</span>" / "<span class="grifo-importante">Mendingo</span>"</td>
+                                <td class="p-2.5 text-emerald-800">"<span class="grifo-verde">Interfones</span>" / "<span class="grifo-verde">Mendigo</span>"</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-2.5 font-bold text-slate-900">Barbarismo Semântico</td>
+                                <td class="p-2.5">Confusão entre termos parônimos ou homônimos.</td>
+                                <td class="p-2.5 text-red-700">"O reitor <span class="grifo-importante">comprimentou</span> a banca"</td>
+                                <td class="p-2.5 text-emerald-800">"O reitor <span class="grifo-verde">cumprimentou</span>..."</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-2.5 font-bold text-slate-900">Solecismo de Concordância</td>
+                                <td class="p-2.5">Inobservância das regras de concordância verbal/nominal.</td>
+                                <td class="p-2.5 text-red-700">"<span class="grifo-importante">Haveriam</span> muitas inscrições"</td>
+                                <td class="p-2.5 text-emerald-800">"<span class="grifo-verde">Havia</span> muitas inscrições"</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-2.5 font-bold text-slate-900">Solecismo de Regência</td>
+                                <td class="p-2.5">Erro na escolha ou omissão de preposição exigida pelo verbo/nome.</td>
+                                <td class="p-2.5 text-red-700">"Assistimos <span class="grifo-importante">o</span> jogo do IFSC"</td>
+                                <td class="p-2.5 text-emerald-800">"Assistimos <span class="grifo-verde">ao</span> jogo do IFSC"</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-2.5 font-bold text-slate-900">Solecismo de Colocação</td>
+                                <td class="p-2.5">Uso indevido de próclise, ênclise ou mesóclise.</td>
+                                <td class="p-2.5 text-red-700">"<span class="grifo-importante">Me empreste</span> o livro" / "Não <span class="grifo-importante">vi-o</span>"</td>
+                                <td class="p-2.5 text-emerald-800">"<span class="grifo-verde">Empreste-me</span>" / "Não <span class="grifo-verde">o vi</span>"</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-2.5 font-bold text-slate-900">Cacofonia (Cacófato)</td>
+                                <td class="p-2.5">Som ridículo ou obsceno resultante da junção de palavras.</td>
+                                <td class="p-2.5 text-red-700">"Não olhe a <span class="grifo-importante">boca dela</span>" / "Vi <span class="grifo-importante">uma mão</span>"</td>
+                                <td class="p-2.5 text-emerald-800">"...boca daquela pessoa" / "...uma das mãos"</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-2.5 font-bold text-slate-900">Pleonasmo Vicioso (Redundância)</td>
+                                <td class="p-2.5">Repetição inútil e desnecessária de uma ideia já expressa.</td>
+                                <td class="p-2.5 text-red-700">"<span class="grifo-importante">Subir para cima</span>" / "<span class="grifo-importante">Elo de ligação</span>"</td>
+                                <td class="p-2.5 text-emerald-800">"<span class="grifo-verde">Subir</span>" / "<span class="grifo-verde">Elo</span>" ou "<span class="grifo-verde">Ligação</span>"</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-2.5 font-bold text-slate-900">Gerundismo</td>
+                                <td class="p-2.5">Uso do gerúndio em locução para ação futura instantânea.</td>
+                                <td class="p-2.5 text-red-700">"Vou <span class="grifo-importante">estar enviando</span> o comprovante"</td>
+                                <td class="p-2.5 text-emerald-800">"Vou <span class="grifo-verde">enviar</span>" / "<span class="grifo-verde">Enviarei</span>"</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-2.5 font-bold text-slate-900">Eco</td>
+                                <td class="p-2.5">Repetição desagradável de sons iguais ao final das palavras (rimas na prosa).</td>
+                                <td class="p-2.5 text-red-700">"A <span class="grifo-importante">produção</span> da <span class="grifo-importante">documentação</span> gerou <span class="grifo-importante">insatisfação</span>"</td>
+                                <td class="p-2.5 text-emerald-800">"A entrega dos documentos causou descontentamento"</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-2.5 font-bold text-slate-900">Colisão e Hiato</td>
+                                <td class="p-2.5">Sequência de consoantes iguais (colisão) ou vogais seguidas (hiato).</td>
+                                <td class="p-2.5 text-red-700">"<span class="grifo-importante">Sua saia sujou</span>" (colisão) / "<span class="grifo-importante">Ou eu ou outra</span>" (hiato)</td>
+                                <td class="p-2.5 text-emerald-800">"A saia dela ficou suja" / "Ou minha opção ou a outra"</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-2.5 font-bold text-slate-900">Estrangeirismo / Neologismo Vicioso</td>
+                                <td class="p-2.5">Uso desnecessário de palavra estrangeira ou invenção sem respaldo.</td>
+                                <td class="p-2.5 text-red-700">"Vou <span class="grifo-importante">startar</span> a reunião" / "Fazer um <span class="grifo-importante">briefing</span>"</td>
+                                <td class="p-2.5 text-emerald-800">"Vou <span class="grifo-verde">iniciar</span> a reunião" / "Fazer um <span class="grifo-verde">resumo</span>"</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-2.5 font-bold text-slate-900">Arcaísmo</td>
+                                <td class="p-2.5">Emprego de termos desusados ou obsoletos na norma culta contemporânea.</td>
+                                <td class="p-2.5 text-red-700">"<span class="grifo-importante">Vosmecê</span> precisa assinar" / "<span class="grifo-importante">Outrossim</span> afirmo"</td>
+                                <td class="p-2.5 text-emerald-800">"<span class="grifo-verde">Você</span> precisa assinar" / "Também afirmo"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- PÁGINA 2: ENGENHARIA DE ACERTOS E PEGADINHAS FAURGS -->
+        <section class="space-y-6 pt-6 border-t-2 border-slate-200">
+            <div class="flex items-center gap-2 bg-slate-100 px-3 py-1.5 rounded-lg w-fit">
+                <span class="bg-slate-900 text-white font-bold text-xs px-2 py-0.5 rounded">PÁGINA 2</span>
+                <span class="font-bold text-sm text-slate-800">ENGENHARIA DE ACERTOS (PEGADINHAS DA FAURGS EM CARGOS EBTT)</span>
+            </div>
+
+            <p class="text-sm">
+                A FAURGS cobra Língua Portuguesa em provas EBTT através de enunciados analíticos de <span class="grifo-importante">reescrita e equivalência sintático-semântica</span>. Domine os 6 comportamentos clássicos da banca:
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                <!-- Pegadinha 1 -->
+                <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm space-y-3 relative overflow-hidden">
+                    <div class="w-1.5 h-full bg-amber-500 absolute left-0 top-0"></div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">PEGADINHA 1</span>
+                        <i class="fa-solid fa-bolt text-amber-500 text-sm"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 text-base">A Desconstrução do Gerundismo (Pontual vs. Continuo)</h3>
+                    <p class="text-xs text-slate-700">
+                        <strong>A Pegadinha:</strong> A banca apresenta a estrutura viciada <span class="grifo font-mono">"vou estar + gerúndio"</span> e cobra a reescrita enxuta preservando o tempo verbal futuro.
+                    </p>
+                    <p class="text-xs text-slate-700">
+                        <strong>O Macete:</strong> Ações pontuais instantâneas não aceitam gerúndio durativo. Substitua por futuro do presente ou presente com valor de futuro.
+                    </p>
+                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 text-xs space-y-1.5">
+                        <p class="text-red-700">❌ <i>Errado:</i> "Vou estar transmitindo as notas dos alunos"</p>
+                        <p class="text-emerald-800 font-semibold">✔ <i>Gabarito FAURGS:</i> "<span class="grifo-verde">Transmitirei</span> as notas" ou "<span class="grifo-verde">Transmito</span> as notas"</p>
+                    </div>
+                </div>
+
+                <!-- Pegadinha 2 -->
+                <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm space-y-3 relative overflow-hidden">
+                    <div class="w-1.5 h-full bg-brand-500 absolute left-0 top-0"></div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-brand-700 bg-brand-50 px-2 py-0.5 rounded border border-brand-200">PEGADINHA 2</span>
+                        <i class="fa-solid fa-filter-circle-dollar text-brand-500 text-sm"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 text-base">A Vírgula e a Mudança de Sujeito no Gerúndio</h3>
+                    <p class="text-xs text-slate-700">
+                        <strong>A Pegadinha:</strong> A banca pergunta se a simples inserção de uma vírgula antes de uma oração reduzida de gerúndio altera o referente do sujeito.
+                    </p>
+                    <p class="text-xs text-slate-700">
+                        <strong>O Macete:</strong> <span class="grifo-importante">A vírgula altera sim o sujeito!</span> Sem vírgula, vincula-se ao termo imediatamente anterior; com vírgula, vincula-se ao sujeito da oração principal.
+                    </p>
+                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 text-xs space-y-1.5">
+                        <p><strong>Sem vírgula:</strong> "A reitoria enviou mensagem ao docente <span class="grifo">solicitando</span> auxílio" <span class="text-slate-500">(o docente solicitava)</span>.</p>
+                        <p><strong>Com vírgula:</strong> "A reitoria enviou mensagem ao docente<span class="grifo-importante">, solicitando</span> auxílio" <span class="text-slate-500">(a reitoria solicitava)</span>.</p>
+                    </div>
+                </div>
+
+                <!-- Pegadinha 3 -->
+                <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm space-y-3 relative overflow-hidden">
+                    <div class="w-1.5 h-full bg-indigo-500 absolute left-0 top-0"></div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">PEGADINHA 3</span>
+                        <i class="fa-solid fa-eye text-indigo-500 text-sm"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 text-base">A Crase Desambiguadora em Adjuntos Adverbiais</h3>
+                    <p class="text-xs text-slate-700">
+                        <strong>A Pegadinha:</strong> A FAURGS pede a frase em que o uso do acento grave é <span class="grifo">obrigatório por motivo semântico de clareza</span> e não por mera regência.
+                    </p>
+                    <p class="text-xs text-slate-700">
+                        <strong>O Macete:</strong> Procure locuções adverbiais ou conjuntivas femininas que sem crase seriam interpretadas como Objeto Direto.
+                    </p>
+                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 text-xs space-y-1.5">
+                        <p><strong>Sem crase (Objeto Direto):</strong> "Recebeu a noite com festa" / "Viu a distância"</p>
+                        <p><strong>Com crase (Adverbial Desambiguado):</strong> "Chegou <span class="grifo-verde">à noite</span>" / "Observou <span class="grifo-verde">à distância</span>"</p>
+                    </div>
+                </div>
+
+                <!-- Pegadinha 4 -->
+                <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm space-y-3 relative overflow-hidden">
+                    <div class="w-1.5 h-full bg-rose-500 absolute left-0 top-0"></div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded border border-rose-200">PEGADINHA 4</span>
+                        <i class="fa-solid fa-arrows-rotate text-rose-500 text-sm"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 text-base">O OD Preposicionado na Inversão Sintática</h3>
+                    <p class="text-xs text-slate-700">
+                        <strong>A Pegadinha:</strong> Frases com ordem invertida (Verbo + Objeto + Sujeito) geram ambiguidade sobre quem pratica e quem recebe a ação.
+                    </p>
+                    <p class="text-xs text-slate-700">
+                        <strong>O Macete:</strong> A preposição (ou crase) antes de um dos termos marca categoricamente que ele é o Objeto, desambiguando o período.
+                    </p>
+                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 text-xs space-y-1.5">
+                        <p class="text-red-700">❌ <i>Ambíguo:</i> "Venceu o aluno o professor" <span class="text-slate-500">(Quem venceu quem?)</span></p>
+                        <p class="text-emerald-800 font-semibold">✔ <i>Sem ambiguidade:</i> "Venceu <span class="grifo-verde">ao aluno</span> o professor" <span class="text-slate-500">(O professor venceu)</span></p>
+                    </div>
+                </div>
+
+                <!-- Pegadinha 5 -->
+                <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm space-y-3 relative overflow-hidden">
+                    <div class="w-1.5 h-full bg-emerald-500 absolute left-0 top-0"></div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">PEGADINHA 5</span>
+                        <i class="fa-solid fa-link text-emerald-500 text-sm"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 text-base">O Pronome Relativo "Que" e o Antecedente Distante</h3>
+                    <p class="text-xs text-slate-700">
+                        <strong>A Pegadinha:</strong> Quando há dois substantivos antes do pronome "que", cria-se dúvida sobre qual é o antecedente.
+                    </p>
+                    <p class="text-xs text-slate-700">
+                        <strong>O Macete:</strong> A FAURGS exige a substituição do "que" por <span class="grifo-verde">o qual / a qual / os quais / as quais</span> para alinhar o gênero e número ao antecedente correto.
+                    </p>
+                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 text-xs space-y-1.5">
+                        <p class="text-red-700">❌ <i>Ambíguo:</i> "Consultei a secretária do diretor que foi demitida"</p>
+                        <p class="text-emerald-800 font-semibold">✔ <i>Desambiguado:</i> "...secretária do diretor, <span class="grifo-verde">a qual</span> foi demitida"</p>
+                    </div>
+                </div>
+
+                <!-- Pegadinha 6 -->
+                <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm space-y-3 relative overflow-hidden">
+                    <div class="w-1.5 h-full bg-purple-500 absolute left-0 top-0"></div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded border border-purple-200">PEGADINHA 6</span>
+                        <i class="fa-solid fa-check-double text-purple-500 text-sm"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 text-base">Reescrita com Mantimento do Sentido e Correção Gramatical</h3>
+                    <p class="text-xs text-slate-700">
+                        <strong>A Pegadinha:</strong> A banca oferece 5 opções de reescrita. Muitas eliminam a ambiguidade, mas introduzem erro de regência ou concordância.
+                    </p>
+                    <p class="text-xs text-slate-700">
+                        <strong>O Macete:</strong> O gabarito perfeito precisa satisfazer <span class="grifo-importante">DUAS condições simultâneas</span>: 1) Correção gramatical absoluta; 2) Manutenção da intenção comunicativa original.
+                    </p>
+                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 text-xs space-y-1.5">
+                        <p class="text-slate-800">Sempre verifique primeiro as proibições gramaticais clássicas (crase, regência, concordância) antes de julgar a semântica da reescrita.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bloco Memento e Método de Resolução -->
+            <div class="bg-slate-50 border-2 border-slate-300 rounded-xl p-5 shadow-sm space-y-4">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-compass text-brand-700"></i>
+                    Método Passo a Passo para Resolver Questões de Ambiguidade na FAURGS
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
+                    <div class="bg-white p-3 rounded-lg border border-slate-200 space-y-1">
+                        <span class="font-bold text-brand-700 block">PASSO 1: Identificar a Causa</span>
+                        <p class="text-slate-600">A ambiguidade é decorrente de uma palavra isolada (Lexical) ou da posição dos termos (Estrutural)?</p>
+                    </div>
+                    <div class="bg-white p-3 rounded-lg border border-slate-200 space-y-1">
+                        <span class="font-bold text-brand-700 block">PASSO 2: Localizar os Referentes</span>
+                        <p class="text-slate-600">Projete as duas interpretações possíveis. Quais termos disputam o mesmo adjetivo, advérbio ou pronome?</p>
+                    </div>
+                    <div class="bg-white p-3 rounded-lg border border-slate-200 space-y-1">
+                        <span class="font-bold text-brand-700 block">PASSO 3: Filtro de Gramática</span>
+                        <p class="text-slate-600">Elimine as alternativas de reescrita que cometem novos desvios (erros de regência, crase ou concordância).</p>
+                    </div>
+                    <div class="bg-white p-3 rounded-lg border border-slate-200 space-y-1">
+                        <span class="font-bold text-brand-700 block">PASSO 4: Validação de Sentido</span>
+                        <p class="text-slate-600">Escolha a opção que restringe expressamente o sentido pretendido com clareza e elegância.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Memento de Véspera -->
+            <div class="bg-amber-50 border-2 border-amber-300 rounded-xl p-5 shadow-sm space-y-3">
+                <h3 class="font-bold text-amber-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-bookmark text-amber-600"></i>
+                    Memento de Véspera: Resumo de Substituições Salvadoras
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                    <div class="bg-white p-3 rounded-lg border border-amber-200 space-y-1.5">
+                        <p class="font-bold text-slate-900">Pronomes Possessivos (Seu/Sua):</p>
+                        <p class="text-slate-700">Troque por <span class="grifo-verde">dele, dela, dos quais, das quais</span> para travar o possuidor.</p>
+                        <p class="text-red-700">❌ "Maria falou com João sobre o <span class="grifo-importante">seu</span> artigo"</p>
+                        <p class="text-emerald-800 font-medium">✔ "...sobre o artigo <span class="grifo-verde">dele</span>" (artigo de João)</p>
+                    </div>
+
+                    <div class="bg-white p-3 rounded-lg border border-amber-200 space-y-1.5">
+                        <p class="font-bold text-slate-900">Gerundismo Vicioso:</p>
+                        <p class="text-slate-700">Troque <span class="grifo-importante">vou estar + gerúndio</span> por verbo simples no futuro do presente ou presente.</p>
+                        <p class="text-red-700">❌ "Vou <span class="grifo-importante">estar disponibilizando</span> o edital"</p>
+                        <p class="text-emerald-800 font-medium">✔ "<span class="grifo-verde">Disponibilizarei</span> o edital"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BOTÃO PARA QUESTÕES AO FINAL DA PÁGINA -->
+        <div class="pt-8 pb-12 flex flex-col items-center justify-center border-t border-slate-200 space-y-3">
+            <p class="text-xs text-slate-500 font-medium">Pronto para testar seus conhecimentos e resolver questões da FAURGS?</p>
+            <a href="questoesambiguidade.html" class="inline-flex items-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-base px-8 py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0">
+                <i class="fa-solid fa-circle-question text-lg"></i>
+                <span>Ir para as Questões Práticas</span>
+                <i class="fa-solid fa-arrow-right text-sm"></i>
+            </a>
+        </div>
+
+    </main>
+
+    <!-- JAVASCRIPT DO AUDIO PLAYER -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.getElementById('mainAudioPlayer');
+            const audioSource = document.getElementById('audioSource');
+            const btnPlayPause = document.getElementById('btnPlayPause');
+            const playIcon = document.getElementById('playIcon');
+            const progressBar = document.getElementById('progressBar');
+            const currentTimeEl = document.getElementById('currentTime');
+            const durationTimeEl = document.getElementById('durationTime');
+            const btnRewind = document.getElementById('btnRewind');
+            const btnForward = document.getElementById('btnForward');
+            const btnSpeed = document.getElementById('btnSpeed');
+            const btnMute = document.getElementById('btnMute');
+            const volumeIcon = document.getElementById('volumeIcon');
+            const volumeSlider = document.getElementById('volumeSlider');
+            const fileNameInput = document.getElementById('audioFileNameInput');
+            const btnReloadAudio = document.getElementById('btnReloadAudio');
+
+            // Lista de velocidades de reprodução
+            const speeds = [1.0, 1.25, 1.5, 2.0];
+            let currentSpeedIdx = 0;
+
+            // Formatar tempo em mm:ss
+            function formatTime(seconds) {
+                if (isNaN(seconds)) return "00:00";
+                const mins = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
+            }
+
+            // Atualizar tempo de duração ao carregar metadados
+            audio.addEventListener('loadedmetadata', function() {
+                durationTimeEl.textContent = formatTime(audio.duration);
+            });
+
+            // Play / Pause Toggle
+            btnPlayPause.addEventListener('click', function() {
+                if (audio.paused) {
+                    audio.play();
+                    playIcon.classList.remove('fa-play');
+                    playIcon.classList.add('fa-pause');
+                } else {
+                    audio.pause();
+                    playIcon.classList.remove('fa-pause');
+                    playIcon.classList.add('fa-play');
+                }
+            });
+
+            // Atualizar barra de progresso
+            audio.addEventListener('timeupdate', function() {
+                if (!isNaN(audio.duration)) {
+                    const progress = (audio.currentTime / audio.duration) * 100;
+                    progressBar.value = progress;
+                    currentTimeEl.textContent = formatTime(audio.currentTime);
+                }
+            });
+
+            // Seek no áudio
+            progressBar.addEventListener('input', function() {
+                if (!isNaN(audio.duration)) {
+                    audio.currentTime = (progressBar.value / 100) * audio.duration;
+                }
+            });
+
+            // Avançar / Recuar 10 segundos
+            btnRewind.addEventListener('click', function() {
+                audio.currentTime = Math.max(0, audio.currentTime - 10);
+            });
+
+            btnForward.addEventListener('click', function() {
+                audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 10);
+            });
+
+            // Alterar velocidade
+            btnSpeed.addEventListener('click', function() {
+                currentSpeedIdx = (currentSpeedIdx + 1) % speeds.length;
+                const newSpeed = speeds[currentSpeedIdx];
+                audio.playbackRate = newSpeed;
+                btnSpeed.textContent = `${newSpeed.toFixed(1)}x`;
+            });
+
+            // Volume e Mute
+            volumeSlider.addEventListener('input', function() {
+                audio.volume = volumeSlider.value;
+                updateVolumeIcon();
+            });
+
+            btnMute.addEventListener('click', function() {
+                if (audio.volume > 0) {
+                    audio.dataset.lastVolume = audio.volume;
+                    audio.volume = 0;
+                    volumeSlider.value = 0;
+                } else {
+                    const lastVol = audio.dataset.lastVolume || 1;
+                    audio.volume = lastVol;
+                    volumeSlider.value = lastVol;
+                }
+                updateVolumeIcon();
+            });
+
+            function updateVolumeIcon() {
+                if (audio.volume === 0) {
+                    volumeIcon.className = 'fa-solid fa-volume-xmark text-xs';
+                } else if (audio.volume < 0.5) {
+                    volumeIcon.className = 'fa-solid fa-volume-low text-xs';
+                } else {
+                    volumeIcon.className = 'fa-solid fa-volume-high text-xs';
+                }
+            }
+
+            // Recarregar arquivo de áudio
+            function loadAudioFile() {
+                const newFileName = fileNameInput.value.trim();
+                if (newFileName) {
+                    const wasPlaying = !audio.paused;
+                    audioSource.src = newFileName;
+                    audio.load();
+                    if (wasPlaying) {
+                        audio.play();
+                    } else {
+                        playIcon.classList.remove('fa-pause');
+                        playIcon.classList.add('fa-play');
+                    }
+                }
+            }
+
+            btnReloadAudio.addEventListener('click', loadAudioFile);
+            fileNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    loadAudioFile();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

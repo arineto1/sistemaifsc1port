@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutor IFAM: Denotação, Conotação e Figuras de Linguagem</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #1f2937; /* Cinza muito escuro para contraste suave */
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        /* Grifos */
+        .mark {
+            background-color: #fef3c7; /* Amarelo suave */
+            padding: 1px 3px;
+            font-weight: 600;
+            border-radius: 2px;
+        }
+
+        .mark-important {
+            background-color: #ffedd5; /* Laranja suave */
+            padding: 1px 3px;
+            font-weight: 700;
+            border-bottom: 2px solid #fb923c;
+        }
+
+        /* Player de Áudio */
+        .audio-section {
+            background-color: #f8fafc;
+            border: 2px dashed #e2e8f0;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 48px;
+            text-align: center;
+        }
+
+        audio {
+            width: 100%;
+            max-width: 450px;
+            height: 40px;
+        }
+
+        /* Tipografia */
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #111827;
+            letter-spacing: -0.025em;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 1.85rem;
+            font-weight: 700;
+            color: #111827;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            border-left: 6px solid #e5e7eb;
+            padding-left: 15px;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #374151;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Tabelas Responsivas sem Scroll */
+        .table-wrapper {
+            width: 100%;
+            margin: 24px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed; /* Força o conteúdo a se ajustar ao espaço */
+        }
+
+        th, td {
+            padding: 14px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+            word-wrap: break-word; /* Evita que o texto quebre a tabela */
+        }
+
+        th {
+            background-color: #f9fafb;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: #6b7280;
+        }
+
+        /* Boxes de Estudo */
+        .exam-tip {
+            background-color: #f0f9ff;
+            border-left: 4px solid #0ea5e9;
+            padding: 20px;
+            margin: 24px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .cefetminas-trap {
+            background-color: #fff7ed;
+            border: 1px solid #fed7aa;
+            padding: 20px;
+            margin: 24px 0;
+            border-radius: 8px;
+        }
+
+        .btn-action {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 60px auto;
+            background-color: #111827;
+            color: white;
+            padding: 18px;
+            text-align: center;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-action:hover {
+            background-color: #374151;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 640px) {
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.5rem; }
+            th, td { padding: 10px 8px; font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- PLAYER DE ÁUDIO -->
+        <div class="audio-section">
+            <h3 style="margin-top: 0;">🔊 Podcast de Revisão Prof. IFAM</h3>
+            <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 15px;">Aperte o play para ouvir o resumo narrado enquanto lê</p>
+            <audio controls>
+                <source src="4diferenca.mp3" type="audio/mpeg">
+                Seu navegador não suporta o áudio.
+            </audio>
+            <p style="font-size: 0.7rem; color: #94a3b8; margin-top: 10px;">(Arquivo: aula_concurso_ifam.mp3)</p>
+        </div>
+
+        <header>
+            <p style="color: #059669; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;">Concurso EBTT - Informática</p>
+            <h1>Denotação, Conotação e Figuras de Linguagem</h1>
+            <p style="font-size: 1.1rem; color: #4b5563;">Aula técnica focada na banca <span class="mark">Fundação CEFETMINAS</span>.</p>
+        </header>
+
+        <section>
+            <h2>1. Definições Essenciais (A Base)</h2>
+            <p>Para a prova do IFAM, você deve distinguir instantaneamente o uso da linguagem conforme a intenção do autor.</p>
+            
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">Conceito</th>
+                            <th>Características Principais</th>
+                            <th>Foco da Banca</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Denotação</strong></td>
+                            <td>Sentido <span class="mark">Literal</span>, unívoco, objetivo. A palavra em seu estado primário (Dicionário).</td>
+                            <td>Textos de Informática, manuais técnicos e enunciados de leis.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Conotação</strong></td>
+                            <td>Sentido <span class="mark">Figurado</span>, plurívoco, subjetivo. Depende do contexto e da emoção.</td>
+                            <td>Crônicas, poemas e charges sociais (frequentes na CEFETMINAS).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section>
+            <h2>2. Figuras de Linguagem (Top Hits CEFETMINAS)</h2>
+            <p>As figuras de linguagem são estratégias de conotação. Abaixo, as que aparecem em <span class="mark-important">80% das provas de nível superior</span> da banca:</p>
+
+            <h3>Figuras de Pensamento e Semântica</h3>
+            <ul>
+                <li><span class="mark">Metáfora:</span> Uma afirmação de identidade entre termos diferentes. <em>"O firewall é a muralha do sistema."</em></li>
+                <li><span class="mark">Metonímia:</span> Substituição por relação lógica (Autor pela obra, parte pelo todo). <em>"Ele consome muito Microsoft"</em> (Software).</li>
+                <li><span class="mark">Hipérbole:</span> O exagero deliberado. <em>"Estou há um século esperando este download."</em></li>
+                <li><span class="mark">Euphemismo:</span> Suavizar uma ideia desagradável. <em>"Ele faltou com a verdade"</em> (Mentiu).</li>
+                <li><span class="mark">Ironia:</span> Sugerir o oposto para criticar ou ridicularizar. Fundamental em textos de opinião.</li>
+                <li><span class="mark">Antítese vs. Paradoxo:</span> 
+                    <br>• <strong>Antítese:</strong> Ideias opostas (Céu/Inferno). 
+                    <br>• <strong>Paradoxo:</strong> Ideias que se anulam logicamente (Um fogo que esfria).
+                </li>
+            </ul>
+
+            <h3>Figuras de Construção e Som</h3>
+            <ul>
+                <li><span class="mark">Personificação (Prosopopeia):</span> Atribuir ações humanas a seres inanimados. <em>"O Windows 'decidiu' reiniciar sozinho."</em></li>
+                <li><span class="mark">Onomatopeia:</span> Reprodução de sons. Comum em tirinhas.</li>
+                <li><span class="mark">Catacrese:</span> Metáfora gasta pelo uso (Pé da mesa, braço da cadeira).</li>
+                <li><span class="mark">Sinestesia:</span> Mistura de sensações de sentidos diferentes. <em>"Um olhar doce"</em> (Visão + Paladar).</li>
+            </ul>
+        </section>
+
+        <section class="cefetminas-trap">
+            <h2 style="margin-top: 0; border: none; padding: 0;">⚠️ Análise de Tendência: Fundação CEFETMINAS</h2>
+            <p>Como a banca se comporta em cargos de <strong>Professor EBTT</strong>:</p>
+            <ol>
+                <li><strong>Interpretação Integrada:</strong> A banca raramente pergunta "Qual a figura na frase X?". Ela pergunta: <span class="mark-important">"A conotação no termo 'Y' contribui para o efeito de humor porque..."</span>.</li>
+                <li><strong>Peguinha da Polissemia:</strong> Eles pegam termos técnicos (ex: vírus, rede, memória) e os colocam em textos literários. O aluno de informática tende a ler como denotação, mas no texto é conotação.</li>
+                <li><strong>Gênero Textual:</strong> Espere Crônicas (como as de Martha Medeiros ou Luis Fernando Veríssimo). Nesses textos, a <span class="mark">Subjetividade</span> predomina.</li>
+            </ol>
+        </section>
+
+        <section class="exam-tip">
+            <h3>📌 Resumo para Memorização (2 Minutos)</h3>
+            <ul>
+                <li><strong>Denotação =</strong> Dado Real.</li>
+                <li><strong>Conotação =</strong> Criatividade.</li>
+                <li><strong>Metáfora =</strong> É (comparação sem "como").</li>
+                <li><strong>Metonímia =</strong> Troca (Marca pelo produto).</li>
+                <li><strong>Prosopopeia =</strong> Humanização.</li>
+                <li><strong>Ironia =</strong> Deboche contextual.</li>
+            </ul>
+        </section>
+
+        <div class="footer">
+            <hr style="border-top: 1px solid #e5e7eb; margin: 40px 0;">
+            <p style="text-align: center; font-weight: 600; color: #9ca3af;">Fim do conteúdo teórico. Próximo passo: Prática.</p>
+            
+            <a href="4questoes.html" class="btn-action">
+                Ir para o Banco de Questões →
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado Instituto AOCP - Relações Discursivas</title>
+    
+    <!-- React and ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Merriweather for text (great for reading) and Inter for UI -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa; /* Fundo claro suave */
+            color: #1a202c; /* Texto escuro */
+        }
+        .reading-text {
+            font-family: 'Merriweather', serif;
+            line-height: 1.8;
+        }
+        .option-label {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .option-label:hover {
+            background-color: #edf2f7;
+        }
+        .selected-option {
+            background-color: #e2e8f0;
+            border-color: #4a5568;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e0;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a0aec0;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        // Dados do Quiz baseados no documento fornecido
+        const quizData = {
+            title: "Relações Sintático-Semântico-Discursivas no Processo Argumentativo",
+            subtitle: "Simulado focado no estilo da banca Instituto AOCP",
+            sections: [
+                {
+                    type: "text",
+                    title: "Texto de Apoio 1: A Era da Informação",
+                    content: `A revolução digital trouxe uma promessa de democratização do saber. Contudo, o que observamos é uma fragmentação da atenção. Como a informação é abundante, a profundidade tornou-se escassa. O usuário navega por manchetes, mas raramente mergulha no conteúdo. As Big Techs, em seus centros de processamento, estão demandando cada vez mais dados comportamentais para alimentar algoritmos que decidem o que devemos ver. Nesse cenário, a leitura crítica é um ato de resistência que exige esforço deliberado.`
+                },
+                {
+                    type: "question",
+                    id: 1,
+                    subject: "Operadores Argumentativos (Adversidade vs Concessão)",
+                    statement: `Em relação ao trecho "A revolução digital trouxe uma promessa de democratização do saber. Contudo, o que observamos é uma fragmentação da atenção.", assinale a alternativa que apresenta uma reescrita que mantém o sentido original e a correção gramatical, alterando o operador argumentativo para uma estrutura concessiva.`,
+                    options: [
+                        "A revolução digital trouxe uma promessa de democratização do saber, porquanto observamos uma fragmentação da atenção.",
+                        "Mas o que observamos é uma fragmentação da atenção, pois a revolução digital trouxe uma promessa de democratização do saber.",
+                        "Embora a revolução digital tenha trazido uma promessa de democratização do saber, o que observamos é uma fragmentação da atenção.",
+                        "A revolução digital trouxe uma promessa de democratização do saber, logo o que observamos é uma fragmentação da atenção.",
+                        "Não obstante a revolução digital trouxe uma promessa de democratização do saber, todavia o que observamos é uma fragmentação da atenção."
+                    ],
+                    correct: 2, // Index 0-based (C)
+                    resolution: `A frase original usa "Contudo" (adversativa). A questão pede a reescrita com valor concessivo. As conjunções concessivas são 'embora', 'conquanto', 'ainda que'. Elas exigem o verbo no subjuntivo. A alternativa C usa "Embora" + "tenha trazido" (subjuntivo), mantendo a ideia de contraste (promessa vs realidade) com a sintaxe correta. As outras alternativas usam conectivos explicativos (porquanto, pois), conclusivos (logo) ou misturam estruturas incorretamente.`
+                },
+                {
+                    type: "question",
+                    id: 2,
+                    subject: "Relações Sintático-Semânticas (Causa e Efeito)",
+                    statement: `No período "Como a informação é abundante, a profundidade tornou-se escassa.", o termo em destaque estabelece uma relação de:`,
+                    options: [
+                        "Comparação, equiparando a abundância da informação à escassez de profundidade.",
+                        "Conformidade, indicando que a escassez de profundidade ocorre de acordo com a abundância de informação.",
+                        "Causa, introduzindo o motivo pelo qual a profundidade se tornou escassa.",
+                        "Modo, descrevendo a maneira como a profundidade desapareceu.",
+                        "Condição, sugerindo que a profundidade só se torna escassa se a informação for abundante."
+                    ],
+                    correct: 2, // C
+                    resolution: `Sempre que "Como" puder ser substituído por "Já que" ou "Visto que" no início do período, ele é Causal. "Já que a informação é abundante, a profundidade tornou-se escassa." Faz sentido perfeito. A abundância é a causa da escassez de profundidade.`
+                },
+                {
+                    type: "question",
+                    id: 3,
+                    subject: "Sintaxe (Vozes Verbais e Locuções)",
+                    statement: `Analise o trecho: "As Big Techs [...] estão demandando cada vez mais dados comportamentais". A transposição deste trecho para a voz passiva analítica resultaria corretamente em:`,
+                    options: [
+                        "Cada vez mais dados comportamentais demandam-se pelas Big Techs.",
+                        "Cada vez mais dados comportamentais estão sendo demandados pelas Big Techs.",
+                        "As Big Techs têm demandado cada vez mais dados comportamentais.",
+                        "Dados comportamentais vão ser demandados pelas Big Techs.",
+                        "Estão-se demandando cada vez mais dados comportamentais pelas Big Techs."
+                    ],
+                    correct: 1, // B
+                    resolution: `Locução Ativa: 'estão (aux) demandando (principal - gerúndio)'. Na passiva, o verbo auxiliar 'estar' se mantém. O verbo principal 'demandar' vai para o particípio ('demandados'). Insere-se o verbo 'ser' no gerúndio ('sendo') para manter o aspecto contínuo. Resultado: 'estão sendo demandados'.`
+                },
+                {
+                    type: "question",
+                    id: 4,
+                    subject: "Funções do \"Que\" (Pronome Relativo)",
+                    statement: `Em "...a leitura crítica é um ato de resistência que exige esforço deliberado.", a palavra destacada classifica-se morfologicamente como Pronome Relativo. Assinale a alternativa em que o termo "que" exerce a mesma função.`,
+                    options: [
+                        "É provável que a internet mude ainda mais nos próximos anos.",
+                        "O pesquisador afirmou que os dados são conclusivos.",
+                        "Temos que estudar mais para entender o algoritmo.",
+                        "Os algoritmos que regem as redes sociais são complexos.",
+                        "Disse-lhe que não viesse tão tarde."
+                    ],
+                    correct: 3, // D
+                    resolution: `No texto original, o "que" retoma "resistência" (Pronome Relativo). Na alternativa D, "Os algoritmos que regem..." o "que" retoma "algoritmos" (pode ser trocado por "os quais"). Nas demais opções, o "que" funciona como Conjunção Integrante (conectando orações substantivas) ou preposição acidental.`
+                },
+                {
+                    type: "text",
+                    title: "Texto de Apoio 2: Crônica do Tempo",
+                    content: `Havia um relógio na praça que parou há décadas. Ninguém consertou. Ele marcava sempre quatro horas. Para alguns, era a hora do café; para outros, o fim do expediente. O tempo, ali, cristalizou-se. Mas a vida ao redor continuava acelerada. 80% dos passantes nem olhavam para o mostrador estático. A pressa era tanta que o símbolo da imobilidade tornou-se invisível. Um poeta, certo dia, parou e disse: "Este relógio está certo duas vezes ao dia". Foi uma epifania. Ele percebeu que a pausa também faz parte do movimento, para que o sentido da vida não se perca na correria.`
+                },
+                {
+                    type: "question",
+                    id: 5,
+                    subject: "Concordância Verbal (Percentagens)",
+                    statement: `Considerando a norma-padrão e o trecho "80% dos passantes nem olhavam para o mostrador estático", assinale a alternativa correta sobre a concordância verbal.`,
+                    options: [
+                        "O verbo deveria estar obrigatoriamente no singular (\"olhava\"), concordando com a ideia implícita de \"grupo\".",
+                        "A concordância está correta, feita com o numeral \"80\" e com o especificador \"passantes\", ambos no plural.",
+                        "Se o numeral fosse \"1%\", a forma \"olhavam\" continuaria correta se o especificador fosse \"dos passantes\".",
+                        "Caso a frase fosse iniciada por \"A maioria dos passantes\", o verbo deveria obrigatoriamente ficar no singular.",
+                        "Se retirássemos o especificador \"dos passantes\", o verbo poderia ficar no singular (\"80% nem olhava\")."
+                    ],
+                    correct: 1, // B
+                    resolution: `Em "80% dos passantes", o verbo pode concordar com o número (80 = plural) ou com o especificador (passantes = plural). Em ambos os casos, "olhavam" está correto. A alternativa A está errada pois o singular seria erro. A alternativa C é tecnicamente aceitável na gramática moderna, mas a B é a definição mais precisa e segura da regra aplicada no exemplo.`
+                },
+                {
+                    type: "question",
+                    id: 6,
+                    subject: "Semântica (Polissemia e Sentido Figurado)",
+                    statement: `Sobre o uso da palavra "tempo" no texto e em contextos variados, analise as assertivas e assinale a alternativa que exemplifica o fenômeno da polissemia, conforme o estilo de cobrança da banca.`,
+                    options: [
+                        `"O tempo chuvoso impediu o passeio" e "O clima estava tenso na reunião". (Sinonímia entre tempo e clima).`,
+                        `"Ele não tem tempo para nada" (disponibilidade) e "O tempo curou suas feridas" (passagem cronológica).`,
+                        `"O tempo voa" (Metáfora) e "O relógio corre" (Personificação).`,
+                        `"Fizemos tudo a tempo" e "Chegamos com tempo".`,
+                        `"Tempo é dinheiro" e "Time is money".`
+                    ],
+                    correct: 1, // B
+                    resolution: `Polissemia é uma mesma palavra com múltiplos sentidos. Na alternativa B, "tempo" significa "disponibilidade" na primeira frase e "fluxo cronológico" na segunda. É o exemplo clássico de polissemia.`
+                },
+                {
+                    type: "question",
+                    id: 7,
+                    subject: "Valor Semântico das Preposições (Finalidade)",
+                    statement: `No trecho "...para que o sentido da vida não se perca na correria.", a locução conjuntiva em destaque expressa:`,
+                    options: [
+                        "Consequência.",
+                        "Proporção.",
+                        "Finalidade.",
+                        "Causa.",
+                        "Explicação."
+                    ],
+                    correct: 2, // C
+                    resolution: `"Para que" é a locução padrão para introduzir Orações Subordinadas Adverbiais Finais. Indica o objetivo, a intenção da pausa: não perder o sentido da vida.`
+                },
+                {
+                    type: "question",
+                    id: 8,
+                    subject: "Sintaxe e Semântica (Qualificação)",
+                    statement: `Baseado na lógica da questão sobre o "doce que merecia ser comido de joelhos" (prova anterior do Instituto AOCP), analise a expressão destacada em: "A pressa era tanta que o símbolo da imobilidade eterna tornou-se invisível." A função semântica do adjetivo "eterna" em relação ao substantivo "imobilidade" é de:`,
+                    options: [
+                        "Quantificar a duração da imobilidade.",
+                        "Modificar o sentido do verbo tornar-se.",
+                        "Conectar a oração principal à subordinada.",
+                        "Qualificar e intensificar a característica do substantivo.",
+                        "Substituir o advérbio \"sempre\"."
+                    ],
+                    correct: 3, // D
+                    resolution: `Assim como em exemplos anteriores da banca, o adjetivo tem a função precípua de qualificar ou caracterizar o substantivo, atribuindo-lhe um valor ou propriedade específica (neste caso, a perenidade da imobilidade).`
+                },
+                {
+                    type: "question",
+                    id: 9,
+                    subject: "Regência e Crase",
+                    statement: `Assinale a alternativa correta quanto à regência e ao uso do acento grave, considerando o padrão culto exigido pela banca.`,
+                    options: [
+                        "O poeta visava ao resgate do tempo perdido, por isso dirigiu-se à praça.",
+                        "O poeta visava o resgate do tempo perdido, por isso dirigiu-se a praça.",
+                        "O poeta aspirava o ar puro da praça e assistia o movimento dos carros.",
+                        "As pessoas obedeciam o relógio biológico, alheias àquele relógio da praça.",
+                        "Preferiam mais a pressa do que a pausa."
+                    ],
+                    correct: 0, // A
+                    resolution: `Correto: "Visar" no sentido de almejar exige preposição "a" (Visava ao resgate). "Dirigir-se" exige preposição "a", e "praça" aceita artigo "a", logo ocorre crase (à praça). As outras alternativas contêm erros de regência (aspirar, assistir, obedecer exigem preposição; preferir não aceita 'mais...do que').`
+                },
+                {
+                    type: "question",
+                    id: 10,
+                    subject: "Coesão e Reescrita (Uso do \"Há\")",
+                    statement: `Observe o trecho: "Havia um relógio na praça que parou há décadas." Assinale a alternativa que apresenta uma reescrita correta para a expressão de tempo, mantendo o sentido original.`,
+                    options: [
+                        "...que parou a décadas.",
+                        "...que parou fazem décadas.",
+                        "...que parou existe décadas.",
+                        "...que parou tem décadas (em linguagem formal).",
+                        "...que parou faz décadas."
+                    ],
+                    correct: 4, // E
+                    resolution: `O verbo "haver" indicando tempo é impessoal. O verbo "fazer" indicando tempo também é impessoal. Portanto, deve-se usar "faz décadas" (singular). "Fazem décadas" é um erro comum de hipercorreção.`
+                }
+            ]
+        };
+
+        function App() {
+            const [answers, setAnswers] = useState({});
+            const [isSubmitted, setIsSubmitted] = useState(false);
+            const [showScrollToTop, setShowScrollToTop] = useState(false);
+
+            const handleOptionSelect = (questionId, optionIndex) => {
+                if (isSubmitted) return;
+                setAnswers(prev => ({
+                    ...prev,
+                    [questionId]: optionIndex
+                }));
+            };
+
+            const calculateScore = () => {
+                let score = 0;
+                let total = 0;
+                quizData.sections.forEach(section => {
+                    if (section.type === 'question') {
+                        total++;
+                        if (answers[section.id] === section.correct) {
+                            score++;
+                        }
+                    }
+                });
+                return { score, total };
+            };
+
+            const handleSubmit = () => {
+                const totalQuestions = quizData.sections.filter(s => s.type === 'question').length;
+                if (Object.keys(answers).length < totalQuestions) {
+                    if (!confirm("Você ainda não respondeu todas as questões. Deseja finalizar mesmo assim?")) {
+                        return;
+                    }
+                }
+                setIsSubmitted(true);
+                setTimeout(() => {
+                    document.getElementById('results-section').scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            };
+
+            const getOptionClass = (question, optionIndex) => {
+                const baseClass = "p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 flex items-start gap-3 ";
+                const isSelected = answers[question.id] === optionIndex;
+                
+                if (!isSubmitted) {
+                    return baseClass + (isSelected ? "border-blue-600 bg-blue-50" : "border-gray-200 hover:border-blue-300 hover:bg-gray-50");
+                }
+
+                const isCorrect = question.correct === optionIndex;
+                
+                if (isCorrect) {
+                    return baseClass + "border-green-500 bg-green-50";
+                }
+                if (isSelected && !isCorrect) {
+                    return baseClass + "border-red-400 bg-red-50";
+                }
+                return baseClass + "border-gray-200 opacity-60";
+            };
+
+            const { score, total } = calculateScore();
+
+            return (
+                <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+                    {/* Header */}
+                    <header className="mb-12 text-center border-b border-gray-200 pb-8">
+                        <h1 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4 font-serif">
+                            {quizData.title}
+                        </h1>
+                        <p className="text-lg text-slate-600">
+                            {quizData.subtitle}
+                        </p>
+                    </header>
+
+                    {/* Content Loop */}
+                    <div className="space-y-12">
+                        {quizData.sections.map((item, index) => {
+                            if (item.type === 'text') {
+                                return (
+                                    <div key={index} className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+                                        <h3 className="text-xl font-bold text-slate-700 mb-4 uppercase tracking-wide border-b pb-2">{item.title}</h3>
+                                        <p className="reading-text text-slate-700 text-lg whitespace-pre-line">
+                                            {item.content}
+                                        </p>
+                                    </div>
+                                );
+                            } else {
+                                const letterOptions = ['A', 'B', 'C', 'D', 'E'];
+                                return (
+                                    <div key={item.id} className="bg-white p-6 md:p-8 rounded-xl shadow-md border border-gray-200 transition-shadow hover:shadow-lg">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <span className="bg-slate-800 text-white text-sm font-bold px-3 py-1 rounded-full">
+                                                Questão {item.id}
+                                            </span>
+                                            <span className="text-sm font-semibold text-slate-500 uppercase tracking-wider">
+                                                {item.subject}
+                                            </span>
+                                        </div>
+                                        
+                                        <p className="reading-text text-lg text-slate-800 mb-6 font-medium">
+                                            {item.statement}
+                                        </p>
+
+                                        <div className="space-y-3">
+                                            {item.options.map((opt, idx) => (
+                                                <div 
+                                                    key={idx}
+                                                    onClick={() => handleOptionSelect(item.id, idx)}
+                                                    className={getOptionClass(item, idx)}
+                                                >
+                                                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-0.5 
+                                                        ${answers[item.id] === idx ? 
+                                                            (isSubmitted && item.correct !== idx ? 'border-red-500 text-red-500' : 'border-blue-600 text-blue-600') : 
+                                                            (isSubmitted && item.correct === idx ? 'border-green-500 text-green-500' : 'border-gray-400 text-transparent')
+                                                        }`}>
+                                                        <div className={`w-3 h-3 rounded-full ${answers[item.id] === idx || (isSubmitted && item.correct === idx) ? 'bg-current' : ''}`}></div>
+                                                    </div>
+                                                    <div className="text-slate-700">
+                                                        <span className="font-bold mr-2">{letterOptions[idx]})</span>
+                                                        {opt}
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                );
+                            }
+                        })}
+                    </div>
+
+                    {/* Submit Button */}
+                    {!isSubmitted && (
+                        <div className="mt-12 text-center">
+                            <button 
+                                onClick={handleSubmit}
+                                className="bg-slate-800 hover:bg-slate-700 text-white font-bold py-4 px-12 rounded-lg shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl text-lg"
+                            >
+                                Finalizar Simulado
+                            </button>
+                        </div>
+                    )}
+
+                    {/* Results Section */}
+                    {isSubmitted && (
+                        <div id="results-section" className="mt-16 pt-12 border-t-2 border-gray-200 animate-fade-in">
+                            <div className="bg-slate-900 text-white p-8 rounded-xl text-center mb-12 shadow-xl">
+                                <h2 className="text-3xl font-bold mb-2">Resultado Final</h2>
+                                <p className="text-5xl font-black text-blue-400 mb-4">{score} <span className="text-2xl text-gray-400 font-normal">/ {total}</span></p>
+                                <p className="text-xl">
+                                    {score === total ? 'Excelente! Você domina o conteúdo.' : 
+                                     score >= total * 0.7 ? 'Muito bom! Continue praticando.' : 
+                                     'Bom treino. Revise os comentários abaixo.'}
+                                </p>
+                            </div>
+
+                            <h3 className="text-2xl font-bold text-slate-800 mb-8 flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                </svg>
+                                Gabarito Comentado e Resoluções
+                            </h3>
+
+                            <div className="space-y-8">
+                                {quizData.sections.filter(s => s.type === 'question').map((q) => (
+                                    <div key={q.id} className={`bg-white p-6 rounded-lg border-l-4 shadow-sm ${answers[q.id] === q.correct ? 'border-green-500' : 'border-red-400'}`}>
+                                        <div className="flex justify-between items-start mb-4">
+                                            <h4 className="text-lg font-bold text-slate-800">Questão {q.id}</h4>
+                                            <span className={`px-3 py-1 rounded text-sm font-bold ${answers[q.id] === q.correct ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                                                {answers[q.id] === q.correct ? 'Correto' : 'Incorreto'}
+                                            </span>
+                                        </div>
+                                        <p className="text-gray-600 mb-4 italic text-sm border-b pb-2">
+                                            Assunto: {q.subject}
+                                        </p>
+                                        <div className="prose prose-slate max-w-none">
+                                            <p className="font-semibold text-slate-700 mb-2">
+                                                Gabarito: <span className="text-green-600 text-lg">Alternativa {['A', 'B', 'C', 'D', 'E'][q.correct]}</span>
+                                            </p>
+                                            <div className="bg-gray-50 p-4 rounded text-slate-700 leading-relaxed">
+                                                <span className="font-bold block mb-1">Resolução:</span>
+                                                {q.resolution}
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            
+                             <div className="mt-12 text-center pb-12">
+                                <button 
+                                    onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
+                                    className="text-slate-600 hover:text-slate-900 font-medium underline"
+                                >
+                                    Voltar ao topo
+                                </button>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+</body>
+</html>

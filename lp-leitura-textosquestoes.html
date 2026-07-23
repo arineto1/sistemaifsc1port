@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz de Interpretação - Estilo AOCP</title>
+    <!-- Carrega o Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Carrega a fonte Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* Define a fonte Inter como padrão e Lora para os textos */
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .text-passage {
+            font-family: 'Lora', serif;
+            line-height: 1.7;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="max-w-3xl mx-auto p-4 sm:p-8">
+        <h1 class="text-3xl font-bold text-center text-blue-900 mb-8">Quiz: Leitura e Interpretação (Estilo AOCP)</h1>
+
+        <!-- O formulário do quiz -->
+        <form id="quiz-form">
+            <div id="quiz-container">
+
+                <!-- Texto I -->
+                <div class="bg-white p-6 sm:p-8 rounded-lg shadow-sm mb-6 border border-gray-200">
+                    <h2 class="text-xl font-sans font-bold text-gray-900 mb-4">Texto I</h2>
+                    <div class="text-passage space-y-4 text-gray-700">
+                        <p>(1) Em um mundo hiperconectado, onde cada vibração do *smartphone* promete uma nova interação, uma nova informação ou uma nova demanda, emerge um contramovimento silencioso, mas crescente: a busca pela desconexão. Não se trata de uma rejeição ludita da tecnologia, mas de um gerenciamento consciente da atenção, recurso que se tornou a *commodity* mais valiosa do século XXI. A fadiga digital, caracterizada pelo esgotamento mental e emocional decorrente do uso excessivo de telas, deixou de ser um diagnóstico de nicho para se tornar uma experiência coletiva.</p>
+                        <p>(2) O argumento central dos entusiastas da "desconexão voluntária" é que a conectividade incessante, embora traga benefícios inegáveis de produtividade e acesso à informação, corrói as fundações da cognição profunda. Nicholas Carr, em seu livro "A Geração Superficial", já alertava que a internet pode estar reconfigurando nossos cérebros para favorecer a varredura rápida de informações em detrimento do pensamento analítico e contemplativo. Estamos nos tornando mestres em encontrar "o que" queremos, mas perdendo a capacidade de refletir sobre "o porquê".</p>
+                        <p>(3) As empresas de tecnologia, cientes dessa saturação, começam a oferecer paliativos. Ferramentas de "bem-estar digital", que monitoram o tempo de uso e permitem bloquear aplicativos, são agora nativas nos sistemas operacionais. <strong>Contudo</strong>, essa é uma solução paradoxal: usa-se a própria tecnologia para combater os males que ela provoca. A verdadeira desconexão, argumentam os críticos dessa abordagem, não é alcançada por um *software* que limita o tempo, mas por uma mudança comportamental que redefine o espaço do silêncio e do ócio produtivo na vida diária.</p>
+                        <p>(4) O ócio, historicamente associado à preguiça, está sendo reavaliado. Em um contexto de trabalho flexível, onde as fronteiras entre o profissional e o pessoal se tornaram fluidas, reservar momentos para "não fazer nada" – ou fazer algo sem propósito produtivo aparente, como olhar pela janela ou caminhar sem destino – torna-se um ato de resistência cognitiva. É nesses parênteses de inatividade digital que a criatividade e a introspecção florescem.</p>
+                        <p>(5) Portanto, a desconexão voluntária não é uma fuga da modernidade, mas uma tentativa de habitá-la de forma mais saudável. É o reconhecimento de que, para se conectar genuinamente consigo mesmo e com os outros, às vezes, o primeiro passo é apertar o botão "desligar".</p>
+                    </div>
+                </div>
+
+                <!-- Questão 1 -->
+                <div class="question-block bg-white p-6 sm:p-8 rounded-lg shadow-sm mb-6 border border-gray-200" id="q1" 
+                     data-correct="C" 
+                     data-resolution="A questão exige a *compreensão* de uma informação explícita no texto. A alternativa C é a única que reflete diretamente o parágrafo 1, que define a fadiga digital como 'o esgotamento mental e emocional decorrente do uso excessivo de telas' e afirma que 'deixou de ser um diagnóstico de nicho para se tornar uma experiência coletiva' (ou seja, comum na sociedade). As demais alternativas são incorretas: (A) o texto diz que *deixou* de ser de nicho; (B) o texto nega ser uma rejeição ludita; (D) a fadiga vem do excesso, não da dificuldade de busca; (E) a 'atenção' é a commodity, não a fadiga.">
+                    <p class="font-semibold text-lg mb-4">Questão 01</p>
+                    <p class="mb-5 text-gray-700 leading-relaxed">De acordo com o Texto I, a "fadiga digital" (parágrafo 1):</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q1" value="A" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>é um diagnóstico médico restrito a profissionais que utilizam tecnologia em excesso.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q1" value="B" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>representa a rejeição completa da tecnologia, similar ao movimento ludita.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q1" value="C" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>é uma experiência de exaustão mental e emocional que se tornou comum na sociedade.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q1" value="D" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>resulta da dificuldade dos usuários em encontrar as informações que procuram na internet.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q1" value="E" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>é um recurso valioso, considerado a *commodity* mais importante do século XXI.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Questão 2 -->
+                <div class="question-block bg-white p-6 sm:p-8 rounded-lg shadow-sm mb-6 border border-gray-200" id="q2"
+                     data-correct="C"
+                     data-resolution="A questão exige *inferência* a partir do parágrafo 2. O texto opõe 'encontrar "o que" queremos' (varredura rápida) a 'refletir sobre "o porquê"' (pensamento analítico). A alternativa C captura essa inferência: a ênfase no acesso (o que) prejudica a reflexão (o porquê). As demais são incorretas: (A) o texto usa 'pode estar', não é uma certeza; (B) Carr é citado para alertar sobre perigos, não elogiar produtividade; (D) a inferência é oposta; (E) a Geração Superficial é moldada pela tecnologia, não a rejeita.">
+                    <p class="font-semibold text-lg mb-4">Questão 02</p>
+                    <p class="mb-5 text-gray-700 leading-relaxed">Infere-se do argumento apresentado no parágrafo 2 que:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q2" value="A" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>a conectividade incessante é a única responsável pela perda do pensamento analítico.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q2" value="B" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>o autor Nicholas Carr defende que a internet tornou as pessoas mais produtivas.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q2" value="C" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>a facilidade de acesso à informação ("o que") pode estar inibindo a capacidade de reflexão profunda ("o porquê").</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q2" value="D" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>o pensamento contemplativo é mais desenvolvido em usuários que dominam as ferramentas de busca.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q2" value="E" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>a "Geração Superficial" é composta por indivíduos que rejeitam os benefícios da tecnologia.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Questão 3 -->
+                <div class="question-block bg-white p-6 sm:p-8 rounded-lg shadow-sm mb-6 border border-gray-200" id="q3"
+                     data-correct="B"
+                     data-resolution="'Contudo' é uma conjunção adversativa, sinônima de 'mas', 'porém', 'entretanto'. O parágrafo 3 apresenta as ferramentas de 'bem-estar digital' como uma solução. A frase iniciada por 'Contudo' introduz uma oposição a essa ideia, mostrando que a solução é paradoxal e insuficiente. Portanto, estabelece uma relação de adversidade.">
+                    <p class="font-semibold text-lg mb-4">Questão 03</p>
+                    <p class="mb-5 text-gray-700 leading-relaxed">No parágrafo 3, o vocábulo "<strong>Contudo</strong>" estabelece uma relação semântica de:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q3" value="A" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>Conclusão, indicando o resultado lógico do argumento anterior.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q3" value="B" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>Adversidade, apresentando uma oposição à ideia de que as empresas estão resolvendo o problema.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q3" value="C" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>Adição, somando-se às ferramentas de bem-estar digital mencionadas.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q3" value="D" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>Causa, explicando por que as empresas de tecnologia criaram os paliativos.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q3" value="E" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>Conformidade, mostrando que a solução está de acordo com o esperado.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Texto II -->
+                <div class="bg-white p-6 sm:p-8 rounded-lg shadow-sm mb-6 border border-gray-200">
+                    <h2 class="text-xl font-sans font-bold text-gray-900 mb-4">Texto II (Tirinha)</h2>
+                    <div class="text-passage space-y-4 text-gray-700">
+                        <p class="mb-2 italic">*(Fonte: Armandinho, de Alexandre Beck)*</p>
+                        <div class="space-y-3 p-4 bg-gray-50 rounded-md border">
+                            <p><strong>Quadro 1:</strong> Armandinho (uma criança) e seu pai estão em frente a uma lixeira pichada e amassada. Armandinho pergunta ao pai: "Pode detonar lixeiras e placas de trânsito?"</p>
+                            <p><strong>Quadro 2:</strong> O pai responde, com ar sério: "Claro que NÃO, filho! Isso é patrimônio PÚBLICO! É crime!"</p>
+                            <p><strong>Quadro 3:</strong> Armandinho continua: "E florestas?"</p>
+                            <p><strong>Quadro 4:</strong> Armandinho finaliza: "...estatais?" O pai fica em silêncio, visivelmente desconcertado e sem resposta.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Questão 4 -->
+                <div class="question-block bg-white p-6 sm:p-8 rounded-lg shadow-sm mb-6 border border-gray-200" id="q4"
+                     data-correct="B"
+                     data-resolution="A tirinha usa o diálogo para expor uma contradição. O pai define 'patrimônio público' (lixeiras) como algo criminoso de se destruir. No entanto, quando o filho (Armandinho) aplica o mesmo conceito a 'florestas' e 'estatais', o pai fica em silêncio (elemento não verbal), visivelmente desconcertado. Isso sugere que o discurso do pai é seletivo. A tirinha critica, portanto, a hipocrisia e a incoerência nessa definição do que é 'público' e deve ser preservado.">
+                    <p class="font-semibold text-lg mb-4">Questão 04</p>
+                    <p class="mb-5 text-gray-700 leading-relaxed">A análise dos elementos verbais e não verbais do Texto II permite concluir que o objetivo central da tirinha é:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q4" value="A" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>ensinar às crianças a diferença entre patrimônio público e privado.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q4" value="B" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>criticar a hipocrisia e a incoerência no discurso sobre a preservação do que é público.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q4" value="C" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>mostrar que o personagem Armandinho não compreende o que o pai lhe ensina sobre crimes.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q4" value="D" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>defender que florestas e estatais não devem ser consideradas patrimônio público.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q4" value="E" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>ilustrar como a depredação de lixeiras e placas é o crime mais grave contra o patrimônio.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Questão 5 -->
+                <div class="question-block bg-white p-6 sm:p-8 rounded-lg shadow-sm mb-6 border border-gray-200" id="q5"
+                     data-correct="B"
+                     data-resolution="A quebra de expectativa vem do silêncio do pai. O pai estabelece o pressuposto de que 'é crime destruir patrimônio público'. Armandinho, logicamente, aplica esse pressuposto a outros patrimônios públicos (florestas, estatais). O silêncio do pai, em vez de uma confirmação ('Sim, filho, também é crime'), quebra a expectativa. Esse silêncio revela que a definição de 'público' que o pai usa é, na verdade, seletiva e conveniente, e não universal como ele fez parecer no início.">
+                    <p class="font-semibold text-lg mb-4">Questão 05</p>
+                    <p class="mb-5 text-gray-700 leading-relaxed">A quebra de expectativa, responsável pelo humor e pela crítica na tirinha, ocorre porque a fala final de Armandinho ("E florestas?... estatais?") confronta um pressuposto subjacente à fala do pai. Esse pressuposto é o de que:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q5" value="A" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>o pai acredita que o filho é jovem demais para entender conceitos como "crime".</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q5" value="B" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>a definição de "patrimônio público" utilizada pelo pai é seletiva e ideologicamente conveniente.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q5" value="C" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>Armandinho sempre concorda com as lições que seu pai lhe ensina.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q5" value="D" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>lixeiras e placas de trânsito são mais valiosas financeiramente do que florestas.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q5" value="E" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>a depredação de qualquer bem é um crime, independentemente de quem seja o dono.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Texto III -->
+                <div class="bg-white p-6 sm:p-8 rounded-lg shadow-sm mb-6 border border-gray-200">
+                    <h2 class="text-xl font-sans font-bold text-gray-900 mb-4">Texto III - A Fila</h2>
+                    <div class="text-passage space-y-4 text-gray-700">
+                        <p>(1) O banco, naquela segunda-feira, era um microcosmo do purgatório. A senha em minha mão exibia um número que parecia uma piada de mau gosto: 347. O painel, com seu zumbido elétrico intermitente, piscava o 210.</p>
+                        <p>(2) Sentei-me. Ao meu lado, uma senhora tricotava um cachecol que parecia infinito, talvez uma metáfora para nossa espera. Um jovem, absorto em seu celular, batalhava contra dragões virtuais, alheio aos dragões reais da burocracia que nos cercavam. Eu não tinha celular. Tinha apenas um livro, mas as letras dançavam diante dos meus olhos, recusando-se a formar sentido.</p>
+                        <p>(3) O tempo, ali dentro, não era medido em minutos, mas em unidades de paciência. Cada "*bip*" do painel era um pequeno sobressalto de esperança, quase sempre frustrado. O 211 surgiu. Senti uma pontada de inveja daquele número anônimo.</p>
+                        <p>(4) Foi quando reparei no senhor à minha frente. Terno gasto, pasta de couro batida sobre o colo. Ele não lia, não digitava, não tricotava. Ele simplesmente... esperava. Seu rosto, sereno, não demonstrava a ansiedade que roía a todos nós. Havia uma dignidade em sua imobilidade.</p>
+                        <p>(5) De repente, ele se virou para mim e, com um sorriso mínimo, disse: "Sabe, meu jovem, o problema não é esperar. O problema é esquecer como se faz isso." Ele apontou para o jovem dos dragões. "Ele não espera, ele se distrai. A senhora", apontou para o tricô, "não espera, ela produz. Nós," ele me incluiu no 'nós', "estamos perdendo a arte de apenas ser."</p>
+                        <p>(6) O painel chamou o 212. O homem do terno sorriu, e eu, pela primeira vez, não senti inveja. Apenas esperei.</p>
+                    </div>
+                </div>
+
+                <!-- Questão 6 -->
+                <div class="question-block bg-white p-6 sm:p-8 rounded-lg shadow-sm mb-6 border border-gray-200" id="q6"
+                     data-correct="C"
+                     data-resolution="A questão testa a distinção entre Gênero Textual e Tipologia Textual. O *gênero* é crônica, pois parte de um fato cotidiano (uma fila de banco) para tecer uma reflexão sobre a vida (a arte de esperar). A *tipologia* (o modo como o texto é construído) é predominantemente narrativa, pois há um narrador-personagem, outros personagens (senhora, jovem, senhor), um espaço (banco) e uma sequência de eventos no tempo que levam a uma reflexão.">
+                    <p class="font-semibold text-lg mb-4">Questão 06</p>
+                    <p class="mb-5 text-gray-700 leading-relaxed">Considerando a estrutura, a linguagem e o propósito comunicativo do Texto III, assinale a alternativa correta:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q6" value="A" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>Trata-se de um texto do gênero injuntivo, pois ensina o leitor a como se comportar em uma fila de banco.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q6" value="B" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>Classifica-se como um texto de tipologia "conto", focado em um evento fantástico no cotidiano.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q6" value="C" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>Pertence ao gênero crônica e utiliza, predominantemente, a tipologia narrativa para relatar um fato cotidiano sob uma perspectiva reflexiva.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q6" value="D" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>É um exemplar da tipologia dissertativa, pois o autor defende uma tese central sobre a burocracia bancária sem se valer de personagens.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q6" value="E" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>Apresenta-se como um gênero de artigo de opinião, cuja tipologia principal é a descritiva, focada nos detalhes do banco.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Questão 7 -->
+                <div class="question-block bg-white p-6 sm:p-8 rounded-lg shadow-sm mb-6 border border-gray-200" id="q7"
+                     data-correct="B"
+                     data-resolution="A fala do senhor de terno é o clímax reflexivo da crônica. Ele opõe o 'distrair' (celular) e o 'produzir' (tricô) ao 'apenas ser'. Para ele, as pessoas estão usando atividades para preencher o tempo e fugir do ócio da espera. A 'arte de apenas ser' seria, portanto, a capacidade de esperar conscientemente, em estado de presença, sem a necessidade de uma distração ou de uma tarefa produtiva.">
+                    <p class="font-semibold text-lg mb-4">Questão 07</p>
+                    <p class="mb-5 text-gray-700 leading-relaxed">No parágrafo 5, a fala do senhor de terno ("'Ele não espera, ele se distrai. [...] Nós... estamos perdendo a arte de apenas ser.'") sugere que:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q7" value="A" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>o uso de celulares e a realização de tarefas manuais são as únicas formas válidas de passar o tempo em uma espera.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q7" value="B" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>a verdadeira espera, para ele, implica um estado de presença e consciência, que está sendo substituído pela distração ou pela produção.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q7" value="C" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>ele desdenha das outras pessoas na fila por considerá-las inferiores em sua capacidade intelectual.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q7" value="D" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>a distração e a produção são sinônimos de "apenas ser", e ele admira a capacidade dos outros de se manterem ocupados.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q7" value="E" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>a "arte de apenas ser" é uma crítica direta à senhora que tricotava, considerada por ele improdutiva.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Texto IV -->
+                <div class="bg-white p-6 sm:p-8 rounded-lg shadow-sm mb-6 border border-gray-200">
+                    <h2 class="text-xl font-sans font-bold text-gray-900 mb-4">Texto IV - O Papel das Vírgulas na Clareza</h2>
+                    <div class="text-passage space-y-4 text-gray-700">
+                        <p>(1) A gramática normativa, muitas vezes vista como um conjunto árido de regras, é, na verdade, um sistema complexo de otimização da comunicação. O uso da pontuação, especialmente da vírgula, é um exemplo claro dessa funcionalidade. A vírgula não serve para "respirar"; ela serve para organizar o pensamento e evitar ambiguidades.</p>
+                        <p>(2) Considere a frase: "O juiz, alertado pelos advogados, anulou a sentença." Neste caso, as vírgulas isolam uma oração subordinada adjetiva explicativa, que se refere ao "juiz" (um antecedente já definido) e adiciona uma informação acessória. A omissão dessas vírgulas ("O juiz alertado pelos advogados anulou a sentença") alteraria drasticamente o sentido. Sem as vírgulas, a oração "alertado pelos advogados" torna-se restritiva, sugerindo que existe mais de um juiz e que estamos especificando qual deles (apenas o que foi alertado) anulou a sentença.</p>
+                        <p>(3) Portanto, dominar o uso da vírgula não é um preciosismo acadêmico, mas uma ferramenta essencial de clareza. Ela guia o leitor, indicando pausas sintáticas, separando elementos e garantindo que a mensagem recebida seja exatamente aquela que o emissor pretendia enviar.</p>
+                    </div>
+                </div>
+
+                <!-- Questão 8 -->
+                <div class="question-block bg-white p-6 sm:p-8 rounded-lg shadow-sm mb-6 border border-gray-200" id="q8"
+                     data-correct="D"
+                     data-resolution="A questão é de 'Gramática Aplicada ao Texto', e o próprio texto já fornece a resposta no parágrafo 2. O texto explica que as vírgulas em 'O juiz, alertado pelos advogados, anulou a sentença' servem para 'isolar uma oração subordinada adjetiva explicativa'. A oração 'alertado pelos advogados' é uma oração reduzida de particípio, equivalente a 'que foi alertado pelos advogados', e ela se refere ao substantivo 'juiz', adicionando uma informação extra (explicativa) sobre ele.">
+                    <p class="font-semibold text-lg mb-4">Questão 08</p>
+                    <p class="mb-5 text-gray-700 leading-relaxed">Com base na análise do Texto IV sobre o uso da pontuação, assinale a alternativa que descreve corretamente a função das vírgulas no trecho: "O juiz, alertado pelos advogados, anulou a sentença." (parágrafo 2).</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q8" value="A" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>Separar um vocativo, pois o autor está chamando o juiz.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q8" value="B" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>Isolar um aposto explicativo, que redefine o termo "O juiz".</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q8" value="C" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>Separar uma oração subordinada adverbial deslocada para o meio do período.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q8" value="D" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>Isolar uma oração subordinada adjetiva explicativa, que adiciona uma informação sobre o termo antecedente.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q8" value="E" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>Indicar a omissão de um verbo (zeugma), que foi subentendido pelo contexto.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Questão 9 -->
+                <div class="question-block bg-white p-6 sm:p-8 rounded-lg shadow-sm mb-6 border border-gray-200" id="q9"
+                     data-correct="C"
+                     data-resolution="A questão avalia a coesão referencial (uso de pronomes). A expressão 'dessa funcionalidade' retoma uma ideia mencionada anteriormente. O texto define a gramática como 'um sistema complexo de otimização da comunicação'. Em seguida, diz que a pontuação é um exemplo 'dessa funcionalidade' (ou seja, da funcionalidade de 'otimização da comunicação').">
+                    <p class="font-semibold text-lg mb-4">Questão 09</p>
+                    <p class="mb-5 text-gray-700 leading-relaxed">No trecho "A gramática normativa [...] é, na verdade, um sistema complexo de otimização da comunicação. O uso da pontuação [...] é um exemplo claro <strong>dessa funcionalidade</strong>." (parágrafo 1), a expressão destacada refere-se:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q9" value="A" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>ao conjunto árido de regras.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q9" value="B" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>à gramática normativa.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q9" value="C" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>ao sistema complexo de otimização da comunicação.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q9" value="D" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>ao uso da pontuação.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q9" value="E" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>à verdade.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Questão 10 -->
+                <div class="question-block bg-white p-6 sm:p-8 rounded-lg shadow-sm mb-6 border border-gray-200" id="q10"
+                     data-correct="C"
+                     data-resolution="A tese é a ideia principal que o autor defende. O texto se inicia refutando a ideia de que a gramática é 'árida' (A) ou que a vírgula serve para 'respirar' (B). Ele usa o exemplo do juiz (D, E) para provar seu ponto principal, que é concluído no parágrafo 3: 'dominar o uso da vírgula [...] é uma ferramenta essencial de clareza'. A alternativa C é, portanto, o resumo perfeito da tese do texto.">
+                    <p class="font-semibold text-lg mb-4">Questão 10</p>
+                    <p class="mb-5 text-gray-700 leading-relaxed">Qual alternativa melhor resume a tese central defendida pelo autor do Texto IV?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q10" value="A" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>A gramática normativa é um sistema árido e ultrapassado.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q10" value="B" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>A vírgula deve ser usada para marcar as pausas de respiração do leitor.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q10" value="C" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>O uso correto da pontuação, como a vírgula, é crucial para a clareza e a precisão do sentido do texto.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q10" value="D" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>Orações adjetivas restritivas e explicativas têm a mesma função e podem ser intercambiadas sem prejuízo de sentido.</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-md border border-gray-200 hover:bg-gray-100 cursor-pointer">
+                            <input type="radio" name="q10" value="E" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>Os juízes e advogados são os que mais cometem erros de pontuação em suas sentenças.</span>
+                        </label>
+                    </div>
+                </div>
+
+            </div> <!-- Fim do #quiz-container -->
+
+            <!-- Botão de Envio -->
+            <button type="submit" id="submit-btn" class="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-blue-700 transition-all duration-200 text-lg mt-6">
+                Finalizar Quiz e Ver Resultados
+            </button>
+
+        </form>
+
+        <!-- Container de Resultados (escondido inicialmente) -->
+        <div id="results-container" class="hidden mt-12">
+            <h2 id="score-display" class="text-3xl font-bold text-center text-gray-900 mb-8"></h2>
+            
+            <div class="bg-white p-6 sm:p-8 rounded-lg shadow-md border border-gray-200">
+                <h3 class="text-2xl font-bold text-blue-900 mb-6">Gabarito e Resoluções Detalhadas</h3>
+                <div id="resolutions-container" class="space-y-6">
+                    <!-- O JavaScript irá popular esta área -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Adiciona o listener ao formulário
+        document.getElementById('quiz-form').addEventListener('submit', function(event) {
+            // Previne o recarregamento da página
+            event.preventDefault();
+
+            let score = 0;
+            let resolutionsHtml = '';
+            
+            // Seleciona todos os blocos de questão
+            const questionBlocks = document.querySelectorAll('.question-block');
+
+            // Itera por cada bloco de questão
+            questionBlocks.forEach(block => {
+                const id = block.id; // ex: "q1"
+                const correctAnswer = block.dataset.correct;
+                const resolutionText = block.dataset.resolution;
+
+                // Encontra a resposta selecionada pelo usuário
+                const selectedInput = document.querySelector(`input[name="${id}"]:checked`);
+                const userAnswer = selectedInput ? selectedInput.value : null;
+
+                const isCorrect = (userAnswer === correctAnswer);
+                if (isCorrect) {
+                    score++;
+                }
+
+                // Pega o texto da questão
+                const questionTitle = block.querySelector('p:first-child').textContent;
+                const questionPrompt = block.querySelector('p:nth-of-type(2)').textContent;
+
+                // Monta o HTML para o bloco de resolução
+                resolutionsHtml += `
+                    <div class="p-4 rounded-lg border ${isCorrect ? 'border-green-300 bg-green-50' : 'border-red-300 bg-red-50'}">
+                        <h4 class="font-bold text-lg text-gray-900">${questionTitle}</h4>
+                        <p class="mt-2 text-gray-700 italic">"${questionPrompt}"</p>
+                        
+                        <p class="mt-3 font-medium">
+                            Sua resposta: 
+                            <span class="font-bold ${userAnswer ? (isCorrect ? 'text-green-700' : 'text-red-700') : 'text-gray-500'}">
+                                ${userAnswer || "Nenhuma"}
+                            </span>
+                        </p>
+                        
+                        <p class="mt-1 font-medium">
+                            Resposta correta: 
+                            <span class="font-bold text-green-700">${correctAnswer}</span>
+                        </p>
+
+                        <!-- Sempre mostra a resolução, conforme solicitado -->
+                        <div class="mt-4 p-3 bg-gray-100 rounded-md text-gray-700 border border-gray-200">
+                            <strong class="text-gray-800">Resolução:</strong>
+                            <p class="mt-1 text-sm leading-relaxed">${resolutionText}</p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Exibe os resultados
+            // Esconde o quiz e o botão
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('submit-btn').classList.add('hidden');
+
+            // Mostra o container de resultados
+            const resultsContainer = document.getElementById('results-container');
+            resultsContainer.classList.remove('hidden');
+
+            // Define a pontuação
+            document.getElementById('score-display').textContent = `Você acertou ${score} de ${questionBlocks.length} questões!`;
+
+            // Adiciona as resoluções
+            document.getElementById('resolutions-container').innerHTML = resolutionsHtml;
+
+            // Rola a página para o topo para mostrar os resultados
+            window.scrollTo(0, 0);
+        });
+    </script>
+
+</body>
+</html>

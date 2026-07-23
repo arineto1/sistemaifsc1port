@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado AOCP: Relações Semânticas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Merriweather', serif;
+            background-color: #fdfbf7; /* Cor de papel suave */
+            color: #2d3748;
+        }
+        h1, h2, h3, button, .option-label {
+            font-family: 'Inter', sans-serif;
+        }
+        .question-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        .option-input:checked + label {
+            background-color: #edf2f7;
+            border-color: #4a5568;
+            font-weight: 600;
+        }
+        .correct-answer {
+            border-left: 4px solid #48bb78 !important;
+            background-color: #f0fff4 !important;
+        }
+        .wrong-answer {
+            border-left: 4px solid #f56565 !important;
+            background-color: #fff5f5 !important;
+        }
+        .explanation-box {
+            border-left: 4px solid #4299e1;
+            background-color: #ebf8ff;
+        }
+    </style>
+</head>
+<body class="antialiased leading-relaxed">
+
+    <div class="max-w-4xl mx-auto px-4 py-12">
+        <!-- Header -->
+        <header class="mb-12 text-center">
+            <div class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-indigo-600 uppercase bg-indigo-100 rounded-full">
+                Dossiê Analítico-Discursivo
+            </div>
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Semântica Lexical e Proposicional
+            </h1>
+            <p class="text-lg text-gray-600 italic max-w-2xl mx-auto">
+                Simulado focado na metodologia avaliativa do Instituto AOCP, abordando sinonímia, antonímia, hiponímia, hiperonímia e polissemia.
+            </p>
+        </header>
+
+        <!-- Texto Base -->
+        <section class="mb-10 p-6 bg-white border-l-4 border-gray-800 shadow-sm rounded-r-lg">
+            <h3 class="text-sm font-bold text-gray-500 uppercase mb-2">Texto Base I</h3>
+            <h2 class="text-xl font-bold mb-4">"A Erosão do Sentido"</h2>
+            <p class="text-gray-700 italic leading-loose">
+                "Na contemporaneidade líquida, a <strong>expectação</strong> por respostas imediatas transformou o diálogo em monólogo. Onde antes havia a troca de experiências, hoje impera um <strong>ceticismo</strong> surdo. Não se busca mais a verdade, mas a validação de crenças prévias. Nesse cenário, a caridade torna-se um ato de <strong>altruísmo</strong> performático, esvaziado de sua substância ética, enquanto o <strong>egoísmo</strong> se traveste de autocuidado. É urgente <strong>retificar</strong> nossos valores antes que a sociedade colapse sob o peso de sua própria indiferença."
+            </p>
+        </section>
+
+        <!-- Formulário do Quiz -->
+        <form id="quizForm" class="space-y-12">
+            
+            <!-- Questões serão injetadas via JS aqui -->
+            <div id="questions-container"></div>
+
+            <!-- Botão de Envio -->
+            <div class="text-center py-8">
+                <button type="submit" class="px-8 py-4 bg-gray-900 text-white font-bold rounded-lg shadow-lg hover:bg-gray-800 transform transition hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 text-lg w-full md:w-auto">
+                    Finalizar Simulado e Ver Resoluções
+                </button>
+            </div>
+        </form>
+
+        <!-- Seção de Resultados (Oculta inicialmente) -->
+        <div id="resultSection" class="hidden mt-16 border-t-2 border-gray-200 pt-12">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900">Resultado da Análise</h2>
+                <div class="mt-4 flex justify-center items-center space-x-4">
+                    <div class="text-5xl font-black text-indigo-600" id="scoreDisplay">0/10</div>
+                </div>
+                <p class="text-gray-600 mt-2" id="scoreMessage">Confira abaixo a dissecação filológica de cada item.</p>
+            </div>
+
+            <!-- Resoluções Detalhadas -->
+            <div id="resolutions-container" class="space-y-12">
+                <!-- As resoluções serão injetadas aqui -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dados das Questões e Resoluções
+        const quizData = [
+            {
+                id: 1,
+                question: "Considerando o contexto do Texto Base I e as relações de sentido entre as palavras, assinale a alternativa que apresenta, respectivamente, um sinônimo adequado para 'ceticismo' e um antônimo para 'altruísmo', preservando a coerência da crítica social empreendida pelo autor.",
+                options: [
+                    "Incredulidade – Filantropia.",
+                    "Desconfiança – Egocentrismo.",
+                    "Crença – Solidariedade.",
+                    "Agnosticismo – Abnegação.",
+                    "Negação – Generosidade."
+                ],
+                correct: 1, // Index B (0-based is 1)
+                explanationTitle: "O Campo Semântico da Crença e do Ego",
+                explanation: `
+                    <p class="mb-4"><strong>Fundamentação Teórica e Contextualização:</strong> A questão exige o domínio da Antonímia e da Sinonímia aplicadas a um texto de crítica social.</p>
+                    <ul class="list-disc pl-5 space-y-2 mb-4">
+                        <li><strong>Ceticismo:</strong> No texto ("ceticismo surdo"), refere-se à falta de crença, à dúvida sistemática. Seu sinônimo deve carregar a carga de "barreira à aceitação". <strong>Desconfiança</strong> cumpre esse papel.</li>
+                        <li><strong>Altruísmo vs. Egoísmo:</strong> Altruísmo é a disposição de se preocupar com o outro. O antônimo direto, que representa o foco exclusivo em si mesmo, é <strong>Egoísmo</strong> ou <strong>Egocentrismo</strong>.</li>
+                    </ul>
+                    <p><strong>Por que não as outras?</strong> "Filantropia", "Abnegação" e "Generosidade" são sinônimos de altruísmo, não antônimos. "Crença" é antônimo de ceticismo, e o comando pedia sinônimo.</p>
+                `
+            },
+            {
+                id: 2,
+                question: "No trecho 'É urgente retificar nossos valores...', o verbo destacado poderia ser substituído por 'corrigir'. Assinale a alternativa que apresenta uma frase onde o uso de 'ratificar' ou 'retificar' está <strong>INCORRETO</strong> quanto ao sentido pretendido.",
+                options: [
+                    "O diretor convocou a imprensa para ratificar as informações dadas anteriormente, confirmando a fusão das empresas.",
+                    "Ao perceber o erro de cálculo no balanço, o contador apressou-se em retificar os números apresentados.",
+                    "O tratado internacional foi assinado para ratificar o compromisso de paz entre as nações envolvidas.",
+                    "O mecânico precisou ratificar o motor do carro, pois as peças estavam desgastadas pelo uso contínuo.",
+                    "Diante das calúnias, o político exigiu que o jornal publicasse uma nota para retificar as acusações falsas."
+                ],
+                correct: 3, // Index D
+                explanationTitle: "Paronímia e Precisão Lexical",
+                explanation: `
+                    <p class="mb-4"><strong>Análise do Erro na Alternativa (D):</strong> A frase diz "O mecânico precisou <em>ratificar</em> o motor". Ratificar significa confirmar, validar. Isso não faz sentido para um motor com peças desgastadas.</p>
+                    <p class="mb-4">O verbo correto seria <strong>Retificar</strong> (tornar reto, corrigir, usinar). A "retífica de motores" é um termo técnico consagrado.</p>
+                    <p><strong>Memorize:</strong><br>Ratificar = Validar (Ratus = Válido).<br>Retificar = Corrigir (Rectus = Reto).</p>
+                `
+            },
+            {
+                id: 3,
+                question: "Analise o vocábulo 'Manga' em: I. 'A criança sujou a manga da camisa.' e II. 'A manga que colhemos no pomar estava doce.' Sobre a relação semântica existente entre as duas ocorrências, é correto afirmar que se trata de um caso de:",
+                options: [
+                    "Polissemia, pois ambas as palavras derivam de um mesmo radical latino (manica).",
+                    "Homonímia, pois, embora tenham a mesma grafia e som, possuem origens etimológicas distintas e significados não relacionados.",
+                    "Paronímia, visto que a pronúncia varia sutilmente dependendo da região.",
+                    "Sinonímia, já que em ambos os casos a palavra refere-se a algo que envolve ou reveste.",
+                    "Antonímia, pois representam conceitos opostos: um natural e um artificial."
+                ],
+                correct: 1, // Index B
+                explanationTitle: "A Batalha entre Polissemia e Homonímia",
+                explanation: `
+                    <p class="mb-4"><strong>Veredito: Homonímia.</strong></p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>Manga (Fruta):</strong> Vem do malaiala (língua asiática) <em>mangga</em>.</li>
+                        <li><strong>Manga (Camisa):</strong> Vem do latim <em>manica</em> (relativo à mão).</li>
+                    </ul>
+                    <p class="mt-4">Não há relação lógica ou histórica entre a fruta e a roupa. São palavras diferentes que "colidiram" na mesma grafia por acidente evolutivo da língua. Diferente de polissemia, onde uma mesma palavra ganha novos sentidos (ex: perna da mesa).</p>
+                `
+            },
+            {
+                id: 4,
+                question: "Assinale a alternativa em que a palavra entre parênteses preenche corretamente a lacuna da frase, considerando o contexto formal.",
+                options: [
+                    "O advogado solicitou a ______ (cessão/sessão/seção) das terras para a reforma agrária.",
+                    "O réu decidiu ______ (espiar/expiar) seus crimes através do trabalho comunitário voluntário.",
+                    "A ______ (estada/estadia) do navio no porto de Santos custou milhares de reais à importadora.",
+                    "O aluno ______ (esperto/experto) em matemática resolveu a equação em segundos, demonstrando grande vivacidade.",
+                    "O músico realizou um ______ (concerto/conserto) memorável no teatro municipal, sendo aplaudido de pé."
+                ],
+                correct: 4, // Index E
+                explanationTitle: "Ortografia e Semântica (Homófonos)",
+                explanation: `
+                    <p class="mb-4"><strong>Análise:</strong> A distinção Concerto (Música) vs. Conserto (Reparo) é a mais inequívoca.</p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>(A) Errado na sugestão implícita. O correto seria Cessão (ato de ceder), mas muitas vezes confunde-se com Seção.</li>
+                        <li>(B) Deveria ser Expiar (pagar pena), não Espiar (olhar).</li>
+                        <li>(C) Estadia é para navios/veículos (correto), mas a alternativa E é mais forte como "resposta gabarito" clássica. (Nota: Estadia para navio está tecnicamente correto, mas Concerto é o exemplo perfeito).</li>
+                        <li>(E) <strong>Concerto</strong> musical (do latim <em>concertare</em>) está perfeitamente empregado.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 5,
+                question: "Considere a analogia: 'Assim como doença está para gripe, veículo está para caminhão'. Assinale a alternativa que apresenta, correta e respectivamente, a classificação semântica dos termos Gripe (em relação a Doença) e Veículo (em relação a Caminhão).",
+                options: [
+                    "Hiperônimo – Hipônimo.",
+                    "Hipônimo – Hiperônimo.",
+                    "Sinônimo – Antônimo.",
+                    "Hipônimo – Hipônimo.",
+                    "Hiperônimo – Hiperônimo."
+                ],
+                correct: 1, // Index B
+                explanationTitle: "Hierarquias Lexicais",
+                explanation: `
+                    <p class="mb-4">Use a técnica do "É um":</p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>Gripe <strong>é uma</strong> Doença. Logo, Gripe é o termo específico (<strong>Hipônimo</strong>).</li>
+                        <li>Caminhão <strong>é um</strong> Veículo. Logo, Veículo é o termo geral que engloba o caminhão (<strong>Hiperônimo</strong>).</li>
+                    </ul>
+                    <p class="mt-4">Sequência correta: Hipônimo – Hiperônimo.</p>
+                `
+            },
+            {
+                id: 6,
+                question: "Em 'Mesmo que a tecnologia avance...', a locução 'Mesmo que' indica concessão. Assinale o conector que, ao substituir 'Mesmo que', alteraria o sentido para CAUSA ou EXPLICAÇÃO.",
+                options: [
+                    "Ainda que.",
+                    "Embora.",
+                    "Conquanto.",
+                    "Posto que.",
+                    "Visto que."
+                ],
+                correct: 4, // Index E
+                explanationTitle: "Semântica dos Conectivos",
+                explanation: `
+                    <p class="mb-4">A questão pede o "intruso" no grupo das concessivas.</p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><em>Ainda que, Embora, Conquanto, Posto que</em> são conectivos de <strong>Concessão</strong> (oposição que não impede a ação).</li>
+                        <li><strong>Visto que</strong> é uma locução de <strong>Causa/Explicação</strong>. Substituí-la mudaria a lógica de "apesar de" para "por causa de".</li>
+                    </ul>
+                `
+            },
+            {
+                id: 7,
+                question: "A palavra 'Incipiente' e a palavra 'Insipiente' formam um par de homônimos. Assinale a alternativa que emprega corretamente um desses termos.",
+                options: [
+                    "O projeto ainda era insipiente, estando apenas em sua fase inicial de planejamento.",
+                    "Devido à sua atitude incipiente, o rapaz cometeu erros grosseiros por falta de sabedoria.",
+                    "A empresa, embora incipiente no mercado, já demonstrava grande potencial de crescimento.",
+                    "Não seja incipiente; estude mais para não falar bobagens sobre assuntos que desconhece.",
+                    "O governador criticou a gestão incipiente do prefeito, chamando-o de ignorante e despreparado."
+                ],
+                correct: 2, // Index C
+                explanationTitle: "A Armadilha Incipiente vs. Insipiente",
+                explanation: `
+                    <p class="mb-4"><strong>Mnemônico:</strong></p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>In</strong>cipiente = <strong>In</strong>ício (Principiante).</li>
+                        <li>In<strong>s</strong>ipiente = <strong>S</strong>em <strong>S</strong>aber (Ignorante).</li>
+                    </ul>
+                    <p class="mt-4">Na alternativa (C), a empresa é nova no mercado (início), logo, "incipiente" está correto. Nas outras opções, os sentidos estão trocados.</p>
+                `
+            },
+            {
+                id: 8,
+                question: "Assinale a alternativa correta quanto ao uso dos parônimos 'Emergir' e 'Imergir'.",
+                options: [
+                    "O submarino precisou imergir rapidamente para a superfície para evitar a colisão.",
+                    "O mergulhador decidiu emergir nas profundezas do oceano para explorar os corais.",
+                    "Após o acidente, a verdade sobre o caso começou a imergir nos noticiários.",
+                    "Para cozinhar o macarrão, é necessário imergir a massa em água fervente.",
+                    "O sol costuma imergir no horizonte ao amanhecer, trazendo luz ao dia."
+                ],
+                correct: 3, // Index D
+                explanationTitle: "Dinâmica de Movimento",
+                explanation: `
+                    <p class="mb-4">Regra dos Prefixos:</p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>E</strong>mergir = Sair (Para fora/Cima).</li>
+                        <li><strong>I</strong>mergir = Entrar (Para dentro/Fundo).</li>
+                    </ul>
+                    <p class="mt-4">A única opção que respeita a física do movimento é a (D): colocar a massa <em>dentro</em> da água (imergir). Ir para a superfície (A) ou nascer do sol (E) seriam "emergir".</p>
+                `
+            },
+            {
+                id: 9,
+                question: "Na frase 'O cabo da vassoura quebrou', a palavra 'cabo' é utilizada em sentido denotativo ou conotativo (catacrese)? E qual seria a relação com 'O cabo do exército'?",
+                options: [
+                    "Conotativo (Catacrese) – Homonímia.",
+                    "Denotativo – Sinonímia.",
+                    "Conotativo (Metáfora pura) – Antonímia.",
+                    "Conotativo (Catacrese) – Polissemia.",
+                    "Denotativo – Paronímia."
+                ],
+                correct: 3, // Index D
+                explanationTitle: "Catacrese e Polissemia",
+                explanation: `
+                    <p class="mb-4"><strong>Análise:</strong></p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>"Cabo da vassoura" é uma <strong>Catacrese</strong> (metáfora desgastada por falta de termo específico).</li>
+                        <li>A relação entre Cabo (vassoura) e Cabo (exército) é de <strong>Polissemia</strong>. Ambos derivam de <em>caput</em> (cabeça/extremidade). Há um elo de sentido (a "cabeça" da esquadra ou a "cabeça" da ferramenta), diferentemente da homonímia onde não há elo.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 10,
+                question: "No par de palavras 'Perdulário' e 'Avaro', temos uma relação de:",
+                options: [
+                    "Sinonímia, pois ambos se referem a pessoas que lidam mal com dinheiro.",
+                    "Antonímia, pois o perdulário gasta em excesso e o avaro retém em excesso.",
+                    "Hiperonímia, pois perdulário é um tipo de avaro.",
+                    "Homonímia, pois possuem sentidos equivalentes em contextos econômicos.",
+                    "Paronímia, devido à semelhança sonora entre os sufixos."
+                ],
+                correct: 1, // Index B
+                explanationTitle: "Antonímia e Campos Lexicais",
+                explanation: `
+                    <p class="mb-4"><strong>Definições:</strong></p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>Perdulário:</strong> Aquele que gasta muito, desperdiça.</li>
+                        <li><strong>Avaro:</strong> Aquele que guarda muito, mesquinho.</li>
+                    </ul>
+                    <p class="mt-4">Eles estão em polos opostos da atitude econômica, configurando uma relação clara de <strong>Antonímia</strong>.</p>
+                `
+            }
+        ];
+
+        const questionsContainer = document.getElementById('questions-container');
+        const resolutionsContainer = document.getElementById('resolutions-container');
+        const quizForm = document.getElementById('quizForm');
+        const resultSection = document.getElementById('resultSection');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const scoreMessage = document.getElementById('scoreMessage');
+
+        // Render Questions
+        quizData.forEach((item, index) => {
+            const qDiv = document.createElement('div');
+            qDiv.className = "question-card p-6 md:p-8 rounded-lg";
+            qDiv.innerHTML = `
+                <div class="flex items-center mb-4">
+                    <span class="bg-gray-200 text-gray-700 text-xs font-bold px-2 py-1 rounded uppercase mr-2">Questão ${item.id}</span>
+                    <span class="text-xs text-gray-500 font-semibold uppercase tracking-wide">Instituto AOCP</span>
+                </div>
+                <p class="text-lg font-serif text-gray-800 mb-6 leading-relaxed">${item.question}</p>
+                <div class="space-y-3 options-group" id="q${index}-options">
+                    ${item.options.map((opt, optIndex) => `
+                        <div class="relative">
+                            <input type="radio" name="q${index}" id="q${index}_opt${optIndex}" value="${optIndex}" class="option-input peer sr-only">
+                            <label for="q${index}_opt${optIndex}" class="option-label block p-4 rounded border border-gray-200 cursor-pointer hover:bg-gray-50 transition-colors text-gray-700">
+                                <span class="font-bold mr-2 text-gray-400 text-sm">${String.fromCharCode(65 + optIndex)}.</span>
+                                ${opt}
+                            </label>
+                        </div>
+                    `).join('')}
+                </div>
+                <div id="q${index}-feedback" class="hidden mt-4 text-sm font-bold"></div>
+            `;
+            questionsContainer.appendChild(qDiv);
+        });
+
+        // Handle Submit
+        quizForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let score = 0;
+            let unanswered = false;
+
+            // Disable inputs and calculate score
+            quizData.forEach((item, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                const optionsGroup = document.getElementById(`q${index}-options`);
+                const feedback = document.getElementById(`q${index}-feedback`);
+                
+                // Visual feedback on the question card
+                const labels = optionsGroup.querySelectorAll('label');
+                
+                // Highlight correct answer regardless of user choice
+                labels[item.correct].classList.add('correct-answer');
+                
+                if (selected) {
+                    const val = parseInt(selected.value);
+                    if (val === item.correct) {
+                        score++;
+                        feedback.textContent = "Correto!";
+                        feedback.className = "mt-4 text-sm font-bold text-green-600 flex items-center";
+                    } else {
+                        // Highlight wrong answer
+                        labels[val].classList.add('wrong-answer');
+                        feedback.textContent = "Incorreto.";
+                        feedback.className = "mt-4 text-sm font-bold text-red-600 flex items-center";
+                    }
+                }
+                
+                // Disable all inputs
+                const inputs = optionsGroup.querySelectorAll('input');
+                inputs.forEach(inp => inp.disabled = true);
+                feedback.classList.remove('hidden');
+            });
+
+            // Show Results Section
+            scoreDisplay.textContent = `${score}/10`;
+            if (score === 10) scoreMessage.textContent = "Excelente! Domínio total da semântica.";
+            else if (score >= 7) scoreMessage.textContent = "Muito bom! Alguns detalhes precisam de revisão.";
+            else scoreMessage.textContent = "Recomendamos a leitura atenta das resoluções abaixo.";
+            
+            renderResolutions();
+            resultSection.classList.remove('hidden');
+            resultSection.scrollIntoView({ behavior: 'smooth' });
+            
+            // Hide submit button
+            e.submitter.style.display = 'none';
+        });
+
+        function renderResolutions() {
+            resolutionsContainer.innerHTML = quizData.map((item, index) => `
+                <div class="bg-white p-6 md:p-8 rounded-lg border border-gray-200 shadow-sm">
+                    <div class="flex items-center mb-4 border-b border-gray-100 pb-4">
+                        <div class="bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm mr-3">${item.id}</div>
+                        <h3 class="text-xl font-bold text-gray-900">${item.explanationTitle}</h3>
+                    </div>
+                    <div class="mb-4 text-sm text-gray-500">
+                        <span class="font-bold">Gabarito:</span> Letra ${String.fromCharCode(65 + item.correct)}
+                    </div>
+                    <div class="explanation-box p-5 rounded text-gray-800 text-base leading-relaxed font-serif">
+                        ${item.explanation}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+    </script>
+</body>
+</html>

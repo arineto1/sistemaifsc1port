@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula de Semântica - Concurso IFAM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #1a202c;
+            line-height: 1.7;
+        }
+
+        .highlight {
+            background-color: #fff9c4;
+            padding: 0 4px;
+            font-weight: 600;
+            border-radius: 2px;
+        }
+
+        .section-card {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #edf2f7;
+        }
+
+        h1, h2, h3 {
+            color: #111827;
+        }
+
+        .table-wrapper {
+            width: 100%;
+            margin: 1.5rem 0;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 14px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background-color: #f9fafb;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .audio-container {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: #ffffff;
+            border-bottom: 2px solid #f1f5f9;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .cefet-box {
+            background-color: #f8fafc;
+            border-left: 5px solid #334155;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .btn-questions {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 3rem auto;
+            text-align: center;
+            background-color: #1a202c;
+            color: #ffffff;
+            padding: 1.25rem;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+
+        .btn-questions:hover {
+            transform: translateY(-2px);
+            background-color: #000000;
+        }
+    </style>
+</head>
+<body class="px-4 py-0 max-w-4xl mx-auto">
+
+    <!-- Reprodutor de Áudio (Sticky) -->
+    <div class="audio-container">
+        <div class="flex flex-col space-y-2">
+            <span class="text-xs font-bold text-gray-500 uppercase tracking-widest">🎧 Player de Estudo</span>
+            <audio controls class="w-full h-10">
+                <!-- SUBSTITUA O NOME DO ARQUIVO ABAIXO -->
+                <source src="3significacao.mp3" type="audio/mpeg">
+                Seu navegador não suporta áudio.
+            </audio>
+        </div>
+    </div>
+
+    <header class="py-10">
+        <h1 class="text-4xl font-extrabold tracking-tight mb-4">Significação Contextual: O Guia Definitivo</h1>
+        <p class="text-xl text-gray-600">Estratégias de Semântica para o Concurso IFAM (Banca Fundação CEFETMINAS)</p>
+    </header>
+
+    <!-- Seção 1: Definição e Conceitos Base -->
+    <section class="section-card">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+            <span class="bg-gray-800 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">1</span>
+            Denotação vs. Conotação
+        </h2>
+        <p class="mb-4">Para a CEFETMINAS, o sentido de uma palavra não é estático; ele <span class="highlight">emerge do contexto</span>. A primeira grande divisão que você deve dominar é:</p>
+        <div class="grid md:grid-cols-2 gap-4">
+            <div class="p-4 border rounded-lg">
+                <h3 class="font-bold text-lg mb-2">Denotação (D de Dicionário)</h3>
+                <p class="text-sm text-gray-600 italic">"O coração é um órgão muscular."</p>
+                <p class="mt-2 text-sm">Sentido literal, objetivo e universal. Base para textos técnicos e manuais.</p>
+            </div>
+            <div class="p-4 border rounded-lg">
+                <h3 class="font-bold text-lg mb-2">Conotação (C de Criatividade)</h3>
+                <p class="text-sm text-gray-600 italic">"Ela tem um coração de gelo."</p>
+                <p class="mt-2 text-sm">Sentido figurado, subjetivo e dependente do contexto socioemocional.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção 2: Sinonímia e Antonímia -->
+    <section class="section-card">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+            <span class="bg-gray-800 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">2</span>
+            Sinonímia e Antonímia Contextuais
+        </h2>
+        <p class="mb-4">Raramente um sinônimo é 100% perfeito. A banca cobra a <span class="highlight">intercambiabilidade</span>: quando uma palavra substitui outra sem prejuízo ao sentido pretendido pelo autor.</p>
+        
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Conceito</th>
+                        <th>O que lembrar</th>
+                        <th>Exemplo Contextual</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Sinonímia</strong></td>
+                        <td>Relação de semelhança. <span class="highlight">Cuidado com a variação de registro</span> (formal vs informal).</td>
+                        <td>"O hardware está <strong>defeituoso</strong>" / "O hardware está <strong>estragado</strong>".</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Antonímia</strong></td>
+                        <td>Relação de oposição. Pode ser total ou relativa ao contexto.</td>
+                        <td>"A conexão está <strong>estável</strong>" vs. "A conexão está <strong>oscilante</strong>".</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Seção 3: Polissemia e Homonímia -->
+    <section class="section-card">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+            <span class="bg-gray-800 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">3</span>
+            Polissemia vs. Homonímia (Foco FCM)
+        </h2>
+        <p class="mb-4 text-gray-700">Este é o ponto onde a banca derruba candidatos. A diferença fundamental está na <span class="highlight">origem (etimologia)</span>.</p>
+        
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fenômeno</th>
+                        <th>Definição</th>
+                        <th>Dica de Ouro</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Polissemia</strong></td>
+                        <td>Uma única palavra com vários sentidos que guardam um <span class="highlight">elo comum</span>.</td>
+                        <td><strong>Rede</strong> (de dormir, de computadores, de pesca). Tudo envolve "entrelaçamento".</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Homonímia</strong></td>
+                        <td>Palavras com origens diferentes que acabaram com a <span class="highlight">mesma grafia ou som</span>.</td>
+                        <td><strong>Cura</strong> (doença) vs. <strong>Cura</strong> (padre). Não há relação lógica entre os sentidos.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Seção 4: Hiperonímia e Hiponímia -->
+    <section class="section-card">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+            <span class="bg-gray-800 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">4</span>
+            Hiperonímia e Hiponímia (Mecanismos de Coesão)
+        </h2>
+        <p class="mb-4">Usados para evitar repetições no texto (anátora). A CEFETMINAS adora perguntar qual termo retoma o outro.</p>
+        <ul class="space-y-4">
+            <li class="flex items-start">
+                <span class="font-bold mr-2">• Hiperônimo (O "Geral"):</span> 
+                <span>Termo de sentido abrangente. Ex: <span class="highlight">Software</span>.</span>
+            </li>
+            <li class="flex items-start">
+                <span class="font-bold mr-2">• Hipônimo (O "Específico"):</span> 
+                <span>Termo de sentido restrito. Ex: <span class="highlight">Compilador</span>, Planilha, S.O.</span>
+            </li>
+        </ul>
+        <div class="cefet-box mt-4">
+            <strong>Exemplo de questão:</strong> "O Windows apresentou falhas. O <strong>sistema operacional</strong> precisou ser reiniciado." -> O hiperônimo 'sistema operacional' retoma o hipônimo 'Windows'.
+        </div>
+    </section>
+
+    <!-- Seção 5: Perfil da Banca CEFETMINAS -->
+    <section class="section-card">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+            <span class="bg-gray-800 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">5</span>
+            Tendências e 'Peguinhas' da CEFETMINAS
+        </h2>
+        <div class="space-y-6">
+            <div class="border-l-4 border-amber-400 pl-4">
+                <h3 class="font-bold mb-1">A Armadilha do Dicionário</h3>
+                <p class="text-sm">A banca frequentemente coloca um sinônimo que está correto no dicionário, mas que <span class="highlight">destrói a coesão do texto</span>. Sempre teste a palavra dentro da frase.</p>
+            </div>
+            <div class="border-l-4 border-amber-400 pl-4">
+                <h3 class="font-bold mb-1">Foco em EBTT (Ensino Básico, Técnico e Tecnológico)</h3>
+                <p class="text-sm">Os textos costumam ser de divulgação científica ou crônicas sobre tecnologia. Palavras como "nuvem", "ferramenta" e "navegar" são prato cheio para questões de <span class="highlight">Polissemia</span>.</p>
+            </div>
+            <div class="border-l-4 border-amber-400 pl-4">
+                <h3 class="font-bold mb-1">Ambiguidade Proposital</h3>
+                <p class="text-sm">A banca pode pedir para você identificar onde a polissemia gerou uma ambiguidade não desejada ou um efeito de humor/ironia.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção 6: Checklist de Memorização -->
+    <section class="section-card">
+        <h2 class="text-2xl font-bold mb-6">📌 Checklist de Véspera</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+            <div class="bg-gray-50 p-4 rounded">
+                <p>✅ <strong>Ratificar:</strong> Confirmar (R<strong>a</strong>tificar = Valid<strong>a</strong>r)</p>
+                <p>✅ <strong>Retificar:</strong> Corrigir (R<strong>e</strong>tificar = Corr<strong>e</strong>gir)</p>
+            </div>
+            <div class="bg-gray-50 p-4 rounded">
+                <p>✅ <strong>Iminente:</strong> Prestes a ocorrer</p>
+                <p>✅ <strong>Eminente:</strong> Ilustre, superior</p>
+            </div>
+            <div class="bg-gray-50 p-4 rounded">
+                <p>✅ <strong>Infligir:</strong> Aplicar pena</p>
+                <p>✅ <strong>Infringir:</strong> Violar regra</p>
+            </div>
+            <div class="bg-gray-50 p-4 rounded">
+                <p>✅ <strong>Descriminar:</strong> Absolver crime</p>
+                <p>✅ <strong>Discriminar:</strong> Diferenciar/Segregar</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Botão de Ação -->
+    <footer class="pb-20">
+        <a href="3questoes.html" class="btn-questions shadow-lg">
+            RESOLVER QUESTÕES →
+        </a>
+        <p class="text-center text-xs text-gray-400">Material produzido para o cargo de Professor de Informática - IFAM</p>
+    </footer>
+
+</body>
+</html>

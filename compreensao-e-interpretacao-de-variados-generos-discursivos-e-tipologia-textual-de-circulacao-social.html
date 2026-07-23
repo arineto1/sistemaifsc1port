@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula Completa: Português IFAM - CEFETMINAS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap');
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        .audio-player-box {
+            background-color: #f9fafb;
+            border: 2px border-dashed #e5e7eb;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2.5rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #111827;
+            border-left: 8px solid #059669;
+            padding-left: 15px;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #065f46;
+            margin-top: 3rem;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #374151;
+            margin-top: 1.8rem;
+        }
+
+        .grifo {
+            background-color: #fef08a; /* Amarelo claro */
+            padding: 2px 4px;
+            font-weight: 600;
+            border-radius: 3px;
+        }
+
+        .importante {
+            background-color: #dcfce7; /* Verde claro */
+            padding: 2px 4px;
+            font-weight: 600;
+            border-radius: 3px;
+        }
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: hidden; /* Garante que não haja scroll se configurado corretamente */
+            margin: 2rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed; /* Força o ajuste ao container */
+        }
+
+        th, td {
+            border: 1px solid #d1d5db;
+            padding: 12px;
+            text-align: left;
+            word-wrap: break-word; /* Quebra palavras longas se necessário */
+            font-size: 0.95rem;
+        }
+
+        th {
+            background-color: #f3f4f6;
+            color: #111827;
+        }
+
+        .alerta-banca {
+            border-left: 5px solid #dc2626;
+            background-color: #fff1f2;
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .metodo-memorizacao {
+            background-color: #eff6ff;
+            border: 1px solid #bfdbfe;
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .btn-footer {
+            display: inline-block;
+            background-color: #059669;
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            text-align: center;
+            width: 100%;
+            transition: all 0.3s;
+            margin-top: 3rem;
+        }
+
+        .btn-footer:hover {
+            background-color: #047857;
+            transform: translateY(-2px);
+        }
+
+        ul { list-style-type: square; margin-left: 1.5rem; }
+        li { margin-bottom: 0.5rem; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Áudio Reproductor -->
+        <div class="audio-player-box">
+            <p class="text-sm font-bold text-gray-500 uppercase tracking-widest mb-3">🎧 Audio-Aula de Apoio</p>
+            <audio controls class="w-full">
+                <source src="1interpretacao.mp3" type="audio/mpeg">
+                Seu navegador não suporta o áudio.
+            </audio>
+            <p class="text-xs text-gray-400 mt-2 italic">*Arquivo: aula_completa_ifam.mp3</p>
+        </div>
+
+        <header>
+            <h1>Interpretação de Textos e Gêneros: Foco IFAM</h1>
+            <p class="text-lg text-gray-600">Tutor Especialista: Preparação para Docência EBTT (Informática)</p>
+        </header>
+
+        <section>
+            <h2>1. Compreensão vs. Interpretação</h2>
+            <p>A CEFETMINAS alterna questões de nível literal e de inferência. Saber a diferença evita "extrapolação".</p>
+            
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>CONCEITO</th>
+                            <th>O QUE É?</th>
+                            <th>COMANDOS DA BANCA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Compreensão</strong></td>
+                            <td>Análise <span class="grifo">dentro do texto</span>. O que está escrito (explícito).</td>
+                            <td>"Segundo o autor...", "O texto afirma que...", "Conforme os dados...".</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Interpretação</strong></td>
+                            <td>Análise <span class="importante">além do texto</span>. Conclusões lógicas (implícito).</td>
+                            <td>"Infere-se que...", "Conclui-se do texto que...", "O autor sugere...".</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="alerta-banca">
+                <strong>Peguinha recorrente:</strong> A banca coloca uma alternativa que é verdade no "mundo real", mas que <span class="grifo">não foi dita no texto</span>. Se a questão for de compreensão, essa alternativa está ERRADA.
+            </div>
+        </section>
+
+        <section>
+            <h2>2. Tipologia Textual (Formas de Organização)</h2>
+            <p>Para o concurso do IFAM, foque na predominância. Um texto técnico de Informática pode descrever um erro (descrição) mas o objetivo final é ensinar a resolvê-lo (injunção).</p>
+
+            <h3>A. Dissertativo-Argumentativo</h3>
+            <p>Objetivo: Convencer o leitor. <span class="grifo">Muito comum em artigos de opinião sobre Tecnologia e Ética.</span></p>
+            <ul>
+                <li><strong>Estrutura:</strong> Tese -> Desenvolvimento (Argumentos) -> Conclusão.</li>
+                <li><strong>Marcadores:</strong> Conectivos lógicos (Portanto, Além disso, Por outro lado).</li>
+            </ul>
+
+            <h3>B. Injuntivo / Prescritivo</h3>
+            <p>Objetivo: Instruir ou dar ordens. <span class="grifo">Típico de Manuais, Tutoriais de Programação e Editais.</span></p>
+            <ul>
+                <li><strong>Marcadores:</strong> Verbos no <span class="importante">Imperativo</span> (Clique, Salve, Execute) ou Infinitivo com valor de ordem.</li>
+            </ul>
+
+            <h3>C. Narrativo</h3>
+            <p>Objetivo: Relatar fatos que mudam com o tempo. <span class="grifo">Comum em notícias sobre lançamentos de softwares.</span></p>
+            <ul>
+                <li><strong>Elementos:</strong> Narrador, Personagens, Espaço, Tempo e Enredo.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>3. Gêneros Discursivos e Circulação Social</h2>
+            <p>O gênero é o uso social da linguagem. No contexto IFAM/EBTT, atente para:</p>
+            
+            <div class="metodo-memorizacao">
+                <strong>Gêneros Digitais (Foco Informática):</strong>
+                <ul class="mt-2">
+                    <li><span class="grifo">Hipertexto:</span> Texto com links, leitura não linear.</li>
+                    <li><span class="grifo">E-mail:</span> Linguagem que varia do formal ao coloquial (híbrido).</li>
+                    <li><span class="grifo">Wiki/Fórum:</span> Produção colaborativa de conhecimento técnico.</li>
+                    <li><span class="grifo">Blog/Vlog:</span> Gêneros de exposição de ideias ou relatos.</li>
+                </ul>
+            </div>
+
+            <div class="alerta-banca">
+                <strong>Análise da Fundação CEFETMINAS:</strong> A banca costuma cobrar a <span class="importante">função social</span> do gênero. Exemplo: "Qual o objetivo social de um Edital de Concurso?". Resposta: "Normatizar e dar transparência a um processo público".
+            </div>
+        </section>
+
+        <section>
+            <h2>4. Coesão e Conectivos (O Coração da Prova)</h2>
+            <p>A CEFETMINAS ama trocar um conectivo por outro e perguntar se mantém o sentido.</p>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>VALOR SEMÂNTICO</th>
+                            <th>CONECTIVOS PARA DECORAR</th>
+                            <th>CUIDADO!</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Concessão</strong></td>
+                            <td>Embora, conquanto, ainda que, apesar de.</td>
+                            <td>Indica <span class="grifo">oposição</span> que não impede o fato.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Adversidade</strong></td>
+                            <td>Mas, porém, contudo, todavia, entretanto.</td>
+                            <td>Oposição forte. Nunca use "Mas" no início de frase na prova.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Conformidade</strong></td>
+                            <td>Conforme, segundo, consoante, como.</td>
+                            <td>O "Como" aqui é campeão de erros.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Finalidade</strong></td>
+                            <td>Para que, a fim de que, com o intuito de.</td>
+                            <td>Indica <span class="importante">objetivo/propósito</span>.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section>
+            <h2>5. Tendências de Cobrança e "Traps"</h2>
+            <p>Como a banca se comporta em cargos de nível superior (Professor):</p>
+            <ul>
+                <li><strong>Intertextualidade:</strong> Relacionar um texto principal com uma tirinha ou charge.</li>
+                <li><strong>Variação Linguística:</strong> Questões sobre o uso formal (culto) vs. informal (coloquial) em ambientes de TI.</li>
+                <li><strong>Denotação vs. Conotação:</strong> Textos técnicos tendem à <span class="importante">Denotação</span> (sentido literal/dicionário).</li>
+                <li><strong>Reescrita de Frases:</strong> Pedem para reescrever mantendo o sentido. <span class="grifo">Foco total na pontuação e conectivos nestas questões.</span></li>
+            </ul>
+        </section>
+
+        <footer>
+            <a href="1questoes.html" class="btn-footer">ESTOU PRONTO: ACESSAR BANCO DE QUESTÕES →</a>
+            <p class="text-center text-gray-400 text-xs mt-4">Documento atualizado para o certame IFAM 2024/2025.</p>
+        </footer>
+    </div>
+
+</body>
+</html>

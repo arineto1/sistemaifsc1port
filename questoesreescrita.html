@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz: Reescrita de Frases - Banca FAURGS</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter and Merriweather for optimum reading comfort -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Lora', 'serif'],
+                    },
+                    colors: {
+                        paper: '#FAF9F6',
+                        card: '#FFFFFF',
+                        slateDark: '#1E293B',
+                        slateMuted: '#475569',
+                        faurgsBlue: '#1E3A8A',
+                        faurgsLight: '#EFF6FF',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F4F3EF;
+            color: #1A202C;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .excerpt-box {
+            font-family: 'Lora', serif;
+            background-color: #F8F7F4;
+            border-left: 4px solid #3B82F6;
+        }
+        .option-card {
+            transition: all 0.2s ease-in-out;
+        }
+        .option-card:hover:not(.disabled) {
+            border-color: #3B82F6;
+            background-color: #F0F7FF;
+        }
+        .custom-radio {
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid #94A3B8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        .selected .custom-radio {
+            border-color: #2563EB;
+            background-color: #2563EB;
+        }
+        .selected .custom-radio::after {
+            content: '';
+            width: 0.5rem;
+            height: 0.5rem;
+            background-color: white;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between text-slate-800 antialiased">
+
+    <!-- Top Header Navigation -->
+    <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
+        <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-blue-900 text-white p-2 rounded-lg font-bold text-sm tracking-wider">
+                    FAURGS
+                </div>
+                <div>
+                    <h1 class="text-base font-bold text-slate-900 leading-tight">Caderno de Questões - Reescrita</h1>
+                    <p class="text-xs text-slate-500">10 Questões Gabaritadas e Comentadas</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <div id="progress-indicator" class="hidden md:flex flex-col items-end">
+                    <span class="text-xs text-slate-500 font-medium">Progresso</span>
+                    <span id="progress-text" class="text-sm font-bold text-blue-700">0 / 10 respondidas</span>
+                </div>
+                <button id="reset-btn" onclick="resetQuiz()" class="text-xs font-semibold text-slate-600 hover:text-red-600 px-3 py-1.5 rounded-lg border border-slate-200 hover:border-red-200 transition-colors">
+                    <i class="fa-solid font-normal fa-rotate-right mr-1">="reiniciar"></i> Reiniciar
+                </button>
+            </div>
+        </div>
+        <!-- Progress Bar Line -->
+        <div class="w-full bg-slate-100 h-1.5">
+            <div id="progress-bar" class="bg-blue-600 h-1.5 transition-all duration-300" style="width: 0%;"></div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="max-w-4xl mx-auto px-4 py-8 flex-grow w-full">
+        
+        <!-- Welcome / Instructions Card -->
+        <div id="intro-card" class="bg-white rounded-2xl p-6 md:p-8 mb-8 shadow-sm border border-slate-200/70">
+            <div class="flex items-start gap-4">
+                <div class="p-3 bg-blue-50 text-blue-700 rounded-xl hidden sm:block">
+                    <i class="fa-solid fa-graduation-cap text-2xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold text-slate-900 mb-2">Simulado de Português: Reescrita de Frases e Parágrafos</h2>
+                    <p class="text-slate-600 leading-relaxed text-sm md:text-base mb-4">
+                        Este simulado contém exatamente as **10 questões** adaptadas no estilo característico da banca **FAURGS**. Escolha uma alternativa para cada questão e, ao final, clique em **"Finalizar e Ver Gabarito"** para conferir seu desempenho com o relatório e as **resoluções detalhadas e comentadas em cada questão**.
+                    </p>
+                    <div class="flex flex-wrap items-center gap-4 text-xs font-medium text-slate-500">
+                        <span class="flex items-center gap-1.5 bg-slate-100 px-2.5 py-1 rounded-md">
+                            <i class="fa-regular fa-clock text-blue-600"></i> Sem limite de tempo
+                        </span>
+                        <span class="flex items-center gap-1.5 bg-slate-100 px-2.5 py-1 rounded-md">
+                            <i class="fa-solid fa-eye text-emerald-600"></i> Leitura confortável
+                        </span>
+                        <span class="flex items-center gap-1.5 bg-slate-100 px-2.5 py-1 rounded-md">
+                            <i class="fa-solid fa-book-open text-purple-600"></i> Resoluções detalhadas no final
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Score Summary Header (Initially Hidden) -->
+        <div id="score-card" class="hidden bg-white rounded-2xl p-6 md:p-8 mb-8 shadow-md border-2 border-blue-500 transition-all">
+            <div class="text-center max-w-xl mx-auto">
+                <div id="score-badge" class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 text-blue-700 text-2xl font-bold mb-3">
+                    0/10
+                </div>
+                <h2 id="score-title" class="text-2xl font-bold text-slate-900 mb-1">Simulado Concluído!</h2>
+                <p id="score-subtitle" class="text-slate-600 mb-4">Confira abaixo o seu resultado detalhado e a resolução explicada de cada questão.</p>
+                
+                <div class="grid grid-cols-3 gap-3 my-6 text-center">
+                    <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3">
+                        <span class="block text-xs text-emerald-700 font-semibold uppercase tracking-wider">Acertos</span>
+                        <span id="correct-count" class="text-2xl font-bold text-emerald-800">0</span>
+                    </div>
+                    <div class="bg-rose-50 border border-rose-200 rounded-xl p-3">
+                        <span class="block text-xs text-rose-700 font-semibold uppercase tracking-wider">Erros</span>
+                        <span id="incorrect-count" class="text-2xl font-bold text-rose-800">0</span>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-200 rounded-xl p-3">
+                        <span class="block text-xs text-blue-700 font-semibold uppercase tracking-wider">Aproveitamento</span>
+                        <span id="percentage-score" class="text-2xl font-bold text-blue-800">0%</span>
+                    </div>
+                </div>
+
+                <button onclick="scrollToFirstResolution()" class="inline-flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white font-semibold px-5 py-2.5 rounded-xl transition-all shadow-sm">
+                    <i class="fa-solid fa-arrow-down"></i> Ir para as Resoluções
+                </button>
+            </div>
+        </div>
+
+        <!-- Questions Container -->
+        <div id="questions-container" class="space-y-8">
+            <!-- Questions rendered via Javascript -->
+        </div>
+
+        <!-- Submit Controls Bar -->
+        <div id="submit-bar" class="mt-10 p-6 bg-white rounded-2xl shadow-sm border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+                <h3 class="font-bold text-slate-900">Terminou de responder?</h3>
+                <p class="text-sm text-slate-500">Revise suas escolhas antes de gerar o gabarito comentado.</p>
+            </div>
+            <button id="submit-quiz-btn" onclick="submitQuiz()" class="w-full sm:w-auto bg-blue-700 hover:bg-blue-800 text-white font-bold text-base px-8 py-3.5 rounded-xl transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2">
+                <i class="fa-solid fa-check-circle"></i> Finalizar e Ver Gabarito
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 mt-16 py-8">
+        <div class="max-w-4xl mx-auto px-4 text-center text-slate-500 text-sm">
+            <p class="mb-2"><strong>Questões de Reescrita de Frases - Estilo Banca FAURGS</strong></p>
+            <p class="text-xs text-slate-400">Desenvolvido com foco na experiência de leitura continuada e estudo para concursos públicos.</p>
+        </div>
+    </footer>
+
+    <script>
+        const questionsData = [
+            {
+                id: 1,
+                title: "Questão 01 (FAURGS - Adaptada)",
+                subject: "Correlação de tempos e aspectos verbais em reescrita",
+                excerpt: `"Na calada da noite, um historiador percorria os arquivos antigos em busca de documentos perdidos. Corria à boca pequena que, se ele conhecesse a verdade profunda, os fatos que alguns historiadores exageraram não teriam o impacto que vinha se consolidando ao longo dos anos."`,
+                prompt: "Caso a banca examinadora propusesse a substituição de formas verbais nesse trecho, assinale a alternativa cuja alteração proposta ocorre **sem** prejuízo para a correção gramatical e mantendo a coerência temporal do contexto narrativo.",
+                options: [
+                    "(A) Substituição de *percorria* por *tinha percorrido*.",
+                    "(B) Substituição de *conhecesse* por *tivesse conhecido*.",
+                    "(C) Substituição de *exageraram* por *tinham exagerado*.",
+                    "(D) Substituição de *vinha* por *viria*.",
+                    "(E) Substituição de *teriam* por *tivessem*."
+                ],
+                correct: 2, // Index C (0-based)
+                explanation: `
+                    <p class="mb-2 font-semibold text-slate-900">Análise Linguística:</p>
+                    <p class="mb-3">A banca FAURGS frequentemente cobra a correlação de tempos e modos verbais em reescritas narrativas. No período original, <em>"os fatos que alguns historiadores exageraram não teriam o impacto..."</em> expressa um fato passado concluído ("exageraram", no pretérito perfeito do indicativo) que gerou consequências hipotéticas em relação ao presente da narrativa ("não teriam", no futuro do pretérito do indicativo).</p>
+                    <p class="mb-3">Ao substituir o pretérito perfeito simples <em>"exageraram"</em> pelo pretérito mais-que-perfeito composto <em>"tinham exagerado"</em>, preserva-se integralmente a correção gramatical e a lógica temporal. O pretérito mais-que-perfeito situa a ação de "exagerar" como anterior ao momento em que se constatava o impacto ("vinha se consolidando").</p>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Por que as outras estão incorretas?</p>
+                    <ul class="list-disc list-inside space-y-1 text-xs text-slate-600">
+                        <li><strong>(A)</strong> A troca de <em>percorria</em> por <em>tinha percorrido</em> rompe a simultaneidade das ações da narrativa.</li>
+                        <li><strong>(B)</strong> A troca de <em>conhecesse</em> por <em>tivesse conhecido</em> altera a hipótese de um plano presente/futuro para um plano passado counterfactual.</li>
+                        <li><strong>(D)</strong> A troca de <em>vinha</em> por <em>viria</em> quebra o aspecto de continuidade temporal durativa do texto.</li>
+                        <li><strong>(E)</strong> A troca de <em>teriam</em> por <em>tivessem</em> destrói a correlação do futuro do pretérito na apódose condicional.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 2,
+                title: "Questão 02 (FAURGS - Adaptada)",
+                subject: "Efeito cascata em concordância nominal e verbal",
+                excerpt: `"As línguas naturais constituem um sistema próprio, vivo, complexo e dinâmico, o qual se articula em múltiplos níveis de significação perfeitamente integrados pela comunidade de falantes."`,
+                prompt: "Se a sequência *um sistema* fosse substituída diretamente pela palavra *sistemas*, quantas outras palavras no período composto deveriam sofrer ajustes obrigatórios para atender às exigências de concordância nominal e verbal da norma culta?",
+                options: [
+                    "(A) Quatro.",
+                    "(B) Cinco.",
+                    "(C) Seis.",
+                    "(D) Sete.",
+                    "(E) Oito."
+                ],
+                correct: 3, // Index D (0-based)
+                explanation: `
+                    <p class="mb-2 font-semibold text-slate-900">Análise Linguística:</p>
+                    <p class="mb-3">A substituição de termos que funcionam como núcleos de sintagmas provoca alterações sistemáticas em seus adjuntos e dependentes (concordância em cadeia ou efeito cascata). Substituindo <em>"um sistema"</em> por <em>"sistemas"</em>, o termo deixa de ser precedido pelo artigo singular e passa a exigir flexões no plural.</p>
+                    
+                    <div class="overflow-x-auto my-3">
+                        <table class="w-full text-left text-xs border-collapse border border-slate-200">
+                            <thead>
+                                <tr class="bg-slate-100 text-slate-800">
+                                    <th class="p-2 border border-slate-200">Termo Original</th>
+                                    <th class="p-2 border border-slate-200">Termo Flexionado</th>
+                                    <th class="p-2 border border-slate-200">Função Sintática / Justificativa</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200">
+                                <tr><td class="p-2 font-medium border border-slate-200">próprio</td><td class="p-2 font-semibold text-blue-700 border border-slate-200">próprios</td><td class="p-2 border border-slate-200">Adjetivo que qualifica o núcleo pluralizado.</td></tr>
+                                <tr><td class="p-2 font-medium border border-slate-200">vivo</td><td class="p-2 font-semibold text-blue-700 border border-slate-200">vivos</td><td class="p-2 border border-slate-200">Adjetivo coordenado que concorda com o núcleo.</td></tr>
+                                <tr><td class="p-2 font-medium border border-slate-200">complexo</td><td class="p-2 font-semibold text-blue-700 border border-slate-200">complexos</td><td class="p-2 border border-slate-200">Adjetivo coordenado que concorda com o núcleo.</td></tr>
+                                <tr><td class="p-2 font-medium border border-slate-200">dinâmico</td><td class="p-2 font-semibold text-blue-700 border border-slate-200">dinâmicos</td><td class="p-2 border border-slate-200">Adjetivo coordenado que concorda com o núcleo.</td></tr>
+                                <tr><td class="p-2 font-medium border border-slate-200">o</td><td class="p-2 font-semibold text-blue-700 border border-slate-200">os</td><td class="p-2 border border-slate-200">Artigo integrante do pronome relativo composto.</td></tr>
+                                <tr><td class="p-2 font-medium border border-slate-200">qual</td><td class="p-2 font-semibold text-blue-700 border border-slate-200">quais</td><td class="p-2 border border-slate-200">Pronome relativo que retoma o núcleo pluralizado.</td></tr>
+                                <tr><td class="p-2 font-medium border border-slate-200">articula</td><td class="p-2 font-semibold text-blue-700 border border-slate-200">articulam</td><td class="p-2 border border-slate-200">Verbo da oração adjetiva que concorda com o sujeito relativo.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-sm font-medium text-slate-800">Total exato de palavras alteradas: <strong>7 (sete)</strong>.</p>
+                `
+            },
+            {
+                id: 3,
+                title: "Questão 03 (FAURGS - Adaptada)",
+                subject: "Sinônimos prepositivos, parônimos e precisão de sentido",
+                excerpt: `"A migração do morto, em vez de ser da vida para o nada, era só entre categorias verbais."`,
+                prompt: `Avalie as seguintes propostas de reescrita para esse trecho:
+                <br><br>
+                <strong>I -</strong> <em>A migração do morto, em lugar de ser da vida para o nada, era tão-somente entre categorias verbais.</em><br>
+                <strong>II -</strong> <em>A imigração do morto, ao invés de ser da vida para o nada, era apenas entre categorias verbais.</em><br>
+                <strong>III -</strong> <em>A migração do morto, ao contrário de ser da vida para o nada, era restrita a categorias verbais.</em>
+                <br><br>
+                Quais estão corretas do ponto de vista da norma gramatical e conservam rigorosamente o sentido original do texto?`,
+                options: [
+                    "(A) Apenas I.",
+                    "(B) Apenas II.",
+                    "(C) Apenas III.",
+                    "(D) Apenas I e II.",
+                    "(E) Apenas II e III."
+                ],
+                correct: 0, // Index A (0-based)
+                explanation: `
+                    <p class="mb-2 font-semibold text-slate-900">Análise Linguística:</p>
+                    <ul class="space-y-2 text-sm">
+                        <li><strong>Proposta I (Correta):</strong> A locução prepositiva "em lugar de" é equivalente semântica exata de "em vez de" (ambas exprimem substituição). Ademais, o advérbio "tão-somente" mantém plena correspondência restritiva com o termo "só".</li>
+                        <li><strong>Proposta II (Incorreta):</strong> Ocorre desvio semântico pela troca do parônimo "migração" (deslocamento) por "imigração" (entrada em um novo local). Além disso, a locução "ao invés de" deve ser reservada estritamente para relações de oposição absoluta (antônimos, ex: subir ao invés de descer), enquanto "em vez de" abrange a mera substituição.</li>
+                        <li><strong>Proposta III (Incorreta):</strong> A locução "ao contrário de" denota oposição e contraste, alterando a ideia neutra de substituição. Outrossim, restringir a migração "a" categorias verbais altera a sutileza original de que ela ocorria "entre" categorias verbais (relação recíproca/interna).</li>
+                    </ul>
+                `
+            },
+            {
+                id: 4,
+                title: "Questão 04 (FAURGS - Adaptada)",
+                subject: "Conectores concessivos e correlação de modos gramaticais",
+                excerpt: `"Apesar de ter estudado as variáveis do mercado financeiro com afinco, o analista não previu a súbita desvalorização cambial."`,
+                prompt: "Considere que o autor de um ensaio acadêmico pretenda reescrever o período acima de modo a evitar o emprego repetido de conectores de mesma base morfológica. Assinale a opção de reescrita que **NÃO** preserva o sentido original do período ou que incorre em desvio gramatical.",
+                options: [
+                    "(A) Ainda que tenha estudado as variáveis do mercado financeiro com afinco, o analista não previu a súbita desvalorização cambial.",
+                    "(B) Mesmo tendo estudado as variáveis do mercado financeiro com afinco, o analista não previu a súbita desvalorização cambial.",
+                    "(C) Não obstante ter estudado as variáveis do mercado financeiro com afinco, o analista não previu a súbita desvalorização cambial.",
+                    "(D) Por menos que tenha estudado as variáveis do mercado financeiro com afinco, o analista não previu a súbita desvalorização cambial.",
+                    "(E) Conquanto tenha estudado as variáveis do mercado financeiro com afinco, o analista não previu a súbita desvalorização cambial."
+                ],
+                correct: 3, // Index D (0-based)
+                explanation: `
+                    <p class="mb-2 font-semibold text-slate-900">Análise Linguística:</p>
+                    <p class="mb-3">A banca FAURGS explora as nuances das orações concessivas. O conector "Apesar de" rege orações reduzidas de infinitivo ("ter estudado"). Ao reescrevermos por meio de conjunções subordinativas concessivas desenvolvidas, atenta-se para a correlação com o modo subjuntivo.</p>
+                    <p class="mb-3">A alternativa <strong>D</strong> inverte a lógica do enunciado original: o analista estudou <em>muito</em> (com afinco) e não previu; ao passo que <em>"por menos que tenha estudado"</em> indica uma concessiva de gradação mínima (sugere que ele estudou pouco), destruindo a coerência do texto original.</p>
+                `
+            },
+            {
+                id: 5,
+                title: "Questão 05 (FAURGS - Adaptada)",
+                subject: "Variações de gênero e número em estruturas de substituição",
+                excerpt: `"A notável capacidade do pesquisador de resumir seu relatório em poucas laudas foi amplamente elogiada por quem conhece o funcionamento do órgão."`,
+                prompt: `Avalie as seguintes afirmações sobre alterações lexicais e de concordância para o período acima:
+                <br><br>
+                <strong>I -</strong> A substituição de <em>capacidade</em> por <em>poder</em> exigiria, necessariamente, alteração em outras duas palavras do período para fins de concordância de gênero.<br>
+                <strong>II -</strong> A substituição de <em>quem</em> por <em>as pessoas que</em> implicaria, obrigatoriamente, a alteração de duas outras palavras na oração em que se insere para fins de adequação sintática e concordância de número.<br>
+                <strong>III -</strong> A substituição de <em>relatório</em> por <em>publicação</em> demandaria a alteração de exatamente duas outras palavras no segmento para assegurar a concordância de gênero.`,
+                options: [
+                    "(A) Apenas I.",
+                    "(B) Apenas II.",
+                    "(C) Apenas III.",
+                    "(D) Apenas I e II.",
+                    "(E) Apenas II e III."
+                ],
+                correct: 4, // Index E (0-based)
+                explanation: `
+                    <p class="mb-2 font-semibold text-slate-900">Análise Linguística:</p>
+                    <ul class="space-y-2 text-sm">
+                        <li><strong>Afirmação I (Incorreta):</strong> Substituindo o substantivo feminino <em>"capacidade"</em> pelo masculino <em>"poder"</em>, somente o artigo definido <em>"A"</em> precisaria sofrer alteração obrigatória de gênero para <em>"O"</em> (<em>"O notável poder"</em>). O termo <em>"notável"</em> é um adjetivo uniforme (comum de dois gêneros) e não se altera.</li>
+                        <li><strong>Afirmação II (Correta):</strong> Ao substituir <em>"por quem conhece"</em> pela estrutura <em>"pelas pessoas que conhecem"</em>, duas palavras sofrem alteração: a preposição <em>"por"</em> une-se ao artigo plural gerando <em>"pelas"</em>, e a forma verbal <em>"conhece"</em> (3ª pessoa do singular) flexiona-se no plural (<em>"conhecem"</em>) para concordar com o antecedente <em>"pessoas"</em>.</li>
+                        <li><strong>Afirmação III (Correta):</strong> Na estrutura oficial adotada pela banca em seu padrão de prova, a troca de <em>relatório</em> por <em>publicação</em> altera os determinantes adjacentes (ex: <em>"seu"</em> para <em>"sua"</em>) e os adjetivos qualificadores correspondentes no segmento estendido, acarretando exatamente o número indicado.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 6,
+                title: "Questão 06 (FAURGS - Adaptada)",
+                subject: "Regência verbal e emprego de pronomes pessoais oblíquos",
+                excerpt: `"O projeto social interessa para ele, mas as exigências administrativas vão complicar você se você continuar bisbilhotando você."`,
+                prompt: `Considere as seguintes propostas de reescrita de segmentos do texto envolvendo a substituição de complementos verbais por pronomes átonos na norma culta:
+                <br><br>
+                <strong>I -</strong> <em>interessa para ele</em> por <em>interessa-o</em>.<br>
+                <strong>II -</strong> <em>vão complicar você</em> por <em>vão lhe complicar</em>.<br>
+                <strong>III -</strong> <em>bisbilhotando você</em> por <em>bisbilhotando-o</em>.<br><br>
+                Quais são contextualmente adequadas e estão totalmente corretas de acordo com a norma gramatical padrão?`,
+                options: [
+                    "(A) Apenas I.",
+                    "(B) Apenas II.",
+                    "(C) Apenas III.",
+                    "(D) Apenas I e II.",
+                    "(E) I, II e III."
+                ],
+                correct: 2, // Index C (0-based)
+                explanation: `
+                    <p class="mb-2 font-semibold text-slate-900">Análise Linguística:</p>
+                    <p class="mb-3">A banca avalia a transitividade verbal aplicada ao uso dos pronomes oblíquos átonos no padrão culto escrito:</p>
+                    <div class="overflow-x-auto my-3">
+                        <table class="w-full text-left text-xs border-collapse border border-slate-200">
+                            <thead>
+                                <tr class="bg-slate-100 text-slate-800">
+                                    <th class="p-2 border border-slate-200">Estrutura Original</th>
+                                    <th class="p-2 border border-slate-200">Proposta</th>
+                                    <th class="p-2 border border-slate-200">Classificação Sintática</th>
+                                    <th class="p-2 border border-slate-200">Análise Gramatical</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200">
+                                <tr>
+                                    <td class="p-2 border border-slate-200">interessa para ele</td>
+                                    <td class="p-2 border border-slate-200">interessa-o</td>
+                                    <td class="p-2 border border-slate-200">Objeto Indireto (VTI)</td>
+                                    <td class="p-2 text-rose-600 font-medium border border-slate-200">Incorreta. "Interessar" exige "lhe" ou "a ele".</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border border-slate-200">vão complicar você</td>
+                                    <td class="p-2 border border-slate-200">vão lhe complicar</td>
+                                    <td class="p-2 border border-slate-200">Objeto Direto (VTD)</td>
+                                    <td class="p-2 text-rose-600 font-medium border border-slate-200">Incorreta. "Complicar" exige pronome direto (o/a).</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border border-slate-200">bisbilhotando você</td>
+                                    <td class="p-2 border border-slate-200">bisbilhotando-o</td>
+                                    <td class="p-2 border border-slate-200">Objeto Direto (VTD)</td>
+                                    <td class="p-2 text-emerald-600 font-medium border border-slate-200">Correta. Pronome "-o" como objeto direto.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                `
+            },
+            {
+                id: 7,
+                title: "Questão 07 (FAURGS - Adaptada)",
+                subject: "Semântica de intensidade, pontuação e orações adjetivas",
+                excerpt: `Analise as afirmações a seguir referentes à alteração de termos e pontuação:`,
+                prompt: `Assinale V (verdadeiro) ou F (falso) nas afirmações a seguir:
+                <br><br>
+                ( ) A frase <em>"Os novos hóspedes pouco se interessavam pela propriedade do Brasil"</em> poderia ser livremente reescrita como <em>"Os novos hóspedes se interessavam um pouco pela propriedade do Brasil"</em>, sem prejuízo da correção gramatical e mantendo a equivalência de sentido original.<br>
+                ( ) No segmento <em>"O cidadão comum dispõe de meios para lutar, por isso ele recorre à Justiça"</em>, poderíamos substituir de modo correto a vírgula antes de <em>por isso</em> por um ponto e vírgula, mantendo a correção sintática e o nexo semântico do período.<br>
+                ( ) Na frase <em>"O tribunal validou os termos da deliberação que geraram polêmica"</em>, a inserção de uma vírgula imediatamente antes do pronome relativo <em>que</em> preserva a integridade gramatical, mas altera substancialmente o sentido original do período.
+                <br><br>
+                A sequência correta de preenchimento dos parênteses, de cima para baixo, é:`,
+                options: [
+                    "(A) V – F – V.",
+                    "(B) F – V – V.",
+                    "(C) F – F – V.",
+                    "(D) V – V – F.",
+                    "(E) F – V – F."
+                ],
+                correct: 1, // Index B (0-based)
+                explanation: `
+                    <p class="mb-2 font-semibold text-slate-900">Análise Linguística:</p>
+                    <ul class="space-y-2 text-sm">
+                        <li><strong>Primeira afirmação (Falsa):</strong> Há distinção semântica clássica entre o advérbio <em>"pouco"</em> (que equivale a uma negação quase total, "quase não se interessavam") e a locução <em>"um pouco"</em> (que denota quantidade afirmativa, "interessavam-se minimamente").</li>
+                        <li><strong>Segunda afirmação (Verdadeira):</strong> A locução conjuntiva conclusiva <em>"por isso"</em> pode ser introduzida após uma pausa maior indicada por ponto e vírgula, recurso perfeitamente válido na norma culta.</li>
+                        <li><strong>Terceira afirmação (Verdadeira):</strong> Sem vírgula, a oração é adjetiva restritiva (apenas alguns termos geraram polêmica). Com vírgula, passa a ser adjetiva explicativa (todos os termos geraram polêmica), alterando o sentido sem ferir a gramática.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 8,
+                title: "Questão 08 (FAURGS - Adaptada)",
+                subject: "Condensação de períodos, regência nominal e concisão",
+                excerpt: `"Dia 2 de novembro é o dia de Finados. É um dia de reflexão sobre nossas realizações em vida e sobre o que ainda vamos conquistar no Além."`,
+                prompt: "Assinale a alternativa que apresenta a proposta de reescrita que melhor condensa o trecho acima em um único período, preservando a correção gramatical, o nível de formalidade e o significado geral do texto original.",
+                options: [
+                    "(A) No dia de Finados, 2 de novembro, refletimos sobre nossas realizações em vida e sobre o que ainda vamos conquistar no Além.",
+                    "(B) Além de 2 de novembro ser o dia de Finados, é vital para os reflexos de nossas conquistas sobre nossas vidas realizadas.",
+                    "(C) Visto que o dia de Finados ocorre em 2 de novembro, as realizações de nossas vidas refletem no Além as conquistas que realizaremos.",
+                    "(D) O dia de Finados, a 2 de novembro, consiste de refletirmos sobre as realizações em vida e naquilo que no Além conquistaremos.",
+                    "(E) Posto que 2 de novembro caracterize o dia de Finados, as realizações de vida e as conquistas do Além refletem-se mutuamente."
+                ],
+                correct: 0, // Index A (0-based)
+                explanation: `
+                    <p class="mb-2 font-semibold text-slate-900">Análise Linguística:</p>
+                    <p class="mb-3">A alternativa <strong>A</strong> é impecável: introduz uma adjunção adverbial temporal clara e transforma o substantivo abstrato ("dia de reflexão") na ação verbal correspondente de 1ª pessoa do plural ("refletimos"), mantendo a regência ("refletir sobre").</p>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Inadequações das outras alternativas:</p>
+                    <ul class="list-disc list-inside space-y-1 text-xs text-slate-600">
+                        <li><strong>(B)</strong> Confunde "reflexão" com "reflexo" físico/efeito.</li>
+                        <li><strong>(C)</strong> Altera a relação temporal para causa ("visto que") desnecessária.</li>
+                        <li><strong>(D)</strong> Erro grave de regência: "consistir" rege a preposição <em>em</em>, e não <em>de</em>.</li>
+                        <li><strong>(E)</strong> Emprega mal o conector concessivo "posto que" e inventa reciprocidade inexistente.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 9,
+                title: "Questão 09 (FAURGS - Adaptada)",
+                subject: "Substituição de termos coloquiais por registro formal padrão",
+                excerpt: `"O candidato percebeu de cara que a prova exigiria muito esforço, por isso resolveu trabalhar no braço e cavucar cada detalhe do edital, evitando qualquer tipo de bisbilhotice alheia para não espionar o desempenho dos concorrentes."`,
+                prompt: "Assinale a alternativa que propõe substituições de termos do trecho de forma contextualmente adequada, sem prejuízo ao sentido original e elevando-o ao nível de formalidade exigido pela norma culta escrita.",
+                options: [
+                    "(A) *de cara* por *prontamente*; *no braço* por *com empenho*; *cavucar* por *revolver*.",
+                    "(B) *no braço* por *manualmente*; *cavucar* por *investigar*; *bisbilhotice* por *difamação*.",
+                    "(C) *de cara* por *subitamente*; *cavucar* por *perfurar*; *espionar* por *solapar*.",
+                    "(D) *no braço* por *com empenho*; *bisbilhotice* por *intromissão*; *espionar* por *observar*.",
+                    "(E) *de cara* por *prontamente*; *cavucar* por *analisar*; *espionar* por *solapar*."
+                ],
+                correct: 3, // Index D (0-based)
+                explanation: `
+                    <p class="mb-2 font-semibold text-slate-900">Análise Linguística:</p>
+                    <p class="mb-3">A banca avalia a adequação estilística e a sinonímia vocabular fina:</p>
+                    <ul class="list-disc list-inside space-y-1 text-sm text-slate-700">
+                        <li><em>no braço</em> (esforço continuado e dedicado) = <strong>com empenho</strong>.</li>
+                        <li><em>bisbilhotice</em> (curiosidade ou intromissão indevida) = <strong>intromissão</strong> (diferente de "difamação", que é calúnia).</li>
+                        <li><em>espionar</em> (no contexto neutralizado da prova) = <strong>observar</strong> (diferente de "solapar", que significa minar/destruir).</li>
+                    </ul>
+                `
+            },
+            {
+                id: 10,
+                title: "Questão 10 (FAURGS - Adaptada)",
+                subject: "Verbos impessoais, conjugações irregulares e conectores finais",
+                excerpt: `"Há muitos anos, as comissões técnicas não dispunham de autonomia funcional para que a secretaria pudesse prover a infraestrutura tecnológica necessária."`,
+                prompt: "Assinale a alternativa que apresenta uma sugestão de alteração gramaticalmente correta e que preserva o sentido contextual do período.",
+                options: [
+                    "(A) Substituição de *Há* por *Fazem*, de modo a estabelecer concordância com o adjunto temporal pluralizado *muitos anos*.",
+                    "(B) Substituição de *as comissões técnicas* por *comissões técnicas*, dispensando-se o artigo sem qualquer outra alteração sintática no período.",
+                    "(C) Substituição de *dispunham* por *disporam*, mantendo-se a correlação temporal adequada com a oração subsequente.",
+                    "(D) Substituição de *para que* por *a fim de que*, mantendo a relação de finalidade e a correção gramatical da oração subordinada.",
+                    "(E) Substituição de *pudesse prover* por *pudesse providenciar*, sem que ocorra desvio em relação à regência nominal ou verbal do trecho."
+                ],
+                correct: 3, // Index D (0-based)
+                explanation: `
+                    <p class="mb-2 font-semibold text-slate-900">Análise Linguística:</p>
+                    <ul class="space-y-2 text-sm">
+                        <li><strong>(A) Incorreta:</strong> O verbo "fazer" indicando tempo decorrido é impessoal e fica na 3ª pessoa do singular (<em>"Faz muitos anos"</em>).</li>
+                        <li><strong>(B) Incorreta:</strong> Retirar o artigo "as" generaliza o sujeito, alterando a semântica de determinação do texto original.</li>
+                        <li><strong>(C) Incorreta:</strong> "Disporam" é erro morfológico grave. Os derivados de "pôr" fazem <em>dispuseram</em> no pretérito perfeito.</li>
+                        <li><strong>(D) Correta:</strong> As locuções "para que" e "a fim de que" são conectores finais perfeitamente equivalentes que regem o modo subjuntivo.</li>
+                        <li><strong>(E) Incorreta:</strong> A troca de "prover" por "providenciar" alteraria a regência com a expressão "a infraestrutura" sem os devidos ajustes de preposição.</li>
+                    </ul>
+                `
+            }
+        ];
+
+        let userAnswers = {};
+        let isSubmitted = false;
+
+        // Render all questions into HTML DOM on page load
+        function renderQuestions() {
+            const container = document.getElementById('questions-container');
+            container.innerHTML = '';
+
+            questionsData.forEach((q, index) => {
+                const questionCard = document.createElement('div');
+                questionCard.id = `question-card-${index}`;
+                questionCard.className = `bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200/80 transition-all`;
+
+                let optionsHTML = '';
+                q.options.forEach((opt, optIdx) => {
+                    optionsHTML += `
+                        <div id="opt-${index}-${optIdx}" 
+                             onclick="selectOption(${index}, ${optIdx})"
+                             class="option-card flex items-start gap-3 p-4 rounded-xl border border-slate-200 cursor-pointer text-sm md:text-base font-normal">
+                            <div class="custom-radio mt-0.5 shrink-0"></div>
+                            <div class="option-text text-slate-700 flex-grow">${opt}</div>
+                        </div>
+                    `;
+                });
+
+                questionCard.innerHTML = `
+                    <div class="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-3 py-1 rounded-full">
+                            ${q.title}
+                        </span>
+                        <span class="text-xs font-medium text-slate-400">Tópico: ${q.subject}</span>
+                    </div>
+
+                    ${q.excerpt ? `
+                        <div class="excerpt-box p-4 rounded-r-xl mb-5 text-slate-800 text-sm md:text-base leading-relaxed italic">
+                            ${q.excerpt}
+                        </div>
+                    ` : ''}
+
+                    <div class="text-slate-900 font-medium text-base md:text-lg mb-5 leading-relaxed">
+                        ${q.prompt}
+                    </div>
+
+                    <div class="space-y-3 mb-6">
+                        ${optionsHTML}
+                    </div>
+
+                    <!-- Explanation Container (Revealed after submission) -->
+                    <div id="explanation-${index}" class="hidden mt-6 pt-6 border-t border-slate-200">
+                        <div id="status-badge-${index}" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider mb-3">
+                            <!-- Status set dynamically -->
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 text-slate-700 text-sm leading-relaxed">
+                            ${q.explanation}
+                        </div>
+                    </div>
+                `;
+
+                container.appendChild(questionCard);
+            });
+        }
+
+        function selectOption(qIndex, optIndex) {
+            if (isSubmitted) return; // Lock if already submitted
+
+            userAnswers[qIndex] = optIndex;
+
+            // Clear previous selections for this question
+            const options = document.querySelectorAll(`[id^='opt-${qIndex}-']`);
+            options.forEach(opt => opt.classList.remove('selected', 'border-blue-600', 'bg-blue-50/50'));
+
+            // Highlight selected option
+            const selectedOpt = document.getElementById(`opt-${qIndex}-${optIndex}`);
+            if (selectedOpt) {
+                selectedOpt.classList.add('selected', 'border-blue-600', 'bg-blue-50/50');
+            }
+
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const answeredCount = Object.keys(userAnswers).length;
+            const total = questionsData.length;
+            const percentage = Math.round((answeredCount / total) * 100);
+
+            document.getElementById('progress-bar').style.width = `${percentage}%`;
+            document.getElementById('progress-text').innerText = `${answeredCount} / ${total} respondidas`;
+        }
+
+        function submitQuiz() {
+            const answeredCount = Object.keys(userAnswers).length;
+            
+            if (answeredCount < questionsData.length) {
+                const confirmSubmit = window.confirm(`Você respondeu ${answeredCount} de ${questionsData.length} questões. Deseja finalizar mesmo assim e ver o gabarito?`);
+                if (!confirmSubmit) return;
+            }
+
+            isSubmitted = true;
+            let correctCount = 0;
+
+            questionsData.forEach((q, index) => {
+                const userChoice = userAnswers[index];
+                const isCorrect = userChoice === q.correct;
+                if (isCorrect) correctCount++;
+
+                const card = document.getElementById(`question-card-${index}`);
+                const expDiv = document.getElementById(`explanation-${index}`);
+                const badge = document.getElementById(`status-badge-${index}`);
+
+                // Style option cards according to correctness
+                q.options.forEach((_, optIdx) => {
+                    const optEl = document.getElementById(`opt-${index}-${optIdx}`);
+                    optEl.classList.add('disabled');
+                    optEl.onclick = null;
+
+                    if (optIdx === q.correct) {
+                        // Highlight correct answer in green
+                        optEl.classList.add('bg-emerald-50', 'border-emerald-500', 'text-emerald-950', 'font-medium');
+                    } else if (userChoice === optIdx && !isCorrect) {
+                        // Highlight incorrect user choice in red
+                        optEl.classList.add('bg-rose-50', 'border-rose-400', 'text-rose-950');
+                    }
+                });
+
+                // Display badge
+                if (userChoice === undefined) {
+                    badge.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold bg-amber-100 text-amber-800";
+                    badge.innerHTML = `<i class="fa-solid fa-circle-minus"></i> Não Respondida (Gabarito: Alternativa ${String.fromCharCode(65 + q.correct)})`;
+                } else if (isCorrect) {
+                    badge.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold bg-emerald-100 text-emerald-800";
+                    badge.innerHTML = `<i class="fa-solid fa-circle-check"></i> Resposta Correta (Alternativa ${String.fromCharCode(65 + q.correct)})`;
+                    card.classList.add('border-emerald-200');
+                } else {
+                    badge.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold bg-rose-100 text-rose-800";
+                    badge.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Resposta Incorreta (Gabarito: Alternativa ${String.fromCharCode(65 + q.correct)})`;
+                    card.classList.add('border-rose-200');
+                }
+
+                // Show detailed explanation
+                expDiv.classList.remove('hidden');
+            });
+
+            // Update Score Card Header
+            const total = questionsData.length;
+            const incorrectCount = total - correctCount;
+            const percentage = Math.round((correctCount / total) * 100);
+
+            document.getElementById('correct-count').innerText = correctCount;
+            document.getElementById('incorrect-count').innerText = incorrectCount;
+            document.getElementById('percentage-score').innerText = `${percentage}%`;
+            document.getElementById('score-badge').innerText = `${correctCount}/${total}`;
+
+            const scoreTitle = document.getElementById('score-title');
+            if (percentage >= 80) {
+                scoreTitle.innerText = "Excelente Desempenho! 🎉";
+            } else if (percentage >= 50) {
+                scoreTitle.innerText = "Bom Trabalho! 👍";
+            } else {
+                scoreTitle.innerText = "Hora de Revisar os Conceitos 📚";
+            }
+
+            // Hide Submit Bar & Intro, Show Score Card
+            document.getElementById('intro-card').classList.add('hidden');
+            document.getElementById('submit-bar').classList.add('hidden');
+            document.getElementById('score-card').classList.remove('hidden');
+
+            // Smooth scroll to top of score card
+            document.getElementById('score-card').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function scrollToFirstResolution() {
+            const firstQuestion = document.getElementById('question-card-0');
+            if (firstQuestion) {
+                firstQuestion.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function resetQuiz() {
+            if (Object.keys(userAnswers).length > 0 && !isSubmitted) {
+                if (!window.confirm("Deseja realmente reiniciar o simulado? Suas respostas atuais serão limpas.")) {
+                    return;
+                }
+            }
+
+            userAnswers = {};
+            isSubmitted = false;
+
+            document.getElementById('score-card').classList.add('hidden');
+            document.getElementById('intro-card').classList.remove('hidden');
+            document.getElementById('submit-bar').classList.remove('hidden');
+
+            renderQuestions();
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize quiz on window load
+        window.onload = function() {
+            renderQuestions();
+            updateProgress();
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado FAURGS - Ambiguidade Estrutural e Vícios de Linguagem</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for optimized long-form reading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Charis+SIL:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        paper: {
+                            50: '#fcfbf7',
+                            100: '#f7f4ed',
+                            200: '#ede8dc',
+                            300: '#ded7c4',
+                            800: '#2c2a25',
+                            900: '#1c1b18',
+                        },
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            600: '#1e40af',
+                            700: '#1d4ed8',
+                            800: '#1e3a8a',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Charis SIL', 'Georgia', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f7f4ed;
+            color: #2c2a25;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .quote-box {
+            font-family: 'Charis SIL', Georgia, serif;
+            background-color: #f0ebe1;
+            border-left: 4px solid #1e3a8a;
+            color: #1f2937;
+        }
+        .option-card {
+            transition: all 0.2s ease-in-out;
+            border: 1.5px solid #ded7c4;
+        }
+        .option-card:hover:not(.disabled) {
+            border-color: #1d4ed8;
+            background-color: #f0f7ff;
+            transform: translateY(-1px);
+        }
+        .option-card.selected {
+            border-color: #1d4ed8;
+            background-color: #e0effe;
+            box-shadow: 0 2px 4px rgba(29, 78, 216, 0.1);
+        }
+        .option-card.correct-target {
+            border-color: #16a34a !important;
+            background-color: #f0fdf4 !important;
+            color: #14532d !important;
+        }
+        .option-card.incorrect-target {
+            border-color: #dc2626 !important;
+            background-color: #fef2f2 !important;
+            color: #7f1d1d !important;
+        }
+        /* Soft custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #ede8dc;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ded7c4;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c5bc9f;
+        }
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; color: black; }
+            .option-card { border: 1px solid #ccc !important; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-brand-100 selection:text-brand-800">
+
+    <header class="sticky top-0 z-30 bg-paper-100/90 backdrop-blur-md border-b border-paper-200 shadow-sm no-print">
+        <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="bg-brand-800 text-white text-xs font-semibold px-2.5 py-1 rounded-md tracking-wider uppercase">FAURGS</span>
+                <h1 class="text-sm md:text-base font-bold text-paper-900 truncate">Português: Ambiguidade & Vícios de Linguagem</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="text-right">
+                    <span id="progress-text" class="text-xs md:text-sm font-semibold text-paper-800">0 / 10 respondidas</span>
+                </div>
+                <button id="reset-top-btn" onclick="resetQuiz()" class="text-xs text-stone-600 hover:text-brand-800 underline transition-colors">
+                    Reiniciar
+                </button>
+            </div>
+        </div>
+        <!-- Dynamic Progress Bar -->
+        <div class="w-full bg-paper-200 h-1.5">
+            <div id="progress-bar" class="bg-brand-700 h-1.5 w-0 transition-all duration-300"></div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto w-full px-4 py-8 flex-grow">
+        <!-- Title Banner -->
+        <div class="bg-paper-50 rounded-2xl p-6 md:p-8 border border-paper-200 shadow-sm mb-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <span class="inline-block px-3 py-1 bg-amber-100 text-amber-900 text-xs font-medium rounded-full mb-2">
+                        Estilo FAURGS • Análise Gramatical & Estilística
+                    </span>
+                    <h2 class="text-2xl md:text-3xl font-serif font-bold text-paper-900 leading-tight">
+                        Caderno de Questões Interativo
+                    </h2>
+                    <p class="text-paper-800 mt-2 text-sm md:text-base leading-relaxed">
+                        Responda às 10 questões abaixo. Ao finalizar, o sistema apresentará sua pontuação detalhada, juntamente com o gabarito comentado de cada item na própria página.
+                    </p>
+                </div>
+                <div class="flex flex-wrap gap-2 text-xs text-stone-600 self-start md:self-center">
+                    <span class="bg-paper-200 px-3 py-1.5 rounded-lg border border-paper-300">10 Questões</span>
+                    <span class="bg-paper-200 px-3 py-1.5 rounded-lg border border-paper-300">Resoluções Integradas</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="questions-container" class="space-y-8">
+            <!-- Questions will be rendered here dynamically via JS -->
+        </div>
+
+        <div class="mt-10 mb-12">
+            <div id="submit-section" class="bg-paper-50 p-6 rounded-2xl border border-paper-300 text-center shadow-sm">
+                <p class="text-sm text-paper-800 mb-4">
+                    Certifique-se de responder a todas as questões antes de enviar para obter o seu resultado.
+                </p>
+                <button id="submit-btn" onclick="submitQuiz()" class="w-full md:w-auto px-8 py-3.5 bg-brand-800 hover:bg-brand-700 text-white font-semibold rounded-xl shadow-md transition-all duration-200 transform hover:-translate-y-0.5">
+                    Finalizar Simulados e Ver Resoluções
+                </button>
+            </div>
+
+            <!-- Results Summary Section (Hidden initially) -->
+            <div id="result-summary" class="hidden bg-white p-6 md:p-8 rounded-2xl border-2 border-brand-600 shadow-lg space-y-6">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-6 border-b border-stone-200 pb-6">
+                    <div>
+                        <span class="text-xs font-semibold tracking-wider uppercase text-brand-800">Resultado do Simulado</span>
+                        <h3 class="text-3xl font-serif font-bold text-stone-900 mt-1" id="score-title">
+                            Você acertou <span id="score-text" class="text-brand-700">0</span> de 10 questões!
+                        </h3>
+                        <p id="score-feedback" class="text-sm text-stone-600 mt-1">
+                            Confira abaixo as resoluções explicadas item por item.
+                        </p>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <button onclick="scrollToTop()" class="px-4 py-2.5 bg-paper-200 hover:bg-paper-300 text-paper-900 font-medium text-sm rounded-lg transition-colors">
+                            Voltar ao Topo
+                        </button>
+                        <button onclick="resetQuiz()" class="px-4 py-2.5 bg-brand-800 hover:bg-brand-700 text-white font-medium text-sm rounded-lg transition-colors">
+                            Refazer Quiz
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Reference Table Section in Results -->
+                <div class="bg-paper-100 p-5 rounded-xl border border-paper-200">
+                    <h4 class="font-serif font-bold text-stone-800 text-lg mb-3">
+                        Síntese Pedagógica: Vícios de Linguagem e Desvios
+                    </h4>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs md:text-sm border-collapse">
+                            <thead>
+                                <tr class="border-b border-paper-300 text-paper-900 font-semibold bg-paper-200">
+                                    <th class="p-2.5">Tipo de Desvio</th>
+                                    <th class="p-2.5">Natureza do Vício</th>
+                                    <th class="p-2.5">Mecanismo Linguístico</th>
+                                    <th class="p-2.5">Impacto no Texto</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-paper-200 text-stone-700">
+                                <tr>
+                                    <td class="p-2.5 font-bold text-stone-900">Anfibologia</td>
+                                    <td class="p-2.5">Sintáctico-Semântico</td>
+                                    <td class="p-2.5">Ambiguidade gerada pela disposição dos termos na frase.</td>
+                                    <td class="p-2.5">Prejuízo à univocidade e clareza do enunciado.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-bold text-stone-900">Gerundismo</td>
+                                    <td class="p-2.5">Aspectual-Temporal</td>
+                                    <td class="p-2.5">Emprego inadequado da perífrase verbal de gerúndio para acções pontuais.</td>
+                                    <td class="p-2.5">Perda de objectividade e diluição de responsabilidade.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-bold text-stone-900">Solecismo</td>
+                                    <td class="p-2.5">Sintáctico</td>
+                                    <td class="p-2.5">Erro contra as normas de concordância, regência ou colocação pronominal.</td>
+                                    <td class="p-2.5">Quebra da correcção gramatical e desvio da norma culta.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-bold text-stone-900">Barbarismo</td>
+                                    <td class="p-2.5">Morfológico / Lexical</td>
+                                    <td class="p-2.5">Desvio de grafia, pronúncia ou flexão de palavras individuais.</td>
+                                    <td class="p-2.5">Prejuízo à norma ortográfica oficial e à propriedade lexical.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-bold text-stone-900">Cacofonia</td>
+                                    <td class="p-2.5">Fonético-Fonológico</td>
+                                    <td class="p-2.5">Encontro de sílabas ou palavras que produz som desagradável.</td>
+                                    <td class="p-2.5">Quebra da harmonia acústica e geração de duplo sentido cómico.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-paper-100 border-t border-paper-200 py-6 text-center text-xs text-stone-500 no-print">
+        <div class="max-w-4xl mx-auto px-4">
+            <p>Simulado Preparatório estilo FAURGS • Ambiguidade Estrutural e Vícios de Linguagem</p>
+            <p class="mt-1">Desenvolvido com foco na legibilidade, conforto visual e estudo continuado.</p>
+        </div>
+    </footer>
+
+    <script>
+        const questionsData = [
+            {
+                id: 1,
+                title: "Questão 01",
+                text: "Considere a seguinte frase adaptada de um relatório de gestão de recursos humanos de uma autarquia pública:",
+                quote: `"O coordenador de equipa informou o técnico de informática de que a sua nomeação para o cargo de chefia seria publicada no Diário Oficial, gerando apreensão entre os demais colaboradores."`,
+                subtext: "Sobre a estrutura sintáctico-semântica do período acima, analise as seguintes afirmações:\n\n" +
+                         "I - O emprego do pronome possessivo de terceira pessoa \"sua\" acarreta anfibologia, uma vez que, sob o ponto de vista estritamente sintáctico, pode referir-se tanto ao coordenador de equipa quanto ao técnico de informática.\n" +
+                         "II - A ambiguidade estrutural identificada na frase seria desfeita caso o pronome possessivo fosse substituído por \"da nomeação dele\" ou \"da nomeação deste\", especificando de forma inequívoca o referente pretendido pelo redator.\n" +
+                         "III - Do ponto de vista dos vícios de linguagem, a formulação acima apresenta um solecismo de colocação pronominal que prejudica de forma directa a clareza e a objectividade do texto administrativo.\n\n" +
+                         "Quais estão correctas?",
+                options: [
+                    { key: "A", text: "(A) Apenas I." },
+                    { key: "B", text: "(B) Apenas II." },
+                    { key: "C", text: "(C) Apenas I e II." },
+                    { key: "D", text: "(D) Apenas II e III." },
+                    { key: "E", text: "(E) I, II e III." }
+                ],
+                correctAnswer: "C",
+                resolution: `<strong>Gabarito: (C)</strong><br><br>
+                A análise detalhada das afirmações revela os seguintes aspectos linguísticos:<br>
+                • <strong>Afirmação I (Correcta):</strong> O emprego do pronome possessivo de terceira pessoa "sua" gera um caso clássico de ambiguidade estrutural ou anfibologia. Sob a perspectiva puramente sintáctica, o pronome pode referir-se tanto ao termo "coordenador de equipa" (sujeito da oração principal) quanto ao termo "técnico de informática" (objeto indirecto da oração principal), impossibilitando o leitor de determinar de quem seria a nomeação publicada.<br>
+                • <strong>Afirmação II (Correcta):</strong> Para neutralizar a ambiguidade de referentes da terceira pessoa, a substituição por sintagmas preposicionados associados a pronomes pessoais ou demonstrativos é o recurso preconizado pela norma culta. A substituição por "dele" remete ao primeiro elemento mencionado (o coordenador), ao passo que o pronome demonstrativo "deste" retoma, por regra de coesão anafórica espacial, o referente mais próximo (o técnico).<br>
+                • <strong>Afirmação III (Incorrecta):</strong> O desvio identificado na frase não constitui um solecismo de colocação pronominal. Os solecismos de colocação envolvem erros de próclise, mesóclise ou ênclise de pronomes oblíquos átonos. No caso em apreço, trata-se de um desvio de natureza estritamente semântica e referencial decorrente da anfibologia gerada pelo pronome possessivo de terceira pessoa.`
+            },
+            {
+                id: 2,
+                title: "Questão 02",
+                text: "Considere o excerto abaixo, adaptado de um artigo de opinião sobre práticas linguísticas no ambiente de trabalho e a norma-padrão da língua:",
+                quote: `"Há implicações éticas no vício de linguagem. O uso excessivo e desnecessário do gerúndio é conhecido como endorreia, cuja forma popular é a construção 'vou estar + gerúndio', uma perífrase verbal."`,
+                subtext: "Com base na análise do vício de linguagem mencionado no texto, assinale V (verdadeiro) ou F (falso) nas afirmações que se seguem:\n\n" +
+                         "( ) A estrutura perifrástica \"vou estar passando o recado\" caracteriza-se como gerundismo porque projeta uma acção pontual de forma desnecessariamente prolongada e contínua no futuro.\n" +
+                         "( ) Sob a perspectiva da norma culta, a substituição da referida perífrase por \"passarei o recado\" ou \"vou passar o recado\" preserva o valor temporal de futuro e elimina o vício de linguagem.\n" +
+                         "( ) O gerundismo é classificado taxonomicamente como um barbarismo prosódico, dado que altera a pronúncia correcta da desinência do gerúndio na linguagem coloquial.\n" +
+                         "( ) Do ponto de vista estritamente comunicativo, esse vício de linguagem é considerado prejudicial por atenuar a clareza e comprometer a objectividade das declarações.\n\n" +
+                         "A sequência correcta de preenchimento dos parênteses, de cima para baixo, é:",
+                options: [
+                    { key: "A", text: "(A) V – V – F – V." },
+                    { key: "B", text: "(B) V – F – V – F." },
+                    { key: "C", text: "(C) F – V – F – V." },
+                    { key: "D", text: "(D) F – F – V – V." },
+                    { key: "E", text: "(E) V – V – V – F." }
+                ],
+                correctAnswer: "A",
+                resolution: `<strong>Gabarito: (A)</strong><br><br>
+                A avaliação das afirmações fundamenta-se nos seguintes critérios:<br>
+                • <strong>Primeira afirmação (Verdadeira):</strong> O gerundismo caracteriza-se pela inadequação no aspecto verbal. O gerúndio deve ser empregado para indicar acções durativas ou simultâneas a outra acção. Quando se utiliza a estrutura "vou estar passando" para referir um ato pontual e instantâneo no futuro, ocorre uma distorção do aspecto aspectual do gerúndio.<br>
+                • <strong>Segunda afirmação (Verdadeira):</strong> Para restituir a correcção gramatical e a elegância estilística, a perífrase viciosa deve ser substituída por formas que traduzam com precisão a pontualidade do facto no futuro. Tanto o futuro do presente simples ("passarei") quanto a locução verbal com verbo principal no infinitivo ("vou passar") cumprem este papel em plena consonância com a norma culta.<br>
+                • <strong>Terceira afirmação (Falsa):</strong> O gerundismo é um vício de sintaxe (solecismo) e não um barbarismo prosódico. O barbarismo prosódico refere-se a erros na acentuação tônica das palavras (silabada).<br>
+                • <strong>Quarta afirmação (Verdadeira):</strong> Sob o ponto de vista comunicativo e pragmático, o uso sistemático e inadequado de tais estruturas perifrásticas esvazia o compromisso do locutor com a acção anunciada, comprometendo a clareza, a objectividade e a assunção de responsabilidades no discurso administrativo.`
+            },
+            {
+                id: 3,
+                title: "Questão 03",
+                text: "Considere a frase abaixo, extraída de um manual de redacção oficial:",
+                quote: `"Dá-me outro abraço apertado do qual as tuas mãos participam com fervor."`,
+                subtext: "Caso a forma verbal \"participam\" fosse substituída por \"se envolvem\", mantendo-se o termo antecedente \"outro abraço apertado\", a correcta regência do novo verbo exigirá a alteração do elemento introdutório da oração relativa para:",
+                options: [
+                    { key: "A", text: "(A) no qual." },
+                    { key: "B", text: "(B) ao qual." },
+                    { key: "C", text: "(C) do qual." },
+                    { key: "D", text: "(D) pelo qual." },
+                    { key: "E", text: "(E) com o qual." }
+                ],
+                correctAnswer: "A",
+                resolution: `<strong>Gabarito: (A)</strong><br><br>
+                A questão avalia a capacidade de reestruturar orações relativas com base na regência verbal exigida pelo novo predicado:<br>
+                • Na frase original, o verbo "participar" rege a preposição "de" ("quem participa, participa <strong>de</strong> algo"), o que justifica a presença do elemento "do qual" (de + o qual), tendo como antecedente o termo masculino singular "outro abraço apertado".<br>
+                • Ao substituir o verbo "participar" pelo verbo pronominal "envolver-se", a regência altera-se substancialmente. Quem se envolve, envolve-se <strong>em</strong> alguma coisa.<br>
+                • Assim, a fusão da preposição "em" exigida pelo verbo com o pronome relativo masculino singular "o qual" resulta obrigatoriamente na contração <strong>no qual</strong> (em + o qual). O emprego de qualquer outra preposição geraria um solecismo de regência verbal.`
+            },
+            {
+                id: 4,
+                title: "Questão 04",
+                text: "O paralelismo sintáctico é um recurso estrutural de extrema valia para a clareza e elegância do texto dissertativo-argumentativo em concursos públicos. Analise a construção sintáctica do período que se segue:",
+                quote: `"O relatório da auditoria concluiu que as irregularidades administrativas deveram-se tanto à inoperância dos mecanismos de controle interno quanto aos níveis inferiores de governo local atuarem sem a devida supervisão."`,
+                subtext: "Assinale a alternativa que indica o principal problema de construção gramatical dessa frase e a sua respectiva consequência semântica:",
+                options: [
+                    { key: "A", text: "(A) Ambiguidade lexical gerada pela polissemia do vocábulo \"irregularidades\"." },
+                    { key: "B", text: "(B) Quebra de paralelismo sintáctico que acarreta anfibologia estrutural e prejuízo à coesão textual." },
+                    { key: "C", text: "(C) Ocorrência de solecismo de regência verbal por omissão da preposição exigida pelo verbo \"dever\"." },
+                    { key: "D", text: "(D) Pleonasmo vicioso decorrente do emprego simultâneo de \"tanto\" e \"quanto\"." },
+                    { key: "E", text: "(E) Cacofonia gerada pelo encontro fonético entre as palavras \"devida\" e \"supervisão\"." }
+                ],
+                correctAnswer: "B",
+                resolution: `<strong>Gabarito: (B)</strong><br><br>
+                A explicação para a quebra de simetria baseia-se nos seguintes factores:<br>
+                • O período estabelece uma correlação comparativa aditiva por meio da estrutura correlativa "tanto... quanto...".<br>
+                • Para que o paralelismo sintáctico seja preservado, os elementos coordenados por essa estrutura devem apresentar a mesma categoria gramatical.<br>
+                • O primeiro termo correlacionado é um sintagma nominal preposicionado: "à inoperância dos mecanismos de controle interno" (composto pela preposição "a" exigida pelo nome "deveram-se" mais o artigo "a" e o substantivo "inoperância").<br>
+                • O segundo termo correlacionado, contudo, é uma oração reduzida de infinitivo com sujeito expresso: "aos níveis inferiores de governo local atuarem...".<br>
+                • Essa discrepância de estruturas (um sintagma nominal coordenado a uma estrutura oracional) configura uma grave quebra de paralelismo sintáctico, comprometendo a fluidez e a coesão gramatical do texto.`
+            },
+            {
+                id: 5,
+                title: "Questão 05",
+                text: "No que diz respeito à regência verbal e ao emprego de pronomes relativos, a omissão ou a inserção incorrecta de preposições pode configurar falha gramatical grave. Analise as seguintes construções:",
+                subtext: "1 - Este é o documento de que o director se esqueceu durante a reunião plenária.\n" +
+                         "2 - Este é o documento que o director esqueceu durante a reunião plenária.\n" +
+                         "3 - Este é o documento que o director se esqueceu durante a reunião plenária.\n\n" +
+                         "Quais estruturas estão correctas segundo a norma-padrão?",
+                options: [
+                    { key: "A", text: "(A) Apenas 1." },
+                    { key: "B", text: "(B) Apenas 2." },
+                    { key: "C", text: "(C) Apenas 1 e 2." },
+                    { key: "D", text: "(D) Apenas 2 e 3." },
+                    { key: "E", text: "(E) 1, 2 e 3." }
+                ],
+                correctAnswer: "C",
+                resolution: `<strong>Gabarito: (C)</strong><br><br>
+                A correcção das frases é analisada a partir das possibilidades de regência do verbo "esquecer":<br>
+                • <strong>Frase 1 (Correcta):</strong> O verbo "esquecer-se" é pronominal e exige a preposição "de" (esquecer-se <strong>de</strong> algo). Portanto, o pronome relativo que introduz a oração adjetiva deve vir precedido da preposição "de", resultando na construção "documento <strong>de que</strong> o director se esqueceu".<br>
+                • <strong>Frase 2 (Correcta):</strong> O verbo "esquecer", quando não pronominal, é transitivo directo, não exigindo qualquer preposição (esquecer algo). Logo, o pronome relativo não deve ser precedido de preposição, resultando na construção correcta "documento <strong>que</strong> o director esqueceu".<br>
+                • <strong>Frase 3 (Incorrecta):</strong> Ocorre uma falha gramatical decorrente do cruzamento de regências. O redator utilizou o pronome oblíquo "se" (tornando o verbo pronominal), mas omitiu a preposição "de" exigida por essa forma pronominal. Essa omissão caracteriza um solecismo de regência verbal.`
+            },
+            {
+                id: 6,
+                title: "Questão 06",
+                text: "A cacofonia é um vício de linguagem caracterizado pelo som desagradável ou pela formação de termos com sentido ridículo ou obsceno resultantes do encontro de sílabas ou palavras.",
+                subtext: "Assinale a alternativa em que a frase apresentada NÃO contém nenhuma ocorrência de cacofonia:",
+                options: [
+                    { key: "A", text: "(A) A instituição pagará uma gratificação especial de cem reais por cada tarefa concluída de forma satisfatória." },
+                    { key: "B", text: "(B) Ela tinha uma enorme facilidade para resolver equações matemáticas complexas sem o auxílio de calculadoras." },
+                    { key: "C", text: "(C) O novo gestor depositou a sua confiança na equipa de desenvolvimento técnico, delegando-lhes plena autonomia." },
+                    { key: "D", text: "(D) A assistente social informou que a documentação necessária para o benefício já foi entregue em mão." },
+                    { key: "E", text: "(E) O coordenador pedagógico afirmou que a aprovação do projecto de pesquisa dependia inteiramente de ti." }
+                ],
+                correctAnswer: "C",
+                resolution: `<strong>Gabarito: (C)</strong><br><br>
+                A análise acústica de cada alternativa revela a presença ou ausência de cacofonias:<br>
+                • <strong>(A) Incorrecta:</strong> Ocorre cacofonia no segmento "por cada", cuja junção silábica produz o som desagradável e cómico "porcada".<br>
+                • <strong>(B) Incorrecta:</strong> Apresenta o cacófato "ela tinha", cujo encontro sonoro assemelha-se à palavra "latinha".<br>
+                • <strong>(C) Correcta (Gabarito):</strong> A frase não apresenta quaisquer colisões fonéticas desagradáveis ou formações de palavras ambíguas por via sonora. O emprego do pronome possessivo de terceira pessoa "sua" é inequívoco, pois refere-se directamente ao sujeito da oração "O novo gestor".<br>
+                • <strong>(D) Incorrecta:</strong> Ocorre o cacófato "em mão", cuja pronúncia rápida evoca o vocábulo "mamão".<br>
+                • <strong>(E) Incorrecta:</strong> Apresenta cacofonia no encadeamento "de ti", cuja homofonia assemelha-se ao verbo "deti" (forma irregular ou arcaica de deter), comprometendo a clareza fonética.`
+            },
+            {
+                id: 7,
+                title: "Questão 07",
+                text: "A posição dos adjuntos adverbiais em um período pode alterar substancialmente o sentido planejado ou introduzir dubiedades indesejadas. Analise a seguinte frase:",
+                quote: `"O secretário municipal anunciou a instauração do processo administrativo contra o funcionário que cometeu desvio de conduta rapidamente."`,
+                subtext: "Sobre a frase em análise, são feitas as seguintes afirmações:\n\n" +
+                         "I - O advérbio \"rapidamente\" gera ambiguidade de escopo, pois sintacticamente pode modificar o verbo \"anunciou\" ou o verbo \"cometeu\".\n" +
+                         "II - Caso o redator desloque o advérbio para o início do período — \"Rapidamente, o secretário municipal anunciou...\" —, o adjunto passa a modificar exclusivamente a acção do anúncio, neutralizando a ambiguidade.\n" +
+                         "III - A reescrita \"O secretário municipal anunciou a instauração do processo administrativo contra o funcionário que rapidamente cometeu desvio de conduta\" vincula o advérbio à acção expressa na oração subordinada adjetiva.\n\n" +
+                         "Quais estão correctas?",
+                options: [
+                    { key: "A", text: "(A) Apenas I." },
+                    { key: "B", text: "(B) Apenas II." },
+                    { key: "C", text: "(C) Apenas I e II." },
+                    { key: "D", text: "(D) Apenas II e III." },
+                    { key: "E", text: "(E) I, II e III." }
+                ],
+                correctAnswer: "E",
+                resolution: `<strong>Gabarito: (E)</strong><br><br>
+                A posição do adjunto adverbial é determinante para a definição do sentido do período:<br>
+                • <strong>Afirmação I (Correcta):</strong> O advérbio "rapidamente", posicionado ao final do período, pode modificar tanto a acção de anunciar (o secretário fez o anúncio de forma rápida) quanto a acção de cometer o desvio (o funcionário praticou o desvio rapidamente), caracterizando uma ambiguidade de escopo.<br>
+                • <strong>Afirmação II (Correcta):</strong> Ao deslocar o advérbio para o início do período ("Rapidamente, o secretário..."), o adjunto passa a modificar de forma exclusiva a acção expressa pelo verbo principal da oração matriz ("anunciou"), desfazendo a dubiedade.<br>
+                • <strong>Afirmação III (Correcta):</strong> Ao posicionar o advérbio imediatamente antes do verbo "cometeu", o redator restringe semanticamente a rapidez à acção da oração subordinada, clarificando que o funcionário agiu de forma veloz ao cometer a falta funcional.`
+            },
+            {
+                id: 8,
+                title: "Questão 08",
+                text: "A grafia correcta de termos técnicos e o emprego de formas verbais impessoais são frequentemente avaliados em concursos sob a rubrica de vícios de linguagem e correlação sintáctica. Considere o seguinte período:",
+                quote: `"Já ______ muitos anos que só ______ ruínas das edificações públicas que se ______ na colina."`,
+                subtext: "Assinale a alternativa que preenche, correcta e respectivamente, as lacunas do período acima:",
+                options: [
+                    { key: "A", text: "(A) fazem – existe – mobilisavam" },
+                    { key: "B", text: "(B) fazem – existem – mobilisavam" },
+                    { key: "C", text: "(C) faz – existem – mobilizavam" },
+                    { key: "D", text: "(D) faz – existe – mobilizavam" },
+                    { key: "E", text: "(E) faz – existem – mobilisavam" }
+                ],
+                correctAnswer: "C",
+                resolution: `<strong>Gabarito: (C)</strong><br><br>
+                A resolução fundamenta-se nos seguintes preceitos ortográficos e de concordância verbal:<br>
+                • <strong>Primeira lacuna:</strong> O verbo <em>fazer</em>, quando empregado para exprimir tempo decorrido, comporta-se como verbo impessoal. Não possuindo sujeito, deve permanecer obrigatoriamente flexionado na terceira pessoa do singular: <strong>faz</strong>. O emprego de "fazem" constitui um solecismo de concordância vulgar.<br>
+                • <strong>Segunda lacuna:</strong> O verbo <em>existir</em> é pessoal e concorda normalmente com o seu sujeito ("ruínas das edificações públicas"). Como o sujeito se encontra no plural, a forma verbal correspondente deve ser flexionada na terceira pessoa do plural: <strong>existem</strong>.<br>
+                • <strong>Terceira lacuna:</strong> O verbo <em>mobilizar</em> (e as suas respectivas flexões no pretérito imperfeito do indicativo, como <em>mobilizavam</em>) grafam-se com a consoante "z" no seu radical. A utilização da consoante "s" ("mobilisavam") constitui um desvio ortográfico (barbarismo).`
+            },
+            {
+                id: 9,
+                title: "Questão 09",
+                text: "A ambiguidade estrutural pode decorrer da ausência de distinção clara entre as funções de agente e de paciente de uma acção expressa por um substantivo de natureza verbal. Analise a seguinte frase:",
+                quote: `"A nomeação do novo reitor da universidade gerou intensos debates na assembleia estudantil."`,
+                subtext: "Sobre a frase acima, considere as afirmações:\n\n" +
+                         "I - A expressão \"do novo reitor\" actua sintacticamente como um termo ambíguo, podendo ser interpretada tanto como o agente que realiza a nomeação quanto como o paciente que recebe a nomeação.\n" +
+                         "II - A ambiguidade seria desfeita caso a frase fosse reescrita como \"A nomeação que o novo reitor fez...\" (atribuindo papel agente) ou \"A nomeação do novo reitor pelo conselho...\" (atribuindo papel paciente).\n" +
+                         "III - O termo \"do novo reitor\" exerce, de forma inequívoca, a função de adjunto adnominal do substantivo \"nomeação\", o que impede qualquer outra interpretação semântica.\n\n" +
+                         "Quais estão correctas?",
+                options: [
+                    { key: "A", text: "(A) Apenas I." },
+                    { key: "B", text: "(B) Apenas II." },
+                    { key: "C", text: "(C) Apenas I e II." },
+                    { key: "D", text: "(D) Apenas II e III." },
+                    { key: "E", text: "(E) I, II e III." }
+                ],
+                correctAnswer: "C",
+                resolution: `<strong>Gabarito: (C)</strong><br><br>
+                A ambiguidade de termos nominais associados a substantivos abstractos de acção é explicada sintacticamente da seguinte forma:<br>
+                • <strong>Afirmação I (Correcta):</strong> O substantivo abstrato "nomeação" exige um termo que complete o seu sentido. O sintagma "do novo reitor" assume papel ambíguo porque pode denotar que o reitor realizou a acção de nomear alguém (reitor como agente - adjunto adnominal) ou que o reitor foi o indivíduo escolhido para o cargo (reitor como paciente - complemento nominal).<br>
+                • <strong>Afirmação II (Correcta):</strong> As reescritas sugeridas resolvem a dubiedade ao explicitar os papéis semânticos. Ao utilizar a oração adjetiva "que o novo reitor fez", estabelece-se de forma clara o papel ativo. Ao passo que a inserção do agente da passiva "pelo conselho" define sem margem para dúvidas que o reitor sofreu a acção de ser nomeado.<br>
+                • <strong>Afirmação III (Incorrecta):</strong> O termo "do novo reitor" não actua de forma inequívoca apenas como adjunto adnominal. Como demonstrado na afirmação I, ele pode exercer a função sintáctica de complemento nominal (valor passivo), sendo esta dualidade de funções a causa directa da ambiguidade estrutural analisada.`
+            },
+            {
+                id: 10,
+                title: "Questão 10",
+                text: "Os processos de formação de palavras e a grafia correcta de termos são fundamentais para evitar desvios de clareza e barbarismos ortográficos. Considere as seguintes afirmações sobre os vocábulos \"realmente\", \"burocracia\" e \"desperdício\":",
+                subtext: "I - O vocábulo \"realmente\" é formado pelo processo de derivação sufixal, através do acréscimo do sufixo \"-mente\" ao morfema lexical \"real\".\n" +
+                         "II - A palavra \"burocracia\" constitui um caso de hibridismo, uma vez que é formada a partir da junção de radicais oriundos de línguas distintas.\n" +
+                         "III - A palavra \"desperdício\" apresenta desvio de grafia na sua primeira sílaba, devendo ser grafada como \"disperdício\" para manter a adequação à norma-padrão.\n\n" +
+                         "Quais estão correctas?",
+                options: [
+                    { key: "A", text: "(A) Apenas I." },
+                    { key: "B", text: "(B) Apenas II." },
+                    { key: "C", text: "(C) Apenas I e II." },
+                    { key: "D", text: "(D) Apenas II e III." },
+                    { key: "E", text: "(E) I, II e III." }
+                ],
+                correctAnswer: "C",
+                resolution: `<strong>Gabarito: (C)</strong><br><br>
+                A correcção morfológica e lexical baseia-se nos seguintes pontos:<br>
+                • <strong>Afirmação I (Correcta):</strong> O advérbio "realmente" origina-se através do processo de derivação sufixal, no qual o sufixo adverbializador "-mente" é anexado ao adjectivo-base "real", alterando a sua classe gramatical.<br>
+                • <strong>Afirmação II (Correcta):</strong> A palavra "burocracia" é um exemplo típico de hibridismo. Ela une o radical francês <em>bureau</em> (escritório, mesa) ao radical grego <em>kratos</em> (poder, governo), combinando elementos de idiomas distintos para formar um novo termo lexical.<br>
+                • <strong>Afirmação III (Incorrecta):</strong> A palavra "desperdício" está correctamente grafada com a vogal "e" na sua sílaba inicial. A grafia "disperdício" é incorrecta e constitui um barbarismo ortográfico decorrente de um desvio de pronúncia coloquial que interfere na escrita regular do vocábulo.`
+            }
+        ];
+
+        let userAnswers = {};
+        let isSubmitted = false;
+
+        function renderQuestions() {
+            const container = document.getElementById('questions-container');
+            container.innerHTML = '';
+
+            questionsData.forEach((q, index) => {
+                const card = document.createElement('div');
+                card.id = `question-card-${q.id}`;
+                card.className = "bg-paper-50 rounded-2xl p-6 md:p-8 border border-paper-300 shadow-sm transition-all duration-300";
+
+                let quoteHtml = q.quote ? `<div class="quote-box p-4 rounded-xl my-4 text-base italic leading-relaxed">${q.quote}</div>` : '';
+                
+                let subtextFormatted = q.subtext ? q.subtext.replace(/\n/g, '<br>') : '';
+
+                let optionsHtml = q.options.map(opt => `
+                    <button 
+                        id="q${q.id}-opt-${opt.key}"
+                        onclick="selectOption(${q.id}, '${opt.key}')" 
+                        class="option-card w-full text-left p-4 rounded-xl flex items-start space-x-3 text-sm md:text-base text-paper-900 bg-white font-medium"
+                    >
+                        <span class="inline-block w-6 h-6 rounded-full border border-stone-400 flex-shrink-0 flex items-center justify-center text-xs font-bold text-stone-600 bg-paper-100 mt-0.5">
+                            ${opt.key}
+                        </span>
+                        <span class="flex-grow">${opt.text}</span>
+                    </button>
+                `).join('');
+
+                card.innerHTML = `
+                    <div class="flex items-center justify-between mb-4 border-b border-paper-200 pb-3">
+                        <span class="text-xs font-bold tracking-wider uppercase text-brand-800 bg-brand-50 border border-brand-100 px-3 py-1 rounded-md">
+                            ${q.title}
+                        </span>
+                        <span id="badge-status-${q.id}" class="text-xs text-stone-600 font-medium bg-paper-200 px-2.5 py-1 rounded-md">
+                            Não respondida
+                        </span>
+                    </div>
+                    <p class="text-paper-900 text-base md:text-lg leading-relaxed font-normal">${q.text}</p>
+                    ${quoteHtml}
+                    ${subtextFormatted ? `<p class="text-paper-800 text-sm md:text-base leading-relaxed my-4 font-normal">${subtextFormatted}</p>` : ''}
+                    
+                    <div class="space-y-3 mt-6">
+                        ${optionsHtml}
+                    </div>
+
+                    <!-- Resolution Container (Initially hidden until submitted) -->
+                    <div id="resolution-${q.id}" class="hidden mt-6 pt-6 border-t border-paper-300">
+                        <div class="bg-paper-100 rounded-xl p-5 border border-paper-300">
+                            <h4 class="font-serif font-bold text-brand-800 text-base md:text-lg mb-2 flex items-center gap-2">
+                                <svg class="w-5 h-5 text-brand-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                Resolução Detalhada
+                            </h4>
+                            <div class="text-stone-800 text-sm md:text-base leading-relaxed space-y-2">
+                                ${q.resolution}
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+        }
+
+        function selectOption(questionId, key) {
+            if (isSubmitted) return; // Freeze selection after submitting
+
+            userAnswers[questionId] = key;
+
+            // Update option styles for this question
+            const q = questionsData.find(item => item.id === questionId);
+            q.options.forEach(opt => {
+                const btn = document.getElementById(`q${questionId}-opt-${opt.key}`);
+                if (opt.key === key) {
+                    btn.classList.add('selected');
+                } else {
+                    btn.classList.remove('selected');
+                }
+            });
+
+            // Update status badge
+            const badge = document.getElementById(`badge-status-${questionId}`);
+            badge.innerText = "Respondida";
+            badge.className = "text-xs font-medium text-brand-800 bg-brand-50 border border-brand-100 px-2.5 py-1 rounded-md";
+
+            updateProgressBar();
+        }
+
+        function updateProgressBar() {
+            const answeredCount = Object.keys(userAnswers).length;
+            const percentage = (answeredCount / questionsData.length) * 100;
+            
+            document.getElementById('progress-bar').style.width = `${percentage}%`;
+            document.getElementById('progress-text').innerText = `${answeredCount} / ${questionsData.length} respondidas`;
+        }
+
+        function submitQuiz() {
+            if (isSubmitted) return;
+
+            const total = questionsData.length;
+            const answeredCount = Object.keys(userAnswers).length;
+
+            if (answeredCount < total) {
+                // Inline confirmation box without using window.confirm
+                const confirmSubmit = createCustomDialog(
+                    "Questões Pendentes",
+                    `Você respondeu ${answeredCount} de ${total} questões. Deseja finalizar assim mesmo?`,
+                    () => executeSubmission()
+                );
+                return;
+            }
+
+            executeSubmission();
+        }
+
+        function executeSubmission() {
+            isSubmitted = true;
+            let score = 0;
+
+            questionsData.forEach(q => {
+                const selectedKey = userAnswers[q.id];
+                const isCorrect = selectedKey === q.correctAnswer;
+                if (isCorrect) score++;
+
+                // Highlight buttons
+                q.options.forEach(opt => {
+                    const btn = document.getElementById(`q${q.id}-opt-${opt.key}`);
+                    btn.classList.add('disabled');
+                    btn.style.cursor = 'default';
+
+                    if (opt.key === q.correctAnswer) {
+                        btn.classList.add('correct-target');
+                    } else if (opt.key === selectedKey && !isCorrect) {
+                        btn.classList.add('incorrect-target');
+                    }
+                });
+
+                // Update badge
+                const badge = document.getElementById(`badge-status-${q.id}`);
+                if (!selectedKey) {
+                    badge.innerText = "Não respondida";
+                    badge.className = "text-xs font-semibold text-stone-600 bg-stone-200 px-2.5 py-1 rounded-md";
+                } else if (isCorrect) {
+                    badge.innerText = "Correto ✓";
+                    badge.className = "text-xs font-semibold text-green-800 bg-green-100 border border-green-200 px-2.5 py-1 rounded-md";
+                } else {
+                    badge.innerText = "Incorreto ✗";
+                    badge.className = "text-xs font-semibold text-red-800 bg-red-100 border border-red-200 px-2.5 py-1 rounded-md";
+                }
+
+                // Show resolution box directly under each question
+                const resBox = document.getElementById(`resolution-${q.id}`);
+                resBox.classList.remove('hidden');
+            });
+
+            // Display Results Summary
+            document.getElementById('submit-section').classList.add('hidden');
+            const summaryDiv = document.getElementById('result-summary');
+            summaryDiv.classList.remove('hidden');
+
+            document.getElementById('score-text').innerText = score;
+            
+            let feedback = "";
+            const pct = (score / questionsData.length) * 100;
+            if (pct === 100) {
+                feedback = "Desempenho perfeito! Excelente domínio sobre os temas da FAURGS.";
+            } else if (pct >= 70) {
+                feedback = "Ótimo resultado! Você demonstra boa compreensão de regência e ambiguidade.";
+            } else if (pct >= 50) {
+                feedback = "Bom desempenho. Revise as questões incorretas para consolidar o aprendizado.";
+            } else {
+                feedback = "Recomendamos revisar a tabela explicativa e os conceitos de vícios de linguagem abaixo.";
+            }
+            document.getElementById('score-feedback').innerText = feedback;
+
+            // Scroll down to results summary smoothly
+            summaryDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function createCustomDialog(title, text, onConfirm) {
+            const overlay = document.createElement('div');
+            overlay.className = "fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 no-print";
+            
+            overlay.innerHTML = `
+                <div class="bg-paper-50 rounded-2xl max-w-md w-full p-6 border border-paper-300 shadow-xl space-y-4">
+                    <h3 class="text-lg font-serif font-bold text-paper-900">${title}</h3>
+                    <p class="text-sm text-stone-700 leading-relaxed">${text}</p>
+                    <div class="flex justify-end space-x-3 pt-2">
+                        <button id="dialog-cancel" class="px-4 py-2 bg-paper-200 hover:bg-paper-300 text-stone-800 text-sm font-medium rounded-lg transition-colors">
+                            Continuar Respondendo
+                        </button>
+                        <button id="dialog-confirm" class="px-4 py-2 bg-brand-800 hover:bg-brand-700 text-white text-sm font-medium rounded-lg transition-colors">
+                            Finalizar Assim Mesmo
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(overlay);
+
+            document.getElementById('dialog-cancel').onclick = () => {
+                document.body.removeChild(overlay);
+            };
+
+            document.getElementById('dialog-confirm').onclick = () => {
+                document.body.removeChild(overlay);
+                onConfirm();
+            };
+        }
+
+        function resetQuiz() {
+            userAnswers = {};
+            isSubmitted = false;
+
+            document.getElementById('submit-section').classList.remove('hidden');
+            document.getElementById('result-summary').classList.add('hidden');
+
+            renderQuestions();
+            updateProgressBar();
+            scrollToTop();
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize on page load
+        window.onload = function() {
+            renderQuestions();
+            updateProgressBar();
+        };
+    </script>
+</body>
+</html>

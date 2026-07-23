@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado CEFETMINAS - Gêneros e Tipologias</title>
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #2d3436;
+            --accent-color: #0984e3;
+            --secondary-text: #636e72;
+            --border-color: #dfe6e9;
+            --correct-bg: #dff9fb;
+            --correct-border: #22a6b3;
+            --wrong-bg: #fab1a0;
+            --container-width: 850px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: var(--container-width);
+            width: 100%;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+        }
+
+        h1 { font-size: 2rem; color: #1e272e; margin-bottom: 10px; }
+        p.subtitle { color: var(--secondary-text); font-style: italic; }
+
+        .text-block {
+            background-color: #f9f9f9;
+            padding: 25px;
+            border-left: 5px solid var(--accent-color);
+            margin: 30px 0;
+            font-size: 1.1rem;
+        }
+
+        .text-block h2 { margin-top: 0; font-size: 1.3rem; color: #2d3436; }
+
+        .image-placeholder {
+            background: #eee;
+            border: 1px dashed #ccc;
+            padding: 20px;
+            text-align: center;
+            margin: 15px 0;
+            font-style: italic;
+            color: #666;
+        }
+
+        .question-container {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .question-title {
+            font-weight: bold;
+            font-size: 1.15rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .options {
+            list-style: none;
+            padding: 0;
+        }
+
+        .option-item {
+            margin-bottom: 10px;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .option-item:hover {
+            background-color: #f1f2f6;
+        }
+
+        .option-item input {
+            margin-right: 15px;
+            margin-top: 5px;
+        }
+
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 40px;
+            transition: background 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #0773c5;
+        }
+
+        /* Results Section */
+        #results-section {
+            display: none;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 4px double var(--border-color);
+        }
+
+        .score-box {
+            text-align: center;
+            padding: 30px;
+            background: #f1f2f6;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+
+        .score-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .resolution-card {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            background: #fff;
+            border: 1px solid var(--border-color);
+        }
+
+        .res-correct { border-left: 10px solid #2ecc71; }
+        .res-wrong { border-left: 10px solid #e74c3c; }
+
+        .res-title { font-weight: bold; margin-bottom: 10px; display: block; }
+        .res-text { font-size: 0.95rem; color: #444; }
+        .correct-ans-label { color: #27ae60; font-weight: bold; }
+
+        @media (max-width: 600px) {
+            .container { padding: 15px; }
+            h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Simulado Língua Portuguesa</h1>
+        <p class="subtitle">Padrão Fundação CEFETMINAS: Gêneros e Tipologias</p>
+    </header>
+
+    <form id="quiz-form">
+        <!-- TEXTO I -->
+        <div class="text-block">
+            <h2>TEXTO I: A obsolescência da alma</h2>
+            <p>Dizia-se antigamente que os objetos tinham alma. A cadeira de balanço da avó gemia com as mudanças de tempo, como se sofresse de reumatismo lenhoso. O relógio de parede, com seu tique-taque asmático, parecia ditar o ritmo cardíaco da casa. Havia uma simbiose entre o proprietário e a propriedade; um desgaste mútuo, um envelhecer solidário.</p>
+            <p>Hoje, vivemos a era da obsolescência programada, não apenas dos dispositivos, mas dos afetos. Meu celular novo, comprado há seis meses, já me olha com a arrogância de quem sabe que será substituído pelo modelo "Pro" ou "Ultra" na próxima estação. Ele não teme a morte; ele anseia pelo descarte, pois sua "alma" está na nuvem, pronta para reencarnar em um corpo de titânio mais leve e mais rápido.</p>
+            <p>Nós, contudo, permanecemos analógicos. Nossa memória não faz backup automático. Nossas falhas não se corrigem com uma atualização de software. Quando quebramos, não há peça de reposição original. Talvez por isso olhemos com tanta desconfiança para as máquinas perfeitas: elas nos lembram, por contraste, a nossa irremediável, suja e bela finitude.</p>
+        </div>
+
+        <div class="question-container" data-q="1">
+            <span class="question-title">QUESTÃO 01. A crônica "A obsolescência da alma" estrutura-se a partir de uma oposição fundamental que perpassa todo o texto. Essa oposição estabelece-se entre:</span>
+            <div class="options">
+                <label class="option-item"><input type="radio" name="q1" value="A"> A) A durabilidade dos móveis antigos e a fragilidade dos materiais tecnológicos modernos.</label>
+                <label class="option-item"><input type="radio" name="q1" value="B"> B) A relação afetiva com os objetos no passado e a descartabilidade fria do presente.</label>
+                <label class="option-item"><input type="radio" name="q1" value="C"> C) A capacidade de armazenamento da nuvem e a limitation da memória humana.</label>
+                <label class="option-item"><input type="radio" name="q1" value="D"> D) O avanço inevitável da tecnologia e a resistência dos idosos em aceitá-la.</label>
+            </div>
+        </div>
+
+        <div class="question-container" data-q="2">
+            <span class="question-title">QUESTÃO 02. No trecho "A cadeira de balanço da avó gemia com as mudanças de tempo, como se sofresse de reumatismo lenhoso", a expressão em destaque:</span>
+            <div class="options">
+                <label class="option-item"><input type="radio" name="q2" value="A"> A) Humaniza o objeto, atribuindo-lhe características biológicas para reforçar a ideia de "alma".</label>
+                <label class="option-item"><input type="radio" name="q2" value="B"> B) Ridiculariza a velhice da avó, comparando-a a um móvel quebrado e barulhento.</label>
+                <label class="option-item"><input type="radio" name="q2" value="C"> C) Descreve tecnicamente o processo de dilatação da madeira causado pela umidade.</label>
+                <label class="option-item"><input type="radio" name="q2" value="D"> D) Indica que a cadeira estava quebrada e precisava de conserto urgente.</label>
+            </div>
+        </div>
+
+        <div class="question-container" data-q="3">
+            <span class="question-title">QUESTÃO 03. "Talvez por isso olhemos com tanta desconfiança para as máquinas perfeitas...". Segundo o texto, esse contraste revela que:</span>
+            <div class="options">
+                <label class="option-item"><input type="radio" name="q3" value="A"> A) As máquinas são superiores aos humanos porque são imortais e perfeitas.</label>
+                <label class="option-item"><input type="radio" name="q3" value="B"> B) A perfeição maquínica evidencia, de forma dolorosa, a imperfeição e a mortalidade humana.</label>
+                <label class="option-item"><input type="radio" name="q3" value="C"> C) Os seres humanos deveriam buscar a perfeição das máquinas para evitar o sofrimento.</label>
+                <label class="option-item"><input type="radio" name="q3" value="D"> D) A sujeira e a finitude são características que devem ser eliminadas pelo progresso.</label>
+            </div>
+        </div>
+
+        <!-- TEXTO II -->
+        <div class="text-block">
+            <h2>TEXTO II: Campanha: Desconecte para Conectar</h2>
+            <div class="image-placeholder">
+                [Descrição da Imagem: Uma família sentada à mesa de jantar. O pai, a mãe e dois filhos estão, cada um, olhando para seu próprio celular. O prato de comida esfria.]
+            </div>
+            <p><strong>Texto Verbal:</strong><br>
+            "A bateria acaba. O tempo também.<br>
+            Neste Dia dos Pais, o melhor presente é a sua presença.<br>
+            Modo Avião: Ative essa ideia."</p>
+        </div>
+
+        <div class="question-container" data-q="4">
+            <span class="question-title">QUESTÃO 04. Considerando a articulação entre a linguagem verbal e não verbal, o uso da expressão "Modo Avião" assume um sentido conotativo que visa:</span>
+            <div class="options">
+                <label class="option-item"><input type="radio" name="q4" value="A"> A) Instruir o leitor sobre como economizar a bateria do celular durante o jantar.</label>
+                <label class="option-item"><input type="radio" name="q4" value="B"> B) Sugerir que a família faça uma viagem de avião para comemorar a data.</label>
+                <label class="option-item"><input type="radio" name="q4" value="C"> C) Propor o desligamento das conexões digitais para permitir a conexão afetiva real.</label>
+                <label class="option-item"><input type="radio" name="q4" value="D"> D) Criticar as companhias aéreas pelo uso excessivo de tecnologia a bordo.</label>
+            </div>
+        </div>
+
+        <div class="question-container" data-q="5">
+            <span class="question-title">QUESTÃO 05. O enunciado "A bateria acaba. O tempo também." utiliza paralelismo sintático para criar uma relação de:</span>
+            <div class="options">
+                <label class="option-item"><input type="radio" name="q5" value="A"> A) Comparação, equiparando a finitude da energia do aparelho à finitude da vida/convivência.</label>
+                <label class="option-item"><input type="radio" name="q5" value="B"> B) Causa e consequência, sugerindo que o fim da bateria causa a perda de tempo.</label>
+                <label class="option-item"><input type="radio" name="q5" value="C"> C) Oposição, mostrando que a bateria pode ser recarregada, mas o tempo não.</label>
+                <label class="option-item"><input type="radio" name="q5" value="D"> D) Alternância, indicando que ou a bateria acaba ou o tempo acaba.</label>
+            </div>
+        </div>
+
+        <!-- TEXTO III -->
+        <div class="text-block">
+            <h2>TEXTO III: Fragmento de "A Ciência da Mudança Climática"</h2>
+            <p>"Embora os modelos climáticos tenham evoluído drasticamente nas últimas décadas, permitindo previsões de precisão milimétrica sobre o aumento do nível dos oceanos, o fator humano permanece como a variável estocástica do sistema. <strong>Ou seja</strong>, a ciência pode prever o derretimento das calotas polares, mas não pode prever se a humanidade terá a vontade política de reduzir as emissões de carbono a tempo. O abismo não é de conhecimento; é de ação."</p>
+        </div>
+
+        <div class="question-container" data-q="6">
+            <span class="question-title">QUESTÃO 06. O conector "Ou seja", destacado no texto, desempenha uma função coesiva de:</span>
+            <div class="options">
+                <label class="option-item"><input type="radio" name="q6" value="A"> A) Retificação, corrigindo uma informação errada apresentada na oração anterior.</label>
+                <label class="option-item"><input type="radio" name="q6" value="B"> B) Explicitação/Reformulação, esclarecendo o sentido da expressão "variável estocástica".</label>
+                <label class="option-item"><input type="radio" name="q6" value="C"> C) Adição, acrescentando um novo argumento não relacionado ao anterior.</label>
+                <label class="option-item"><input type="radio" name="q6" value="D"> D) Conclusão, encerrando o texto com uma síntese final.</label>
+            </div>
+        </div>
+
+        <div class="question-container" data-q="7">
+            <span class="question-title">QUESTÃO 07. Ao afirmar que "o abismo não é de conhecimento; é de ação", o autor defende que:</span>
+            <div class="options">
+                <label class="option-item"><input type="radio" name="q7" value="A"> A) A ciência ainda não possui dados suficientes para confirmar o aquecimento global.</label>
+                <label class="option-item"><input type="radio" name="q7" value="B"> B) O problema climático é estritamente técnico e depende de melhores modelos.</label>
+                <label class="option-item"><input type="radio" name="q7" value="C"> C) A solução depende mais de decisões políticas do que de avanços científicos.</label>
+                <label class="option-item"><input type="radio" name="q7" value="D"> D) A humanidade é incapaz de compreender a complexidade dos modelos climáticos.</label>
+            </div>
+        </div>
+
+        <!-- TEXTO IV -->
+        <div class="text-block">
+            <h2>TEXTO IV: Charge: O Gênio da Lâmpada</h2>
+            <div class="image-placeholder">
+                [Quadro 1: Homem esfrega lâmpada. Gênio sai cansado com prancheta.]<br>
+                [Quadro 2: Gênio pede assinatura de termos de uso, política de privacidade e cessão de dados.]<br>
+                [Quadro 3: Homem joga a lâmpada no lixo.]
+            </div>
+        </div>
+
+        <div class="question-container" data-q="8">
+            <span class="question-title">QUESTÃO 08. A charge produz humor através da:</span>
+            <div class="options">
+                <label class="option-item"><input type="radio" name="q8" value="A"> A) Personificação de objetos inanimados, como a lâmpada que fala.</label>
+                <label class="option-item"><input type="radio" name="q8" value="B"> B) Intertextualidade com contos de fadas, subvertida pela burocracia contemporânea.</label>
+                <label class="option-item"><input type="radio" name="q8" value="C"> C) Caracterização do homem como alguém preguiçoso que não quer ler contratos.</label>
+                <label class="option-item"><input type="radio" name="q8" value="D"> D) Crítica à falta de higiene urbana, representada pelo descarte da lâmpada.</label>
+            </div>
+        </div>
+
+        <!-- TEXTO V -->
+        <div class="text-block">
+            <h2>TEXTO V: Trecho de Romance: O Amanhecer Urbano</h2>
+            <p>"A cidade acordava com uma ressaca de ferro e concreto. O sol, tímido, tentava furar a poluição cinzenta que pairava como um manto sujo sobre os prédios. Do alto do viaduto, Roberto olhava os carros que já formavam um rio de lataria lento e ruidoso. Sentiu um aperto no peito, não sabia se era angústia ou a fumaça do ônibus que passara raspando. — Mais um dia — murmurou, e a frase saiu pesada, como se tivesse forma física."</p>
+        </div>
+
+        <div class="question-container" data-q="9">
+            <span class="question-title">QUESTÃO 09. A descrição do ambiente urbano no fragmento é evidenciada pela:</span>
+            <div class="options">
+                <label class="option-item"><input type="radio" name="q9" value="A"> A) Descrição objetiva e técnica do tráfego e da poluição atmosférica.</label>
+                <label class="option-item"><input type="radio" name="q9" value="B"> B) Utilização de metáforas que fundem a paisagem física com sensações de desconforto.</label>
+                <label class="option-item"><input type="radio" name="q9" value="C"> C) Fala otimista do personagem diante do nascer do sol.</label>
+                <label class="option-item"><input type="radio" name="q9" value="D"> D) Ausência total de adjetivos na construção do cenário.</label>
+            </div>
+        </div>
+
+        <div class="question-container" data-q="10">
+            <span class="question-title">QUESTÃO 10. Em "... a frase saiu pesada, como se tivesse forma física", o narrador utiliza uma comparação para:</span>
+            <div class="options">
+                <label class="option-item"><input type="radio" name="q10" value="A"> A) Indicar que Roberto falava muito alto.</label>
+                <label class="option-item"><input type="radio" name="q10" value="B"> B) Materializar o sentimento de cansaço e opressão da rotina.</label>
+                <label class="option-item"><input type="radio" name="q10" value="C"> C) Mostrar que o ar estava tão poluído que as palavras se solidificavam.</label>
+                <label class="option-item"><input type="radio" name="q10" value="D"> D) Demonstrar que Roberto tinha problemas de dicção.</label>
+            </div>
+        </div>
+
+        <button type="button" class="btn-submit" onclick="finishQuiz()">Finalizar Simulado e Ver Resultados</button>
+    </form>
+
+    <div id="results-section">
+        <div class="score-box">
+            <h2>Resultado Final</h2>
+            <div class="score-number" id="final-score">0/10</div>
+            <p id="score-text">Excelente desempenho!</p>
+        </div>
+
+        <div id="resolutions-list">
+            <!-- Resolutions will be injected here -->
+        </div>
+    </div>
+</div>
+
+<script>
+    const correctAnswers = {
+        q1: "B", q2: "A", q3: "B", q4: "C", q5: "A",
+        q6: "B", q7: "C", q8: "B", q9: "B", q10: "B"
+    };
+
+    const resolutions = {
+        q1: "A crônica constrói-se sobre a antítese 'Antigamente' vs. 'Hoje'. O primeiro parágrafo descreve a relação orgânica e duradoura com os objetos. O segundo descreve a 'obsolescência programada' e a descartabilidade.",
+        q2: "A expressão atribui uma doença humana (reumatismo) à madeira (lenhoso). Isso é uma personificação (prosopopeia) que humaniza o objeto para reforçar a ideia de 'alma'.",
+        q3: "O contraste é entre a 'máquina perfeita/imortal' e o humano 'falho/mortal'. A perfeição da máquina atua como um espelho que realça nossa finitude.",
+        q4: "O 'Modo Avião' desconecta o celular da rede. Metaforicamente, na campanha, significa desconectar-se do digital para estar 'presente' afetivamente.",
+        q5: "A estrutura sintática idêntica aproxima os dois conceitos (finitude da bateria e finitude do tempo/vida). É uma comparação existencial.",
+        q6: "O autor usa um termo técnico complexo ('variável estocástica') e usa 'Ou seja' para traduzi-lo em termos acessíveis ('vontade política'). Função de reformulação.",
+        q7: "O autor defende que o problema não é a falta de dados científicos (conhecimento), mas sim a falta de atitude política e social (ação).",
+        q8: "A charge dialoga com o mito de Aladim (intertextualidade), mas insere elementos da burocracia digital moderna, gerando humor pelo anacronismo.",
+        q9: "O narrador projeta a angústia de Roberto na paisagem. Expressões como 'ressaca de ferro' e 'rio de lataria' são metáforas que fundem o físico ao psicológico.",
+        q10: "Atribuir 'forma física' a uma fala é uma materialização que intensifica a sensação de fardo emocional e cansaço da rotina."
+    };
+
+    function finishQuiz() {
+        let score = 0;
+        const form = document.getElementById('quiz-form');
+        const resultsDiv = document.getElementById('results-section');
+        const resList = document.getElementById('resolutions-list');
+        resList.innerHTML = ''; // Clear previous
+
+        for (let i = 1; i <= 10; i++) {
+            const qName = 'q' + i;
+            const selected = form.querySelector(`input[name="${qName}"]:checked`);
+            const isCorrect = selected && selected.value === correctAnswers[qName];
+            
+            if (isCorrect) score++;
+
+            // Create Resolution Card
+            const card = document.createElement('div');
+            card.className = `resolution-card ${isCorrect ? 'res-correct' : 'res-wrong'}`;
+            
+            card.innerHTML = `
+                <span class="res-title">QUESTÃO ${i < 10 ? '0' + i : i} - ${isCorrect ? '✅ ACERTOU' : '❌ ERROU'}</span>
+                <p>Sua resposta: <strong>${selected ? selected.value : 'Não respondida'}</strong> | 
+                   Gabarito: <span class="correct-ans-label">${correctAnswers[qName]}</span></p>
+                <p class="res-text"><strong>Resolução:</strong> ${resolutions[qName]}</p>
+            `;
+            resList.appendChild(card);
+        }
+
+        // Update score
+        document.getElementById('final-score').innerText = `${score}/10`;
+        const scoreText = document.getElementById('score-text');
+        if (score >= 9) scoreText.innerText = "Excelente! Você domina o estilo da banca.";
+        else if (score >= 7) scoreText.innerText = "Bom desempenho! Revise os pontos onde houve dúvida.";
+        else scoreText.innerText = "Continue estudando. Analise as resoluções abaixo para entender a lógica da banca.";
+
+        // Show results
+        resultsDiv.style.display = 'block';
+        
+        // Scroll to results
+        resultsDiv.scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>

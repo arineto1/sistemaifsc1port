@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass IFAM: Informações e Ponto de Vista</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.7;
+        }
+
+        .highlight {
+            background-color: #fef08a;
+            padding: 0px 4px;
+            border-radius: 2px;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .section-card {
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            background-color: #fff;
+        }
+
+        h2 {
+            color: #111827;
+            font-size: 1.875rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #f3f4f6;
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            color: #374151;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .table-container {
+            width: 100%;
+            margin: 1.5rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        th, td {
+            border: 1px solid #e5e7eb;
+            padding: 14px;
+            text-align: left;
+            word-wrap: break-word;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #f9fafb;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        .audio-player-container {
+            background-color: #fafafa;
+            padding: 2rem;
+            border: 2px solid #eeeeee;
+            border-radius: 16px;
+            margin-bottom: 3rem;
+        }
+
+        .btn-action {
+            display: inline-block;
+            background-color: #000000;
+            color: #ffffff;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-action:hover {
+            background-color: #333333;
+            transform: translateY(-2px);
+        }
+
+        .alert-box {
+            background-color: #f9fafb;
+            border-left: 4px solid #111827;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .grid-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+    </style>
+</head>
+<body class="max-w-5xl mx-auto px-6 py-12">
+
+    <!-- Header & Audio -->
+    <header class="text-center mb-12">
+        <h1 class="text-4xl font-extrabold mb-4">Português para IFAM (EBTT)</h1>
+        <p class="text-xl text-gray-500">Tópico: Informações Implícitas, Explícitas e Ponto de Vista</p>
+        
+        <div class="audio-player-container mt-8">
+            <p class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-4">Reproduzir Aula em Áudio</p>
+            <audio controls class="w-full">
+                <source src="2identificacao.mp3" type="audio/mpeg">
+                Seu navegador não suporta áudio.
+            </audio>
+            <p class="text-xs text-gray-400 mt-4 italic">Substitua o arquivo por: <strong>RESUMO_IFAM_PORTUGUES.mp3</strong></p>
+        </div>
+    </header>
+
+    <!-- Seção 1: Definições e Fundamentos -->
+    <section class="section-card">
+        <h2>1. Definições Essenciais para o Dia da Prova</h2>
+        <p>A Fundação CEFETMINAS não costuma cobrar apenas a "leitura", mas a <span class="highlight">capacidade analítica</span> de separar o que é dado do que é construído pelo autor.</p>
+        
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">Conceito</th>
+                        <th>O que é?</th>
+                        <th>Gatilho na Prova</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Informação Explícita</strong></td>
+                        <td>Dados textuais literais. Estão na superfície.</td>
+                        <td>"Segundo o autor...", "O texto afirma explicitamente..."</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Informação Implícita</strong></td>
+                        <td>Sentido "entrelinhas". Exige conhecimento prévio ou lógica.</td>
+                        <td>"Infere-se...", "Conclui-se do texto que...", "Depreende-se..."</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ponto de Vista</strong></td>
+                        <td>A perspectiva ideológica ou opinativa do autor.</td>
+                        <td>"A posição do autor em relação a...", "O tom do texto é..."</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="alert-box">
+            <strong>Diferença técnica crucial:</strong> 
+            <br>• <strong>Pressuposto:</strong> É uma pista deixada por uma palavra (Ex: "Ele <u>parou</u> de fumar" -> Pressupõe que ele fumava).
+            <br>• <strong>Subentendido:</strong> Depende totalmente do contexto e pode ser negado (Ex: "Está frio aqui, né?" -> Pode subentender um pedido para fechar a janela).
+        </div>
+    </section>
+
+    <!-- Seção 2: Análise do Ponto de Vista (Modalização) -->
+    <section class="section-card">
+        <h2>2. Rastreando a Opinião do Autor</h2>
+        <p>Em cargos de Professor (EBTT), os textos costumam ser <span class="highlight">dissertativo-argumentativos</span> ou artigos de opinião. O autor sempre deixa marcas.</p>
+        
+        <h3>Marcas de Subjetividade (Onde o autor se esconde)</h3>
+        <div class="grid-points">
+            <div class="p-4 border rounded">
+                <p><strong>Adjetivos Valorativos:</strong></p>
+                <p class="text-sm text-gray-600">Palavras como "absurdo", "fundamental", "lastimável" revelam julgamento imediato.</p>
+            </div>
+            <div class="p-4 border rounded">
+                <p><strong>Advérbios de Modo:</strong></p>
+                <p class="text-sm text-gray-600">"Infelizmente", "Curiosamente", "Surpreendentemente" indicam a reação do autor ao fato.</p>
+            </div>
+            <div class="p-4 border rounded">
+                <p><strong>Verbos de Elocução:</strong></p>
+                <p class="text-sm text-gray-600">"O autor <u>lamenta</u>" vs "O autor <u>constata</u>". O primeiro é opinativo, o segundo é neutro.</p>
+            </div>
+        </div>
+
+        <h3 class="mt-8">Análise da Tese Central</h3>
+        <p>A tese é a <span class="highlight">espinha dorsal</span> do ponto de vista. Para achá-la, pergunte ao texto: <em>"O que o autor quer que eu aceite como verdade ao final da leitura?"</em>. Geralmente aparece na introdução ou após conectivos conclusivos no final.</p>
+    </section>
+
+    <!-- Seção 3: Tendências e "Peguinhas" CEFETMINAS -->
+    <section class="section-card">
+        <h2>3. O Estilo Fundação CEFETMINAS</h2>
+        <p>Esta banca gosta de testar os limites da interpretação. Cuidado com os <span class="highlight">três pecados</span>:</p>
+        
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 30%;">Erro de Interpretação</th>
+                        <th>Descrição do Peguinha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Extrapolação</strong></td>
+                        <td>A alternativa traz uma ideia que é "verdade no mundo real", mas <span class="highlight">não está no texto</span>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Redução (Limitação)</strong></td>
+                        <td>A alternativa foca em um detalhe pequeno e ignora a ideia principal (tese).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Contradição</strong></td>
+                        <td>A banca inverte uma relação de causa e consequência ou nega um fato do texto.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>Atenção aos Enunciados Técnicos</h3>
+        <p>A CEFETMINAS costuma usar termos acadêmicos. Memorize estes sinônimos:</p>
+        <ul class="list-disc pl-6 space-y-2">
+            <li><strong>Depreender/Inferir:</strong> Tirar uma conclusão lógica do implícito.</li>
+            <li><strong>Aludir:</strong> Fazer referência a algo sem citar nomeadamente.</li>
+            <li><strong>Reiterar:</strong> Repetir uma ideia para dar ênfase.</li>
+            <li><strong>Ratificar:</strong> Confirmar (Diferente de <em>Retificar</em>, que é corrigir).</li>
+        </ul>
+    </section>
+
+    <!-- Seção 4: Dicas de Ouro (Checklist de Prova) -->
+    <section class="section-card">
+        <h2>4. Checklist de Resolução Rápida</h2>
+        <div class="space-y-4">
+            <div class="flex items-start">
+                <div class="mt-1 bg-black text-white rounded-full h-6 w-6 flex items-center justify-center text-xs mr-3">1</div>
+                <p><strong>Cuidado com Generalizações:</strong> Palavras como "Sempre", "Nunca", "Todos" ou "Nenhum" em alternativas de interpretação geralmente indicam erro (Extrapolação).</p>
+            </div>
+            <div class="flex items-start">
+                <div class="mt-1 bg-black text-white rounded-full h-6 w-6 flex items-center justify-center text-xs mr-3">2</div>
+                <p><strong>Olhe para o Título:</strong> O título da CEFETMINAS costuma antecipar o ponto de vista ou a tese principal.</p>
+            </div>
+            <div class="flex items-start">
+                <div class="mt-1 bg-black text-white rounded-full h-6 w-6 flex items-center justify-center text-xs mr-3">3</div>
+                <p><strong>Conjunções são Bússolas:</strong> Um "Contudo" ou "Todavia" indica que o autor vai apresentar o <span class="highlight">ponto de vista real</span> dele, contrapondo uma ideia anterior.</p>
+            </div>
+            <div class="flex items-start">
+                <div class="mt-1 bg-black text-white rounded-full h-6 w-6 flex items-center justify-center text-xs mr-3">4</div>
+                <p><strong>Ironia em Charges:</strong> Se houver texto visual, a resposta do "ponto de vista" quase sempre está na <span class="highlight">quebra de expectativa</span> (humor ou crítica social).</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Action -->
+    <div class="text-center py-10">
+        <p class="mb-6 text-gray-500 font-medium">Pronto para testar seus conhecimentos?</p>
+        <a href="2questoes.html" class="btn-action">
+            ACESSAR BANCO DE QUESTÕES (SIMULADO) →
+        </a>
+    </div>
+
+    <footer class="text-center text-gray-400 text-sm mt-12 pb-8 border-t pt-8">
+        Guia de Estudo Exclusivo - Concurso IFAM | Tutor de Informática Especialista
+    </footer>
+
+</body>
+</html>

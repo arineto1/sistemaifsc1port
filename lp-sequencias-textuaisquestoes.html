@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz: Sequências Textuais (Instituto AOCP)</title>
+    <!-- Carrega o Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Estilo para um layout de leitura confortável */
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Estilo para os blocos de texto das questões */
+        .text-block {
+            background-color: #f8f9fa; /* Um cinza muito claro */
+            padding: 1rem;
+            border-radius: 0.5rem; /* 8px */
+            border: 1px solid #e9ecef; /* Borda sutil */
+            margin-bottom: 1rem;
+            font-family: 'Georgia', 'Times New Roman', Times, serif; /* Fonte serifada para texto longo */
+            line-height: 1.6;
+            color: #212529; /* Cor de texto escura */
+            white-space: pre-wrap; /* Preserva quebras de linha */
+        }
+        
+        /* Fundo claro e texto escuro, como solicitado */
+        .quiz-container {
+            background-color: #ffffff; /* Fundo branco */
+            color: #212529; /* Texto escuro */
+        }
+        
+        /* Estilo para as opções de rádio */
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-radius: 0.375rem; /* 6px */
+            border: 1px solid #ced4da; /* Borda cinza */
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+        .option-label:hover {
+            background-color: #f1f3f5; /* Leve destaque ao passar o mouse */
+        }
+        /* Estilo quando o rádio está selecionado */
+        .option-label input[type="radio"]:checked + span {
+            font-weight: 600;
+        }
+        .option-label input[type="radio"] {
+            margin-right: 0.75rem;
+            width: 1.15rem;
+            height: 1.15rem;
+            color: #0d6efd; /* Azul para o rádio */
+            accent-color: #0d6efd;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div class="container mx-auto max-w-4xl p-6 md:p-10 my-10">
+        <div class="quiz-container shadow-lg rounded-lg p-8">
+            
+            <!-- Cabeçalho do Quiz -->
+            <header class="border-b border-gray-200 pb-6 mb-8">
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-800">Quiz: Sequências Textuais</h1>
+                <p class="text-lg text-gray-600 mt-2">Estilo da banca: Instituto AOCP</p>
+            </header>
+
+            <!-- Contêiner para as Questões -->
+            <main id="quiz-container">
+                <!-- As questões serão injetadas aqui pelo JavaScript -->
+            </main>
+
+            <!-- Botão de Finalizar -->
+            <button id="submit-btn" class="w-full bg-blue-600 text-white p-4 rounded-lg font-bold text-lg hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 mt-8">
+                Finalizar Quiz e Ver Resultados
+            </button>
+
+            <!-- Seção de Resultados (oculta por padrão) -->
+            <section id="results-container" class="hidden mt-12">
+                <h2 class="text-3xl font-bold text-gray-800 border-b pb-4 mb-6">Resultados</h2>
+                <p id="score" class="text-2xl font-bold mb-8"></p>
+                
+                <!-- Contêiner para as Resoluções -->
+                <div id="resolutions-container">
+                    <!-- As resoluções serão injetadas aqui -->
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script>
+        // --- BANCO DE DADOS DO QUIZ ---
+        // Dados extraídos diretamente do documento fornecido.
+        const quizData = [
+            {
+                id: 1,
+                textBlock: "Texto 1\n\nNaquela manhã, Fabiano acordou cedo. O sol mal nascera e o ar já era quente e seco. Levantou-se, preparou o café ralo e tomou a decisão: não esperariam mais. Horas depois, reuniriam os poucos pertences e partiriam ao anoitecer, antes que a seca consumisse o último pingo de esperança.",
+                question: "1. Assinale a alternativa que apresenta e justifica corretamente a tipologia textual predominante no Texto 1.",
+                options: [
+                    { id: 'A', text: "Descritiva, pois o foco é o ambiente seco e o incômodo de Fabiano." },
+                    { id: 'B', text: "Explicativa, pois detalha as razões da seca no sertão." },
+                    { id: 'C', text: "Narrativa, pois se estrutura em uma sucessão de ações e eventos ocorridos em um período de tempo." },
+                    { id: 'D', text: "Injuntiva, pois os verbos no pretérito indicam ordens que Fabiano devia seguir." },
+                    { id: 'E', text: "Argumentativa, pois defende a tese de que a seca é um problema social." }
+                ],
+                correct: 'C',
+                resolution: `Gabarito: C
+
+Análise da Alternativa Correta (C): A alternativa C apresenta a classificação (Narrativa) e a justificativa correta. A estrutura fundamental do texto é a sucessão de eventos (o enredo) envolvendo um personagem (Fabiano) em um determinado tempo. O texto estabelece uma linha do tempo clara: "Naquela manhã" (início), "Horas depois" (meio) e "ao anoitecer" (plano futuro). As ações (verbos no pretérito perfeito e imperfeito) marcam essa progressão: "acordou", "levantou-se", "preparou", "tomou a decisão", "reuniria", "partiriam".
+
+Análise dos Distratores:
+(A) Incorreta. Embora o texto contenha elementos descritivos (o incômodo de Fabiano, a seca), eles são secundários. A descrição serve para contextualizar a narração, mas não é o eixo principal do texto.
+(B) Incorreta. O texto não explica por que chove ou não; ele narra as consequências da seca na ação do personagem.
+(D) Incorreta. Verbos no pretérito (passado) indicam ações concluídas, típicos da narração, e não ordens (que seriam no imperativo, caracterizando a injunção).
+(E) Incorreta. O texto não defende uma tese; ele relata um fato na vida de um personagem.`
+            },
+            {
+                id: 2,
+                textBlock: "Texto 2\n\nA sala principal estava sombria. As janelas, cobertas por grossas cortinas de veludo empoeirado, barravam quase toda a luz. O ar era pesado, e o silêncio, palpável. O visitante, parado no umbral, sentiu um arrepio. Apenas a silhueta dos móveis se destacava na penumbra.",
+                question: "2. No Texto 2, predomina a sequência descritiva. Sobre sua função e características, é correto afirmar que",
+                options: [
+                    { id: 'A', text: "o autor utiliza uma descrição objetiva e denotativa, focando em fatos mensuráveis." },
+                    { id: 'B', text: "o autor \"pausa\" a ação para construir uma imagem do local, usando adjetivos conotativos (\"sombria\", \"silêncio palpável\") que transmitem uma atmosfera subjetiva." },
+                    { id: 'C', text: "a descrição é marcada pelo uso de verbos de ação, que dão dinamismo ao cenário." },
+                    { id: 'D', text: "o objetivo é persuadir o leitor (argumentação) de que a casa está em decadência." },
+                    { id: 'E', text: "o texto se configura como um inventário (injunção), listando os móveis do cômodo." }
+                ],
+                correct: 'B',
+                resolution: `Gabarito: B
+
+Análise da Alternativa Correta (B): A alternativa B é a correta. O enunciado já estabelece a predominância descritiva. A função dessa descrição é "pausar" a ação (o "visitante" é mencionado, mas o foco é o cenário) para construir a imagem do local. A descrição é subjetiva, pois os adjetivos usados ("sombria", "silêncio palpável") não são meramente denotativos (como "verde"), mas conotativos, transmitindo sensações de abandono, opressão ou mistério.
+
+Análise dos Distratores:
+(A) Incorreta. A descrição não é objetiva. Termos como "sombria" e "silêncio palpável" são impressões subjetivas, não fatos mensuráveis.
+(C) Incorreta. Verbos de ligação (ser, estar, parecer, ficar) indicam estado ou característica, sendo a marca principal da descrição, e não verbos de ação, que caracterizam a narração.
+(D) Incorreta. Embora a decadência seja implícita, o objetivo do texto não é persuadir o leitor disso (argumentação), but sim mostrar (descrever) o ambiente.
+(E) Incorreta. Um inventário (gênero injuntivo/descritivo) teria uma formatação e objetividade diferentes, sem a carga atmosférica ("sombria", "palpável").`
+            },
+            {
+                id: 3,
+                textBlock: "Texto 3\n\nÉ inegável o avanço que as ferramentas digitais trouxeram para a sala de aula. No entanto, acreditar que a simples presença de computadores e internet pode, por si só, revolucionar a educação é um equívoco perigoso. Sem o investimento maciço na formação continuada dos professores para o uso crítico e pedagógico dessas mídias, a tecnologia será apenas um adereço caro. É preciso, urgentemente, repensar o foco dos investimentos.",
+                question: "3. Quanto à organização do Texto 3, é correto afirmar que a sequência predominante é",
+                options: [
+                    { id: 'A', text: "explicativa, pois apresenta dados científicos sobre o uso da tecnologia, com imparcialidade." },
+                    { id: 'B', text: "descritiva, pois enumera as características das novas ferramentas digitais." },
+                    { id: 'C', text: "argumentativa, pois o autor defende uma tese (necessidade de formação docente) e utiliza modalizadores (\"inegável\", \"equívoco perigoso\", \"urgentemente\") para expressar seu juízo de valor." },
+                    { id: 'D', text: "narrativa, pois relata fatos passados sobre a implementação de computadores." },
+                    { id: 'E', text: "injuntiva, pois instrui o leitor a comprar novas tecnologias." }
+                ],
+                correct: 'C',
+                resolution: `Gabarito: C
+
+Análise da Alternativa Correta (C): A alternativa C define perfeitamente a sequência argumentativa. O texto não se limita a informar; ele se posiciona. A tese (ponto de vista) é que a tecnologia sozinha não basta, sendo urgente o investimento em formação docente. Essa tese é sustentada por: 1) Operadores argumentativos que indicam oposição ("No entanto"); 2) Modalizadores, que são palavras que expressam o juízo de valor do autor ("inegável", "equívoco perigoso", "urgentemente").
+
+Análise dos Distratores:
+(A) Incorreta. O texto não apresenta dados científicos e não é imparcial. O uso de "equívoco perigoso" denota forte parcialidade (opinião).
+(B) Incorreta. Isso caracterizaria uma sequência explicativa, mas não é o foco do texto.
+(D) Incorreta. Não há relato de fatos passados (narração).
+(E) Incorreta. Não há instruções (injunção).`
+            },
+            {
+                id: 4,
+                textBlock: "Texto 4\n\nA fotossíntese é um processo físico-químico, realizado por organismos clorofilados, que utilizam dióxido de carbono e água para obter glicose através da energia solar. Este processo é fundamental para a vida na Terra, pois, além de produzir o alimento base da cadeia trófica, libera oxigênio para a atmosfera.",
+                question: "4. A sequência textual que predomina no Texto 4 é a",
+                options: [
+                    { id: 'A', text: "argumentativa, pois o autor busca persuadir o leitor sobre a importância \"fundamental\" da fotossíntese." },
+                    { id: 'B', text: "explicativa (ou expositiva), pois o objetivo central é transmitir um conhecimento, definindo um processo biológico de forma objetiva e imparcial." },
+                    { id: 'C', text: "injuntiva, pois ensina o leitor a realizar a fotossíntese." },
+                    { id: 'D', text: "narrativa, pois relata a descoberta da fotossíntese em uma sequência temporal." },
+                    { id: 'E', text: "descritiva, pois foca apenas na aparência visual das plantas clorofiladas." }
+                ],
+                correct: 'B',
+                resolution: `Gabarito: B
+
+Análise da Alternativa Correta (B): A alternativa B é a correta. O objetivo central do texto é transmitir um conhecimento (o que é fotossíntese) de forma objetiva, clara e imparcial, usando definições e descrições do processo. Esta é a definição de uma sequência explicativa (ou expositiva).
+
+Análise dos Distratores:
+(A) Incorreta. Esta é a confusão mais comum. O texto afirma a importância ("fundamental"), mas este é um fato científico consensual, não uma opinião (tese) do autor sendo defendida contra um ponto de vista oposto. O objetivo não é persuadir, mas informar.
+(C) Incorreta. Não há instruções ou comandos (injunção).
+(D) Incorreta. O texto é atemporal, definindo um processo biológico, e não narra eventos.
+(E) Incorreta. O texto faz mais do que descrever; ele explica um processo (a conversão de energia).`
+            },
+            {
+                id: 5,
+                textBlock: "Texto 5 (Fragmento)\n\n*Modo de Preparo:*\n*1. Preaqueça o forno a 180°C.*\n*2. Em uma tigela, bata os ovos, o açúcar e a manteiga até obter um creme homogêneo.*\n*3. Adicione a farinha de trigo e o leite, alternando-os, e misture bem.*",
+                question: "5. A sequência textual do Texto 5 é classificada como injuntiva. A principal marca gramatical que define essa tipologia no texto é",
+                options: [
+                    { id: 'A', text: "o uso de substantivos concretos (\"forno\", \"tigela\", \"ovos\")." },
+                    { id: 'B', text: "o uso de verbos no pretérito, indicando ações já concluídas." },
+                    { id: 'C', text: "o uso predominante de verbos no modo imperativo (\"Preaqueça\", \"bata\", \"adicione\"), que expressam ordem ou instrução." },
+                    { id: 'D', text: "a presença de uma tese (o bolo é saboroso) defendida no modo de preparo." },
+                    { id: 'E', text: "a descrição detalhada dos ingredientes, configurando uma sequência descritiva." }
+                ],
+                correct: 'C',
+                resolution: `Gabarito: C
+
+Análise da Alternativa Correta (C): O Instituto AOCP frequentemente cobra a relação entre a tipologia e as marcas gramaticais. A sequência injuntiva tem como objetivo instruir o leitor a realizar uma ação. A ferramenta gramatical para expressar instrução ou ordem é o modo imperativo dos verbos. O texto está estruturado por esses verbos ("Preaqueça", "bata", "adicione"), que comandam as ações do leitor.
+
+Análise dos Distratores:
+(A) Incorreta. Os substantivos definem o campo temático (culinária), mas não a tipologia injuntiva.
+(B) Incorreta. Verbos no pretérito (passado) caracterizariam uma narração (alguém fez o bolo), e não uma instrução (como fazer o bolo).
+(D) Incorreta. Não há defesa de tese (argumentação).
+(E) Incorreta. A descrição (sequência descritiva) estaria no final, ao descrever o resultado, mas não na seção "Modo de Preparo".`
+            },
+            {
+                id: 6,
+                textBlock: "Texto 6\n\n— Bom dia. Este ônibus vai para o centro?\n— Bom dia. Vai sim, senhora.\n— Sabe me dizer em quanto tempo chegamos lá?\n— Cerca de vinte minutos, se o trânsito ajudar.",
+                question: "6. O Texto 6 se organiza predominantemente como uma sequência dialogal. Sua estrutura fundamental é caracterizada",
+                options: [
+                    { id: 'A', text: "pela sucessão de eventos no passado, com narrador e personagem." },
+                    { id: 'B', text: "pela descrição de um estado ou cenário, com foco nos adjetivos." },
+                    { id: 'C', text: "pela alternância de turnos de fala entre interlocutores, organizados em pares adjacentes (pergunta-resposta)." },
+                    { id: 'D', text: "pela exposição unilateral de informações sobre o sistema de transporte." },
+                    { id: 'E', text: "pelo uso de verbos no imperativo para instruir o passageiro." }
+                ],
+                correct: 'C',
+                resolution: `Gabarito: C
+
+Análise da Alternativa Correta (C): A sequência dialogal é definida pela interação verbal entre dois ou mais interlocutores. Sua estrutura básica é a alternância de turnos de fala (a vez de cada um falar) e a organização desses turnos em pares lógicos, chamados "pares adjacentes" (e.g., pergunta-resposta, cumprimento-cumprimento, convite-aceite). O texto é um exemplo claro de pares pergunta-resposta.
+
+Análise dos Distratores:
+(A) Incorreta. Isso define a sequência narrativa.
+(B) Incorreta. Isso define a sequência descritiva.
+(D) Incorreta. A exposição não é unilateral; é uma interação (diálogo).
+(E) Incorreta. Não há ordens (injunção).`
+            },
+            {
+                id: 7,
+                textBlock: "Texto 7\n\nUm novo relatório da ONU confirmou que o nível do mar, em áreas costeiras do Pacífico, já subiu 10 cm acima da média histórica. Setores da indústria fóssil insistem em tratar o dado como mera flutuação estatística. É um alarme impossível de ignorar. Manter essa postura negacionista não é apenas um erro de cálculo; é uma sentença de desastre irresponsável para as futuras gerações.",
+                question: "7. No Texto 7, o autor utiliza dados de um relatório e, ao mesmo tempo, emite fortes juízos de valor. Sobre a tipologia textual, é correto afirmar que",
+                options: [
+                    { id: 'A', text: "predomina a sequência explicativa, pois o foco do texto é apresentar os dados do relatório da ONU de forma imparcial." },
+                    { id: 'B', text: "predomina a sequência argumentativa, pois os dados (sequência explicativa) são usados como premissa para defender uma tese e refutar a opinião contrária (\"setores da indústria\")." },
+                    { id: 'C', text: "predomina a sequência narrativa, pois o texto conta a história da publicação do relatório." },
+                    { id: 'D', text: "predomina a sequência descritiva, pois o texto descreve o estado atual das ilhas do Pacífico." },
+                    { id: 'E', text: "predomina a sequência injuntiva, pois o texto ordena que os leitores ajam." }
+                ],
+                correct: 'B',
+                resolution: `Gabarito: B
+
+Análise da Alternativa Correta (B): Esta questão testa a habilidade de identificar a predominância em textos híbridos. O texto inicia com uma sequência explicativa (apresenta um dado do relatório: "subiu 10 cm"). No entanto, o autor usa esse dado como premissa para uma sequência argumentativa. Ele toma partido, refuta a opinião contrária ("setores... insistem em tratar como mera flutuação") e emite forte juízo de valor ("alarme impossível de ignorar", "irresponsável", "sentença de desastre"). A explicação está, portanto, subordinada à argumentação.
+
+Análise dos Distratores:
+(A) Incorreta. O autor não se limita a apresentar dados; ele opina fortemente sobre eles, quebrando a imparcialidade.
+(C) Incorreta. Não é uma narração (sucessão de fatos); é uma análise opinativa de um fato.
+(D) Incorreta. É mais do que uma descrição; é uma defesa de tese.
+(E) Incorreta. Embora a argumentação possa sugerir uma ação, o texto não usa a estrutura injuntiva (verbos no imperativo).`
+            },
+            {
+                id: 8,
+                textBlock: "Texto 8\n\nOs infelizes tinham caminhado o dia inteiro; estavam cansados e famintos. Ordinariamente, andavam pouco, mas como haviam repousado bastante na areia do rio seco, a viagem progredira bem. Fazia horas que procuravam uma sombra. A folhagem dos juazeiros apareceu longe, através dos galhos pelados da caatinga rala.",
+                question: "8. O Texto 8 apresenta trechos descritivos (\"cansados e famintos\", \"galhos pelados\"). No entanto, a sequência textual *predominante* é",
+                options: [
+                    { id: 'A', text: "descritiva, pois o uso de verbos de ligação (\"estavam\") é a marca principal do texto." },
+                    { id: 'B', text: "descritiva, pois a enumeração de características da caatinga e dos personagens supera a ação." },
+                    { id: 'C', text: "narrativa, pois a descrição está subordinada a um eixo principal de sucessão temporal e de ações (\"tinham caminhado\", \"haviam repousado\", \"progredira\", \"procuravam\")." },
+                    { id: 'D', text: "narrativa, unicamente por se tratar de um fragmento de romance e pela ausência de diálogo." },
+                    { id: 'E', text: "descritiva, pois o objetivo do autor é apenas pintar um retrato do cenário, sem progressão de fatos." }
+                ],
+                correct: 'C',
+                resolution: `Gabarito: C
+
+Análise da Alternativa Correta (C): Esta é uma questão clássica sobre predominância, similar a análises de textos da banca AOCP. O texto é rico em descrições (o estado "cansados e famintos", o cenário "galhos pelados da caatinga rala"). Contudo, essas descrições estão ancoradas em um eixo narrativo. O que move o texto é a progressão temporal e a cadeia de ações e estados: eles tinham caminhado (ação A), por isso estavam cansados; eles haviam repousado (ação B), por isso a viagem progredira (consequência C); eles procuravam (ação D) e, então, a folhagem apareceu (evento E). A narração é a estrutura principal.
+
+Análise dos Distratores:
+(A) Incorreta. Verbos de ligação ("Estavam") são a marca da descrição (sequência secundária aqui), e não da narração.
+(B) Incorreta. Isso descreve a sequência descritiva presente no texto, mas ela não é a predominante.
+(D) Incorreta. A ausência de diálogo não é critério para definir uma narração.
+(E) Incorreta. A descrição da caatinga é um elemento de cenário, subordinado à ação dos personagens.`
+            },
+            {
+                id: 9,
+                textBlock: "Texto 3 (Releitura)\n\nÉ inegável o avanço que as ferramentas digitais trouxeram para a sala de aula. No entanto, acreditar que a simples presença de computadores e internet pode, por si só, revolucionar a educação é um equívoco perigoso. Sem o investimento maciço na formação continuada dos professores para o uso crítico e pedagógico dessas mídias, a tecnologia será apenas um adereço caro. É preciso, urgentemente, repensar o foco dos investimentos.",
+                question: "9. Releia o Texto 3. O uso do advérbio \"urgentemente\" no final do texto cumpre uma função textual estratégica. Assinale a alternativa que melhor descreve essa função.",
+                options: [
+                    { id: 'A', text: "É um advérbio de modo que apenas descreve a forma como o investimento deve ser feito." },
+                    { id: 'B', text: "É um marcador temporal, que situa a ação no passado, caracterizando a narração." },
+                    { id: 'C', text: "É um modalizador que reforça a sequência argumentativa, pois expressa o juízo de valor e o senso de necessidade na visão do autor." },
+                    { id: 'D', text: "É um conectivo explicativo, introduzindo a causa da necessidade de investimento." },
+                    { id: 'E', text: "É uma marca de injunção, pois dá uma ordem direta ao leitor." }
+                ],
+                correct: 'C',
+                resolution: `Gabarito: C
+
+Análise da Alternativa Correta (C): Esta questão exemplifica o estilo AOCP de misturar gramática e análise textual. Gramaticalmente, "urgentemente" é um advérbio de modo. Contudo, textualmente, sua função é muito maior: ele é um modalizador. Ele não apenas diz como investir (com urgência), mas revela o juízo de valor do autor, sua opinião sobre a necessidade e a pressa daquela ação. Ao injetar a opinião do autor, o advérbio funciona como um reforço fundamental para a sequência argumentativa.
+
+Análise dos Distratores:
+(A) Incorreta. A função textual vai além da simples descrição do modo; ela carrega a tese do autor.
+(B) Incorreta. Não indica tempo (como "ontem") nem reforça uma narração.
+(D) Incorreta. Não é um conectivo (como "pois" ou "porque").
+(E) Incorreta. Embora a argumentação possa levar a uma sugestão, o advérbio em si não é uma instrução (marca injuntiva).`
+            },
+            {
+                id: 10,
+                textBlock: "Texto 9\n\nO detetive observou o frasco na mesa da vítima. Rótulo: Tetrodotoxina. Ele engoliu em seco. O detetive pegou as luvas; o caso acabara de ficar muito mais sério.",
+                question: "10. O Texto 9 apresenta uma estrutura híbrida. O trecho entre colchetes [ ] cumpre a função de",
+                options: [
+                    { id: 'A', text: "uma sequência dialogal, pois o narrador conversa com o leitor." },
+                    { id: 'B', text: "uma sequência descritiva, focada na aparência do detetive." },
+                    { id: 'C', text: "uma sequência argumentativa, defendendo a tese de que o baiacu é perigoso." },
+                    { id: 'D', text: "uma sequência explicativa, \"encaixada\" na narrativa principal para fornecer ao leitor um conhecimento técnico necessário à compreensão da trama." },
+                    { id: 'E', text: "uma sequência injuntiva, ensinando como manusear a toxina." }
+                ],
+                correct: 'D',
+                resolution: `Gabarito: D
+
+Análise da Alternativa Correta (D): O texto ilustra a "heterogeneidade composicional", onde uma sequência principal (narrativa) "encaixa" ou se subordina a outra. A narrativa (o detetive e sua investigação) é pausada para a inserção de um bloco de texto. Esse bloco ("A Tetrodotoxina...") tem a função de explicar ao leitor, de forma objetiva, o que é aquele termo técnico. Sem essa sequência explicativa, o leitor não compreenderia a gravidade da descoberta do detetive (o porquê de ele "engolir em seco").
+(Nota: A questão no documento original é falha, pois menciona colchetes [ ] que não estão no Texto 9. A resolução, no entanto, deixa clara a intenção da questão, que é analisar a função de um texto explicativo que *deveria* estar ali, como [A Tetrodotoxina...], para dar contexto.)
+
+Análise dos Distratores:
+(A) Incorreta. Embora "para quem não sabe" seja um vocativo ao leitor, a estrutura não é de turnos de fala, mas de uma exposição unilateral de fatos (explicação).
+(B) Incorreta. A descrição não é do detetive, mas da toxina.
+(C) Incorreta. O objetivo do trecho não é defender a tese de que o baiacu é perigoso (argumentação), mas informar sobre a toxina (explicação).
+(E) Incorreta. Não ensina a manusear a toxina; define-a.`
+            }
+        ];
+
+        // --- LÓGICA DO QUIZ ---
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const quizContainer = document.getElementById('quiz-container');
+            const submitButton = document.getElementById('submit-btn');
+            const resultsContainer = document.getElementById('results-container');
+            const scoreElement = document.getElementById('score');
+            const resolutionsContainer = document.getElementById('resolutions-container');
+
+            // 1. Renderizar as questões
+            function renderQuiz() {
+                let quizHtml = '';
+
+                quizData.forEach((q, index) => {
+                    // Monta o bloco de texto, se existir
+                    const textBlockHtml = q.textBlock ? `<div class="text-block">${q.textBlock}</div>` : '';
+
+                    // Monta as opções
+                    const optionsHtml = q.options.map(option => `
+                        <label class="option-label">
+                            <input type="radio" name="question-${q.id}" value="${option.id}">
+                            <span><strong>(${option.id})</strong> ${option.text}</span>
+                        </label>
+                    `).join('');
+
+                    // Monta o card da questão
+                    quizHtml += `
+                        <div class="mb-10 p-6 border border-gray-200 rounded-lg shadow-sm" data-question-id="${q.id}">
+                            ${textBlockHtml}
+                            <h3 class="text-lg font-semibold text-gray-800 mb-4">${q.question}</h3>
+                            <div class="flex flex-col space-y-3">
+                                ${optionsHtml}
+                            </div>
+                        </div>
+                    `;
+                });
+
+                quizContainer.innerHTML = quizHtml;
+            }
+
+            // 2. Calcular e mostrar os resultados
+            function showResults() {
+                let score = 0;
+                let resolutionsHtml = '';
+
+                quizData.forEach(q => {
+                    const questionElement = document.querySelector(`[data-question-id="${q.id}"]`);
+                    const selectedInput = document.querySelector(`input[name="question-${q.id}"]:checked`);
+                    const userAnswer = selectedInput ? selectedInput.value : null;
+                    const isCorrect = userAnswer === q.correct;
+
+                    if (isCorrect) {
+                        score++;
+                    }
+
+                    // --- Monta o card de resolução individual ---
+                    
+                    // Define as classes de cor com base na resposta
+                    const resultBorderClass = isCorrect ? 'border-green-500 bg-green-50' : 'border-red-500 bg-red-50';
+                    const resultTextClass = isCorrect ? 'text-green-700' : 'text-red-700';
+                    const resultIcon = isCorrect 
+                        ? '<span class="text-green-600 font-bold">✔ Correto</span>' 
+                        : '<span class="text-red-600 font-bold">✖ Incorreto</span>';
+
+                    // Encontra o texto da resposta do usuário
+                    const userAnswerText = q.options.find(opt => opt.id === userAnswer)?.text || 'Nenhuma resposta selecionada';
+                    
+                    // Monta o HTML da resolução
+                    resolutionsHtml += `
+                        <div class="mb-8 p-6 border ${resultBorderClass} rounded-lg shadow-sm">
+                            <h4 class="text-lg font-bold text-gray-900 mb-3">${q.question}</h4>
+                            
+                            <div class="mb-4 text-sm space-y-2">
+                                <p><strong>Sua resposta:</strong> <span class="${resultTextClass}">(${userAnswer || 'N/A'}) ${userAnswerText}</span> ${resultIcon}</p>
+                                <p><strong>Resposta correta:</strong> (${q.correct}) ${q.options.find(opt => opt.id === q.correct).text}</p>
+                            </div>
+                            
+                            <hr class="my-4 border-gray-300">
+                            
+                            <h5 class="font-semibold text-gray-800 mb-2">Resolução Comentada:</h5>
+                            <div class="text-gray-700 whitespace-pre-wrap leading-relaxed" style="font-family: 'Georgia', 'Times New Roman', Times, serif; font-size: 0.95rem;">
+                                ${q.resolution}
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Desabilita os inputs na questão original
+                    const inputs = questionElement.querySelectorAll('input[type="radio"]');
+                    inputs.forEach(input => {
+                        input.disabled = true;
+                        const label = input.closest('label');
+                        if (input.value === q.correct) {
+                            label.classList.add('border-green-500', 'bg-green-100');
+                        } else if (input.value === userAnswer && !isCorrect) {
+                            label.classList.add('border-red-500', 'bg-red-100');
+                        }
+                    });
+                });
+
+                // Exibe a pontuação
+                scoreElement.textContent = `Você acertou ${score} de ${quizData.length} questões.`;
+                
+                // Insere as resoluções
+                resolutionsContainer.innerHTML = resolutionsHtml;
+
+                // Esconde o botão e mostra os resultados
+                submitButton.classList.add('hidden');
+                resultsContainer.classList.remove('hidden');
+                
+                // Rola para o topo dos resultados
+                resultsContainer.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            // --- INICIALIZAÇÃO ---
+            
+            // Renderiza o quiz na tela
+            renderQuiz();
+
+            // Adiciona o listener ao botão de finalizar
+            submitButton.addEventListener('click', () => {
+                // Confirmação para evitar cliques acidentais
+                if (confirm('Tem certeza que deseja finalizar o quiz? Você não poderá alterar suas respostas.')) {
+                    showResults();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

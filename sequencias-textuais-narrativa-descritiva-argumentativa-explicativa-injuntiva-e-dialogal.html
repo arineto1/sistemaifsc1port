@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula Estratégica: Sequências Textuais (Foco: AOCP)</title>
+    <!-- Carrega o Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fontes Inter para melhor legibilidade -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Estilos personalizados para legibilidade e requisitos */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff; /* Fundo branco em tudo */
+            color: #1f2937; /* Letras escuras e boas de visualizar */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        h1, h2, h3 {
+            color: #111827; /* Títulos mais escuros */
+            font-weight: 700; /* Negrito para títulos */
+        }
+
+        h2 {
+            border-bottom: 2px solid #e5e7eb; /* Linha sutil separando seções */
+            padding-bottom: 8px;
+        }
+
+        /* Estilo para citações [1], [2], etc. */
+        .citation {
+            font-size: 0.75em; /* 12px */
+            color: #4b5563; /* Cinza escuro */
+            vertical-align: super;
+            padding-left: 2px;
+            font-weight: 400; /* Garante que não fique em negrito */
+            text-decoration: none;
+            /* Remove o fundo de marca-texto da citação */
+            background-color: transparent !important; 
+        }
+
+        /* * NOVO ESTILO: Marca-texto amarelo suave para <strong> 
+         */
+        strong {
+            background-color: #fef9c3; /* Tailwind 'yellow-100' (amarelo suave) */
+            padding: 1px 4px; /* Espaçamento horizontal leve */
+            border-radius: 3px; /* Cantos arredondados suaves */
+            font-weight: 700; /* Negrito */
+            color: #111827; /* Cor do texto escura (preto suave) */
+            /* Garante que o fundo se aplique corretamente em quebras de linha */
+            -webkit-box-decoration-break: clone;
+            box-decoration-break: clone;
+        }
+
+        /* Configuração da Tabela: Sem Scroll Horizontal */
+        table {
+            width: 100%;
+            table-layout: fixed; /* Impede que o conteúdo alargue a coluna */
+            border-collapse: collapse; /* Bordas limpas */
+        }
+
+        th, td {
+            border: 1px solid #d1d5db; /* Borda cinza clara */
+            padding: 12px; /* Espaçamento interno bom */
+            word-wrap: break-word; /* ESSENCIAL: Quebra a palavra para não estourar */
+            hyphens: auto; /* Ajuda na quebra de palavras longas */
+            vertical-align: top; /* Alinha o conteúdo no topo */
+        }
+
+        th {
+            background-color: #f9fafb; /* Fundo de header de tabela neutro */
+            text-align: left;
+            font-weight: 600;
+        }
+
+        /* Lista com marcadores */
+        ul {
+            list-style-position: outside;
+            padding-left: 1.5rem; /* Indentação padrão para listas */
+        }
+        
+        /* Remove estilo de lista para sub-listas (evita marcador duplo) */
+        ul ul {
+            list-style-type: circle;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body class="bg-white">
+
+    <!-- Container Principal com boa largura de leitura -->
+    <div class="max-w-4xl mx-auto p-6 md:p-10">
+
+        <!-- 1. Título (Vem do Resumo) -->
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8">
+            Resumo Focado em Memorização: Sequências Textuais (Foco: AOCP)
+        </h1>
+
+        <!-- 2. Reprodutor de Áudio -->
+        <div class="mb-10 p-4 border border-gray-200 rounded-lg bg-gray-50 shadow-sm">
+            <h2 class="text-xl font-semibold text-gray-900 mb-3 !border-b-0">
+                Resumo em Áudio
+            </h2>
+            <audio controls class="w-full">
+                <!-- 
+                  IMPORTANTE: 
+                  Substitua 'SEU_ARQUIVO.mp3' pelo nome do seu arquivo de áudio.
+                  O arquivo MP3 deve estar na mesma pasta que este arquivo HTML.
+                -->
+                <source src="lp-sequencias-textuais.mp3" type="audio/mpeg">
+                Seu navegador não suporta o elemento de áudio.
+            </audio>
+            <p class="text-sm text-gray-600 mt-2">
+                <strong>Instrução:</strong> Coloque seu arquivo MP3 na mesma pasta e atualize o nome do arquivo no código HTML (linha 123).
+            </p>
+        </div>
+
+        <!-- 3. Conteúdo do Resumo (Convertido para HTML) -->
+
+        <!-- Seção 1: Conceitos-Chave -->
+        <section class="mb-8 space-y-5">
+            <h2 class="text-2xl font-bold text-gray-900">1. Conceitos-Chave (A Base)</h2>
+
+            <h3 class="text-xl font-semibold text-gray-900 pt-2">Gênero Textual vs. Sequência Textual</h3>
+            <ul class="list-disc space-y-3">
+                <li>
+                    <strong>GÊNEROS Textuais (O "Veículo"):</strong> São os textos <strong>concretos</strong> que circulam na sociedade. Têm função social específica.<span class="citation">[1, 2]</span>
+                    <br>
+                    <em class="ml-4 text-gray-700">Exemplos:</em> Notícia, receita de bolo<span class="citation">[3]</span>, edital de concurso<span class="citation">[4]</span>, artigo de opinião<span class="citation">[5]</span>, romance<span class="citation">[6]</span>, e-mail.
+                </li>
+                <li>
+                    <strong>SEQUÊNCIAS Textuais (O "Motor"):</strong> São os <strong>modos de organização</strong> internos, as estruturas linguísticas. São limitadas (as 6 do edital).<span class="citation">[2]</span>
+                    <br>
+                    <em class="ml-4 text-gray-700">Exemplos:</em> Narrativa, Descritiva, Argumentativa, Explicativa, Injuntiva, Dialogal.
+                </li>
+            </ul>
+
+            <h3 class="text-xl font-semibold text-gray-900 pt-2">O Foco da Banca: Hibridismo e PREDOMINÂNCIA</h3>
+            <p>
+                Os textos de prova são <strong>híbridos</strong> (misturam várias sequências).<span class="citation">[7, 8]</span> Por isso, o Instituto AOCP quase sempre perguntará pela sequência <strong>PREDOMINANTE</strong>.<span class="citation">[9]</span>
+            </p>
+            <!-- Bloco de destaque removido e estilo aplicado via <strong> -->
+            <p>
+                <strong>Sua tarefa:</strong> Identificar a <strong>intenção principal</strong> do autor (Contar? Convencer? Explicar? Instruir?).
+            </p>
+        </section>
+
+        <!-- Seção 2: As 6 Sequências -->
+        <section class="mb-8 space-y-5">
+            <h2 class="text-2xl font-bold text-gray-900">2. As 6 Sequências (Reconhecimento e Pistas)</h2>
+
+            <h3 class="text-xl font-semibold text-gray-900 pt-2">1. NARRATIVA (Contar)</h3>
+            <ul class="list-disc space-y-2">
+                <li><strong>Intenção:</strong> <strong>CONTAR</strong> uma história, relatar fatos sucessivos no tempo.<span class="citation">[10]</span></li>
+                <li><strong>Pistas (Linguística):</strong>
+                    <ul>
+                        <li>Verbos de <strong>Ação</strong> (correr, dizer, fazer).<span class="citation">[11]</span></li>
+                        <li>Verbos no <strong>PASSADO</strong> (Pretérito Perfeito e Imperfeito).<span class="citation">[12]</span></li>
+                    </ul>
+                </li>
+                <li><strong>Exemplo (AOCP):</strong> <em class="italic text-gray-700">"quando o pai era criança ele passava mercúrio no machucado..."</em><span class="citation">[9]</span> (A banca considerou narrativo por relatar uma história com personagem e sequência de tempo).<span class="citation">[9]</span></li>
+            </ul>
+
+            <h3 class="text-xl font-semibold text-gray-900 pt-2">2. DESCRITIVA ("Fotografar")</h3>
+            <ul class="list-disc space-y-2">
+                <li><strong>Intenção:</strong> <strong>CARACTERIZAR</strong> um objeto, pessoa ou cena. O tempo "congela" para detalhar.</li>
+                <li><strong>Pistas (Linguística):</strong>
+                    <ul>
+                        <li>Excesso de <strong>Adjetivos</strong> e locuções adjetivas.<span class="citation">[13]</span></li>
+                        <li>Verbos de <strong>Ligação</strong> (ser, estar, ficar, parecer).<span class="citation">[13]</span></li>
+                    </ul>
+                </li>
+                <li><strong>Exemplo:</strong> <em class="italic text-gray-700">"Seu rosto era largo, as maçãs do rosto salientes, os olhos fundos e pequenos..."</em></li>
+            </ul>
+
+            <h3 class="text-xl font-semibold text-gray-900 pt-2">3. ARGUMENTATIVA (Convencer)</h3>
+            <ul class="list-disc space-y-2">
+                <li><strong>Intenção:</strong> <strong>CONVENCER</strong> o leitor a aceitar uma Tese (opinião).</li>
+                <li><strong>Pistas (Linguística):</strong>
+                    <ul>
+                        <li><strong>Modalizadores (Pista de Ouro):</strong> Palavras que indicam a opinião do autor. (Ex: <em>Infelizmente</em>, <em>obviamente</em>, <em>é preciso</em>, <em>é fundamental</em>).<span class="citation">[5]</span></li>
+                        <li>Conectivos de oposição (mas, porém, contudo).<span class="citation">[14, 15]</span></li>
+                    </ul>
+                </li>
+                <li><strong>Exemplo (AOCP):</strong> A banca<span class="citation">[5]</span> identifica um texto como argumentativo pelo uso de "<strong>modalizadores argumentativos, como 'obviamente'</strong>".</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold text-gray-900 pt-2">4. EXPLICATIVA ou EXPOSITIVA (Informar)</h3>
+            <ul class="list-disc space-y-2">
+                <li><strong>Intenção:</strong> <strong>INFORMAR</strong>, <strong>EXPLICAR</strong> ou apresentar conceitos de forma <strong>neutra</strong>.<span class="citation">[6, 16]</span></li>
+                <li><strong>Pistas (Linguística):</strong>
+                    <ul>
+                        <li>Linguagem <strong>objetiva e impessoal</strong> (foco na 3ª pessoa).<span class="citation">[11, 17]</span></li>
+                        <li>Verbos no Presente (com tom "científico", atemporal).</li>
+                        <li>Conectivos explicativos (Ex: <em>ou seja</em>, <em>isto é</em>, <em>por exemplo</em>).<span class="citation">[18]</span></li>
+                    </ul>
+                </li>
+                <li><strong>Exemplo:</strong> <em class="italic text-gray-700">"A sequência dialogal é a mais comum das sequências textuais, porque funciona como a 'espinha dorsal' de vários gêneros orais..."</em><span class="citation">[19]</span></li>
+            </ul>
+
+            <h3 class="text-xl font-semibold text-gray-900 pt-2">5. INJUNTIVA (Instruir)</h3>
+            <ul class="list-disc space-y-2">
+                <li><strong>Intenção:</strong> <strong>INSTRUIR</strong> o leitor, dar ordens, conselhos ou um passo a passo.<span class="citation">[6, 4, 11]</span></li>
+                <li><strong>Pistas (Linguística):</strong>
+                    <ul>
+                        <li>Verbos no <strong>IMPERATIVO</strong> (<em>Faça</em>, <em>Misture</em>, <em>Clique</em>).</li>
+                        <li>Verbos no <strong>Infinitivo</strong> (<em>Fazer</em>, <em>Misturar</em>, <em>Clicar</em>).</li>
+                    </ul>
+                </li>
+                <li><strong>Tipos (Atenção):</strong>
+                    <ul>
+                        <li><strong>Instrucional (Sugestão):</strong> Receita de bolo<span class="citation">[3]</span>, manual de software.</li>
+                        <li><strong>Prescritivo (Ordem):</strong> Lei, edital de concurso<span class="citation">[4]</span>, bula de remédio.<span class="citation">[6]</span></li>
+                    </ul>
+                </li>
+                <li><strong>Exemplo:</strong> <em class="italic text-gray-700">"<strong>Bata</strong> o açúcar com os ovos... <strong>Acrescente</strong> a mandioca..."</em><span class="citation">[3]</span></li>
+            </ul>
+
+            <h3 class="text-xl font-semibold text-gray-900 pt-2">6. DIALOGAL ou CONVERSACIONAL (Interagir)</h3>
+            <ul class="list-disc space-y-2">
+                <li><strong>Intenção:</strong> Representar um <strong>DIÁLOGO</strong>, uma interação direta entre falantes.<span class="citation">[19]</span></li>
+                <li><strong>Pistas (Linguística):</strong>
+                    <ul>
+                        <li>Uso de <strong>Travessão (—)</strong> para marcar a troca de falas.<span class="citation">[19]</span></li>
+                        <li>Alternância de turnos; marcas de oralidade (Oi!, Ah!, Hum...).<span class="citation">[19, 20]</span></li>
+                    </ul>
+                </li>
+                <li><strong>Exemplo:</strong>
+                    <blockquote class="border-l-4 border-gray-300 pl-4 italic my-4 text-gray-700">
+                        — Olá, Martina!<br>
+                        — Olá, Ricardo! Quanto tempo!<span class="citation">[21]</span>
+                    </blockquote>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Seção 3: O Desafio (Tabela 1) -->
+        <section class="mb-8 space-y-5">
+            <h2 class="text-2xl font-bold text-gray-900">3. O Desafio da AOCP: Argumentativa vs. Explicativa</h2>
+            <p>
+                O ponto mais difícil é diferenciar textos que <em>explicam</em> de textos que <em>convencem</em>. A diferença está na <strong>intenção</strong> do autor (Neutra vs. Parcial).
+            </p>
+            
+            <!-- Container da Tabela (para garantir que não haja overflow) -->
+            <div class="w-full overflow-hidden">
+                <table class="text-sm md:text-base">
+                    <thead>
+                        <tr>
+                            <th>Característica</th>
+                            <th>Sequência EXPLICATIVA (Expositiva)</th>
+                            <th>Sequência ARGUMENTATIVA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Intenção Principal</strong></td>
+                            <td><strong>INFORMAR</strong>, Explicar, Apresentar<span class="citation">[6]</span></td>
+                            <td><strong>CONVENCER</strong>, Persuadir, Defender Tese<span class="citation">[22]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Posição do Autor</strong></td>
+                            <td>Neutra, Imparcial, Distante</td>
+                            <td>Parcial, Subjetiva, Engajada</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Linguagem</strong></td>
+                            <td>Objetiva, Denotativa, Factual</td>
+                            <td>Subjetiva (mesmo disfarçada), Valorativa</td>
+                        </tr>
+                        <tr>
+                            <td><strong>"Palavras-Chave"</strong></td>
+                            <td>"Isto é", "ou seja", "por exemplo"<span class="citation">[18]</span></td>
+                            <td>"Infelizmente", "é preciso", "obviamente", "mas", "porém"<span class="citation">[5]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Gêneros Comuns</strong></td>
+                            <td>Livro didático, Verbete, Notícia (pura)<span class="citation">[6]</span></td>
+                            <td>Editorial, Artigo de Opinião, Crítica, Publicidade<span class="citation">[4]</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Seção 4: Foco Estratégico -->
+        <section class="mb-8 space-y-5">
+            <h2 class="text-2xl font-bold text-gray-900">4. Foco Estratégico (O que a AOCP quer de você?)</h2>
+            <p>A banca espera que você saiba<span class="citation">[22, 23]</span>:</p>
+            <ol class="list-decimal space-y-2 list-outside pl-6">
+                <li><strong>Aprofundamento:</strong> Ir além do básico (ex: diferenciar injuntivo instrucional de prescritivo).<span class="citation">[24, 4]</span></li>
+                <li><strong>Foco na Predominância:</strong> Achar a intenção principal no texto híbrido. A palavra-chave da questão é "<strong>predominante</strong>".<span class="citation">[9]</span></li>
+                <li><strong>Relação Gênero -> Sequência:</strong> Saber que um "Artigo de Opinião" é "<strong>argumentativo</strong>".<span class="citation">[5]</span></li>
+                <li><strong>A "Pegadinha" Mestra:</strong> "Caçar" a opinião (<strong>modalizadores</strong>) em textos que parecem apenas explicativos.<span class="citation">[5]</span></li>
+            </ol>
+        </section>
+
+        <!-- Seção 5: Quadro-Resumo (Tabela 2) -->
+        <section class="mb-12 space-y-5">
+            <h2 class="text-2xl font-bold text-gray-900">5. Quadro-Resumo Estratégico (Revisão Final)</h2>
+            
+            <div class="w-full overflow-hidden">
+                <table class="text-sm md:text-base">
+                    <thead>
+                        <tr>
+                            <th>Sequência</th>
+                            <th>Intenção Principal (Verbo-Chave)</th>
+                            <th>Marcas Linguísticas Principais (Pistas da AOCP)</th>
+                            <th>Gêneros Comuns (Onde Predomina)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>NARRATIVA</strong></td>
+                            <td><strong>CONTAR</strong> (uma história)</td>
+                            <td>Verbos de ação no <strong>PASSADO</strong> (Perfeito/Imperfeito). Progressão de tempo.<span class="citation">[9, 12]</span></td>
+                            <td>Conto, Crônica, Romance, Fábula<span class="citation">[6]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>DESCRITIVA</strong></td>
+                            <td><strong>CARACTERIZAR</strong> ("Fotografar")</td>
+                            <td><strong>ADJETIVOS</strong> em excesso. <strong>Verbos de Ligação</strong> (ser, estar). Pausa no tempo.<span class="citation">[13]</span></td>
+                            <td>(Geralmente <em>secundária</em>; anúncios de imóveis)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ARGUMENTATIVA</strong></td>
+                            <td><strong>CONVENCER</strong> (defender tese)</td>
+                            <td>Tese (opinião). <strong>MODALIZADORES</strong> (infelizmente, obviamente). Conectivos de oposição (mas, porém).<span class="citation">[5]</span></td>
+                            <td>Artigo de Opinião, Editorial, Publicidade, Crítica<span class="citation">[4]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>EXPLICATIVA</strong></td>
+                            <td><strong>INFORMAR</strong> (Explicar algo)</td>
+                            <td>Linguagem <strong>NEUTRA</strong> (3ª pessoa). Verbos no PRESENTE (científico). Conectivos ("ou seja", "por exemplo").<span class="citation">[6, 17, 18]</span></td>
+                            <td>Livro didático, Verbete de dicionário, Notícia (informativa)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>INJUNTIVA</strong></td>
+                            <td><strong>INSTRUIR</strong> (Dar ordem/conselho)</td>
+                            <td>Verbos no <strong>IMPERATIVO</strong> (Faça!) ou <strong>Infinitivo</strong> (Fazer).<span class="citation">[4, 11]</span></td>
+                            <td>Receita<span class="citation">[3]</span>, Manual, Edital<span class="citation">[4]</span>, Bula<span class="citation">[6]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>DIALOGAL</strong></td>
+                            <td><strong>INTERAGIR</strong> (Conversar)</td>
+                            <td><strong>Travessão (—)</strong>. Alternância de falas. Marcas de oralidade (Ah! Oi!).<span class="citation">[19]</span></td>
+                            <td>Entrevista, Debate, Peça de teatro. (Secundária em contos)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 4. Botão de Questões -->
+        <footer class="text-center mt-12 pt-8 border-t border-gray-200">
+            <a href="lp-sequencias-textuaisquestoes.html" 
+               class="inline-block bg-blue-600 text-white font-bold py-3 px-10 rounded-lg text-lg shadow-md hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                Ir para Questões
+            </a>
+        </footer>
+
+    </div> <!-- Fim do container principal -->
+
+</body>
+</html>

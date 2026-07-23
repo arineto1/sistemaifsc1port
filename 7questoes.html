@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado: Coesão, Coerência e Pontuação - Estilo FCM</title>
+    <style>
+        :root {
+            --bg-color: #fdfdfd;
+            --container-bg: #ffffff;
+            --text-color: #2c3e50;
+            --accent-color: #34495e;
+            --correct-color: #27ae60;
+            --wrong-color: #c0392b;
+            --border-color: #e0e0e0;
+            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 40px;
+            background: var(--container-bg);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-radius: 8px;
+        }
+
+        header {
+            border-bottom: 2px solid var(--accent-color);
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin: 0;
+        }
+
+        p.intro {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .question-block {
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .question-text {
+            font-weight: 600;
+            font-size: 1.15rem;
+            margin-bottom: 20px;
+        }
+
+        .quote-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--accent-color);
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .options {
+            list-style: none;
+            padding: 0;
+        }
+
+        .option-item {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background 0.2s;
+        }
+
+        .option-item:hover {
+            background-color: #f0f4f8;
+        }
+
+        .option-item input {
+            margin-top: 7px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        .resolution {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f1f8ff;
+            border-radius: 5px;
+            border: 1px dashed #0056b3;
+        }
+
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .btn-submit:hover {
+            opacity: 0.9;
+        }
+
+        #results-summary {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            margin-bottom: 40px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .score-box {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .correct-answer { background-color: #d4edda !important; }
+        .wrong-answer { background-color: #f8d7da !important; }
+        
+        strong.label {
+            display: inline-block;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 20px; margin: 10px; }
+            h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Simulado Fundação CEFETMINAS</h1>
+        <p class="intro">Coesão, Coerência e Pontuação como fatores de sequenciação.</p>
+    </header>
+
+    <div id="results-summary">
+        <h2>Resultado Final</h2>
+        <div class="score-box" id="final-score">0/10</div>
+        <p id="score-message"></p>
+    </div>
+
+    <form id="quiz-form">
+        <!-- Questão 01 -->
+        <div class="question-block" id="q1">
+            <div class="question-text">QUESTÃO 01 - Teoria da Textualidade e Coesão</div>
+            <div class="quote-box">
+                A coesão e a coerência constituem dois fatores importantes da textualidade... informe se é verdadeiro (V) ou falso (F) o que se afirma.<br><br>
+                ( ) A coesão diz respeito às relações de sentido presentes na superfície do texto...<br>
+                ( ) A coerência é a estruturação lógico-semântica profunda...<br>
+                ( ) A presença abundante de recursos coesivos é condição suficiente e obrigatória para garantir a coerência...<br>
+                ( ) Em textos como listas de compras ou poemas concretos, a sequência pode ser marcada apenas pela justaposição...
+            </div>
+            <p>De acordo com as afirmações, a sequência correta é:</p>
+            <ul class="options">
+                <li class="option-item"><input type="radio" name="q1" value="A"> A) V, V, F, V.</li>
+                <li class="option-item"><input type="radio" name="q1" value="B"> B) V, F, F, V.</li>
+                <li class="option-item"><input type="radio" name="q1" value="C"> C) F, V, F, V.</li>
+                <li class="option-item"><input type="radio" name="q1" value="D"> D) F, V, V, F.</li>
+                <li class="option-item"><input type="radio" name="q1" value="E"> E) V, V, V, V.</li>
+            </ul>
+            <div class="resolution" id="res-q1">
+                <strong class="label">Resolução:</strong><br>
+                <strong>Gabarito: A.</strong><br>
+                (V) A coesão foca na superfície textual e conectivos.<br>
+                (V) A coerência é a lógica profunda e pode existir sem conectivos em contextos específicos.<br>
+                (F) A coesão NÃO é condição suficiente nem obrigatória para a coerência. Um texto pode ser coeso e sem sentido.<br>
+                (V) Justaposição é recurso válido em listas e poemas.
+            </div>
+        </div>
+
+        <!-- Questão 02 -->
+        <div class="question-block" id="q2">
+            <div class="question-text">QUESTÃO 02 - Pontuação e Expressividade</div>
+            <div class="quote-box">
+                "Amazonas: mito grego menos antigo que os mitos da Amazônia"
+            </div>
+            <p>Avalie as afirmações sobre os dois-pontos e escolha a alternativa correta:</p>
+            <ul class="options">
+                <li class="option-item"><input type="radio" name="q2" value="A"> A) I e II.</li>
+                <li class="option-item"><input type="radio" name="q2" value="B"> B) I, II e IV.</li>
+                <li class="option-item"><input type="radio" name="q2" value="C"> C) II e III.</li>
+                <li class="option-item"><input type="radio" name="q2" value="D"> D) II e IV.</li>
+                <li class="option-item"><input type="radio" name="q2" value="E"> E) III e IV.</li>
+            </ul>
+            <div class="resolution" id="res-q2">
+                <strong class="label">Resolução:</strong><br>
+                <strong>Gabarito: B.</strong><br>
+                I - Correto: Introduz um esclarecimento/definição.<br>
+                II - Correto: Função teórica de anunciar fala direta, embora não aplicada aqui.<br>
+                IV - Correto: A substituição por ponto final é gramaticalmente possível em textos literários, mudando o ritmo. O item III está incorreto pois não há enumeração de afluentes.
+            </div>
+        </div>
+
+        <!-- Questão 03 -->
+        <div class="question-block" id="q3">
+            <div class="question-text">QUESTÃO 03 - Coesão Referencial</div>
+            <div class="quote-box">
+                “O mestre... nada esperava <strong>desse</strong> animal...”
+            </div>
+            <p>A palavra "desse" se classifica como a contração de uma preposição com um pronome _____________, cuja função textual é ____________ um termo mencionado anteriormente, garantindo a ____________ e a unidade temática do parágrafo.</p>
+            <ul class="options">
+                <li class="option-item"><input type="radio" name="q3" value="A"> A) relativo / antecipar / incoerência.</li>
+                <li class="option-item"><input type="radio" name="q3" value="B"> B) demonstrativo / retomar / coesão.</li>
+                <li class="option-item"><input type="radio" name="q3" value="C"> C) possessivo / modificar / regência.</li>
+                <li class="option-item"><input type="radio" name="q3" value="D"> D) indefinido / substituir / ênfase.</li>
+                <li class="option-item"><input type="radio" name="q3" value="E"> E) pessoal / qualificar / estética.</li>
+            </ul>
+            <div class="resolution" id="res-q3">
+                <strong class="label">Resolução:</strong><br>
+                <strong>Gabarito: B.</strong><br>
+                "Desse" é pronome demonstrativo (de+esse). Sua função é anafórica (retomar), garantindo a coesão do texto.
+            </div>
+        </div>
+
+        <!-- Questão 04 -->
+        <div class="question-block" id="q4">
+            <div class="question-text">QUESTÃO 04 - Operadores Argumentativos</div>
+            <div class="quote-box">
+                “Essa é a nossa realidade global hoje. <strong>Além disso</strong>, alcançamos todos os continentes...”
+            </div>
+            <p>Assinale a alternativa que apresenta um operador argumentativo de soma que pode substituir "Além disso":</p>
+            <ul class="options">
+                <li class="option-item"><input type="radio" name="q4" value="A"> A) Ou seja.</li>
+                <li class="option-item"><input type="radio" name="q4" value="B"> B) Visto que.</li>
+                <li class="option-item"><input type="radio" name="q4" value="C"> C) Ademais.</li>
+                <li class="option-item"><input type="radio" name="q4" value="D"> D) Por conseguinte.</li>
+                <li class="option-item"><input type="radio" name="q4" value="E"> E) Conquanto.</li>
+            </ul>
+            <div class="resolution" id="res-q4">
+                <strong class="label">Resolução:</strong><br>
+                <strong>Gabarito: C.</strong><br>
+                "Ademais" é o conectivo de adição correspondente a "além disso". "Ou seja" explica, "Visto que" causa, "Por conseguinte" conclui e "Conquanto" concede.
+            </div>
+        </div>
+
+        <!-- Questão 05 -->
+        <div class="question-block" id="q5">
+            <div class="question-text">QUESTÃO 05 - Funções dos Sinais de Pontuação</div>
+            <p>Associe os comandos (1: Dois-pontos, 2: Aspas, 3: Travessões, 5: Vírgulas) às funções abaixo:</p>
+            <div class="quote-box">
+                ( ) Empregam-se para indicar a mudança de interlocutor nos diálogos.<br>
+                ( ) Empregam-se para separar termos que exercem a mesma função sintática ou isolar vocativo.<br>
+                ( ) Empregam-se no início e no final de citações e para destacar gírias.<br>
+                ( ) Empregam-se para introduzir palavras que servem para esclarecer o afirmado.
+            </div>
+            <ul class="options">
+                <li class="option-item"><input type="radio" name="q5" value="A"> A) 3, 5, 2, 1.</li>
+                <li class="option-item"><input type="radio" name="q5" value="B"> B) 1, 5, 2, 4.</li>
+                <li class="option-item"><input type="radio" name="q5" value="C"> C) 4, 3, 5, 2.</li>
+                <li class="option-item"><input type="radio" name="q5" value="D"> D) 3, 4, 2, 1.</li>
+                <li class="option-item"><input type="radio" name="q5" value="E"> E) 1, 3, 2, 5.</li>
+            </ul>
+            <div class="resolution" id="res-q5">
+                <strong class="label">Resolução:</strong><br>
+                <strong>Gabarito: A.</strong><br>
+                A sequência lógica baseada na gramática de Cereja e Cochar é: Travessões (diálogo), Vírgulas (enumeração/vocativo), Aspas (citação/destaque), Dois-pontos (esclarecimento).
+            </div>
+        </div>
+
+        <!-- Questão 06 -->
+        <div class="question-block" id="q6">
+            <div class="question-text">QUESTÃO 06 - Análise de Coesão Textual</div>
+            <div class="quote-box">
+                “O lugar <strong>onde</strong> passamos... <strong>Afinal</strong>, a casa é um abrigo... <strong>Quanto mais</strong> imprimimos nossa identidade nela, <strong>mais</strong> pertencimento encontramos.”
+            </div>
+            <p>Estão corretas as análises:</p>
+            <ul class="options">
+                <li class="option-item"><input type="radio" name="q6" value="A"> A) I, II e III apenas.</li>
+                <li class="option-item"><input type="radio" name="q6" value="B"> B) I e IV apenas.</li>
+                <li class="option-item"><input type="radio" name="q6" value="C"> C) II e III apenas.</li>
+                <li class="option-item"><input type="radio" name="q6" value="D"> D) I, III e IV apenas.</li>
+                <li class="option-item"><input type="radio" name="q6" value="E"> E) I, II, III e IV.</li>
+            </ul>
+            <div class="resolution" id="res-q6">
+                <strong class="label">Resolução:</strong><br>
+                <strong>Gabarito: A.</strong><br>
+                I - Correto: "onde" retoma lugar físico.<br>
+                II - Correto: "Afinal" justifica a tese anterior.<br>
+                III - Correto: Correlação de proporcionalidade.<br>
+                IV - Errado: "nela" retoma "casa", sendo coesão ANAFÓRICA (não catafórica).
+            </div>
+        </div>
+
+        <!-- Questão 07 -->
+        <div class="question-block" id="q7">
+            <div class="question-text">QUESTÃO 07 - Coerência e Progressão Textual</div>
+            <div class="quote-box">
+                "A voz de minha bisavó... avó... mãe... filha recolhe todas as nossas vozes..." (Conceição Evaristo)
+            </div>
+            <p>Sobre a organização e a coerência deste texto, assinale a alternativa CORRETA:</p>
+            <ul class="options">
+                <li class="option-item"><input type="radio" name="q7" value="A"> A) A coerência é prejudicada pela ausência de conectivos temporais.</li>
+                <li class="option-item"><input type="radio" name="q7" value="B"> B) A organização segue uma lógica cronológica e genealógica, construindo uma progressão.</li>
+                <li class="option-item"><input type="radio" name="q7" value="C"> C) Apresenta incoerência temporal ao misturar passado e presente sem transição.</li>
+                <li class="option-item"><input type="radio" name="q7" value="D"> D) A repetição da estrutura "A voz de minha..." é um defeito de coesão.</li>
+                <li class="option-item"><input type="radio" name="q7" value="E"> E) A coerência depende exclusivamente de fatores externos.</li>
+            </ul>
+            <div class="resolution" id="res-q7">
+                <strong class="label">Resolução:</strong><br>
+                <strong>Gabarito: B.</strong><br>
+                O poema é coerente pois segue a linha temporal das gerações de mulheres. A repetição é um recurso estilístico (anáfora), não um erro.
+            </div>
+        </div>
+
+        <!-- Questão 08 -->
+        <div class="question-block" id="q8">
+            <div class="question-text">QUESTÃO 08 - Pontuação e Sintaxe</div>
+            <div class="quote-box">
+                "Pátria Amada, Brasil!"
+            </div>
+            <p>Se a frase fosse transcrita rigorosamente, ela deveria conter uma ____________ antes do nome do país, porque "Pátria amada" funciona como caracterização e “Brasil” assume a função de ____________.</p>
+            <ul class="options">
+                <li class="option-item"><input type="radio" name="q8" value="A"> A) reticências / sujeito.</li>
+                <li class="option-item"><input type="radio" name="q8" value="B"> B) vírgula / vocativo.</li>
+                <li class="option-item"><input type="radio" name="q8" value="C"> C) ponto e vírgula / aposto.</li>
+                <li class="option-item"><input type="radio" name="q8" value="D"> D) ponto de exclamação / predicativo.</li>
+                <li class="option-item"><input type="radio" name="q8" value="E"> E) dois-pontos / objeto direto.</li>
+            </ul>
+            <div class="resolution" id="res-q8">
+                <strong class="label">Resolução:</strong><br>
+                <strong>Gabarito: B.</strong><br>
+                "Brasil" é o interlocutor (vocativo) e deve vir isolado por vírgula.
+            </div>
+        </div>
+
+        <!-- Questão 09 -->
+        <div class="question-block" id="q9">
+            <div class="question-text">QUESTÃO 09 - Conjunções Coordenativas</div>
+            <div class="quote-box">
+                “O rapaz... havia derrubado muitas árvores sem parar. <strong>E</strong> ele se empolgava... No final, o lenhador experiente o venceu.”
+            </div>
+            <p>Para evidenciar a quebra de expectativa entre o esforço do jovem e sua derrota, qual conjunção melhor substituiria o ponto final e iniciaria a adversidade?</p>
+            <ul class="options">
+                <li class="option-item"><input type="radio" name="q9" value="A"> A) Portanto.</li>
+                <li class="option-item"><input type="radio" name="q9" value="B"> B) Porquanto.</li>
+                <li class="option-item"><input type="radio" name="q9" value="C"> C) Mas.</li>
+                <li class="option-item"><input type="radio" name="q9" value="D"> D) Pois.</li>
+                <li class="option-item"><input type="radio" name="q9" value="E"> E) Por conseguinte.</li>
+            </ul>
+            <div class="resolution" id="res-q9">
+                <strong class="label">Resolução:</strong><br>
+                <strong>Gabarito: C.</strong><br>
+                O "Mas" introduz a oposição entre o esforço sem pausas do jovem e a vitória do ancião que descansava.
+            </div>
+        </div>
+
+        <!-- Questão 10 -->
+        <div class="question-block" id="q10">
+            <div class="question-text">QUESTÃO 10 - Coerência em Textos Sintéticos</div>
+            <div class="quote-box">
+                "Rua / Torta. Lua / Morta. Tua / Porta." (Cassiano Ricardo)
+            </div>
+            <p>Assinale a sequência correta para V ou F:</p>
+            <ul class="options">
+                <li class="option-item"><input type="radio" name="q10" value="A"> A) V, F, V, V.</li>
+                <li class="option-item"><input type="radio" name="q10" value="B"> B) V, V, F, F.</li>
+                <li class="option-item"><input type="radio" name="q10" value="C"> C) F, V, V, F.</li>
+                <li class="option-item"><input type="radio" name="q10" value="D"> D) F, F, V, V.</li>
+                <li class="option-item"><input type="radio" name="q10" value="E"> E) V, F, F, V.</li>
+            </ul>
+            <div class="resolution" id="res-q10">
+                <strong class="label">Resolução:</strong><br>
+                <strong>Gabarito: A.</strong><br>
+                (V) Coerência por associação de imagens.<br>
+                (F) O texto é perfeitamente inteligível pelo contexto lírico.<br>
+                (V) A disposição visual é pontuação.<br>
+                (V) Prova que coesão gramatical não é obrigatória para a textualidade.
+            </div>
+        </div>
+
+        <button type="button" class="btn-submit" onclick="gradeQuiz()">Finalizar Quiz e Ver Resoluções</button>
+    </form>
+</div>
+
+<script>
+    const answers = {
+        q1: 'A',
+        q2: 'B',
+        q3: 'B',
+        q4: 'C',
+        q5: 'A',
+        q6: 'A',
+        q7: 'B',
+        q8: 'B',
+        q9: 'C',
+        q10: 'A'
+    };
+
+    function gradeQuiz() {
+        let score = 0;
+        const form = document.getElementById('quiz-form');
+        const formData = new FormData(form);
+
+        // Resetar estilos
+        document.querySelectorAll('.option-item').forEach(item => {
+            item.classList.remove('correct-answer', 'wrong-answer');
+        });
+
+        for (let i = 1; i <= 10; i++) {
+            const questionId = 'q' + i;
+            const userAnswer = formData.get(questionId);
+            const correctAnswer = answers[questionId];
+            const resolution = document.getElementById('res-' + questionId);
+
+            // Mostrar resolução
+            resolution.style.display = 'block';
+
+            // Validar acerto
+            const options = document.querySelectorAll(`input[name="${questionId}"]`);
+            options.forEach(opt => {
+                const parentLi = opt.parentElement;
+                if (opt.value === correctAnswer) {
+                    parentLi.classList.add('correct-answer');
+                }
+                if (userAnswer === opt.value && userAnswer !== correctAnswer) {
+                    parentLi.classList.add('wrong-answer');
+                }
+            });
+
+            if (userAnswer === correctAnswer) {
+                score++;
+            }
+        }
+
+        // Mostrar resumo
+        const summary = document.getElementById('results-summary');
+        const finalScoreText = document.getElementById('final-score');
+        const message = document.getElementById('score-message');
+
+        summary.style.display = 'block';
+        finalScoreText.innerText = score + '/10';
+        
+        if (score >= 8) {
+            message.innerText = "Excelente desempenho! Você domina os mecanismos de textualidade da FCM.";
+            message.style.color = "var(--correct-color)";
+        } else if (score >= 5) {
+            message.innerText = "Bom trabalho, mas revise os pontos onde houve dúvida.";
+            message.style.color = "#d35400";
+        } else {
+            message.innerText = "Atenção: Revise a teoria de Linguística Textual e o uso de conectivos.";
+            message.style.color = "var(--wrong-color)";
+        }
+
+        // Rolar para o topo suavemente
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // Desativar inputs para evitar mudar após ver gabarito
+        document.querySelectorAll('input').forEach(input => input.disabled = true);
+        document.querySelector('.btn-submit').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>

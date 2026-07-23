@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumo de Semântica - Concurso IFPB (Instituto AOCP)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Ajustes finos para garantir leitura confortável */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #1a202c; /* Cinza muito escuro para alto contraste */
+        }
+        
+        /* Estilo para palavras grifadas (simulando marca-texto) */
+        .highlight {
+            background-color: #fef08a; /* Amarelo suave */
+            padding: 0 4px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #000;
+        }
+
+        /* Estilo para tabelas responsivas sem scroll horizontal */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+            table-layout: fixed; /* Força a tabela a respeitar a largura */
+        }
+        
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 12px;
+            text-align: left;
+            word-wrap: break-word; /* Quebra palavras longas se necessário */
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #f7fafc; /* Cinza muito claro */
+            font-weight: 700;
+            color: #2d3748;
+        }
+
+        /* Remove bordas laterais para visual mais limpo em mobile */
+        @media (max-width: 640px) {
+            th, td {
+                padding: 8px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white min-h-screen p-4 md:p-8 max-w-4xl mx-auto">
+
+    <!-- Cabeçalho e Player de Áudio -->
+    <header class="mb-8 text-center border-b pb-6">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Resumo de Alta Performance</h1>
+        <h2 class="text-xl text-gray-700 mb-6">Semântica para Concurso IFPB (Instituto AOCP)</h2>
+        
+        <div class="bg-gray-50 rounded-lg p-4 border border-gray-200 max-w-md mx-auto shadow-sm">
+            <label class="block text-sm font-medium text-gray-600 mb-2">🎧 Resumo em Áudio</label>
+            <!-- SUBSTIRUA "resumo_audio.mp3" PELO NOME DO SEU ARQUIVO -->
+            <audio controls class="w-full">
+                <source src="lp-relacoes-semanticas.mp3" type="audio/mpeg">
+                Seu navegador não suporta o elemento de áudio.
+            </audio>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="space-y-10">
+
+        <!-- Seção 1 -->
+        <section>
+            <h2 class="text-2xl font-bold text-blue-900 mb-4 border-l-4 border-blue-900 pl-3">🎯 1. O "Mindset" da Banca</h2>
+            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <ul class="list-disc pl-5 space-y-2">
+                    <li>
+                        <strong>Regra de Ouro:</strong> Esqueça o dicionário isolado. Para o Instituto AOCP, o sentido depende 100% do <span class="highlight">contexto</span> e da <span class="highlight">intencionalidade</span> do autor.
+                    </li>
+                    <li>
+                        <strong>Foco:</strong> A banca avalia sua capacidade de perceber <span class="highlight">nuances</span> e <span class="highlight">coesão</span>. Não é "decoreba", é lógica textual.
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Seção 2 -->
+        <section>
+            <h2 class="text-2xl font-bold text-blue-900 mb-4 border-l-4 border-blue-900 pl-3">🔄 2. Sinonímia e Antonímia: As Armadilhas</h2>
+            
+            <h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">⚠️ Alerta de Pegadinha: Sinonímia Contextual</h3>
+            <p class="mb-4">A banca escolhe palavras que <strong>não são sinônimos perfeitos</strong> no dicionário, mas funcionam como equivalentes naquele texto específico.</p>
+
+            <div class="overflow-hidden rounded-lg shadow-sm border border-gray-200">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="w-1/4">Palavra na Prova</th>
+                            <th class="w-1/4">Sinônimo AOCP</th>
+                            <th class="w-1/2">Por que acertar?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-semibold text-red-700">Primazia</td>
+                            <td class="font-semibold text-green-700">Predomínio</td>
+                            <td>Ambos indicam superioridade ou destaque, mesmo que "primazia" venha de "primeiro".</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold text-red-700">Expectação</td>
+                            <td class="font-semibold text-green-700">Expectativa</td>
+                            <td>"Expectação" parece errado, mas existe e é sinônimo culto de expectativa (ato de esperar).</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold text-red-700">Ceticismo</td>
+                            <td class="font-semibold text-green-700">Descrença / Dúvida</td>
+                            <td>Jamais associe a "promessa". Ceticismo é a <span class="highlight">suspensão da crença</span>.</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold text-red-700">Altruísmo</td>
+                            <td class="font-semibold text-green-700">Ajudar / Generosidade</td>
+                            <td>Usado como sinônimo prático de solidariedade em textos sociais.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="text-xl font-semibold text-gray-800 mb-3 mt-6">⛔ Antonímia Discursiva (Oposto Lógico)</h3>
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                <p class="mb-2">O antônimo exigido pode não ser o oposto literal, mas o oposto da <span class="highlight">ideia</span> que a palavra representa.</p>
+                <p><strong>Caso Real:</strong> Se o texto diz "uma <strong>recuada</strong> nos números" (sentido de algo grande/significativo), o antônimo não é "avanço", mas algo que indique <span class="highlight">pequenez</span> ou insignificância.</p>
+            </div>
+        </section>
+
+        <!-- Seção 3 -->
+        <section>
+            <h2 class="text-2xl font-bold text-blue-900 mb-4 border-l-4 border-blue-900 pl-3">🔗 3. Hiponímia e Hiperonímia</h2>
+            <p class="mb-4">Use a lógica de <strong>Conjuntos</strong>. Isso cai em questões de <span class="highlight">Retomada Textual</span>.</p>
+
+            <div class="grid md:grid-cols-2 gap-4 mb-6">
+                <div class="bg-blue-50 p-4 rounded border border-blue-100">
+                    <h4 class="font-bold text-blue-800 text-lg mb-2">HIPERônimo (Grande)</h4>
+                    <p>O termo genérico (Classe Pai).</p>
+                    <p class="mt-2 text-sm text-gray-600">Ex: Animal, Veículo, Equipamento, <strong>Cômodo</strong>.</p>
+                </div>
+                <div class="bg-green-50 p-4 rounded border border-green-100">
+                    <h4 class="font-bold text-green-800 text-lg mb-2">hipônimo (pequeno)</h4>
+                    <p>O termo específico (Classe Filha).</p>
+                    <p class="mt-2 text-sm text-gray-600">Ex: Gato, Carro, Mouse, <strong>Sala</strong>.</p>
+                </div>
+            </div>
+
+            <div class="bg-gray-100 p-4 rounded-lg border-2 border-gray-200 border-dashed">
+                <h4 class="font-bold text-gray-800 mb-2">⚡ Esquema de Memorização Prática:</h4>
+                <p class="italic text-gray-700">"Os <span class="text-blue-600 font-bold">rinocerontes</span> (hipônimo) foram transportados. Esses <span class="text-red-600 font-bold">animais</span> (hiperônimo) pesam muito."</p>
+                <p class="mt-2 text-sm"><strong>A banca pergunta:</strong> "O termo 'animais' retoma 'rinocerontes' por relação de...?"</p>
+                <p class="text-sm"><strong>Resposta:</strong> <span class="highlight">Hiperonímia</span> (do específico para o geral).</p>
+            </div>
+        </section>
+
+        <!-- Seção 4 -->
+        <section>
+            <h2 class="text-2xl font-bold text-blue-900 mb-4 border-l-4 border-blue-900 pl-3">🎭 4. Polissemia vs. Homonímia vs. Paronímia</h2>
+            
+            <div class="grid gap-4 mb-8">
+                <div class="p-3 bg-white border rounded hover:shadow-md transition">
+                    <strong class="text-lg text-indigo-700">A. Polissemia (Muitos Sentidos)</strong>
+                    <p class="text-sm text-gray-600 mt-1">Uma palavra, vários sentidos com <span class="highlight">elo lógico</span>. Ex: Cabo (vassoura/militar).</p>
+                </div>
+                <div class="p-3 bg-white border rounded hover:shadow-md transition">
+                    <strong class="text-lg text-indigo-700">B. Homonímia (Igual Nome)</strong>
+                    <p class="text-sm text-gray-600 mt-1">Escrita/som iguais, origens diferentes. <span class="highlight">Sem elo lógico</span>. Ex: Manga (fruta) vs Manga (camisa).</p>
+                </div>
+                <div class="p-3 bg-white border rounded hover:shadow-md transition">
+                    <strong class="text-lg text-indigo-700">C. Paronímia (Parecido)</strong>
+                    <p class="text-sm text-gray-600 mt-1">Grafia e som quase iguais, sentidos diferentes. Ex: Iminente vs Eminente.</p>
+                </div>
+            </div>
+
+            <h3 class="text-xl font-bold text-red-700 mb-3 text-center">🚨 Tabela da Morte (Os Mais Cobrados)</h3>
+            
+            <div class="overflow-hidden rounded-lg shadow-sm border border-gray-200">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="w-1/4">Par 1</th>
+                            <th class="w-1/4">Par 2</th>
+                            <th class="w-1/2">Dica Mnemônica (Memorize!)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>D<span class="text-red-600">e</span>ferir</strong><br><span class="text-xs text-gray-500">Conceder/Aceitar</span></td>
+                            <td><strong>D<span class="text-red-600">i</span>ferir</strong><br><span class="text-xs text-gray-500">Divergir/Adiar</span></td>
+                            <td>D<strong class="text-red-600">E</strong>ferir = Y<strong class="text-red-600">E</strong>S. <br>D<strong class="text-red-600">I</strong>ferir = D<strong class="text-red-600">I</strong>ferente.</td>
+                        </tr>
+                        <tr>
+                            <td><strong><span class="text-red-600">E</span>minente</strong><br><span class="text-xs text-gray-500">Elevado</span></td>
+                            <td><strong><span class="text-red-600">I</span>minente</strong><br><span class="text-xs text-gray-500">Imediato</span></td>
+                            <td><strong class="text-red-600">E</strong>minente = <strong class="text-red-600">E</strong>xcelente. <br><strong class="text-red-600">I</strong>minente = <strong class="text-red-600">I</strong>nstantâneo.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ratificar</strong><br><span class="text-xs text-gray-500">Confirmar</span></td>
+                            <td><strong>Retificar</strong><br><span class="text-xs text-gray-500">Corrigir</span></td>
+                            <td>R<strong class="text-red-600">A</strong>tificar = V<strong class="text-red-600">A</strong>lidar. <br>R<strong class="text-red-600">E</strong>tificar = R<strong class="text-red-600">E</strong>fazer.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ce<span class="text-red-600">ss</span>ão</strong><br><span class="text-xs text-gray-500">Ceder/Doar</span></td>
+                            <td><strong>Se<span class="text-red-600">ss</span>ão</strong><br><span class="text-xs text-gray-500">Tempo/Reunião</span></td>
+                            <td>Se<strong class="text-red-600">ss</strong>ão dura tempo. <br>Ce<strong class="text-red-600">ss</strong>ão é ato de dar.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Vult<span class="text-red-600">o</span>so</strong><br><span class="text-xs text-gray-500">$$ / Volume</span></td>
+                            <td><strong>Vult<span class="text-red-600">u</span>oso</strong><br><span class="text-xs text-gray-500">Doença</span></td>
+                            <td>Vult<strong class="text-red-600">o</strong>so = <strong class="text-red-600">O</strong>uro. <br>Vult<strong class="text-red-600">u</strong>oso = T<strong class="text-red-600">u</strong>mor.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Seção Checklist -->
+        <section class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">⚡ Checklist Final para o Dia da Prova</h2>
+            <ol class="list-decimal pl-5 space-y-3 font-medium text-gray-700">
+                <li><strong>Viu "Sinônimo"?</strong> Teste a troca na frase original. O sentido mudou? O tom (positivo/negativo) mudou?</li>
+                <li><strong>Viu "Hiperônimo"?</strong> Pense em Classes e Objetos. O termo abrange o outro?</li>
+                <li><strong>Viu "Polissemia"?</strong> Pergunte: "Tem o mesmo DNA?" Se sim, é polissemia. Se for coincidência total, é homonímia.</li>
+                <li><strong>Viu Parônimos?</strong> Respire e lembre da <span class="highlight">Tabela da Morte</span> acima.</li>
+            </ol>
+        </section>
+
+    </main>
+
+    <!-- Botão Footer -->
+    <footer class="mt-12 mb-8 text-center">
+        <a href="lp-relacoes-semanticasquestoes.html" class="inline-block bg-gray-800 hover:bg-black text-white font-bold py-4 px-12 rounded-lg shadow-lg transform transition hover:scale-105 text-lg no-underline">
+            Ir para Questões
+        </a>
+    </footer>
+
+</body>
+</html>

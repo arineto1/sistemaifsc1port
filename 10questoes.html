@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado Técnico-Analítico: Crase (Padrão CEFETMINAS)</title>
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #333;
+            --primary-color: #2c5282;
+            --accent-color: #4299e1;
+            --success-color: #2f855a;
+            --error-color: #c53030;
+            --border-color: #e2e8f0;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            font-size: 18px;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #666;
+            font-style: italic;
+            font-size: 1rem;
+        }
+
+        /* Styles for Text Support/Quotes */
+        .text-support {
+            background-color: #f0f4f8;
+            border-left: 5px solid var(--primary-color);
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+
+        .text-support h3 {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            color: var(--primary-color);
+        }
+
+        /* Question Card Styles */
+        .question-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .question-title {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .question-text {
+            margin-bottom: 20px;
+        }
+
+        .options-list {
+            list-style: none;
+        }
+
+        .option-item {
+            margin-bottom: 12px;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: flex-start;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .option-label:hover {
+            background-color: #f7fafc;
+            border-color: var(--border-color);
+        }
+
+        .option-input {
+            margin-top: 6px;
+            margin-right: 12px;
+            transform: scale(1.2);
+        }
+
+        /* Result Section Styles */
+        #result-area {
+            display: none;
+            margin-top: 40px;
+            border-top: 2px solid var(--border-color);
+            padding-top: 30px;
+        }
+
+        .score-box {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.5em;
+            margin-bottom: 40px;
+        }
+
+        .resolution-box {
+            background-color: #fefefe;
+            border: 1px solid var(--border-color);
+            border-left: 5px solid var(--accent-color);
+            padding: 20px;
+            margin-top: 15px;
+            font-size: 0.9em;
+            display: none; /* Hidden initially, shown after submit */
+        }
+        
+        .resolution-box.visible {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        .resolution-title {
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-size: 0.85em;
+        }
+
+        .resolution-content h4 {
+            margin-top: 15px;
+            margin-bottom: 8px;
+            color: #4a5568;
+        }
+
+        .resolution-content ul {
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+
+        /* Feedback Colors */
+        .correct-answer {
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
+        .wrong-answer {
+            color: var(--error-color);
+            text-decoration: line-through;
+        }
+        
+        .user-selection-marker {
+            font-weight: bold;
+            margin-left: 5px;
+            font-size: 0.9em;
+        }
+
+        .status-icon {
+            margin-right: 8px;
+        }
+
+        /* Button */
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-bottom: 50px;
+        }
+
+        .btn-submit:hover {
+            background-color: #1a365d;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        blockquote {
+            font-style: italic;
+            color: #555;
+            margin: 15px 0;
+            padding-left: 15px;
+            border-left: 3px solid #cbd5e0;
+        }
+
+        strong {
+            color: #2d3748;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            body { padding: 10px; font-size: 16px; }
+            .question-card { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Simulado de Português: Crase</h1>
+        <p class="description">Focado em Regência e Sintaxe - Estilo Fundação CEFETMINAS</p>
+    </header>
+
+    <div id="quiz-container">
+        <!-- Questions will be injected here via JavaScript -->
+    </div>
+
+    <button class="btn-submit" id="submit-btn" onclick="submitQuiz()">Finalizar Simulado e Ver Resoluções</button>
+
+    <div id="result-area">
+        <div class="score-box" id="score-display"></div>
+        <!-- Detailed feedback will be injected into the question cards -->
+    </div>
+</div>
+
+<script>
+    const quizData = [
+        {
+            id: 1,
+            title: "QUESTÃO 01",
+            context: `
+                <div class="text-support">
+                    <h3>Texto de Apoio para as Questões 01 e 02</h3>
+                    <p><strong>A Ciência e o Cotidiano</strong></p>
+                    <p>"A popularização da ciência não pode se limitar <strong>(1)</strong> simples divulgação de resultados fascinantes. Ela deve aspirar <strong>(2)</strong> formação de um pensamento crítico que permita ao cidadão comum não apenas o deslumbramento, mas o questionamento. Quando nos referimos <strong>(3)</strong> tecnologia em sala de aula, muitas vezes esquecemos que ela deve estar aliada <strong>(4)</strong> prática pedagógica reflexiva, e não submetida <strong>(5)</strong> lógicas de mercado que visam apenas <strong>(6)</strong> venda de equipamentos obsoletos."</p>
+                    <p><em>(Adaptado de: Cadernos de Educação Tecnológica, 2024)</em></p>
+                </div>
+                <p>No que tange à regência verbal e nominal, e considerando a necessidade de preenchimento das lacunas no texto de apoio em conformidade com a norma-padrão, assinale a alternativa que completa correta e respectivamente os espaços numerados (1), (2) e (3).</p>
+            `,
+            options: [
+                "à — a — à",
+                "a — à — a",
+                "à — à — à",
+                "a — a — a"
+            ],
+            correctIndex: 2, // C
+            resolution: `
+                <h4>1. Análise Macroscópica</h4>
+                <p>A questão explora a regência verbal e nominal em um texto dissertativo-técnico.</p>
+                <h4>2. Dissecção das Lacunas</h4>
+                <ul>
+                    <li><strong>Lacuna (1):</strong> "restringir-se <strong>à</strong> mera transmissão". O verbo <em>restringir-se</em> é transitivo indireto (restringir-se <strong>a</strong> algo). O substantivo "transmissão" é feminino e determinado pelo adjetivo "mera", exigindo artigo "a". Crase obrigatória.</li>
+                    <li><strong>Lacuna (2):</strong> "deve aspirar <strong>à</strong> formação". O verbo <em>aspirar</em> no sentido de almejar/desejar é VTI e exige preposição "a". "Formação" aceita artigo "a". Crase obrigatória.</li>
+                    <li><strong>Lacuna (3):</strong> "nos referimos <strong>à</strong> tecnologia". O verbo <em>referir-se</em> é VTI (referir-se <strong>a</strong>). "Tecnologia" no contexto está especificada ("em sala de aula"), aceitando artigo. Crase obrigatória.</li>
+                </ul>
+            `
+        },
+        {
+            id: 2,
+            title: "QUESTÃO 02",
+            context: `
+                <p>Considerando a continuidade do texto apresentado na Questão 01 e as regras de crase diante de substantivos femininos, locuções e regência de verbos transitivos, assinale a opção que preenche corretamente as lacunas (4), (5) e (6).</p>
+            `,
+            options: [
+                "à — às — à",
+                "a — as — a",
+                "à — as — à",
+                "a — às — a"
+            ],
+            correctIndex: 0, // A
+            resolution: `
+                <h4>Detalhamento das Lacunas</h4>
+                <ul>
+                    <li><strong>Lacuna (4):</strong> "aliada <strong>à</strong> prática". O adjetivo <em>aliada</em> rege preposição "a". "Prática" é feminino e determinado. Crase obrigatória.</li>
+                    <li><strong>Lacuna (5):</strong> "submetida <strong>às</strong> lógicas". Quem é submetido, é submetido <strong>a</strong> algo. O substantivo "lógicas" está no plural e determinado pela oração adjetiva seguinte. A união da preposição "a" com o artigo "as" gera <strong>às</strong>.</li>
+                    <li><strong>Lacuna (6):</strong> "visam apenas <strong>à</strong> venda". O verbo <em>visar</em> no sentido de ter por objetivo é Transitivo Indireto na norma culta rigorosa (exigida pela CEFET), pedindo preposição "a". "Venda" aceita artigo. Crase obrigatória.</li>
+                </ul>
+            `
+        },
+        {
+            id: 3,
+            title: "QUESTÃO 03",
+            context: `
+                <p>(Adaptação Padrão CEFET-MG / Análise de Tira e Locuções)<br>
+                Analise o período abaixo, extraído de uma narrativa contemporânea:</p>
+                <blockquote>"O pesquisador observava o fenômeno <strong>à distância</strong>, sem intervir, pois sabia que <strong>à medida que</strong> o tempo passava, as variáveis se alteravam <strong>às escondidas</strong>."</blockquote>
+                <p>Avalie as asserções sobre o emprego do acento grave nos termos destacados:</p>
+                <ol style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>Em "à distância", o acento grave é obrigatório, independentemente de a distância estar especificada ou não, para evitar ambiguidade com o objeto direto.</li>
+                    <li>A expressão "à medida que" constitui uma locução conjuntiva proporcional de base feminina, exigindo o acento grave fixo.</li>
+                    <li>"Às escondidas" classifica-se como locução adverbial de modo feminina, seguindo a mesma regra de "às pressas" e "às cegas".</li>
+                </ol>
+                <p>Estão corretas as análises:</p>
+            `,
+            options: [
+                "I e II, apenas.",
+                "II e III, apenas.",
+                "I e III, apenas.",
+                "I, II e III."
+            ],
+            correctIndex: 1, // B
+            resolution: `
+                <h4>Análise das Assertivas</h4>
+                <ul>
+                    <li><strong>I. Incorreta:</strong> A gramática normativa tradicional postula que, se a distância <strong>não for especificada</strong>, não ocorre crase (ou é facultativa para clareza, mas não "obrigatória irrestrita"). O termo "obrigatório" torna a assertiva falsa.</li>
+                    <li><strong>II. Correta:</strong> "À medida que" é locução conjuntiva proporcional de base feminina. Crase obrigatória.</li>
+                    <li><strong>III. Correta:</strong> "Às escondidas" é locução adverbial feminina plural, assim como "às pressas". Recebe acento grave.</li>
+                </ul>
+            `
+        },
+        {
+            id: 4,
+            title: "QUESTÃO 04",
+            context: `
+                <p>(Padrão CEFET-MG / Casos Especiais: Topônimos e Paralelismo)<br>
+                Assinale a alternativa que apresenta o emprego do acento indicativo de crase em total conformidade com as regras de regência e paralelismo sintático.</p>
+            `,
+            options: [
+                "O congresso de biotecnologia ocorrerá de 15 a 20 de outubro, com visitas guiadas da fábrica à estação de tratamento de água.",
+                "Os alunos viajarão à Londres para um intercâmbio, retornando depois à Terra natal com novas experiências.",
+                "Durante a feira, o estande funcionará das 8h a 18h, oferecendo brindes a quem comparecer a palestra de abertura.",
+                "Fui à Ouro Preto das igrejas barrocas, onde dediquei-me à contemplar a arquitetura colonial."
+            ],
+            correctIndex: 0, // A
+            resolution: `
+                <h4>O Princípio do Paralelismo Sintático</h4>
+                <ul>
+                    <li><strong>A (Correta):</strong> "da fábrica à estação". Há paralelismo perfeito: Origem com artigo (da = de + a) exige destino com artigo (à = a + a).</li>
+                    <li><strong>B (Incorreta):</strong> "viajarão à Londres". Topônimos não especificados não levam crase ("Volto de Londres", não "da Londres").</li>
+                    <li><strong>C (Incorreta):</strong> "das 8h a 18h". Quebra de paralelismo. Deveria ser "das 8h <strong>às</strong> 18h". Também falta crase em "comparecer <strong>à</strong> palestra".</li>
+                    <li><strong>D (Incorreta):</strong> "à contemplar". Erro grave: crase antes de verbo.</li>
+                </ul>
+            `
+        },
+        {
+            id: 5,
+            title: "QUESTÃO 05",
+            context: `
+                <p>(Padrão CEFET-MG / Pronomes Demonstrativos e Relativos)<br>
+                No diálogo "Não me refiro <strong>a</strong> essa tese, mas <strong>àquela</strong> que foi premiada no ano passado, <strong>a qual</strong> dedicamos tanto estudo", o uso ou a ausência do acento grave justifica-se, respectivamente, por:</p>
+            `,
+            options: [
+                "Regência do verbo referir-se proibindo crase ante pronome demonstrativo 'essa'; fusão da preposição 'a' com o pronome 'aquela'; regência do verbo dedicar ante pronome relativo.",
+                "Ausência de artigo ante pronome possessivo; fusão facultativa com demonstrativo; exigência de preposição pelo termo 'estudo'.",
+                "Proibição de crase ante pronome indefinido; fusão obrigatória com pronome pessoal; regência nominal de 'premiada'.",
+                "Facultatividade ante demonstrativos; concordância com o substantivo 'tese'; ausência de termo regente na oração adjetiva."
+            ],
+            correctIndex: 0, // A
+            resolution: `
+                <h4>Sintaxe dos Pronomes</h4>
+                <ul>
+                    <li><strong>"a essa":</strong> Pronomes demonstrativos "esse/essa" não admitem artigo. Só há preposição.</li>
+                    <li><strong>"àquela":</strong> Fusão da preposição "a" (exigida por <em>referir-se</em>) com o "a" inicial do pronome <em>aquela</em>.</li>
+                    <li><strong>"à qual":</strong> O verbo <em>dedicar</em> exige preposição "a" (dedicar algo <strong>a</strong> alguém). O pronome relativo "a qual" contém o artigo "a". A fusão é obrigatória.</li>
+                </ul>
+            `
+        },
+        {
+            id: 6,
+            title: "QUESTÃO 06",
+            context: `
+                <p>(Padrão CEFET-MG / Semântica e Ambiguidade)<br>
+                Em qual das alternativas a presença ou ausência do acento grave altera a função sintática do termo, mudando o sentido de "instrumento/modo" para "objeto direto" ou vice-versa?</p>
+            `,
+            options: [
+                "O aluno riscou a caneta no papel. / O aluno riscou à caneta no papel.",
+                "Ele obedeceu a regra. / Ele obedeceu à regra.",
+                "O diretor visou o passaporte. / O diretor visou ao passaporte.",
+                "A garota cheirou a flor. / A garota cheirou à flor."
+            ],
+            correctIndex: 0, // A
+            resolution: `
+                <h4>Semântica e Crase Diferencial</h4>
+                <ul>
+                    <li><strong>A (Correta):</strong> "Riscou a caneta" (OD) = Danificou o objeto caneta. "Riscou à caneta" (Adjunto Adverbial) = Usou a caneta para escrever. A crase muda a função de Objeto para Instrumento.</li>
+                    <li>As outras alternativas alteram a regência verbal ou a correção gramatical, mas não exemplificam a mudança clássica de "instrumento" solicitada.</li>
+                </ul>
+            `
+        },
+        {
+            id: 7,
+            title: "QUESTÃO 07",
+            context: `
+                <p>(Padrão CEFET-MG / Palavra "Casa" e Locuções Implícitas)<br>
+                Leia as frases a seguir:</p>
+                <ol style="margin-left: 20px;">
+                    <li>Após a longa jornada de trabalho no laboratório, retornou <strong>a</strong> casa exausto.</li>
+                    <li>No almoço de domingo, serviram um bife <strong>a</strong> milanesa que estava delicioso.</li>
+                    <li>Iremos <strong>a</strong> casa dos meus avós na próxima semana para a celebração.</li>
+                </ol>
+                <p>O acento grave deve ser obrigatoriamente empregado:</p>
+            `,
+            options: [
+                "Apenas na frase II.",
+                "Apenas nas frases II e III.",
+                "Apenas na frase III.",
+                "Nas frases I, II e III."
+            ],
+            correctIndex: 1, // B
+            resolution: `
+                <h4>Casos Específicos: Casa e Moda</h4>
+                <ul>
+                    <li><strong>I. Sem crase:</strong> "Casa" no sentido de lar próprio, sem especificador, não aceita artigo.</li>
+                    <li><strong>II. Com crase:</strong> "À milanesa". Locução implícita "à moda de". Crase obrigatória.</li>
+                    <li><strong>III. Com crase:</strong> "À casa dos meus avós". A palavra casa está especificada ("dos meus avós"), aceitando artigo.</li>
+                </ul>
+            `
+        },
+        {
+            id: 8,
+            title: "QUESTÃO 08",
+            context: `
+                <p>(Padrão CEFET-MG / Regência com Pronomes e Verbos)<br>
+                Assinale a alternativa que preenche corretamente as lacunas da frase:</p>
+                <blockquote>"Diga <strong>___</strong> Vossa Senhoria que estamos dispostos <strong>___</strong> colaborar com o projeto, mas não nos submeteremos <strong>___</strong> nenhuma imposição que fira a ética."</blockquote>
+            `,
+            options: [
+                "à — a — à",
+                "a — a — a",
+                "a — à — à",
+                "à — a — a"
+            ],
+            correctIndex: 1, // B
+            resolution: `
+                <h4>Análise de Bloqueios de Crase</h4>
+                <ul>
+                    <li><strong>1. "Diga a Vossa Senhoria":</strong> Pronomes de tratamento iniciados por Vossa/Sua rejeitam crase.</li>
+                    <li><strong>2. "dispostos a colaborar":</strong> Antes de verbo (colaborar) nunca ocorre crase.</li>
+                    <li><strong>3. "a nenhuma imposição":</strong> Pronomes indefinidos (nenhuma) rejeitam artigo, logo, não há crase.</li>
+                    <li><strong>Resultado:</strong> Tudo preposição pura (a — a — a).</li>
+                </ul>
+            `
+        },
+        {
+            id: 9,
+            title: "QUESTÃO 09",
+            context: `
+                <p>(Padrão CEFET-MG / Facultatividade)<br>
+                Identifique a opção em que o uso do acento grave é considerado facultativo segundo a norma-padrão, justificando-se por dupla possibilidade de análise sintática ou regra específica.</p>
+            `,
+            options: [
+                "Encaminharei o relatório a minha gestora amanhã cedo.",
+                "O curso é destinado a pessoas interessadas em robótica.",
+                "Ficamos cara a cara com o problema de engenharia.",
+                "O acesso a internet é vital para a pesquisa acadêmica."
+            ],
+            correctIndex: 0, // A
+            resolution: `
+                <h4>Facultatividade</h4>
+                <ul>
+                    <li><strong>A (Correta):</strong> Antes de pronomes possessivos femininos singulares ("minha gestora"), o uso do artigo é opcional. Portanto, a crase também é opcional (a minha / à minha).</li>
+                    <li><strong>B:</strong> Proibida ("a" singular antes de plural).</li>
+                    <li><strong>C:</strong> Proibida (palavras repetidas).</li>
+                    <li><strong>D:</strong> Modernamente tende a ser obrigatória ("a internet" é determinada).</li>
+                </ul>
+            `
+        },
+        {
+            id: 10,
+            title: "QUESTÃO 10",
+            context: `
+                <p>(Padrão CEFET-MG / Verbo Haver e Tempo)<br>
+                Analise o trecho: "O laboratório foi inaugurado <strong>há</strong> cinco anos, mas o acesso <strong>a</strong> ele só foi liberado <strong>à</strong> comunidade científica ontem."</p>
+                <p>Se substituíssemos os termos destacados por estruturas equivalentes de tempo futuro e regência, mantendo a correção, teríamos:</p>
+            `,
+            options: [
+                "Daqui à cinco anos / ao qual / para a",
+                "Daqui a cinco anos / a este / à",
+                "A cinco anos / à ele / na",
+                "Há cerca de cinco anos / à esse / a"
+            ],
+            correctIndex: 1, // B
+            resolution: `
+                <h4>Análise Temporal e Substituição</h4>
+                <ul>
+                    <li><strong>1. Futuro:</strong> "Daqui <strong>a</strong> cinco anos". Tempo futuro usa "a" (preposição), não "há". Sem crase antes de numeral.</li>
+                    <li><strong>2. Pronome:</strong> "acesso <strong>a este</strong>". Sem crase antes de pronome demonstrativo masculino.</li>
+                    <li><strong>3. Regência:</strong> "liberado <strong>à</strong>". Mantém a crase se o termo seguinte for feminino implícito na lógica da alternativa B.</li>
+                </ul>
+            `
+        }
+    ];
+
+    function renderQuiz() {
+        const quizContainer = document.getElementById('quiz-container');
+        
+        quizData.forEach((q, index) => {
+            const card = document.createElement('div');
+            card.className = 'question-card';
+            card.id = `q-card-${index}`;
+
+            let optionsHtml = '<ul class="options-list">';
+            q.options.forEach((opt, optIndex) => {
+                const letter = String.fromCharCode(65 + optIndex); // A, B, C, D
+                optionsHtml += `
+                    <li class="option-item">
+                        <label class="option-label">
+                            <input type="radio" name="question-${index}" value="${optIndex}" class="option-input">
+                            <span><strong>${letter})</strong> ${opt}</span>
+                        </label>
+                    </li>
+                `;
+            });
+            optionsHtml += '</ul>';
+
+            card.innerHTML = `
+                <div class="question-title">
+                    <span>${q.title}</span>
+                    <span id="status-icon-${index}"></span>
+                </div>
+                <div class="question-text">${q.context}</div>
+                ${optionsHtml}
+                <div class="resolution-box" id="res-${index}">
+                    <div class="resolution-title">Resolução e Gabarito</div>
+                    <div class="resolution-content">
+                        ${q.resolution}
+                    </div>
+                </div>
+            `;
+
+            quizContainer.appendChild(card);
+        });
+    }
+
+    function submitQuiz() {
+        let score = 0;
+        let total = quizData.length;
+        let allAnswered = true;
+
+        // Check Logic
+        quizData.forEach((q, index) => {
+            const selected = document.querySelector(`input[name="question-${index}"]:checked`);
+            const statusIcon = document.getElementById(`status-icon-${index}`);
+            const resolutionBox = document.getElementById(`res-${index}`);
+            const labels = document.querySelectorAll(`input[name="question-${index}"] ~ span`);
+            
+            // Visual feedback reset
+            labels.forEach(l => {
+                l.classList.remove('correct-answer', 'wrong-answer');
+                // Remove markers text if exist (simplified by re-rendering text logic or just appending)
+            });
+
+            if (selected) {
+                const answer = parseInt(selected.value);
+                
+                // Show resolution
+                resolutionBox.classList.add('visible');
+
+                if (answer === q.correctIndex) {
+                    score++;
+                    statusIcon.innerHTML = '<span style="color:var(--success-color)">✓ Correto</span>';
+                    labels[answer].classList.add('correct-answer');
+                } else {
+                    statusIcon.innerHTML = '<span style="color:var(--error-color)">✗ Incorreto</span>';
+                    labels[answer].classList.add('wrong-answer');
+                    // Highlight the correct one
+                    labels[q.correctIndex].classList.add('correct-answer');
+                    labels[q.correctIndex].innerHTML += ' <span class="user-selection-marker">(Gabarito)</span>';
+                }
+            } else {
+                // If not answered
+                allAnswered = false;
+                resolutionBox.classList.add('visible');
+                statusIcon.innerHTML = '<span style="color:orange">⚠ Não respondida</span>';
+                labels[q.correctIndex].classList.add('correct-answer');
+                labels[q.correctIndex].innerHTML += ' <span class="user-selection-marker">(Gabarito)</span>';
+            }
+        });
+
+        // Display Score Section
+        const resultArea = document.getElementById('result-area');
+        const scoreDisplay = document.getElementById('score-display');
+        
+        resultArea.style.display = 'block';
+        scoreDisplay.innerHTML = `Você acertou <strong>${score}</strong> de <strong>${total}</strong> questões.`;
+
+        // Hide submit button to prevent re-submission confusion (or change text)
+        const btn = document.getElementById('submit-btn');
+        btn.style.display = 'none';
+
+        // Scroll to results
+        resultArea.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Init
+    renderQuiz();
+</script>
+
+</body>
+</html>
