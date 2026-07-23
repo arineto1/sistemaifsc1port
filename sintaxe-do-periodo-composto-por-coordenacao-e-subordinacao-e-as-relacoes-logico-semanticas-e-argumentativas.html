@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumo Completo: Sintaxe e Argumentação (IFAM/CEFETMINAS)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            background-color: #ffffff;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+        
+        .highlight-yellow { background-color: #fef9c3; padding: 0 4px; border-radius: 2px; font-weight: 600; }
+        .highlight-red { color: #9b2c2c; font-weight: 700; }
+        .highlight-blue { background-color: #ebf8ff; color: #2c5282; font-weight: 600; padding: 0 4px; border-radius: 2px; }
+
+        .box-concept {
+            border-left: 4px solid #2b6cb0;
+            background-color: #f7fafc;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        /* Tabelas anti-scroll horizontal */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed; /* OBRIGATÓRIO para evitar scroll */
+        }
+        
+        td, th {
+            word-wrap: break-word; /* Quebra palavras longas se necessário */
+            overflow-wrap: break-word;
+            padding: 0.75rem;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background-color: #edf2f7;
+            font-weight: 700;
+            text-align: left;
+            color: #2d3748;
+        }
+
+        /* Áudio */
+        audio {
+            width: 100%;
+            height: 45px;
+            border-radius: 8px;
+            background-color: #f1f5f9;
+            margin-top: 10px;
+        }
+        
+        h2 { margin-top: 2.5rem; }
+    </style>
+</head>
+<body class="p-4 md:p-10 flex justify-center">
+
+    <div class="max-w-5xl w-full">
+        
+        <!-- Cabeçalho -->
+        <header class="mb-8 border-b-2 border-gray-100 pb-6">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Resumo Completo: Sintaxe do Período & Relações Lógico-Semânticas</h1>
+            <p class="text-lg text-gray-600">Foco: <strong>Fundação CEFETMINAS (Cargo: Professor EBTT)</strong></p>
+            
+            <div class="mt-6 p-5 bg-gray-50 rounded-xl border border-gray-200 shadow-sm">
+                <label class="block text-sm font-bold text-gray-700 uppercase tracking-wide mb-1">🎧 Áudio Aula (Revisão Guiada)</label>
+                <audio controls>
+                    <source src="14sintaxe.mp3" type="audio/mpeg">
+                    Seu navegador não suporta o elemento de áudio.
+                </audio>
+                <p class="text-xs text-gray-400 mt-2 text-right">Arquivo: aula_resumo_sintaxe_ifam.mp3</p>
+            </div>
+        </header>
+
+        <!-- 1. Conceitos Fundamentais -->
+        <section>
+            <h2 class="text-2xl font-bold text-gray-900 mb-4 border-l-8 border-blue-600 pl-3">1. Definições Essenciais</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="box-concept mt-0">
+                    <h3 class="font-bold text-lg mb-2">Coordenação (Independência)</h3>
+                    <p>Orações que ficam "lado a lado". Não exercem função sintática umas nas outras. São sintaticamente independentes, embora semanticamente conectadas.</p>
+                </div>
+                <div class="box-concept mt-0 border-l-blue-900 bg-blue-50">
+                    <h3 class="font-bold text-lg mb-2">Subordinação (Dependência)</h3>
+                    <p>Uma oração "encaixada" na outra. A oração subordinada exerce função sintática (sujeito, objeto, adjunto) em relação à oração principal.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. O Algoritmo de Identificação -->
+        <section>
+            <h2 class="text-2xl font-bold text-gray-900 mb-4 border-l-8 border-blue-600 pl-3">2. Algoritmo de Resolução de Questões</h2>
+            <p class="mb-4 text-gray-700">Não confie na intuição. Siga a ordem:</p>
+            
+            <div class="border rounded-lg overflow-hidden shadow-sm">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="w-1/4">Passo</th>
+                            <th class="w-3/4">Ação / Teste</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-bold">1. Verbos</td>
+                            <td>Localize e sublinhe todos os verbos. (Nº Verbos = Nº Orações).</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold">2. Conectivos</td>
+                            <td>Circule "que", "se", "como", "quando", "embora".</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-blue-700">3. Teste do ISSO</td>
+                            <td>Tente trocar a oração inteira por <strong>ISSO</strong>. <br><em>Deu certo?</em> → <strong>Substantiva</strong> (Conjunção Integrante).</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-blue-700">4. Teste do O QUAL</td>
+                            <td>Tente trocar o "QUE" por <strong>O QUAL/A QUAL</strong>. <br><em>Deu certo?</em> → <strong>Adjetiva</strong> (Pronome Relativo).</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-blue-700">5. Semântica</td>
+                            <td>Não é nenhum dos dois acima? Analise o sentido (tempo, causa, condição) → <strong>Adverbial</strong>.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 3. Período Composto por Coordenação -->
+        <section>
+            <h2 class="text-2xl font-bold text-gray-900 mb-4 border-l-8 border-blue-600 pl-3">3. Orações Coordenadas (Sindéticas)</h2>
+            <p class="mb-4">Possuem conectivo. As Assindéticas (sem conectivo) são separadas apenas por vírgula.</p>
+
+            <div class="border rounded-lg overflow-hidden">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="w-1/4">Tipo</th>
+                            <th class="w-1/3">Principais Conectivos</th>
+                            <th class="w-1/3">Dica de Prova / Pontuação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-bold">Aditivas</td>
+                            <td>e, nem, não só... mas também.</td>
+                            <td>A vírgula antes do "E" é <strong>proibida</strong>, exceto: 1) Sujeitos diferentes; 2) Polissíndeto (repetição do E); 3) Ênfase.</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold">Adversativas</td>
+                            <td>mas, porém, contudo, todavia, entretanto, no entanto.</td>
+                            <td><span class="highlight-red">NÃO</span> use "mas" e "embora" juntos. "Mas" não aceita deslocamento, os outros sim (entre vírgulas).</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold">Alternativas</td>
+                            <td>ou... ou, ora... ora, quer... quer, seja... seja.</td>
+                            <td>Vírgula obrigatória se o par estiver completo.</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold">Conclusivas</td>
+                            <td>logo, portanto, por isso, assim, pois (deslocado).</td>
+                            <td>Ideia de fechamento lógico/dedução.</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold">Explicativas</td>
+                            <td>que, porque, pois (antes do verbo).</td>
+                            <td>Geralmente vem após verbo no <strong>Imperativo</strong>. ("Fique quieto, <strong>que</strong> vai começar").</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 4. Subordinadas Substantivas -->
+        <section>
+            <h2 class="text-2xl font-bold text-gray-900 mb-4 border-l-8 border-blue-600 pl-3">4. Subordinadas Substantivas</h2>
+            <p class="mb-2"><strong>Truque:</strong> Troca pela palavra <span class="highlight-yellow">ISSO</span>.</p>
+            
+            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <h3 class="font-bold text-red-800 mb-2">⚠️ Regra de Ouro da Pontuação</h3>
+                <p>Nas substantivas, a vírgula é <span class="highlight-red">PROIBIDA</span> entre a Oração Principal e a Subordinada (pois não se separa sujeito de verbo, nem verbo de complemento).</p>
+                <p class="text-sm mt-2 text-gray-600"><em>Exceção:</em> Apositiva (usa dois pontos ou vírgula explicativa).</p>
+            </div>
+
+            <ul class="grid md:grid-cols-2 gap-4 mt-4 text-sm font-medium">
+                <li class="bg-white p-3 border rounded shadow-sm">1. <strong>Subjetiva:</strong> Funciona como sujeito. (Verbo ligação + Adjetivo / Voz Passiva).</li>
+                <li class="bg-white p-3 border rounded shadow-sm">2. <strong>Objetiva Direta:</strong> Sem preposição. (Desejo <em>que voltes</em>).</li>
+                <li class="bg-white p-3 border rounded shadow-sm">3. <strong>Objetiva Indireta:</strong> Com preposição exigida por verbo. (Preciso <em>de que voltes</em>).</li>
+                <li class="bg-white p-3 border rounded shadow-sm">4. <strong>Completiva Nominal:</strong> Com preposição exigida por nome. (Tenho medo <em>de que voltes</em>).</li>
+                <li class="bg-white p-3 border rounded shadow-sm">5. <strong>Predicativa:</strong> Após verbo Ser. (A verdade é <em>que ele sumiu</em>).</li>
+                <li class="bg-white p-3 border rounded shadow-sm">6. <strong>Apositiva:</strong> Após dois pontos, explica termo anterior.</li>
+            </ul>
+        </section>
+
+        <!-- 5. Subordinadas Adjetivas -->
+        <section>
+            <h2 class="text-2xl font-bold text-gray-900 mb-4 border-l-8 border-blue-600 pl-3">5. Subordinadas Adjetivas</h2>
+            <p class="mb-4">Introduzidas por <strong>Pronome Relativo</strong> (Que, Quem, O Qual, Cujo, Onde). O pronome retoma um substantivo anterior.</p>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div class="border-2 border-green-100 rounded p-4">
+                    <h3 class="font-bold text-green-800">Restritiva (Sem vírgula)</h3>
+                    <p class="text-sm">Limita, especifica. Refere-se a uma parte do grupo.</p>
+                    <p class="italic mt-2 text-gray-600">"Os alunos <strong>que estudam</strong> passam." (Só os que estudam).</p>
+                </div>
+                <div class="border-2 border-blue-100 rounded p-4">
+                    <h3 class="font-bold text-blue-800">Explicativa (Com vírgula)</h3>
+                    <p class="text-sm">Generaliza, acrescenta informação extra. Refere-se ao todo.</p>
+                    <p class="italic mt-2 text-gray-600">"O homem, <strong>que é mortal</strong>, sofre." (Todo homem).</p>
+                </div>
+            </div>
+
+            <div class="bg-yellow-50 p-4 rounded border-l-4 border-yellow-400">
+                <h4 class="font-bold text-gray-800">Pontos Focais de Reescrita (CEFETMINAS):</h4>
+                <ul class="list-disc list-inside text-sm mt-2 space-y-1">
+                    <li><strong>CUJO:</strong> Indica posse. Concorda com a coisa possuída. <span class="highlight-red">JAMAIS</span> aceita artigo depois (Cujo o = Erro). Aceita preposição antes ("Do cujo" = Erro / "Do qual" = Ok).</li>
+                    <li><strong>ONDE vs AONDE:</strong> "Onde" = Lugar fixo. "Aonde" = Com verbos de movimento (ir, chegar, levar).</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 6. Subordinadas Adverbiais (Tabela Completa) -->
+        <section>
+            <h2 class="text-2xl font-bold text-gray-900 mb-4 border-l-8 border-blue-600 pl-3">6. Subordinadas Adverbiais</h2>
+            <p class="mb-4">Indicam circunstância. A pontuação é facultativa se estiverem no fim (ordem direta), mas <span class="highlight-yellow">obrigatória se deslocadas para o início</span>.</p>
+
+            <div class="border rounded-lg overflow-hidden">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="w-1/5">Tipo</th>
+                            <th class="w-2/5">Conectivos Principais</th>
+                            <th class="w-2/5">Sentido / Pegadinha</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm">
+                        <tr>
+                            <td class="font-bold">Causal</td>
+                            <td>porque, visto que, já que, uma vez que, como (início).</td>
+                            <td>Causa = Fato que ocorre <strong>antes</strong> do efeito.</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold">Consecutiva</td>
+                            <td>que (precedido de tão, tal, tanto, tamanho), de modo que.</td>
+                            <td>Consequência = Ocorre <strong>depois</strong> da causa.</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold">Condicional</td>
+                            <td>se, caso, desde que, contanto que, a menos que.</td>
+                            <td>Hipótese. "Desde que" + subjuntivo = condição.</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold">Concessiva</td>
+                            <td>embora, ainda que, mesmo que, conquanto, por mais que.</td>
+                            <td><span class="highlight-blue">Quebra de expectativa</span>. Oposição fraca que não impede o fato. Exige verbo no subjuntivo.</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold">Conformativa</td>
+                            <td>conforme, segundo, consoante, como (meio da frase).</td>
+                            <td>Acordo, citação.</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold">Comparativa</td>
+                            <td>como, mais/menos... (do) que, tal qual.</td>
+                            <td>Frequentemente o verbo é elíptico. "Ele estuda mais que o irmão (estuda)."</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold">Final</td>
+                            <td>para que, a fim de que.</td>
+                            <td>Objetivo/Intenção.</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold">Temporal</td>
+                            <td>quando, enquanto, logo que, assim que, mal (Mal chegou...).</td>
+                            <td>Momento no tempo.</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold">Proporcional</td>
+                            <td>à medida que, à proporção que, quanto mais/menos...</td>
+                            <td>Simultaneidade gradual. <strong>Cuidado:</strong> "Na medida em que" = Causal.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 7. Orações Reduzidas (Nível Superior) -->
+        <section>
+            <h2 class="text-2xl font-bold text-gray-900 mb-4 border-l-8 border-blue-600 pl-3">7. Orações Reduzidas</h2>
+            <p class="mb-4">Não possuem conectivo (conjunção ou pronome relativo) e o verbo está em forma nominal (Infinitivo, Gerúndio, Particípio).</p>
+            
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="bg-gray-50 p-4 border rounded">
+                    <h4 class="font-bold border-b pb-1 mb-2">De Infinitivo (-ar, -er, -ir)</h4>
+                    <p class="text-sm">Ex: "É preciso <strong>estudar</strong> muito."</p>
+                    <p class="text-xs text-gray-500 mt-1">Desenvolvida: É preciso que se estude.</p>
+                </div>
+                <div class="bg-gray-50 p-4 border rounded">
+                    <h4 class="font-bold border-b pb-1 mb-2">De Gerúndio (-ndo)</h4>
+                    <p class="text-sm">Ex: "<strong>Saindo</strong> de casa, vi o acidente." (Temporal).</p>
+                    <p class="text-xs text-gray-500 mt-1">Desenvolvida: Quando saí de casa...</p>
+                </div>
+                <div class="bg-gray-50 p-4 border rounded">
+                    <h4 class="font-bold border-b pb-1 mb-2">De Particípio (-ado, -ido)</h4>
+                    <p class="text-sm">Ex: "<strong>Terminada</strong> a festa, todos saíram."</p>
+                    <p class="text-xs text-gray-500 mt-1">Desenvolvida: Assim que a festa terminou...</p>
+                </div>
+            </div>
+            <p class="mt-3 text-sm italic text-gray-600"><strong>Dica:</strong> Para classificar a reduzida, tente desenvolvê-la (colocar o conectivo) mentalmente. A circunstância (tempo, causa, condição) será a mesma.</p>
+        </section>
+
+        <!-- 8. Relações Lógico-Argumentativas -->
+        <section>
+            <h2 class="text-2xl font-bold text-gray-900 mb-4 border-l-8 border-blue-600 pl-3">8. Operadores Argumentativos e Coesão</h2>
+            
+            <div class="space-y-4">
+                <div class="border-l-4 border-gray-800 pl-4 py-2">
+                    <h3 class="font-bold text-lg">Escala Argumentativa</h3>
+                    <p>Palavras que indicam a força do argumento.</p>
+                    <ul class="list-disc list-inside mt-2 text-sm">
+                        <li><strong>Mesmo, Até, Inclusive:</strong> Introduzem o argumento mais forte. <br><em>"Ele sabe tudo, conhece <strong>até</strong> Latim."</em></li>
+                        <li><strong>Ao menos, Pelo menos:</strong> Introduzem o argumento mais fraco (piso argumentativo).</li>
+                    </ul>
+                </div>
+
+                <div class="border-l-4 border-gray-800 pl-4 py-2">
+                    <h3 class="font-bold text-lg">Referenciação (Coesão)</h3>
+                    <table class="mt-2 w-full text-sm">
+                        <tr>
+                            <td class="font-bold w-1/4">Anafórico</td>
+                            <td>Retoma algo dito. (Isso, Esse, Essa). <br>Ex: "Violência. <strong>Esse</strong> problema é grave."</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold">Catafórico</td>
+                            <td>Anuncia algo futuro. (Isto, Este, Esta). <br>Ex: "Quero <strong>isto</strong>: a sua aprovação."</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="border-l-4 border-gray-800 pl-4 py-2">
+                    <h3 class="font-bold text-lg">Polifonia e Contraponto</h3>
+                    <p class="text-sm">Identificar vozes no texto. O uso de <strong>"Ao contrário de..."</strong> ou <strong>"Diferentemente de..."</strong> estabelece confronto de teses.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Botão Final -->
+        <div class="text-center py-12">
+            <a href="14questoes.html" class="inline-block bg-gray-900 hover:bg-gray-800 text-white font-bold py-4 px-12 rounded-full shadow-lg transition duration-300 transform hover:scale-105 text-lg no-underline tracking-wide">
+                Iniciar Bateria de Questões 📝
+            </a>
+        </div>
+
+    </div>
+
+</body>
+</html>

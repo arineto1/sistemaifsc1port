@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado Fundação CEFETMINAS - Português</title>
+    <style>
+        :root {
+            --bg-color: #fdfdfd;
+            --container-bg: #ffffff;
+            --text-color: #2c3e50;
+            --accent-color: #34495e;
+            --highlight-color: #e8f4f8;
+            --correct-color: #27ae60;
+            --error-color: #c0392b;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif; /* Serifada para leitura longa */
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--container-bg);
+            padding: 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-radius: 8px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        p.intro {
+            font-style: italic;
+            color: #7f8c8d;
+        }
+
+        .question-block {
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .question-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+            display: block;
+        }
+
+        .question-text {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        .options-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .option-item {
+            margin-bottom: 10px;
+            padding: 10px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .option-item:hover {
+            background-color: var(--highlight-color);
+            border-color: #bdc3c7;
+        }
+
+        .option-item input[type="radio"] {
+            margin-right: 15px;
+            margin-top: 6px;
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+
+        .option-item label {
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--accent-color);
+            color: white;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: sans-serif;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .btn-submit:hover {
+            background-color: #2c3e50;
+        }
+
+        /* Styles for Results */
+        .resolution-box {
+            display: none;
+            margin-top: 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid var(--accent-color);
+            padding: 20px;
+            font-size: 0.95rem;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .resolution-title {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            font-family: sans-serif;
+        }
+
+        .status-msg {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .status-correct {
+            color: var(--correct-color);
+        }
+
+        .status-incorrect {
+            color: var(--error-color);
+        }
+
+        .score-display {
+            display: none;
+            text-align: center;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            font-family: sans-serif;
+        }
+
+        .score-display h2 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        /* Helper classes applied by JS */
+        .option-correct {
+            background-color: #d4edda !important;
+            border-color: #c3e6cb !important;
+            color: #155724;
+        }
+
+        .option-wrong {
+            background-color: #f8d7da !important;
+            border-color: #f5c6cb !important;
+            color: #721c24;
+        }
+        
+        /* Mobile adjustment */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Simulado Fundação CEFETMINAS</h1>
+        <p class="intro">Regras de concordância e regência verbal e nominal aplicadas ao texto e ao padrão culto.</p>
+    </header>
+
+    <div id="score-area" class="score-display">
+        <!-- Score will be injected here -->
+    </div>
+
+    <form id="quiz-form">
+        <div id="questions-container">
+            <!-- Questions will be injected here via JavaScript -->
+        </div>
+
+        <button type="button" id="submit-btn" class="btn-submit">Finalizar Simulado</button>
+    </form>
+</div>
+
+<script>
+    const quizData = [
+        {
+            id: 1,
+            title: "QUESTÃO 01 (Sintaxe de Concordância e Regência - V/F)",
+            text: `Sobre a sintaxe de concordância e de regência aplicada ao texto padrão, analise as afirmativas a seguir e identifique com <strong>V</strong> as verdadeiras e com <strong>F</strong> as falsas.<br><br>
+            ( ) Na oração "Fazem anos que não se veem atitudes tão nobres", há um desvio de concordância verbal, pois o verbo fazer, indicando tempo decorrido, é impessoal e deveria estar no singular.<br>
+            ( ) Em "Prefiro a leitura de clássicos do que assistir a filmes modernos", a regência do verbo preferir está adequada à norma culta, estabelecendo uma comparação de superioridade.<br>
+            ( ) Os vocábulos "meio" e "bastante", em "Elas estavam meio confusas e havia bastantes dúvidas", funcionam, respectivamente, como advérbio e pronome adjetivo, estando a concordância nominal correta.<br>
+            ( ) A partícula "se", em "Alugam-se casas de veraneio", atua como índice de indeterminação do sujeito, justificando a flexão do verbo no plural.<br>
+            ( ) O verbo "assistir", no sentido de prestar assistência, admite a regência transitiva direta, como em "O médico assistiu o paciente prontamente".<br><br>
+            A alternativa que contém a sequência correta, de cima para baixo, é:`,
+            options: [
+                "V - F - V - F - V",
+                "V - V - F - V - F",
+                "F - F - V - F - V",
+                "V - F - F - V - V",
+                "F - V - V - V - F"
+            ],
+            correctIndex: 0,
+            resolution: `<strong>(V) Fazem anos... (Erro):</strong> Verdadeiro. A afirmativa diz que há um desvio. E há mesmo. O verbo <em>fazer</em> indicando tempo é impessoal e não tem plural. O correto é "Faz anos".<br>
+            <strong>(F) Prefiro... do que...:</strong> Falso. A regência culta de <em>preferir</em> é "Preferir X a Y". A construção "do que" é condenada pela banca.<br>
+            <strong>(V) Meio e Bastantes:</strong> Verdadeiro. "Meio confusas" (um pouco = advérbio invariável). "Bastantes dúvidas" (muitas = pronome adjetivo variável). Concordância correta.<br>
+            <strong>(F) Alugam-se casas...:</strong> Falso. Em "Alugam-se casas", o verbo é VTD e "casas" é sujeito paciente. O "se" é partícula apassivadora, não índice de indeterminação.<br>
+            <strong>(V) Assistir (ajudar) VTD:</strong> Verdadeiro. A banca reconhece que, no sentido de ajudar, o verbo <em>assistir</em> pode ser transitivo direto.`
+        },
+        {
+            id: 2,
+            title: "QUESTÃO 02 (Preenchimento de Lacunas - Regência e Crase)",
+            text: `Considere o período abaixo e as regras de regência nominal e verbal.<br><br>
+            <em>"A diretora chegou ________ escola pontualmente ao meio-dia e ________. Ela informou _________ alunos que o uso de celular é nocivo _________ concentração."</em><br><br>
+            Assinale a opção que preenche corretamente as lacunas.`,
+            options: [
+                "na – meia – aos – para a",
+                "à – meio – os – à",
+                "à – meia – aos – à",
+                "na – meio – os – contra a",
+                "a – meia – aos – na"
+            ],
+            correctIndex: 2,
+            resolution: `<strong>1ª Lacuna:</strong> Quem chega, chega <strong>a</strong> algum lugar. "A" (preposição) + "a" (artigo de escola) = <strong>à</strong>. ("Chegar em" é considerado erro pela banca).<br>
+            <strong>2ª Lacuna:</strong> "Meio-dia e <strong>meia</strong>" (hora). Concordância nominal obrigatória.<br>
+            <strong>3ª Lacuna:</strong> Informar é bitransitivo. A frase diz "que o uso..." (Objeto Direto). Logo, o complemento "alunos" deve ser Objeto Indireto. "Informou <strong>aos</strong> alunos".<br>
+            <strong>4ª Lacuna:</strong> Regência nominal de nocivo pede preposição "a". Com o artigo "a" de concentração = <strong>à</strong>.`
+        },
+        {
+            id: 3,
+            title: "QUESTÃO 03 (Concordância Verbal e Sujeitos Complexos)",
+            text: `A concordância verbal está inteiramente de acordo com a norma culta da língua portuguesa na alternativa:`,
+            options: [
+                "A maioria dos candidatos, apesar do cansaço, insistiram em revisar o conteúdo até o último minuto.",
+                "Faltam resolver os problemas mais graves de infraestrutura antes de iniciar as obras.",
+                "Não se viam senão destroços após a passagem avassaladora do furacão pela costa.",
+                "Ocorreu, durante a reunião de ontem, graves divergências entre os membros do conselho.",
+                "Estados Unidos, China e Rússia investe pesadamente em novas tecnologias espaciais."
+            ],
+            correctIndex: 2,
+            resolution: `<strong>A) Incorreta.</strong> A banca prefere a concordância lógica com o núcleo "maioria" ("insistiu"), especialmente com a interposição de termos.<br>
+            <strong>B) Incorreta.</strong> A construção "Faltam resolver" é condenada. Correto: "Falta resolver" ou "Faltam ser resolvidos".<br>
+            <strong>C) Correta.</strong> "Não se viam senão destroços". Verbo <em>ver</em> (VTD) + SE (PA). Sujeito = "destroços". Verbo no plural ("viam").<br>
+            <strong>D) Incorreta.</strong> Sujeito = "graves divergências" (plural). Verbo deve ser "<strong>Ocorreram</strong>".<br>
+            <strong>E) Incorreta.</strong> Sujeito composto. Verbo no plural: "<strong>investem</strong>".`
+        },
+        {
+            id: 4,
+            title: "QUESTÃO 04 (Regência Verbal - Verbos 'Traiçoeiros')",
+            text: `Analise as sentenças abaixo quanto à regência verbal:<br><br>
+            I. O funcionário esqueceu do crachá em casa e não pôde entrar.<br>
+            II. O novo regulamento implica em mudanças drásticas na rotina de trabalho.<br>
+            III. O aspirante aspirava ao cargo de oficial com grande dedicação.<br>
+            IV. Obedeceremos o regulamento para evitar punições severas.<br><br>
+            Estão <strong>INCORRETAS</strong>, segundo o rigor gramatical da Fundação CEFETMINAS:`,
+            options: [
+                "Apenas I e II.",
+                "Apenas II e III.",
+                "Apenas III e IV.",
+                "Apenas I, II e IV.",
+                "Todas as sentenças."
+            ],
+            correctIndex: 3,
+            resolution: `<strong>I. Incorreta.</strong> Verbo não pronominal (esqueceu) não aceita preposição "de". Correto: "Esqueceu o crachá" ou "Esqueceu-se do crachá".<br>
+            <strong>II. Incorreta.</strong> Verbo <em>implicar</em> (acarretar) é VTD. Não usa "em". Correto: "Implica mudanças".<br>
+            <strong>III. Correta.</strong> "Aspirava ao cargo". Verbo <em>aspirar</em> (desejar) é VTI com preposição "a".<br>
+            <strong>IV. Incorreta.</strong> <em>Obedecer</em> é VTI e exige preposição "a". Correto: "Obedeceremos <strong>ao</strong> regulamento".`
+        },
+        {
+            id: 5,
+            title: "QUESTÃO 05 (Concordância Nominal - Casos Especiais)",
+            text: `Assinale a alternativa em que a concordância nominal apresenta desvio em relação à norma padrão.`,
+            options: [
+                "É proibido entrada de estranhos sem identificação prévia na portaria.",
+                "As meninas mesmas organizaram a festa surpresa para a professora.",
+                "Seguem inclusas as planilhas de custos atualizadas para a conferência.",
+                "Aqueles documentos ficaram bastantes confusos após a revisão malfeita.",
+                "A senhora parecia meio preocupada com os resultados dos exames."
+            ],
+            correctIndex: 3,
+            resolution: `<strong>A) Correta.</strong> "É proibido entrada". Sem determinante, o adjetivo fica no masculino singular (neutro).<br>
+            <strong>B) Correta.</strong> "Mesmo" concorda com o sujeito.<br>
+            <strong>C) Correta.</strong> "Inclusas" concorda com "planilhas".<br>
+            <strong>D) Incorreta.</strong> "Bastante" aqui modifica o adjetivo "confusos", logo é advérbio de intensidade (muito) e <strong>não varia</strong>. Correto: "Ficaram <strong>bastante</strong> confusos".`
+        },
+        {
+            id: 6,
+            title: "QUESTÃO 06 (Identificação de Erro - Sintaxe)",
+            text: `No trecho: <em>"Quando o termo regente é um nome, ocorre a regência nominal. Assim, a frase 'Estamos ansiosos por resultados' está correta, enquanto 'Somos favoráveis com a greve' apresenta erro."</em><br><br>
+            Sobre a regência do adjetivo "favorável" no contexto da banca, a preposição correta a ser utilizada em substituição a "com" é:`,
+            options: [
+                "de",
+                "para",
+                "por",
+                "a",
+                "em"
+            ],
+            correctIndex: 3,
+            resolution: `Quem é favorável, é favorável <strong>a</strong> alguma coisa. A banca considera o uso de "com" um coloquialismo. A forma culta é "Favorável à greve".`
+        },
+        {
+            id: 7,
+            title: "QUESTÃO 07 (Voz Passiva e Concordância)",
+            text: `Observe a oração: <em>"Concertam-se sapatos e fabricam-se chaves."</em><br><br>
+            Sobre a sintaxe de concordância aplicada a este período, é correto afirmar:`,
+            options: [
+                "O sujeito é indeterminado, razão pela qual os verbos estão na 3ª pessoa do plural.",
+                "A partícula 'se' funciona como objeto direto reflexivo.",
+                "Os verbos são transitivos diretos e concordam com seus respectivos sujeitos pacientes ('sapatos' e 'chaves').",
+                "Há erro de concordância, pois a norma culta exige o singular quando o sujeito está posposto.",
+                "Trata-se de voz passiva analítica, onde o auxiliar 'ser' está elíptico."
+            ],
+            correctIndex: 2,
+            resolution: `<strong>Análise:</strong> <em>Concertar</em> e <em>Fabricar</em> são VTD. A partícula <em>se</em> atua como partícula apassivadora. Logo, "sapatos" e "chaves" são sujeitos pacientes, o que obriga a concordância no plural ("Concertam" e "Fabricam").`
+        },
+        {
+            id: 8,
+            title: "QUESTÃO 08 (Uso de Verbos Impessoais)",
+            text: `Marque a alternativa em que o verbo destacado foi empregado corretamente quanto à flexão de número.`,
+            options: [
+                "<strong>Houveram</strong> muitos acidentes naquela rodovia durante o feriado.",
+                "<strong>Faz</strong> dez anos que não visito meus avós no interior.",
+                "Devem <strong>fazer</strong> dias frios no próximo inverno.",
+                "Podem <strong>haver</strong> razões que desconhecemos para tal atitude.",
+                "<strong>Existia</strong> grandes possibilidades de sucesso naquele empreendimento."
+            ],
+            correctIndex: 1,
+            resolution: `<strong>A) Incorreta.</strong> <em>Haver</em> (existir) é impessoal. Correto: "<strong>Houve</strong> muitos acidentes".<br>
+            <strong>B) Correta.</strong> <em>Fazer</em> (tempo decorrido) é impessoal. "<strong>Faz</strong> dez anos". Singular obrigatório.<br>
+            <strong>C) Incorreta.</strong> Em locução, a impessoalidade transmite-se ao auxiliar. Correto: "Deve <strong>fazer</strong> dias frios".<br>
+            <strong>D) Incorreta.</strong> Correto: "Pode <strong>haver</strong> razões".<br>
+            <strong>E) Incorreta.</strong> <em>Existir</em> <strong>é pessoal</strong> e concorda com o sujeito. Correto: "<strong>Existiam</strong> grandes possibilidades".`
+        },
+        {
+            id: 9,
+            title: "QUESTÃO 09 (Regência do Verbo Assistir e Pronomes)",
+            text: `Considere a frase: <em>"O menino queria ver o filme, mas os pais não o deixaram assistir _______."</em><br><br>
+            Para completar a lacuna respeitando a regência culta do verbo assistir (ver) e o uso correto dos pronomes oblíquos, a forma adequada é:`,
+            options: [
+                "o",
+                "lhe",
+                "a ele",
+                "no mesmo",
+                "ele"
+            ],
+            correctIndex: 2,
+            resolution: `Verbo <em>assistir</em> no sentido de ver é VTI (exige preposição "a"). O Objeto Indireto do verbo assistir <strong>não aceita</strong> o pronome oblíquo átono "lhe" na norma culta tradicional defendida pela banca. Deve-se usar o pronome tônico preposicionado: "<strong>a ele</strong>".`
+        },
+        {
+            id: 10,
+            title: "QUESTÃO 10 (Sintaxe Textual e Coesão)",
+            text: `Em: <em>"A remessa de vacinas que <strong>chegaram</strong> ontem ao estado será distribuída imediatamente."</em><br><br>
+            O uso do verbo "chegar" no plural:`,
+            options: [
+                "Está correto, pois concorda com 'vacinas'.",
+                "Está incorreto, pois o núcleo do sujeito é 'remessa', exigindo o singular.",
+                "É facultativo, podendo concordar com 'remessa' ou com 'vacinas' (concordância atrativa).",
+                "Está correto, pois concorda com o pronome relativo 'que'.",
+                "Gera ambiguidade, sugerindo que o estado chegou ontem."
+            ],
+            correctIndex: 1,
+            resolution: `Para a CEFETMINAS, a concordância ideal é com o núcleo "remessa", especialmente porque o verbo principal da frase ("será") está no singular, exigindo coerência e coesão textual. A concordância com "vacinas" cria desarmonia no período.`
+        }
+    ];
+
+    function renderQuiz() {
+        const container = document.getElementById('questions-container');
+        
+        quizData.forEach((q, index) => {
+            const questionDiv = document.createElement('div');
+            questionDiv.classList.add('question-block');
+            
+            // Title and Text
+            questionDiv.innerHTML = `
+                <span class="question-title">${q.title}</span>
+                <p class="question-text">${q.text}</p>
+                <ul class="options-list" id="options-${index}">
+                    <!-- Options injected below -->
+                </ul>
+                <div class="resolution-box" id="res-${index}">
+                    <span class="resolution-title">Resolução Analítica</span>
+                    <span class="status-msg" id="status-${index}"></span>
+                    <p>${q.resolution}</p>
+                </div>
+            `;
+            
+            // Options
+            const optionsList = questionDiv.querySelector(`#options-${index}`);
+            q.options.forEach((opt, optIndex) => {
+                const li = document.createElement('li');
+                li.classList.add('option-item');
+                li.innerHTML = `
+                    <input type="radio" name="q${index}" id="q${index}_opt${optIndex}" value="${optIndex}">
+                    <label for="q${index}_opt${optIndex}">${opt}</label>
+                `;
+                optionsList.appendChild(li);
+            });
+
+            container.appendChild(questionDiv);
+        });
+    }
+
+    function calculateResults() {
+        let score = 0;
+        const total = quizData.length;
+
+        quizData.forEach((q, index) => {
+            const selected = document.querySelector(`input[name="q${index}"]:checked`);
+            const resolutionBox = document.getElementById(`res-${index}`);
+            const statusMsg = document.getElementById(`status-${index}`);
+            
+            // Disable inputs
+            const inputs = document.querySelectorAll(`input[name="q${index}"]`);
+            inputs.forEach(input => input.disabled = true);
+
+            let userCorrect = false;
+
+            // Determine correctness and style
+            if (selected) {
+                const val = parseInt(selected.value);
+                if (val === q.correctIndex) {
+                    score++;
+                    userCorrect = true;
+                    statusMsg.textContent = "✓ Resposta Correta!";
+                    statusMsg.className = "status-msg status-correct";
+                    selected.parentElement.classList.add('option-correct');
+                } else {
+                    statusMsg.textContent = "✕ Resposta Incorreta";
+                    statusMsg.className = "status-msg status-incorrect";
+                    selected.parentElement.classList.add('option-wrong');
+                    
+                    // Highlight correct answer
+                    const correctInput = document.getElementById(`q${index}_opt${q.correctIndex}`);
+                    correctInput.parentElement.classList.add('option-correct');
+                }
+            } else {
+                statusMsg.textContent = "✕ Não respondida";
+                statusMsg.className = "status-msg status-incorrect";
+                // Highlight correct answer
+                const correctInput = document.getElementById(`q${index}_opt${q.correctIndex}`);
+                correctInput.parentElement.classList.add('option-correct');
+            }
+
+            // Show resolution
+            resolutionBox.style.display = "block";
+        });
+
+        // Show Score
+        const scoreArea = document.getElementById('score-area');
+        scoreArea.innerHTML = `<h2>Você acertou ${score} de ${total} questões</h2>`;
+        scoreArea.style.display = "block";
+        
+        // Hide Submit button
+        document.getElementById('submit-btn').style.display = 'none';
+        
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+        renderQuiz();
+        document.getElementById('submit-btn').addEventListener('click', calculateResults);
+    });
+</script>
+
+</body>
+</html>

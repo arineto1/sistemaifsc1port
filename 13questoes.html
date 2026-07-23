@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz: Análise Sintática - CEFETMINAS</title>
+    <style>
+        :root {
+            --bg-color: #f9f7f1; /* Off-white suave para não cansar a vista */
+            --card-bg: #ffffff;
+            --text-color: #2c3e50;
+            --accent-color: #3498db;
+            --success-color: #27ae60;
+            --error-color: #c0392b;
+            --border-color: #e0e0e0;
+            --highlight-bg: #ecf0f1;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif; /* Serifada para leitura longa */
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        header h1 {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 2.2rem;
+            color: #1a252f;
+        }
+
+        header p {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        .ref-text {
+            background-color: #f4f6f7;
+            padding: 20px;
+            border-left: 5px solid var(--accent-color);
+            margin-bottom: 30px;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+
+        .ref-text h3 {
+            margin-top: 0;
+            font-family: 'Segoe UI', sans-serif;
+            color: var(--accent-color);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .question-card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        .question-header {
+            font-weight: bold;
+            font-family: 'Segoe UI', sans-serif;
+            margin-bottom: 15px;
+            color: #555;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .question-text {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .options {
+            list-style: none;
+            padding: 0;
+        }
+
+        .option-item {
+            margin-bottom: 12px;
+            padding: 10px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: baseline;
+            font-family: 'Segoe UI', sans-serif; /* Sans para UI elements */
+        }
+
+        .option-item:hover {
+            background-color: var(--highlight-bg);
+        }
+
+        .option-item input[type="radio"] {
+            margin-right: 12px;
+            transform: scale(1.2);
+        }
+
+        .action-area {
+            text-align: center;
+            margin: 50px 0;
+        }
+
+        .btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.1s, background-color 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        /* Área de Resultados */
+        #results-section {
+            display: none;
+            margin-top: 50px;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .score-card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            border: 2px solid var(--accent-color);
+        }
+
+        .score-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            display: block;
+        }
+
+        .resolution-card {
+            background-color: var(--card-bg);
+            padding: 0;
+            margin-bottom: 40px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .resolution-header {
+            padding: 15px 30px;
+            background-color: #eaeaea;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            color: white;
+        }
+
+        .status-correct {
+            background-color: var(--success-color);
+        }
+
+        .status-incorrect {
+            background-color: var(--error-color);
+        }
+
+        .resolution-content {
+            padding: 30px;
+        }
+
+        .resolution-content h4 {
+            margin-top: 0;
+            color: var(--text-color);
+            border-bottom: 2px solid var(--highlight-bg);
+            padding-bottom: 10px;
+        }
+
+        .gabarito-label {
+            display: block;
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: #555;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .theory-block {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #95a5a6;
+            margin-top: 15px;
+        }
+
+        .distractor-analysis {
+            margin-top: 20px;
+        }
+        
+        .distractor-analysis ul {
+            padding-left: 20px;
+        }
+
+        .distractor-analysis li {
+            margin-bottom: 8px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            .question-card, .resolution-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Simulado: Análise Sintática</h1>
+        <p>Focado no padrão da banca Fundação CEFETMINAS</p>
+    </header>
+
+    <form id="quiz-form">
+        <!-- Texto I -->
+        <div class="ref-text">
+            <h3>Texto de Referência para as Questões 01 a 03</h3>
+            <p>"Ninguém sabe ao certo como se entenderam, mas se entenderam. E a primeira coisa que o índio deu a Colombo foi um tomate. Era o primeiro encontro, na primeira ilha, no primeiro dia, e o próprio sol parecia ter chegado mais perto para não perder a cena. Fazia calor e o tomate brilhava ao sol como uma maçã dourada.<br>
+            — Um <em>pomo d’oro</em>! — exclamou Colombo.<br>
+            — Um tomate — explicou o índio. — Para a salada. Para o molho.<br>
+            — Finalmente algo para pôr fim à brancura do espaguete — disse Colombo emocionado."<br>
+            <small>(VERISSIMO, Luis Fernando. <em>Comédias da vida pública</em>. Porto Alegre: L&PM, 1995. Adaptado.)</small></p>
+        </div>
+
+        <!-- Questão 01 -->
+        <div class="question-card" id="q1">
+            <div class="question-header">Questão 01</div>
+            <div class="question-text">
+                No período "Ninguém sabe ao certo como se entenderam, mas se entenderam", a partícula "se" ocorre em duas instâncias associada ao verbo "entender". Considerando a morfossintaxe e a semântica verbal no contexto da interação entre Colombo e o índio, assinale a alternativa que apresenta a correta classificação sintática destes termos.
+            </div>
+            <ul class="options">
+                <li class="option-item"><label><input type="radio" name="q1" value="A"> A) Em ambas as ocorrências, o "se" funciona como partícula apassivadora, determinando que o sujeito da oração é paciente e indeterminado, o que reforça a impessoalidade histórica do encontro narrado.</label></li>
+                <li class="option-item"><label><input type="radio" name="q1" value="B"> B) Trata-se de um pronome reflexivo com valor recíproco em ambas as orações, exercendo a função sintática de objeto direto, indicando que a ação verbal recai mutuamente sobre os sujeitos implícitos (Colombo e o índio).</label></li>
+                <li class="option-item"><label><input type="radio" name="q1" value="C"> C) O termo classifica-se como índice de indeterminação do sujeito, haja vista que o verbo "entender", neste contexto, opera como transitivo indireto, sem referência a um sujeito agente específico no discurso.</label></li>
+                <li class="option-item"><label><input type="radio" name="q1" value="D"> D) A primeira ocorrência atua como conjunção integrante introduzindo uma oração subordinada substantiva, enquanto a segunda constitui parte integrante de um verbo pronominal essencial.</label></li>
+            </ul>
+        </div>
+
+        <!-- Questão 02 -->
+        <div class="question-card" id="q2">
+            <div class="question-header">Questão 02</div>
+            <div class="question-text">
+                Observe o período: "Fazia calor e o tomate brilhava ao sol como uma maçã dourada."<br>
+                Acerca da estrutura sintática deste período e da classificação dos sujeitos oracionais, a análise correta é:
+            </div>
+            <ul class="options">
+                <li class="option-item"><label><input type="radio" name="q2" value="A"> A) O período é simples, composto por um sujeito composto implícito, onde os núcleos semânticos "calor" e "tomate" regem a concordância dos verbos.</label></li>
+                <li class="option-item"><label><input type="radio" name="q2" value="B"> B) Trata-se de um período composto por coordenação, no qual a primeira oração é classificada como oração sem sujeito devido à impessoalidade do verbo "fazer", e a segunda oração possui sujeito simples ("o tomate").</label></li>
+                <li class="option-item"><label><input type="radio" name="q2" value="C"> C) Configura-se um período composto por subordinação, onde a oração "Fazia calor" atua como principal e a subsequente como subordinada adverbial comparativa, evidenciada pelo conectivo "como".</label></li>
+                <li class="option-item"><label><input type="radio" name="q2" value="D"> D) Na primeira oração, o substantivo "calor" exerce a função de sujeito simples do verbo "fazer", enquanto na segunda, a expressão "ao sol" funciona como objeto direto do verbo "brilhar".</label></li>
+            </ul>
+        </div>
+
+        <!-- Questão 03 -->
+        <div class="question-card" id="q3">
+            <div class="question-header">Questão 03</div>
+            <div class="question-text">
+                No fragmento "— Finalmente algo para pôr fim <strong>à brancura do espaguete</strong>...", o termo destacado desempenha, em relação ao vocábulo "fim", a função sintática de:
+            </div>
+            <ul class="options">
+                <li class="option-item"><label><input type="radio" name="q3" value="A"> A) Objeto Indireto, visto que completa o sentido transitivo indireto da locução verbal "pôr fim".</label></li>
+                <li class="option-item"><label><input type="radio" name="q3" value="B"> B) Complemento Nominal, pois integra o sentido do substantivo abstrato "fim", indicando o alvo paciente da ação nominal.</label></li>
+                <li class="option-item"><label><input type="radio" name="q3" value="C"> C) Adjunto Adnominal, uma vez que caracteriza o substantivo "fim", atribuindo-lhe uma qualidade específica e posse.</label></li>
+                <li class="option-item"><label><input type="radio" name="q3" value="D"> D) Objeto Direto Preposicionado, exigido pela regência arcaica do verbo "pôr" quando associado a substantivos de término.</label></li>
+            </ul>
+        </div>
+
+        <!-- Texto II -->
+        <div class="ref-text">
+            <h3>Texto de Referência para as Questões 04 e 05</h3>
+            <p>"Poesia, minha tia, ilumine as certezas dos homens e os tons de minhas palavras. É que arrisco a prosa mesmo com balas atravessando os fonemas. É o verbo, aquele que é maior que o seu tamanho, que diz, faz e acontece. Aqui ele cambaleia baleado."<br>
+            <small>(LINS, Paulo. <em>Cidade de Deus</em>. São Paulo: Companhia das Letras, 2007. Fragmento.)</small></p>
+        </div>
+
+        <!-- Questão 04 -->
+        <div class="question-card" id="q4">
+            <div class="question-header">Questão 04</div>
+            <div class="question-text">
+                No segmento inicial "Poesia, <strong>minha tia</strong>, ilumine as certezas dos homens...", o termo em destaque, isolado por vírgulas, exerce a função sintática de:
+            </div>
+            <ul class="options">
+                <li class="option-item"><label><input type="radio" name="q4" value="A"> A) Sujeito simples, concordando com o verbo "ilumine" e indicando o agente da ação solicitada pelo eu-lírico.</label></li>
+                <li class="option-item"><label><input type="radio" name="q4" value="B"> B) Aposto explicativo, especificando uma relação de parentesco figurada atribuída ao termo antecedente "Poesia".</label></li>
+                <li class="option-item"><label><input type="radio" name="q4" value="C"> C) Vocativo, configurando um chamamento direto ao interlocutor personificado, independente da estrutura sujeito-predicado.</label></li>
+                <li class="option-item"><label><input type="radio" name="q4" value="D"> D) Adjunto adnominal, pois qualifica o núcleo "Poesia" com uma característica afetiva, apesar da pontuação.</label></li>
+            </ul>
+        </div>
+
+        <!-- Questão 05 -->
+        <div class="question-card" id="q5">
+            <div class="question-header">Questão 05</div>
+            <div class="question-text">
+                No trecho "...aquele que é maior que o seu tamanho...", a oração sublinhada classifica-se, quanto à sua função sintática no período, como:
+            </div>
+            <ul class="options">
+                <li class="option-item"><label><input type="radio" name="q5" value="A"> A) Oração subordinada substantiva predicativa, atribuindo uma qualidade essencial ao pronome demonstrativo "aquele".</label></li>
+                <li class="option-item"><label><input type="radio" name="q5" value="B"> B) Oração subordinada adjetiva restritiva, delimitando o sentido do pronome antecedente "aquele" sem o uso de pausas explicativas.</label></li>
+                <li class="option-item"><label><input type="radio" name="q5" value="C"> C) Oração subordinada adjetiva explicativa, generalizando uma característica inerente ao "verbo" retomado pelo pronome.</label></li>
+                <li class="option-item"><label><input type="radio" name="q5" value="D"> D) Oração subordinada adverbial comparativa, estabelecendo uma relação de superioridade entre o antecedente e o predicativo "tamanho".</label></li>
+            </ul>
+        </div>
+
+        <div class="ref-text">
+            <h3>Questões Isoladas - Gramática Normativa e Texto</h3>
+        </div>
+
+        <!-- Questão 06 -->
+        <div class="question-card" id="q6">
+            <div class="question-header">Questão 06</div>
+            <div class="question-text">
+                Considere a frase adaptada de uma prova anterior da banca: "Ele observou-a e achou aquele gesto feio."<br>
+                A análise sintática do termo "feio" e sua relação com o verbo "achou" permite classificá-lo como:
+            </div>
+            <ul class="options">
+                <li class="option-item"><label><input type="radio" name="q6" value="A"> A) Adjunto Adnominal, pois qualifica diretamente o substantivo "gesto" dentro do objeto direto, indicando uma característica permanente.</label></li>
+                <li class="option-item"><label><input type="radio" name="q6" value="B"> B) Predicativo do Sujeito, pois reflete uma impressão subjetiva que o sujeito "Ele" projetou sobre a ação.</label></li>
+                <li class="option-item"><label><input type="radio" name="q6" value="C"> C) Predicativo do Objeto, pois atribui uma característica transitória ao objeto direto "aquele gesto" por intermédio de um verbo transobjetivo.</label></li>
+                <li class="option-item"><label><input type="radio" name="q6" value="D"> D) Complemento Nominal, completando o sentido do substantivo "gesto" que, neste contexto, exige uma qualificação adjetiva.</label></li>
+            </ul>
+        </div>
+
+        <!-- Questão 07 -->
+        <div class="question-card" id="q7">
+            <div class="question-header">Questão 07</div>
+            <div class="question-text">
+                Em provas recentes, a banca tem explorado o valor semântico-sintático dos modalizadores. Analise o período:<br>
+                "Sem dúvida, a leitura dos clássicos é essencial, mas talvez os jovens prefiram narrativas contemporâneas."<br>
+                Sintaticamente, os termos "Sem dúvida" e "talvez" classificam-se, respectivamente, como:
+            </div>
+            <ul class="options">
+                <li class="option-item"><label><input type="radio" name="q7" value="A"> A) Adjunto Adverbial de Afirmação e Adjunto Adverbial de Dúvida, modificando o sentido oracional global.</label></li>
+                <li class="option-item"><label><input type="radio" name="q7" value="B"> B) Conjunção Coordenativa Explicativa e Conjunção Coordenativa Adversativa, articulando as orações do período.</label></li>
+                <li class="option-item"><label><input type="radio" name="q7" value="C"> C) Predicativo do Sujeito e Predicativo do Objeto, qualificando a certeza do enunciador sobre o sujeito da oração.</label></li>
+                <li class="option-item"><label><input type="radio" name="q7" value="D"> D) Aposto Oracional e Vocativo, funcionando como termos acessórios que comentam a oração principal.</label></li>
+            </ul>
+        </div>
+
+        <!-- Questão 08 -->
+        <div class="question-card" id="q8">
+            <div class="question-header">Questão 08</div>
+            <div class="question-text">
+                Analise a transposição da voz verbal no seguinte período: "As novas regras do edital foram alteradas pela comissão organizadora ontem."<br>
+                Ao converter a oração para a voz ativa, preservando o tempo e modo verbais originais, a forma correta é:
+            </div>
+            <ul class="options">
+                <li class="option-item"><label><input type="radio" name="q8" value="A"> A) A comissão organizadora alterou as novas regras do edital ontem.</label></li>
+                <li class="option-item"><label><input type="radio" name="q8" value="B"> B) A comissão organizadora alterava as novas regras do edital ontem.</label></li>
+                <li class="option-item"><label><input type="radio" name="q8" value="C"> C) A comissão organizadora alterara as novas regras do edital ontem.</label></li>
+                <li class="option-item"><label><input type="radio" name="q8" value="D"> D) A comissão organizadora tem alterado as novas regras do edital ontem.</label></li>
+            </ul>
+        </div>
+
+        <!-- Questão 09 -->
+        <div class="question-card" id="q9">
+            <div class="question-header">Questão 09</div>
+            <div class="question-text">
+                "O vento varria as folhas, o vento varria os frutos..." (Manuel Bandeira).<br>
+                Considerando a estrutura sintática de reiteração, caso o autor optasse por "O vento, <strong>varredor implacável</strong>, destruía tudo", o termo destacado exerceria a função de:
+            </div>
+            <ul class="options">
+                <li class="option-item"><label><input type="radio" name="q9" value="A"> A) Predicativo do Sujeito, indicando uma característica momentânea do sujeito "O vento".</label></li>
+                <li class="option-item"><label><input type="radio" name="q9" value="B"> B) Adjunto Adnominal, restringindo o sentido do substantivo "vento" sem pausa enfática.</label></li>
+                <li class="option-item"><label><input type="radio" name="q9" value="C"> C) Aposto Explicativo, identificando e caracterizando o núcleo do sujeito com valor substantivo.</label></li>
+                <li class="option-item"><label><input type="radio" name="q9" value="D"> D) Vocativo, personificando o elemento natural como interlocutor do poema.</label></li>
+            </ul>
+        </div>
+
+        <!-- Questão 10 -->
+        <div class="question-card" id="q10">
+            <div class="question-header">Questão 10</div>
+            <div class="question-text">
+                No período "É fundamental <strong>que os candidatos leiam o edital atentamente</strong>", a oração destacada exerce, em relação à oração principal, a função sintática de:
+            </div>
+            <ul class="options">
+                <li class="option-item"><label><input type="radio" name="q10" value="A"> A) Objeto Direto, completando o sentido do verbo de ligação "É".</label></li>
+                <li class="option-item"><label><input type="radio" name="q10" value="B"> B) Sujeito, funcionando como o termo determinante sobre o qual se declara a qualidade "fundamental".</label></li>
+                <li class="option-item"><label><input type="radio" name="q10" value="C"> C) Predicativo do Sujeito, atribuindo uma característica ao sujeito oculto da oração principal.</label></li>
+                <li class="option-item"><label><input type="radio" name="q10" value="D"> D) Complemento Nominal, integrando o sentido do adjetivo "fundamental" presente na oração principal.</label></li>
+            </ul>
+        </div>
+
+        <div class="action-area">
+            <button type="button" class="btn" onclick="submitQuiz()">Finalizar e Ver Resoluções</button>
+        </div>
+    </form>
+
+    <!-- Seção de Resultados e Resoluções -->
+    <div id="results-section">
+        <div class="score-card">
+            <h2>Seu Resultado</h2>
+            <span class="score-number" id="final-score">0/10</span>
+            <p id="feedback-text">Confira abaixo a análise detalhada de cada questão.</p>
+        </div>
+        
+        <div id="resolutions-container">
+            <!-- As resoluções serão inseridas aqui via JavaScript -->
+        </div>
+    </div>
+</div>
+
+<script>
+    // Dados das resoluções
+    const resolutionsData = {
+        q1: {
+            correct: "B",
+            title: "Resolução Analítica da Questão 01",
+            content: `
+                <div class="theory-block">
+                    <strong>Fundamentação Teórica:</strong> O verbo "entender", no contexto "como se entenderam", indica reciprocidade (um ao outro). O sujeito é composto implícito (Colombo e o índio).
+                </div>
+                <p>Na Voz Reflexiva Recíproca, o pronome "se" assume a função do termo que recebe a ação. Como "entender" é Verbo Transitivo Direto (Quem entende, entende alguém), o "se" funciona como <strong>Objeto Direto</strong>.</p>
+                <div class="distractor-analysis">
+                    <strong>Por que não as outras?</strong>
+                    <ul>
+                        <li><strong>A)</strong> Não é passiva sintética pois o sujeito (eles) é o agente da compreensão mútua.</li>
+                        <li><strong>C)</strong> O Índice de Indeterminação ocorre com verbos na 3ª pessoa do singular (ex: precisa-se de ajuda). Aqui o verbo está no plural.</li>
+                        <li><strong>D)</strong> "Se" não é conjunção aqui, pois não liga orações, mas faz parte da estrutura verbal reflexiva.</li>
+                    </ul>
+                </div>
+            `
+        },
+        q2: {
+            correct: "B",
+            title: "Resolução Analítica da Questão 02",
+            content: `
+                <div class="theory-block">
+                    <strong>Oração 1: "Fazia calor"</strong><br>
+                    O verbo "fazer" indicando fenômeno da natureza/clima é <strong>impessoal</strong>. Logo, a oração é <strong>Sem Sujeito</strong>. "Calor" é Objeto Direto.
+                    <br><br>
+                    <strong>Oração 2: "o tomate brilhava..."</strong><br>
+                    O sujeito é "o tomate" (Sujeito Simples).
+                </div>
+                <p>O período é composto por coordenação (conectivo "e").</p>
+                <div class="distractor-analysis">
+                    <strong>Por que não as outras?</strong>
+                    <ul>
+                        <li><strong>A)</strong> "Calor" não é sujeito, é objeto.</li>
+                        <li><strong>C)</strong> As orações são coordenadas, independentes sintaticamente. O "como" está dentro da segunda oração apenas.</li>
+                        <li><strong>D)</strong> "Ao sol" é adjunto adverbial de lugar/modo, não objeto direto.</li>
+                    </ul>
+                </div>
+            `
+        },
+        q3: {
+            correct: "B",
+            title: "Resolução Analítica da Questão 03",
+            content: `
+                <p>O termo "à brancura do espaguete" completa o substantivo abstrato "fim".</p>
+                <div class="theory-block">
+                    <strong>Regra de Ouro (CN vs AA):</strong><br>
+                    Ligado a substantivo abstrato:<br>
+                    - Se tem sentido Ativo (age) -> Adjunto Adnominal.<br>
+                    - Se tem sentido Passivo (sofre) -> <strong>Complemento Nominal</strong>.
+                </div>
+                <p>"A brancura" não pratica o fim; ela <em>sofre</em> o fim (é finalizada). Portanto, é Complemento Nominal.</p>
+                <div class="distractor-analysis">
+                    <strong>Por que não as outras?</strong>
+                    <ul>
+                        <li><strong>A)</strong> Objeto Indireto completa verbo. Aqui o termo completa o nome "fim".</li>
+                        <li><strong>C)</strong> Não é Adjunto pois o sentido é passivo, não de posse ou agente.</li>
+                    </ul>
+                </div>
+            `
+        },
+        q4: {
+            correct: "B",
+            title: "Resolução Analítica da Questão 04",
+            content: `
+                <p>A frase é: "Poesia [Vocativo], minha tia [Aposto], ilumine...".</p>
+                <div class="theory-block">
+                    <strong>Aposto Explicativo:</strong> Termo substantivo que explica, redefini ou identifica um termo anterior, geralmente isolado por vírgulas.
+                </div>
+                <p>O termo "minha tia" explica quem é a "Poesia" para o eu-lírico naquela invocação. É uma equivalência de identidade.</p>
+                <div class="distractor-analysis">
+                    <strong>Por que não as outras?</strong>
+                    <ul>
+                        <li><strong>A)</strong> O sujeito é "Poesia" (ou você oculto). O aposto não concorda com o verbo.</li>
+                        <li><strong>C)</strong> "Poesia" é o vocativo. "Minha tia" é a explicação do vocativo.</li>
+                        <li><strong>D)</strong> Adjunto adnominal não é isolado por vírgulas.</li>
+                    </ul>
+                </div>
+            `
+        },
+        q5: {
+            correct: "B",
+            title: "Resolução Analítica da Questão 05",
+            content: `
+                <p>Trecho: "...aquele <strong>que é maior que o seu tamanho</strong>..."</p>
+                <p>O "que" é um pronome relativo que retoma "aquele". Isso inicia uma Oração Subordinada Adjetiva.</p>
+                <div class="theory-block">
+                    <strong>Restritiva vs. Explicativa:</strong><br>
+                    - Com vírgula: Explicativa (acessória).<br>
+                    - <strong>Sem vírgula: Restritiva</strong> (essencial para definir o antecedente).
+                </div>
+                <p>Como não há vírgula separando "aquele" do "que", a oração é <strong>Restritiva</strong>.</p>
+            `
+        },
+        q6: {
+            correct: "C",
+            title: "Resolução Analítica da Questão 06",
+            content: `
+                <p>Frase: "Ele observou-a e achou aquele gesto <strong>feio</strong>."</p>
+                <p>O verbo "achar" aqui significa "julgar" (Verbo Transobjetivo). Ele liga o Objeto ("aquele gesto") a uma qualidade atribuída pelo sujeito ("feio").</p>
+                <div class="theory-block">
+                    <strong>Predicativo do Objeto:</strong> Qualidade atribuída ao objeto através de um verbo de julgamento ou transformação. Não é uma qualidade inerente (que seria adjunto), mas uma avaliação momentânea.
+                </div>
+                <div class="distractor-analysis">
+                    <strong>Por que não as outras?</strong>
+                    <ul>
+                        <li><strong>A)</strong> Se fosse adjunto, a qualidade seria própria do gesto, independente do verbo "achar".</li>
+                        <li><strong>B)</strong> O predicativo do sujeito qualificaria "Ele".</li>
+                    </ul>
+                </div>
+            `
+        },
+        q7: {
+            correct: "A",
+            title: "Resolução Analítica da Questão 07",
+            content: `
+                <p>"Sem dúvida" = Certeza (Afirmação).<br>
+                "Talvez" = Incerteza (Dúvida).</p>
+                <div class="theory-block">
+                    Na NGB, termos que indicam circunstância modificando a oração ou o verbo são <strong>Adjuntos Adverbiais</strong>.
+                </div>
+                <p>Logo: Adjunto Adverbial de Afirmação e Adjunto Adverbial de Dúvida.</p>
+            `
+        },
+        q8: {
+            correct: "A",
+            title: "Resolução Analítica da Questão 08",
+            content: `
+                <p>Passiva: "Foram alteradas" (Verbo Ser no Pretérito Perfeito + Particípio).</p>
+                <p>Para passar para a Ativa:</p>
+                <ol>
+                    <li>O Agente da Passiva ("pela comissão") vira Sujeito ("A comissão").</li>
+                    <li>O verbo principal ("alterar") assume o tempo do auxiliar ("foram" -> Pret. Perfeito).</li>
+                    <li>Resultado: <strong>"Alterou"</strong>.</li>
+                </ol>
+                <p>Frase final: "A comissão organizadora <strong>alterou</strong> as novas regras..."</p>
+                <div class="distractor-analysis">
+                    <strong>Por que não as outras?</strong>
+                    <ul>
+                        <li><strong>B)</strong> "Alterava" é imperfeito (era alterada).</li>
+                        <li><strong>C)</strong> "Alterara" é mais-que-perfeito (fora alterada).</li>
+                        <li><strong>D)</strong> "Tem alterado" é tempo composto (tem sido alterada).</li>
+                    </ul>
+                </div>
+            `
+        },
+        q9: {
+            correct: "C",
+            title: "Resolução Analítica da Questão 09",
+            content: `
+                <p>Frase: "O vento, <strong>varredor implacável</strong>, destruía tudo".</p>
+                <p>O termo é um substantivo ("varredor") que redenomina o sujeito ("vento"), isolado por vírgulas. Essa é a definição clássica de <strong>Aposto Explicativo</strong>.</p>
+                <div class="distractor-analysis">
+                    <strong>Diferença chave:</strong> O predicativo indica qualidade (adjetivo), o aposto indica identidade/equivalência (substantivo).
+                </div>
+            `
+        },
+        q10: {
+            correct: "B",
+            title: "Resolução Analítica da Questão 10",
+            content: `
+                <p>Frase: "É fundamental <strong>[que os candidatos leiam...]</strong>".</p>
+                <p>Podemos substituir a oração por "ISSO": "É fundamental ISSO" -> ordem direta -> "ISSO é fundamental".</p>
+                <div class="theory-block">
+                    Se o pronome "ISSO" funciona como <strong>Sujeito</strong> na substituição, a oração original é <strong>Subordinada Substantiva Subjetiva</strong>.
+                </div>
+                <p>A oração principal "É fundamental" tem verbo de ligação + predicativo, mas falta o sujeito, que é a oração seguinte.</p>
+            `
+        }
+    };
+
+    function submitQuiz() {
+        let score = 0;
+        const totalQuestions = 10;
+        const form = document.getElementById('quiz-form');
+        const resultsContainer = document.getElementById('resolutions-container');
+        
+        // Limpar resultados anteriores
+        resultsContainer.innerHTML = '';
+        
+        // Processar cada questão
+        for (let i = 1; i <= totalQuestions; i++) {
+            const qKey = 'q' + i;
+            const data = resolutionsData[qKey];
+            const selected = form.querySelector(`input[name="${qKey}"]:checked`);
+            const userAnswer = selected ? selected.value : null;
+            
+            // Verificar acerto
+            const isCorrect = userAnswer === data.correct;
+            if (isCorrect) score++;
+
+            // Criar card de resolução
+            const resCard = document.createElement('div');
+            resCard.className = 'resolution-card';
+            
+            const statusClass = isCorrect ? 'status-correct' : 'status-incorrect';
+            const statusText = isCorrect ? 'Você acertou' : 'Você errou';
+            
+            // Construir HTML da resolução
+            resCard.innerHTML = `
+                <div class="resolution-header">
+                    <strong>Questão ${i}</strong>
+                    <span class="status-badge ${statusClass}">${statusText}</span>
+                </div>
+                <div class="resolution-content">
+                    <span class="gabarito-label">Gabarito: Alternativa ${data.correct}</span>
+                    <span class="gabarito-label" style="font-weight: normal; color: #777;">Sua resposta: ${userAnswer ? 'Alternativa ' + userAnswer : 'Não respondida'}</span>
+                    <h4>${data.title}</h4>
+                    ${data.content}
+                </div>
+            `;
+            
+            resultsContainer.appendChild(resCard);
+        }
+
+        // Atualizar pontuação
+        document.getElementById('final-score').textContent = `${score}/${totalQuestions}`;
+        
+        // Mensagem de feedback baseada na nota
+        const feedbackText = document.getElementById('feedback-text');
+        if (score === 10) feedbackText.textContent = "Excelente! Domínio total do conteúdo.";
+        else if (score >= 7) feedbackText.textContent = "Muito bom! Alguns detalhes precisam de atenção.";
+        else if (score >= 5) feedbackText.textContent = "Bom, mas revise os tópicos onde errou.";
+        else feedbackText.textContent = "Recomenda-se uma revisão aprofundada da teoria.";
+
+        // Mostrar seção e rolar até ela
+        const resultsSection = document.getElementById('results-section');
+        resultsSection.style.display = 'block';
+        resultsSection.scrollIntoView({ behavior: 'smooth' });
+        
+        // Desabilitar o formulário para evitar mudanças após ver as respostas
+        const inputs = form.querySelectorAll('input');
+        inputs.forEach(input => input.disabled = true);
+        const btn = form.querySelector('.btn');
+        btn.disabled = true;
+        btn.style.backgroundColor = '#95a5a6';
+        btn.textContent = "Quiz Finalizado";
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz FAURGS - Vozes Verbais e Transposição</title>
+    <!-- Tailwind CSS para estilização moderna e responsiva -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter para máxima legibilidade em textos longos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome para ícones de interface -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#2563eb',
+                            600: '#1d4ed8',
+                            700: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        paper: '#fcfcfd',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Suavização de scroll para navegação fluida */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Estilo customizado para os inputs do tipo radio */
+        .custom-radio {
+            appearance: none;
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid #cbd5e1;
+            border-radius: 50%;
+            outline: none;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .custom-radio:checked {
+            border-color: #2563eb;
+            background-color: #2563eb;
+            box-shadow: inset 0 0 0 3px #ffffff;
+        }
+
+        /* Destaque de opção selecionada */
+        .option-label {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .option-label:hover {
+            background-color: #f1f5f9;
+            border-color: #94a3b8;
+        }
+
+        .option-label.selected {
+            background-color: #eff6ff;
+            border-color: #3b82f6;
+            box-shadow: 0 1px 2px rgba(59, 130, 246, 0.05);
+        }
+
+        /* Estilos de correção pós-gabarito */
+        .option-label.correct-target {
+            background-color: #f0fdf4 !important;
+            border-color: #22c55e !important;
+            color: #15803d !important;
+            font-weight: 600;
+        }
+
+        .option-label.wrong-target {
+            background-color: #fef2f2 !important;
+            border-color: #ef4444 !important;
+            color: #b91c1c !important;
+            text-decoration: line-through;
+        }
+
+        .option-label.disabled {
+            cursor: default;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-800 antialiased selection:bg-blue-100 selection:text-blue-900">
+
+    <!-- Cabeçalho Principal -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
+        <div class="max-w-4xl mx-auto px-4 py-3 sm:px-6 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-lg shadow-md shadow-blue-500/20">
+                    FA
+                </div>
+                <div>
+                    <h1 class="text-base sm:text-lg font-bold text-slate-900 leading-tight">Simulado FAURGS</h1>
+                    <p class="text-xs text-slate-500">Vozes Verbais e Transposição de Voz</p>
+                </div>
+            </div>
+            
+            <!-- Indicador de Progresso em Tempo Real -->
+            <div class="flex items-center gap-3">
+                <div class="hidden sm:block text-right">
+                    <span id="progress-text" class="text-xs font-semibold text-slate-600">0 de 10 respondidas</span>
+                    <div class="w-32 bg-slate-100 rounded-full h-2 mt-1 overflow-hidden">
+                        <div id="progress-bar" class="bg-blue-600 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                    </div>
+                </div>
+                <button id="top-submit-btn" onclick="submitQuiz()" class="text-xs sm:text-sm bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition shadow-sm flex items-center gap-1.5">
+                    <i class="fa-solid fa-paper-plane text-xs">
+                    </i>
+                    <span>Finalizar</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="max-w-4xl mx-auto px-4 py-8 sm:px-6">
+        
+        <!-- Banner Introdutório da Prova -->
+        <div class="bg-white rounded-2xl p-6 mb-8 border border-slate-200 shadow-sm">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+                <div>
+                    <span class="inline-block px-3 py-1 bg-blue-50 text-blue-700 text-xs font-semibold rounded-full mb-2">
+                        Português • Nível Superior / Médio
+                    </span>
+                    <h2 class="text-xl sm:text-2xl font-bold text-slate-900">Caderno Interativo de Questões</h2>
+                </div>
+                <div class="flex items-center gap-2 text-slate-500 text-xs sm:text-sm">
+                    <i class="fa-regular fa-clock">
+                    </i>
+                    <span>Sem limite de tempo</span>
+                </div>
+            </div>
+            <p class="mt-4 text-sm text-slate-600 leading-relaxed">
+                Este simulado contém 10 questões originais e adaptadas no estilo de cobrança da banca **FAURGS**, focando em Voz Passiva Analítica, Sintética, Transitividade e Transposição Verbal. Responda a todas as questões e clique em <strong>"Finalizar e Ver Resultado"</strong> para conferir sua pontuação e a resolução detalhada de cada item.
+            </p>
+            
+            <!-- Grade de Atalho Rápido para Questões -->
+            <div class="mt-6 pt-4 border-t border-slate-100">
+                <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-2">Atalho rápido de navegação:</span>
+                <div id="questions-nav" class="flex flex-wrap gap-2">
+                    <!-- Gerado dinamicamente via JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Mensagem de Aviso / Modal de Alerta Customizado -->
+        <div id="alert-box" class="hidden mb-6 p-4 bg-amber-50 border border-amber-200 text-amber-800 rounded-xl flex items-center justify-between gap-3 shadow-sm">
+            <div class="flex items-center gap-2 text-sm font-medium">
+                <i class="fa-solid fa-triangle-exclamation text-amber-600 text-lg">
+                </i>
+                <span id="alert-message">Você ainda possui questões não respondidas.</span>
+            </div>
+            <button onclick="dismissAlert()" class="text-amber-600 hover:text-amber-800 text-sm font-bold px-2 py-1">
+                Entendi
+            </button>
+        </div>
+
+        <!-- CONTAINER DAS QUESTÕES -->
+        <div id="quiz-container" class="space-y-8">
+            <!-- Questões serão injetadas via Javascript -->
+        </div>
+
+        <!-- Painel Final de Submissão -->
+        <div id="bottom-actions" class="mt-12 bg-white rounded-2xl p-6 text-center border border-slate-200 shadow-sm">
+            <h3 class="text-lg font-bold text-slate-900 mb-2">Pronto para conferir seu resultado?</h3>
+            <p class="text-sm text-slate-600 mb-6 max-w-md mx-auto">
+                Certifique-se de que respondeu a todas as 10 questões antes de enviar para garantir o cálculo correto da sua nota.
+            </p>
+            <button id="bottom-submit-btn" onclick="submitQuiz()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3.5 rounded-xl shadow-lg shadow-blue-600/20 transition-all hover:scale-[1.02] active:scale-[0.98] text-base inline-flex items-center gap-2">
+                <i class="fa-solid fa-check-double">
+                </i>
+                <span>Finalizar e Ver Resultado</span>
+            </button>
+        </div>
+
+        <!-- SEÇÃO DE RESULTADO E RESOLUÇÕES (INICIALMENTE OCULTA) -->
+        <section id="results-section" class="hidden mt-12 space-y-8 scroll-mt-20">
+            <!-- Card do Desempenho Geral -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-md text-center relative overflow-hidden">
+                <div id="score-badge" class="w-20 h-20 mx-auto rounded-full flex items-center justify-center text-3xl font-bold mb-4 shadow-inner">
+                    <!-- Nota em número -->
+                </div>
+                <h3 id="score-title" class="text-2xl font-bold text-slate-900 mb-1">Resultado do Simulado</h3>
+                <p id="score-subtitle" class="text-slate-600 text-sm max-w-md mx-auto mb-6">Você completou todas as questões da prova.</p>
+                
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-lg mx-auto bg-slate-50 p-4 rounded-xl border border-slate-100">
+                    <div class="text-center">
+                        <span class="block text-xs text-slate-500 font-medium uppercase">Acertos</span>
+                        <span id="stat-correct" class="text-xl font-bold text-green-600">0</span>
+                    </div>
+                    <div class="text-center">
+                        <span class="block text-xs text-slate-500 font-medium uppercase">Erros</span>
+                        <span id="stat-wrong" class="text-xl font-bold text-red-500">0</span>
+                    </div>
+                    <div class="col-span-2 sm:col-span-1 text-center">
+                        <span class="block text-xs text-slate-500 font-medium uppercase">Aproveitamento</span>
+                        <span id="stat-percent" class="text-xl font-bold text-blue-600">0%</span>
+                    </div>
+                </div>
+
+                <div class="mt-6">
+                    <button onclick="resetQuiz()" class="inline-flex items-center gap-2 px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded-lg text-sm transition">
+                        <i class="fa-solid fa-rotate-left">
+                        </i>
+                        <span>Refazer Simulado</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tabela de Correspondência Sintático-Semântica -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm overflow-hidden">
+                <h4 class="text-lg font-bold text-slate-900 mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-table-list text-blue-600">
+                    </i>
+                    <span>Quadro de Análise Sintática das Questões</span>
+                </h4>
+                <p class="text-xs text-slate-500 mb-4">Síntese das estruturas verbais, transitividade e transformações avaliadas neste simulado:</p>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs sm:text-sm border-collapse">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700 font-semibold border-b border-slate-200">
+                                <th class="p-3">Questão</th>
+                                <th class="p-3">Estrutura Original</th>
+                                <th class="p-3">Transitividade / Classificação</th>
+                                <th class="p-3">Voz Verbal</th>
+                                <th class="p-3">Forma Resultante</th>
+                            </tr>
+                        </thead>
+                        <tbody id="summary-table-body" class="divide-y divide-slate-100 text-slate-600">
+                            <!-- Preenchido via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        /* Dados completos do banco de questões (Exatamente como o documento original) */
+        const quizData = [
+            {
+                id: 1,
+                num: "QUESTÃO 01",
+                text: "Considerando as regras de sintaxe verbal e a classificação das vozes da oração, assinale a alternativa em que a locução verbal constitui, de forma inequívoca, a voz passiva analítica:",
+                options: [
+                    { letter: "A", text: "Você vai fazer essa operação?" },
+                    { letter: "B", text: "Você teria realizado tal cirurgia?" },
+                    { letter: "C", text: "Realizou-se logo a intervenção." },
+                    { letter: "D", text: "A operação foi realizada logo." },
+                    { letter: "E", text: "A cirurgia se realizará em breve." }
+                ],
+                correct: "D",
+                resolution: "A identificação da voz passiva analítica requer a observação de uma estrutura composta por um verbo auxiliar de voz, que é comumente representado pelo verbo <em>ser</em>, conjugado no mesmo tempo e modo da ação descrita, em associação com o particípio do verbo principal, o qual deve ser obrigatoriamente transitivo direto.<br><br>Na alternativa D, a construção <strong>\"A operação foi realizada logo\"</strong> atende integralmente a esses requisitos gramaticais, uma vez que exibe o sujeito paciente \"A operação\" sofrendo a ação expressa pela locução verbal \"foi realizada\", na qual o verbo auxiliar <em>ser</em> se encontra no pretérito perfeito do indicativo.<br><br>Nas demais opções, as estruturas verbais revelam comportamentos sintáticos distintos: A e B contêm locuções verbais ativas (\"vai fazer\" e \"teria realizado\"); C e E exemplificam construções de voz passiva sintética ou pronominal marcadas pelo pronome apassivador <em>se</em> (\"realizou-se\" e \"se realizará\").",
+                tableInfo: {
+                    original: "foi realizada",
+                    transitivity: "Transitivo Direto",
+                    voz: "Passiva Analítica",
+                    resultante: "realizou-se (Sintética)"
+                }
+            },
+            {
+                id: 2,
+                num: "QUESTÃO 02",
+                text: "Considere a seguinte construção extraída de documento oficial: <em>\"as pessoas comprometidas com a corrupção deveriam ser punidas de forma mais rigorosa\"</em>.<br><br>Assinale a alternativa que apresenta a forma verbal ativa correspondente à locução verbal em destaque na voz passiva:",
+                options: [
+                    { letter: "A", text: "deveria punir" },
+                    { letter: "B", text: "puniria" },
+                    { letter: "C", text: "puniriam" },
+                    { letter: "D", text: "deveriam punir" },
+                    { letter: "E", text: "deveriam ser punidas" }
+                ],
+                correct: "D",
+                resolution: "A transposição de uma locução verbal da voz passiva analítica para a voz ativa exige a preservação do tempo, do modo e do aspecto do verbo auxiliar modal, bem como a eliminação do verbo auxiliar de voz e a conversão do particípio principal na forma de infinitivo.<br><br>No fragmento analisado, a estrutura passiva <strong>\"deveriam ser punidas\"</strong> é composta pelo verbo auxiliar de dever flexionado na terceira pessoa do plural do futuro do pretérito do indicativo (<em>deveriam</em>), acompanhado do auxiliar de voz <em>ser</em> e do particípio de <em>punir</em>. Ao efetuar a conversão ativa, remove-se o elemento passivo <em>ser</em>, mantendo-se o verbo modal flexionado na mesma pessoa e tempo, seguido diretamente do infinitivo do verbo principal, o que resulta na forma verbal <strong>\"deveriam punir\"</strong>.<br><br>A opção A falha na concordância no singular (deveria); B e C usam formas simples desconsiderando o verbo auxiliar modal; e a E apenas repete a frase original.",
+                tableInfo: {
+                    original: "deveriam ser punidas",
+                    transitivity: "Transitivo Direto (Locução)",
+                    voz: "Passiva Analítica",
+                    resultante: "deveriam punir"
+                }
+            },
+            {
+                id: 3,
+                num: "QUESTÃO 03",
+                text: "Com base na análise sintática e morfológica de textos contemporâneos adaptados para exames públicos, leia a seguinte sentença: <em>\"Expõem-se ali todos\"</em>.<br><br>A alternativa que apresenta a correta análise da estrutura verbal e sintática do termo em destaque é:",
+                options: [
+                    { letter: "A", text: "Ocorre voz ativa com sujeito indeterminado pela presença do pronome \"se\"." },
+                    { letter: "B", text: "Ocorre voz reflexiva recíproca, cujo sujeito paciente encontra-se elíptico." },
+                    { letter: "C", text: "Ocorre voz passiva sintética, na qual o termo \"todos\" funciona como sujeito paciente." },
+                    { letter: "D", text: "Ocorre voz ativa com verbo pronominal essencial, exigindo complemento indireto." },
+                    { letter: "E", text: "Ocorre voz passiva analítica com agente da passiva devidamente expresso." }
+                ],
+                correct: "C",
+                resolution: "A construção <strong>\"Expõem-se ali todos\"</strong> é estruturada com o verbo <em>expor</em>, que atua no contexto como transitivo direto, exigindo um objeto direto em construções ativas. Com a presença do pronome <em>se</em>, que atua estritamente como partícula apassivadora, o termo <strong>\"todos\"</strong> (que seria o objeto direto na voz ativa) passa a exercer a função de <strong>sujeito paciente</strong> da oração, determinando a concordância verbal no plural (<em>expõem</em>). Essa estrutura equivale perfeitamente à forma passiva analítica \"Todos são expostos ali\", caracterizando a <strong>voz passiva sintética</strong>.<br><br>A alternativa A é incorreta pois não indetermina o sujeito; a B equivoca-se ao sugerir reciprocidade; a D é descartada pois o verbo não é essencialmente pronominal; e a E falha porque a estrutura é sintética e não analítica.",
+                tableInfo: {
+                    original: "Expõem-se",
+                    transitivity: "Transitivo Direto",
+                    voz: "Passiva Sintética",
+                    resultante: "são expostos (Analítica)"
+                }
+            },
+            {
+                id: 4,
+                num: "QUESTÃO 04",
+                text: "Considere as duas passagens linguísticas apresentadas a seguir:<br><br>I - <em>\"A Internet realmente transformou o mundo\"</em>.<br>II - <em>\"ela está substituindo os encontros entre pessoas\"</em>.<br><br>Passando-se ambas as orações para a voz passiva, as formas verbais resultantes serão, respectivamente:",
+                options: [
+                    { letter: "A", text: "tem sido transformado e têm substituído." },
+                    { letter: "B", text: "foi transformado e estão sendo substituídos." },
+                    { letter: "C", text: "tem sido transformado e têm sido substituídos." },
+                    { letter: "D", text: "está sendo transformado e estão sendo substituídos." },
+                    { letter: "E", text: "foi transformado e têm sido substituídos." }
+                ],
+                correct: "B",
+                resolution: "Na passagem I, a forma ativa <strong>\"transformou\"</strong> está conjugada no pretérito perfeito simples do indicativo, tendo \"o mundo\" como objeto direto. Na transposição analítica, o objeto direto torna-se sujeito paciente, e o verbo auxiliar <em>ser</em> assume o tempo/modo do verbo ativo original (<em>foi</em>), resultando na locução <strong>\"foi transformado\"</strong>.<br><br>Na passagem II, a locução de aspecto progressivo <strong>\"está substituindo\"</strong> refere-se ao objeto direto \"os encontros entre pessoas\". Ao transpor essa estrutura, o novo sujeito paciente plural exige que a locução passiva incorpore o gerúndio do verbo auxiliar de voz (<em>sendo</em>) mantendo o auxiliar de aspecto flexionado no plural (<em>estão</em>), gerando a forma <strong>\"estão sendo substituídos\"</strong>.",
+                tableInfo: {
+                    original: "transformou / está substituindo",
+                    transitivity: "Transitivo Direto",
+                    voz: "Ativa",
+                    resultante: "foi transformado / estão sendo substituídos"
+                }
+            },
+            {
+                id: 5,
+                num: "QUESTÃO 05",
+                text: "Analise as seguintes sentenças extraídas de textos literários e jornalísticos:<br><br>I - Talvez por isso não tenha conseguido que cultivássemos nosso gosto pelo repertório clássico.<br>II - Dali a algumas horas, as caixas seriam devolvidas ao seu verdadeiro dono, o Rei Roberto, que praticamente morava ali dentro.<br>III - Passei a gostar do som que me acordava aos domingos e um tanto mais de meu pai.<br>IV - Um clássico é colocado na vitrola e ele vai às lágrimas.<br><br>Quais das sentenças acima contêm oração estruturada na voz passiva?",
+                options: [
+                    { letter: "A", text: "Apenas I e III." },
+                    { letter: "B", text: "Apenas II e III." },
+                    { letter: "C", text: "Apenas II e IV." },
+                    { letter: "D", text: "Apenas III e IV." },
+                    { letter: "E", text: "Apenas I, II e IV." }
+                ],
+                correct: "C",
+                resolution: "A determinação de quais sentenças contêm voz passiva baseia-se na identificação de sujeitos pacientes sofrendo a ação por meio de locuções passivas analíticas ou estruturas sintéticas.<br><br>Na frase II, identifica-se a locução passiva analítica <strong>\"seriam devolvidas\"</strong>, em que o sujeito paciente plural \"as caixas\" sofre a ação de devolver. Na frase IV, ocorre o mesmo fenômeno sintático com o segmento <strong>\"é colocado\"</strong>, onde o sujeito paciente \"Um clássico\" recebe a ação do verbo colocar no presente do indicativo.<br><br>As sentenças I e III contêm apenas voz ativa (verbos <em>cultivássemos</em>, <em>passei a gostar</em>, <em>acordava</em>).",
+                tableInfo: {
+                    original: "seriam devolvidas / é colocado",
+                    transitivity: "Transitivo Direto",
+                    voz: "Passiva Analítica",
+                    resultante: "Não aplicável"
+                }
+            },
+            {
+                id: 6,
+                num: "QUESTÃO 06",
+                text: "A possibilidade de transposição de uma oração da voz ativa para a voz passiva depende diretamente da transitividade do verbo no contexto aplicado. Assinale a alternativa cuja construção <strong>NÃO</strong> admite transposição para a voz passiva:",
+                options: [
+                    { letter: "A", text: "As novelas substituíram os folhetins do passado." },
+                    { letter: "B", text: "O diretor reuniu para esta novela um elenco especial." },
+                    { letter: "C", text: "Alguns episódios estão propondo novas emoções ao público." },
+                    { letter: "D", text: "O autor extrai alguns detalhes do personagem de pessoas conhecidas." },
+                    { letter: "E", text: "O público gosta muito das novelas e assiste a elas diariamente." }
+                ],
+                correct: "E",
+                resolution: "A conversão sintática da voz ativa para a voz passiva é restrita a estruturas com verbos transitivos diretos (VTD). Na alternativa E, os verbos <strong>\"gosta\"</strong> e <strong>\"assiste\"</strong> comportam-se como <strong>transitivos indiretos (VTI)</strong>, exigindo complementos regidos pelas preposições <em>de</em> (gostar de) e <em>a</em> (assistir a). Como os objetos indiretos não podem assumir a função de sujeito paciente na norma-padrão, a sentença é refratária à transposição passiva.<br><br>As alternativas A, B, C e D possuem verbos transitivos diretos (substituíram, reuniu, estão propondo, extrai) que admitem transposição passiva normalmente.",
+                tableInfo: {
+                    original: "gosta / assiste",
+                    transitivity: "Transitivo Indireto",
+                    voz: "Ativa",
+                    resultante: "Impossível (VTI)"
+                }
+            },
+            {
+                id: 7,
+                num: "QUESTÃO 07",
+                text: "A seguinte construção <strong>NÃO</strong> admite transposição para a voz passiva:",
+                options: [
+                    { letter: "A", text: "Alguns escritores inventam mitos para si mesmos." },
+                    { letter: "B", text: "Há escritores incrivelmente precoces." },
+                    { letter: "C", text: "Muitos já leram trechos de Proust." },
+                    { letter: "D", text: "A leitura de Os sertões me fascinou." },
+                    { letter: "E", text: "Encontrei nessas páginas grandes personagens." }
+                ],
+                correct: "B",
+                resolution: "O impedimento para a transposição passiva na alternativa B reside na natureza gramatical do verbo <strong>haver</strong> quando empregado com sentido de existência ou ocorrência. Nessas condições, o verbo é <strong>impessoal</strong> e a oração é classificada como <strong>sem sujeito</strong>.<br><br>Embora o termo \"escritores incrivelmente precoces\" atue sintaticamente como objeto direto, a inexistência de um sujeito ativo original e a impossibilidade de o objeto direto converter-se em sujeito sob a regência de um verbo sem sujeito inviabilizam qualquer tentativa de passivação.<br><br>As demais opções contêm verbos transitivos diretos pessoais comuns (inventam, leram, fascinou, encontrei).",
+                tableInfo: {
+                    original: "Há (existencial)",
+                    transitivity: "Transitivo Direto (Impessoal)",
+                    voz: "Ativa (Sem Sujeito)",
+                    resultante: "Impossível (Impessoal)"
+                }
+            },
+            {
+                id: 8,
+                num: "QUESTÃO 08",
+                text: "A frase que <strong>NÃO</strong> admite transposição para a voz passiva é:",
+                options: [
+                    { letter: "A", text: "Em seus poemas encontramos o estilo oral desses \"casos\"..." },
+                    { letter: "B", text: "A cidade de Goiás [...] surgiu das povoações..." },
+                    { letter: "C", text: "... que alimentaram as lendas sobre os escravos..." },
+                    { letter: "D", text: "Lendas que provocavam a imaginação das crianças..." },
+                    { letter: "E", text: "... a cidade atingiu o auge durante o século XVIII." }
+                ],
+                correct: "B",
+                resolution: "A transposição para a voz passiva exige obrigatoriamente um objeto direto. Na alternativa B, o verbo <strong>surgir</strong> é classificado como <strong>intransitivo (VI)</strong>, expressando uma ação completa que não recai sobre um objeto direto, associando-se apenas ao sujeito ativo (\"A cidade de Goiás\") e ao adjunto adverbial (\"das povoações\"). A ausência de objeto direto torna impossível a conversão dessa oração para a voz passiva.<br><br>As outras alternativas contêm verbos transitivos diretos (encontramos, alimentaram, provocavam, atingiu) que admitem transposição passiva regular.",
+                tableInfo: {
+                    original: "surgiu",
+                    transitivity: "Intransitivo",
+                    voz: "Ativa",
+                    resultante: "Impossível (Intransitivo)"
+                }
+            },
+            {
+                id: 9,
+                num: "QUESTÃO 09",
+                text: "Considere a seguinte oração na voz passiva analítica: <em>\"A expressão 'política indigenista' foi utilizada por muito tempo como sinônimo de toda e qualquer ação política governamental...\"</em>.<br><br>Transpondo-se o trecho acima para a voz passiva sintética, a forma verbal resultante será:",
+                options: [
+                    { letter: "A", text: "utilizaram-se." },
+                    { letter: "B", text: "utiliza-se." },
+                    { letter: "C", text: "utilizaram." },
+                    { letter: "D", text: "utilizou-se." },
+                    { letter: "E", text: "utilizamos." }
+                ],
+                correct: "D",
+                resolution: "A conversão da voz passiva analítica <strong>\"foi utilizada\"</strong> para a voz passiva sintética requer a eliminação do verbo auxiliar de voz e o acoplamento do pronome apassivador <em>se</em> ao verbo principal <em>utilizar</em>.<br><br>O verbo resultante deve preservar estritamente a flexão de tempo e modo do auxiliar retirado (pretérito perfeito do indicativo) e concordar em pessoa e número com o sujeito paciente singular (\"A expressão 'política indigenista'\"). Portanto, a flexão verbal correta na terceira pessoa do singular é <strong>\"utilizou-se\"</strong>.<br><br>As alternativas A e C estão no plural; B está no presente; e E altera a pessoa do discurso.",
+                tableInfo: {
+                    original: "foi utilizada",
+                    transitivity: "Transitivo Direto",
+                    voz: "Passiva Analítica",
+                    resultante: "utilizou-se"
+                }
+            },
+            {
+                id: 10,
+                num: "QUESTÃO 10",
+                text: "Considere a expressão destacada no fragmento: <em>\"Trata-se de um caso de grande visibilidade\"</em>.<br><br>Analise as afirmativas abaixo sobre essa estrutura verbal:<br>I - Trata-se de verbo na voz passiva.<br>II - O pronome <em>se</em>, nesta expressão, é índice indeterminador do sujeito.<br>III - Esta forma verbal é um exemplo de verbo pronominal.<br><br>Quais estão corretas?",
+                options: [
+                    { letter: "A", text: "Apenas I." },
+                    { letter: "B", text: "Apenas II." },
+                    { letter: "C", text: "Apenas III." },
+                    { letter: "D", text: "Apenas I e II." },
+                    { letter: "E", text: "Apenas II e III." }
+                ],
+                correct: "E",
+                resolution: "A afirmativa I está <strong>incorreta</strong> porque o verbo <em>tratar</em>, na acepção de \"referir-se a\", é transitivo indireto (regido pela preposição <em>de</em>), o que impede a formação de voz passiva.<br><br>A afirmativa II está <strong>correta</strong> porque, associado a um verbo transitivo indireto na 3ª pessoa do singular, o pronome <em>se</em> atua como Índice de Indeterminação do Sujeito (IIS).<br><br>A afirmativa III está <strong>correta</strong>, pois a estrutura <em>tratar-se</em> é classificada como verbo pronominal nessa acepção específica. Portanto, estão corretas as afirmações II e III.",
+                tableInfo: {
+                    original: "Trata-se",
+                    transitivity: "Transitivo Indireto / Pronominal",
+                    voz: "Ativa (Sujeito Indeterminado)",
+                    resultante: "Não aplicável"
+                }
+            }
+        ];
+
+        /* Estado global da aplicação */
+        const userAnswers = {};
+        let isSubmitted = false;
+
+        // Renderizar o simulado ao carregar
+        document.addEventListener("DOMContentLoaded", () => {
+            renderQuestions();
+            renderNavMatrix();
+            renderSummaryTable();
+            updateProgress();
+        });
+
+        // Função para construir o HTML das questões
+        function renderQuestions() {
+            const container = document.getElementById("quiz-container");
+            container.innerHTML = "";
+
+            quizData.forEach((q, index) => {
+                const questionCard = document.createElement("div");
+                questionCard.id = `q-card-${q.id}`;
+                questionCard.className = "bg-white rounded-2xl p-6 sm:p-7 border border-slate-200 shadow-sm transition-all duration-300 scroll-mt-24";
+
+                let optionsHtml = "";
+                q.options.forEach(opt => {
+                    optionsHtml += `
+                        <label id="opt-label-${q.id}-${opt.letter}" 
+                               for="radio-${q.id}-${opt.letter}" 
+                               class="option-label flex items-start gap-3 p-4 rounded-xl border border-slate-200 bg-white">
+                            <input type="radio" 
+                                   id="radio-${q.id}-${opt.letter}" 
+                                   name="question-${q.id}" 
+                                   value="${opt.letter}"
+                                   class="custom-radio mt-0.5" 
+                                   onchange="selectOption(${q.id}, '${opt.letter}')">
+                            <div class="text-sm sm:text-base leading-relaxed text-slate-700">
+                                <strong class="font-bold text-slate-900 mr-1">${opt.letter})</strong> ${opt.text}
+                            </div>
+                        </label>
+                    `;
+                });
+
+                questionCard.innerHTML = `
+                    <div class="flex items-center justify-between gap-2 mb-4 pb-3 border-b border-slate-100">
+                        <span class="text-xs sm:text-sm font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-lg">
+                            ${q.num}
+                        </span>
+                        <span id="status-tag-${q.id}" class="text-xs text-slate-400 font-medium">
+                            Não respondida
+                        </span>
+                    </div>
+                    
+                    <div class="text-base sm:text-lg font-medium text-slate-900 mb-6 leading-relaxed">
+                        ${q.text}
+                    </div>
+
+                    <div class="space-y-3">
+                        ${optionsHtml}
+                    </div>
+
+                    <!-- Bloco de Resolução (Exibido após finalizar) -->
+                    <div id="resolution-${q.id}" class="hidden mt-6 pt-5 border-t border-slate-100 bg-slate-50 p-5 rounded-xl border border-slate-200">
+                        <div class="flex items-center gap-2 text-blue-900 font-bold text-sm mb-3">
+                            <i class="fa-solid fa-graduation-cap text-blue-600 text-base"></i>
+                            <span>Resolução Comentada FAURGS:</span>
+                        </div>
+                        <div class="text-sm text-slate-700 leading-relaxed space-y-2">
+                            ${q.resolution}
+                        </div>
+                    </div>
+                `;
+
+                container.appendChild(questionCard);
+            });
+        }
+
+        // Registrar resposta selecionada
+        function selectOption(questionId, letter) {
+            if (isSubmitted) return;
+
+            userAnswers[questionId] = letter;
+
+            // Atualizar classes visuais dos rótulos da questão
+            const q = quizData.find(item => item.id === questionId);
+            q.options.forEach(opt => {
+                const lbl = document.getElementById(`opt-label-${questionId}-${opt.letter}`);
+                if (opt.letter === letter) {
+                    lbl.classList.add("selected");
+                } else {
+                    lbl.classList.remove("selected");
+                }
+            });
+
+            // Atualizar tag da questão
+            const statusTag = document.getElementById(`status-tag-${questionId}`);
+            statusTag.textContent = "Respondida";
+            statusTag.className = "text-xs text-blue-600 font-semibold";
+
+            // Atualizar navegadores
+            updateProgress();
+            updateNavMatrix();
+        }
+
+        // Renderizar barra de progresso no cabeçalho
+        function updateProgress() {
+            const total = quizData.length;
+            const answered = Object.keys(userAnswers).length;
+            const percentage = Math.round((answered / total) * 100);
+
+            document.getElementById("progress-text").textContent = `${answered} de ${total} respondidas`;
+            document.getElementById("progress-bar").style.width = `${percentage}%`;
+        }
+
+        // Matriz de atalhos de navegação
+        function renderNavMatrix() {
+            const navContainer = document.getElementById("questions-nav");
+            navContainer.innerHTML = "";
+
+            quizData.forEach((q) => {
+                const btn = document.createElement("button");
+                btn.id = `nav-btn-${q.id}`;
+                btn.className = "w-9 h-9 rounded-lg text-xs font-bold border border-slate-200 text-slate-600 bg-white hover:bg-slate-100 transition flex items-center justify-center";
+                btn.textContent = q.id < 10 ? `0${q.id}` : `${q.id}`;
+                btn.onclick = () => scrollToQuestion(q.id);
+                navContainer.appendChild(btn);
+            });
+        }
+
+        function updateNavMatrix() {
+            quizData.forEach((q) => {
+                const btn = document.getElementById(`nav-btn-${q.id}`);
+                const isAnswered = !!userAnswers[q.id];
+
+                if (isSubmitted) {
+                    const isCorrect = userAnswers[q.id] === q.correct;
+                    if (isCorrect) {
+                        btn.className = "w-9 h-9 rounded-lg text-xs font-bold text-white bg-green-600 border border-green-600 flex items-center justify-center";
+                    } else {
+                        btn.className = "w-9 h-9 rounded-lg text-xs font-bold text-white bg-red-500 border border-red-500 flex items-center justify-center";
+                    }
+                } else if (isAnswered) {
+                    btn.className = "w-9 h-9 rounded-lg text-xs font-bold text-blue-700 bg-blue-100 border border-blue-300 flex items-center justify-center";
+                }
+            });
+        }
+
+        function scrollToQuestion(id) {
+            const card = document.getElementById(`q-card-${id}`);
+            if (card) {
+                card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // Finalizar e corrigir simulado
+        function submitQuiz() {
+            const total = quizData.length;
+            const answered = Object.keys(userAnswers).length;
+
+            if (answered < total) {
+                const missing = total - answered;
+                showAlert(`Atenção: faltam ${missing} questão(ões) a responder! Marque todas antes de finalizar.`);
+                return;
+            }
+
+            dismissAlert();
+            isSubmitted = true;
+
+            // Bloquear edição de opções e aplicar estilos de acerto/erro
+            let correctCount = 0;
+
+            quizData.forEach(q => {
+                const userChoice = userAnswers[q.id];
+                const isCorrect = userChoice === q.correct;
+
+                if (isCorrect) correctCount++;
+
+                // Atualizar rótulo das opções
+                q.options.forEach(opt => {
+                    const lbl = document.getElementById(`opt-label-${q.id}-${opt.letter}`);
+                    const radio = document.getElementById(`radio-${q.id}-${opt.letter}`);
+                    
+                    radio.disabled = true;
+                    lbl.classList.add("disabled");
+                    lbl.classList.remove("selected");
+
+                    if (opt.letter === q.correct) {
+                        lbl.classList.add("correct-target");
+                    } else if (opt.letter === userChoice && !isCorrect) {
+                        lbl.classList.add("wrong-target");
+                    }
+                });
+
+                // Atualizar tag de status da questão
+                const statusTag = document.getElementById(`status-tag-${q.id}`);
+                if (isCorrect) {
+                    statusTag.innerHTML = `<i class="fa-solid fa-circle-check text-green-600 mr-1"></i> Correto`;
+                    statusTag.className = "text-xs font-bold text-green-600";
+                } else {
+                    statusTag.innerHTML = `<i class="fa-solid fa-circle-xmark text-red-500 mr-1"></i> Incorreto (Sua resposta: ${userChoice})`;
+                    statusTag.className = "text-xs font-bold text-red-500";
+                }
+
+                // Exibir a resolução da questão
+                document.getElementById(`resolution-${q.id}`).classList.remove("hidden");
+            });
+
+            // Atualizar Matriz e Barra Superior
+            updateNavMatrix();
+            document.getElementById("top-submit-btn").classList.add("hidden");
+            document.getElementById("bottom-actions").classList.add("hidden");
+
+            // Exibir Painel de Resultados
+            renderResultsBanner(correctCount, total);
+        }
+
+        // Renderizar o resultado final
+        function renderResultsBanner(correct, total) {
+            const resultsSection = document.getElementById("results-section");
+            resultsSection.classList.remove("hidden");
+
+            const percent = Math.round((correct / total) * 100);
+            
+            document.getElementById("stat-correct").textContent = correct;
+            document.getElementById("stat-wrong").textContent = total - correct;
+            document.getElementById("stat-percent").textContent = `${percent}%`;
+
+            const badge = document.getElementById("score-badge");
+            const title = document.getElementById("score-title");
+            const subtitle = document.getElementById("score-subtitle");
+
+            if (percent >= 80) {
+                badge.className = "w-20 h-20 mx-auto rounded-full flex items-center justify-center text-3xl font-bold mb-4 bg-green-100 text-green-700 border-4 border-green-200";
+                badge.innerHTML = `<i class="fa-solid fa-trophy"></i>`;
+                title.textContent = "Excelente Desempenho!";
+                subtitle.textContent = "Você dominou as regras de vozes verbais e transposição no estilo FAURGS.";
+            } else if (percent >= 50) {
+                badge.className = "w-20 h-20 mx-auto rounded-full flex items-center justify-center text-3xl font-bold mb-4 bg-blue-100 text-blue-700 border-4 border-blue-200";
+                badge.innerHTML = `<i class="fa-solid fa-thumbs-up"></i>`;
+                title.textContent = "Bom Desempenho!";
+                subtitle.textContent = "Você possui boa base. Revise os comentários das questões que errou para consolidar.";
+            } else {
+                badge.className = "w-20 h-20 mx-auto rounded-full flex items-center justify-center text-3xl font-bold mb-4 bg-amber-100 text-amber-700 border-4 border-amber-200";
+                badge.innerHTML = `<i class="fa-solid fa-book-open"></i>`;
+                title.textContent = "Precisa de Revisão";
+                subtitle.textContent = "A banca FAURGS exige atenção em transitividade e impessoalidade. Leia as resoluções abaixo.";
+            }
+
+            // Scroll suave até o resultado
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Preencher a tabela síntese com os dados das resoluções
+        function renderSummaryTable() {
+            const tbody = document.getElementById("summary-table-body");
+            tbody.innerHTML = "";
+
+            quizData.forEach(q => {
+                const tr = document.createElement("tr");
+                tr.className = "hover:bg-slate-50 transition";
+                tr.innerHTML = `
+                    <td class="p-3 font-bold text-slate-900">${q.num}</td>
+                    <td class="p-3 italic text-slate-700">${q.tableInfo.original}</td>
+                    <td class="p-3">${q.tableInfo.transitivity}</td>
+                    <td class="p-3"><span class="px-2 py-0.5 rounded text-xs bg-slate-100 text-slate-700">${q.tableInfo.voz}</span></td>
+                    <td class="p-3 font-semibold text-blue-700">${q.tableInfo.resultante}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Funções do Modal de Alerta
+        function showAlert(msg) {
+            document.getElementById("alert-message").textContent = msg;
+            document.getElementById("alert-box").classList.remove("hidden");
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function dismissAlert() {
+            document.getElementById("alert-box").classList.add("hidden");
+        }
+
+        // Reiniciar o simulado
+        function resetQuiz() {
+            window.location.reload();
+        }
+    </script>
+</body>
+</html>

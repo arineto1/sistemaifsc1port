@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado CEFETMINAS: Sintaxe do Período Composto</title>
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #2c3e50;
+            --card-bg: #ffffff;
+            --accent-color: #34495e;
+            --highlight-color: #e8f4f8;
+            --border-color: #e0e0e0;
+            --correct-color: #27ae60;
+            --incorrect-color: #c0392b;
+            --btn-color: #2980b9;
+            --btn-hover: #1c6ea4;
+        }
+
+        body {
+            font-family: 'Georgia', 'Cambria', serif; /* Serifada para melhor leitura longa */
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding-bottom: 60px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        p.intro {
+            font-family: 'Helvetica Neue', sans-serif;
+            color: #7f8c8d;
+            font-size: 1rem;
+        }
+
+        .question-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            transition: transform 0.2s ease;
+        }
+
+        .question-header {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-weight: bold;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .text-base {
+            background-color: var(--highlight-color);
+            padding: 15px 20px;
+            border-left: 4px solid var(--accent-color);
+            margin: 15px 0;
+            font-style: italic;
+            font-size: 1.05rem;
+            color: #444;
+        }
+
+        .question-text {
+            font-size: 1.15rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .options-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .option-item {
+            margin-bottom: 10px;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 0.95rem;
+            transition: background-color 0.2s;
+        }
+
+        .option-label:hover {
+            background-color: #f8f9fa;
+        }
+
+        .option-input {
+            margin-right: 12px;
+            margin-top: 5px;
+            transform: scale(1.2);
+        }
+
+        /* Estilos de feedback na questão após envio */
+        .option-label.correct-answer {
+            background-color: #d4edda;
+            border-color: var(--correct-color);
+            color: #155724;
+        }
+
+        .option-label.user-wrong {
+            background-color: #f8d7da;
+            border-color: var(--incorrect-color);
+            color: #721c24;
+        }
+
+        .btn-submit {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 40px auto;
+            padding: 15px;
+            background-color: var(--btn-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn-submit:hover {
+            background-color: var(--btn-hover);
+        }
+
+        /* Seção de Resultados e Resoluções */
+        #results-section {
+            display: none; /* Oculto inicialmente */
+            margin-top: 50px;
+            border-top: 2px solid var(--border-color);
+            padding-top: 40px;
+        }
+
+        .score-display {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 8px;
+        }
+
+        .score-display h2 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .resolution-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-left: 5px solid var(--btn-color);
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .resolution-title {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-weight: bold;
+            color: var(--btn-color);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .resolution-content h4 {
+            font-size: 1rem;
+            color: #555;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .resolution-content ul {
+            padding-left: 20px;
+        }
+
+        .resolution-content li {
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            .question-card { padding: 15px; }
+            h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Simulado Fundação CEFETMINAS</h1>
+        <p class="intro">Sintaxe do Período Composto: Coordenação, Subordinação e Relações Lógico-Semânticas.</p>
+    </header>
+
+    <form id="quiz-form">
+        
+        <!-- QUESTÃO 1 -->
+        <div class="question-card" id="q1">
+            <div class="question-header">Questão 1</div>
+            <div class="text-base">
+                “O algoritmo calculou, <strong>mas</strong> não sentiu <strong>que</strong> a interação era puramente sarcástica. Num período onde a velocidade impera, a máquina processa dados, classifica sentimentos, <strong>porém</strong> ignora a ironia. Assim, tem-se um cenário onde a precisão técnica não garante a compreensão humana. O usuário riu, o sistema travou, e a vida seguiu, <strong>conquanto</strong> a dúvida permanecesse no ar.”
+            </div>
+            <p class="question-text">Considere o período: <em>“O algoritmo calculou, mas não sentiu que a interação era puramente sarcástica.”</em> Analise as orações que compõem esse período e as relações sintáticas estabelecidas entre elas. A classificação correta e sequencial das orações é:</p>
+            <ul class="options-list">
+                <li class="option-item"><label class="option-label"><input type="radio" name="q1" value="A" class="option-input"> A) Oração absoluta / Oração coordenada sindética aditiva / Oração subordinada adjetiva restritiva.</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q1" value="B" class="option-input"> B) Oração coordenada assindética / Oração coordenada sindética adversativa / Oração subordinada substantiva objetiva direta.</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q1" value="C" class="option-input"> C) Oração principal / Oração subordinada adverbial concessiva / Oração subordinada substantiva subjetiva.</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q1" value="D" class="option-input"> D) Oração coordenada sindética explicativa / Oração coordenada assindética / Oração subordinada substantiva completiva nominal.</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q1" value="E" class="option-input"> E) Oração subordinada adverbial causal / Oração principal / Oração subordinada substantiva predicativa.</label></li>
+            </ul>
+        </div>
+
+        <!-- QUESTÃO 2 -->
+        <div class="question-card" id="q2">
+            <div class="question-header">Questão 2</div>
+            <div class="text-base">
+                “<strong>Embora</strong> tenha construído uma carreira artística com obras de alta complexidade técnica, Tarsila do Amaral é hoje um ícone popular. Sua obra Abaporu é reproduzida em escolas de todo o país, <strong>visto que</strong> sua estética antropofágica dialoga com o imaginário infantil. Não obstante, os críticos ainda debatem as nuances de sua fase pau-brasil.”
+            </div>
+            <p class="question-text">No trecho <em>“<strong>Embora</strong> tenha construído uma carreira artística com obras de alta complexidade técnica...”</em>, o conectivo destacado estabelece uma relação semântica com a oração principal que pode ser corretamente classificada como:</p>
+            <ul class="options-list">
+                <li class="option-item"><label class="option-label"><input type="radio" name="q2" value="A" class="option-input"> A) Condicional, indicando uma hipótese não confirmada sobre a carreira da artista.</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q2" value="B" class="option-input"> B) Consecutiva, demonstrando o resultado da complexidade técnica de suas obras.</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q2" value="C" class="option-input"> C) Adversativa, marcando uma oposição direta que anula a popularidade da artista.</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q2" value="D" class="option-input"> D) Concessiva, introduzindo um fato real que contrasta com a oração principal sem impedi-la.</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q2" value="E" class="option-input"> E) Causal, explicando o motivo pelo qual Tarsila se tornou um ícone popular.</label></li>
+            </ul>
+        </div>
+
+        <!-- QUESTÃO 3 -->
+        <div class="question-card" id="q3">
+            <div class="question-header">Questão 3</div>
+            <div class="text-base">
+                (Texto Base: vide Questão 2)
+            </div>
+            <p class="question-text">No segmento <em>“...<strong>visto que</strong> sua estética antropofágica dialoga com o imaginário infantil”</em>, a locução conjuntiva em destaque introduz uma oração que desempenha, em relação à anterior, a função de:</p>
+            <ul class="options-list">
+                <li class="option-item"><label class="option-label"><input type="radio" name="q3" value="A" class="option-input"> A) Indicar a consequência da reprodução da obra nas escolas.</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q3" value="B" class="option-input"> B) Apresentar a causa ou a justificativa para a obra ser reproduzida em escolas.</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q3" value="C" class="option-input"> C) Estabelecer uma comparação entre a estética antropofágica e o imaginário infantil.</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q3" value="D" class="option-input"> D) Contrapor a complexidade da obra à sua aceitação pelas crianças.</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q3" value="E" class="option-input"> E) Sinalizar o tempo em que a obra começou a ser utilizada na educação.</label></li>
+            </ul>
+        </div>
+
+        <!-- QUESTÃO 4 -->
+        <div class="question-card" id="q4">
+            <div class="question-header">Questão 4</div>
+            <div class="text-base">
+                “<strong>Já era noite.</strong> Parecia viável <strong>que</strong> todos entendessem <strong>que</strong>, naquele instante, o silêncio era a única resposta possível. O prisioneiro, <strong>cuja</strong> voz fora silenciada pela ditadura, olhava as grades <strong>como</strong> quem olha o abismo.”
+            </div>
+            <p class="question-text">Analise sintaticamente o termo oracional destacado no período: <em>“Parecia viável <strong>que todos entendessem</strong>...”</em>. A oração iniciada pela conjunção integrante exerce, em relação à oração <em>“Parecia viável”</em>, a função sintática de:</p>
+            <ul class="options-list">
+                <li class="option-item"><label class="option-label"><input type="radio" name="q4" value="A" class="option-input"> A) Objeto Direto, completando o sentido do verbo "parecer".</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q4" value="B" class="option-input"> B) Predicativo do Sujeito, caracterizando o sujeito "viável".</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q4" value="C" class="option-input"> C) Sujeito Oracional, funcionando como o termo sobre o qual se declara a viabilidade.</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q4" value="D" class="option-input"> D) Complemento Nominal, completando o sentido do adjetivo "viável".</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q4" value="E" class="option-input"> E) Aposto, explicando o termo "viável".</label></li>
+            </ul>
+        </div>
+
+        <!-- QUESTÃO 5 -->
+        <div class="question-card" id="q5">
+            <div class="question-header">Questão 5</div>
+            <p class="question-text">No trecho <em>“O prisioneiro, <strong>cuja</strong> voz fora silenciada...”</em>, o pronome relativo <em>cuja</em> foi empregado corretamente segundo a norma-padrão. Assinale a alternativa que apresenta uma reescrita <strong>incorreta</strong> ou que altera a relação sintática original, violando as regras de regência ou uso dos relativos cobradas pela FCM:</p>
+            <ul class="options-list">
+                <li class="option-item"><label class="option-label"><input type="radio" name="q5" value="A" class="option-input"> A) O prisioneiro, a voz do qual fora silenciada...</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q5" value="B" class="option-input"> B) O prisioneiro, que teve a voz silenciada...</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q5" value="C" class="option-input"> C) O prisioneiro, onde a voz fora silenciada...</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q5" value="D" class="option-input"> D) O prisioneiro, de quem a voz fora silenciada...</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q5" value="E" class="option-input"> E) O prisioneiro, cuja a voz fora silenciada...</label></li>
+            </ul>
+        </div>
+
+        <!-- QUESTÃO 6 -->
+        <div class="question-card" id="q6">
+            <div class="question-header">Questão 6</div>
+            <p class="question-text">A conjunção <strong>"como"</strong> é um operador polissêmico frequente nas provas da CEFETMINAS. Analise o seu emprego no seguinte período adaptado de <em>Capitães da Areia</em>: <em>“<strong>Como</strong> a noite descia rápida sobre o trapiche, os meninos se recolheram.”</em> O valor semântico estabelecido pela conjunção no contexto acima é de:</p>
+            <ul class="options-list">
+                <li class="option-item"><label class="option-label"><input type="radio" name="q6" value="A" class="option-input"> A) Comparação.</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q6" value="B" class="option-input"> B) Causa.</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q6" value="C" class="option-input"> C) Conformidade.</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q6" value="D" class="option-input"> D) Modo.</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q6" value="E" class="option-input"> E) Adição.</label></li>
+            </ul>
+        </div>
+
+        <!-- QUESTÃO 7 -->
+        <div class="question-card" id="q7">
+            <div class="question-header">Questão 7</div>
+            <p class="question-text">A escolha entre "onde" e "aonde" depende estritamente da regência do verbo da oração adjetiva. Assinale a alternativa em que a lacuna deve ser preenchida, obrigatoriamente, por <strong>"aonde"</strong> (ou "a que"), segundo o padrão culto exigido pela banca:</p>
+            <ul class="options-list">
+                <li class="option-item"><label class="option-label"><input type="radio" name="q7" value="A" class="option-input"> A) O trapiche ______ os Capitães da Areia dormiam era insalubre.</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q7" value="B" class="option-input"> B) A cidade de Salvador, ______ Jorge Amado ambientou suas obras, é rica em cultura.</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q7" value="C" class="option-input"> C) O destino ______ Pedro Bala conduzia o grupo era incerto e perigoso.</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q7" value="D" class="option-input"> D) A sociedade ______ eles viviam os marginalizava constantemente.</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q7" value="E" class="option-input"> E) O local ______ se escondiam ficava próximo à praia.</label></li>
+            </ul>
+        </div>
+
+        <!-- QUESTÃO 8 -->
+        <div class="question-card" id="q8">
+            <div class="question-header">Questão 8</div>
+            <p class="question-text">Em tirinhas e textos humorísticos, a FCM explora as múltiplas funções do "se". No período: <em>“Não <strong>se</strong> sabe se a mudança virá, mas espera-<strong>se</strong> que sim.”</em>, as ocorrências da partícula "se" classificam-se, respectivamente, como:</p>
+            <ul class="options-list">
+                <li class="option-item"><label class="option-label"><input type="radio" name="q8" value="A" class="option-input"> A) Partícula apassivadora / Conjunção integrante / Índice de indeterminação do sujeito.</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q8" value="B" class="option-input"> B) Índice de indeterminação do sujeito / Conjunção integrante / Partícula apassivadora.</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q8" value="C" class="option-input"> C) Partícula apassivadora / Conjunção condicional / Pronome reflexivo.</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q8" value="D" class="option-input"> D) Pronome reflexivo / Conjunção integrante / Partícula apassivadora.</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q8" value="E" class="option-input"> E) Índice de indeterminação do sujeito / Conjunção condicional / Partícula apassivadora.</label></li>
+            </ul>
+        </div>
+
+        <!-- QUESTÃO 9 -->
+        <div class="question-card" id="q9">
+            <div class="question-header">Questão 9</div>
+            <p class="question-text">A pontuação é um mecanismo sintático essencial para a banca. Assinale a alternativa em que a vírgula é empregada para marcar o deslocamento de uma oração subordinada adverbial (ordem inversa):</p>
+            <ul class="options-list">
+                <li class="option-item"><label class="option-label"><input type="radio" name="q9" value="A" class="option-input"> A) "O professor, que era muito exigente, reprovou os alunos."</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q9" value="B" class="option-input"> B) "Estudou tanto para a prova, que acabou adoecendo de estresse."</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q9" value="C" class="option-input"> C) "Quando os resultados saírem, saberemos quem foi aprovado."</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q9" value="D" class="option-input"> D) "Ele disse que viria, mas não confirmou o horário."</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q9" value="E" class="option-input"> E) "É importante que todos leiam o edital com atenção."</label></li>
+            </ul>
+        </div>
+
+        <!-- QUESTÃO 10 -->
+        <div class="question-card" id="q10">
+            <div class="question-header">Questão 10</div>
+            <p class="question-text">A banca frequentemente solicita a transposição de orações reduzidas para desenvolvidas (ou vice-versa). No período: <em>“Ao terminar a leitura, o aluno compreendeu o tema.”</em>, a oração reduzida de infinitivo equivale, semanticamente e sintaticamente, à oração desenvolvida sublinhada em:</p>
+            <ul class="options-list">
+                <li class="option-item"><label class="option-label"><input type="radio" name="q10" value="A" class="option-input"> A) <strong>Porque terminou a leitura</strong>, o aluno compreendeu o tema.</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q10" value="B" class="option-input"> B) <strong>Quando terminou a leitura</strong>, o aluno compreendeu o tema.</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q10" value="C" class="option-input"> C) <strong>Para terminar a leitura</strong>, o aluno compreendeu o tema.</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q10" value="D" class="option-input"> D) <strong>Embora terminasse a leitura</strong>, o aluno compreendeu o tema.</label></li>
+                <li class="option-item"><label class="option-label"><input type="radio" name="q10" value="E" class="option-input"> E) <strong>Caso termine a leitura</strong>, o aluno compreendeu o tema.</label></li>
+            </ul>
+        </div>
+
+        <button type="button" class="btn-submit" onclick="submitQuiz()">VERIFICAR RESPOSTAS</button>
+    </form>
+
+    <!-- ÁREA DE RESULTADOS -->
+    <div id="results-section">
+        <div class="score-display">
+            <h2>Sua pontuação: <span id="score-value">0</span>/10</h2>
+            <p id="score-message"></p>
+        </div>
+
+        <h3 style="text-align: center; color: var(--accent-color); margin-bottom: 30px;">Gabarito Comentado e Resoluções</h3>
+        <div id="resolutions-container">
+            <!-- As resoluções serão inseridas aqui via JS -->
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const correctAnswers = {
+        q1: 'B',
+        q2: 'D',
+        q3: 'B',
+        q4: 'C',
+        q5: 'E',
+        q6: 'B',
+        q7: 'C',
+        q8: 'A',
+        q9: 'C',
+        q10: 'B'
+    };
+
+    const explanations = {
+        q1: `
+            <div class="resolution-title">Gabarito: B</div>
+            <div class="resolution-content">
+                <p><strong>Análise Teórica:</strong> Esta questão exige segmentação do período (cutting) e classificação oracional.</p>
+                <ul>
+                    <li><strong>1ª Oração:</strong> "O algoritmo calculou" - Tem sentido completo e não tem conectivo. É uma <strong>Oração Coordenada Assindética</strong>.</li>
+                    <li><strong>2ª Oração:</strong> ", mas não sentiu" - O conectivo "mas" indica adversidade. É uma <strong>Oração Coordenada Sindética Adversativa</strong>.</li>
+                    <li><strong>3ª Oração:</strong> "que a interação era puramente sarcástica" - O verbo "sentiu" é transitivo direto e pede complemento. A oração funciona como objeto direto do verbo sentir. É uma <strong>Oração Subordinada Substantiva Objetiva Direta</strong>.</li>
+                </ul>
+            </div>
+        `,
+        q2: `
+            <div class="resolution-title">Gabarito: D</div>
+            <div class="resolution-content">
+                <p><strong>Análise Teórica:</strong> O foco está nos Operadores Argumentativos.</p>
+                <ul>
+                    <li>O conectivo <strong>"Embora"</strong> é concessivo por excelência.</li>
+                    <li><strong>Lógica da Concessão:</strong> Apresenta uma causa (construir obras complexas) que deveria levar a um resultado oposto (ser impopular), mas não leva (ela é popular). Há ruptura de expectativa sem anular o fato.</li>
+                    <li>A alternativa C (Adversativa) é incorreta pois a estrutura sintática de subordinação (uso do subjuntivo "tenha") define a concessiva, diferente da adversativa que usa coordenação.</li>
+                </ul>
+            </div>
+        `,
+        q3: `
+            <div class="resolution-title">Gabarito: B</div>
+            <div class="resolution-content">
+                <p><strong>Análise Teórica:</strong> Relação de Causalidade.</p>
+                <ul>
+                    <li><strong>Conectivo:</strong> "Visto que" é uma locução conjuntiva causal clássica.</li>
+                    <li><strong>Contexto:</strong> A oração introduzida por "visto que" fornece a <strong>razão</strong> (estética dialoga com crianças) pela qual a ação da oração principal ocorre (obra reproduzida em escolas).</li>
+                    <li>A alternativa A inverte a relação, sugerindo consequência, o que está incorreto.</li>
+                </ul>
+            </div>
+        `,
+        q4: `
+            <div class="resolution-title">Gabarito: C</div>
+            <div class="resolution-content">
+                <p><strong>Análise Teórica:</strong> Estrutura de sujeito oracional.</p>
+                <ul>
+                    <li><strong>Estrutura:</strong> <em>Parecia viável [que todos entendessem]</em>.</li>
+                    <li>O verbo <em>parecer</em> atua como verbo de ligação unindo o predicativo ("viável") a um sujeito.</li>
+                    <li>Perguntamos: "O que parecia viável?". A resposta é a oração inteira: <em>"Que todos entendessem"</em>.</li>
+                    <li>Podemos substituir por "ISSO": <em>ISSO parecia viável</em>. Logo, é uma <strong>Oração Subordinada Substantiva Subjetiva</strong>.</li>
+                </ul>
+            </div>
+        `,
+        q5: `
+            <div class="resolution-title">Gabarito: E (Alternativa Incorreta)</div>
+            <div class="resolution-content">
+                <p><strong>Análise Teórica:</strong> Uso do pronome relativo "cujo".</p>
+                <ul>
+                    <li><strong>Regra de Ouro:</strong> O pronome relativo <em>cujo</em> (e flexões) expressa posse e <strong>jamais admite artigo depois dele</strong>.</li>
+                    <li>A construção "cuja <strong>a</strong> voz" é gramaticalmente incorreta pois o artigo "a" já está embutido na desinência de gênero do pronome "cuj<strong>a</strong>".</li>
+                    <li>A alternativa C ("onde") também é coloquial, mas a alternativa E viola uma regra estrutural específica e "clássica" cobrada em concursos.</li>
+                </ul>
+            </div>
+        `,
+        q6: `
+            <div class="resolution-title">Gabarito: B</div>
+            <div class="resolution-content">
+                <p><strong>Análise Teórica:</strong> Conjunção "Como" iniciando período.</p>
+                <ul>
+                    <li>No período <em>“Como a noite descia rápida..., os meninos se recolheram”</em>, podemos substituir "Como" por "Porque" ou "Já que".</li>
+                    <li>A descida da noite é a <strong>Causa</strong> para o recolhimento dos meninos (Efeito).</li>
+                    <li>Quando o "Como" inicia o período indicando motivo, ele é <strong>Causal</strong>.</li>
+                </ul>
+            </div>
+        `,
+        q7: `
+            <div class="resolution-title">Gabarito: C</div>
+            <div class="resolution-content">
+                <p><strong>Análise Teórica:</strong> Regência e pronomes relativos de lugar.</p>
+                <ul>
+                    <li><strong>Regra:</strong> Usa-se "onde" para verbos estáticos (em) e "aonde" para verbos de movimento que exigem a preposição "a".</li>
+                    <li>Verbo <strong>Conduzir</strong>: Quem conduz, conduz alguém <strong>A</strong> algum lugar.</li>
+                    <li>Logo, a lacuna exige a preposição "a": <em>O destino <strong>a que</strong> (ou <strong>aonde</strong>) Pedro Bala conduzia...</em></li>
+                </ul>
+            </div>
+        `,
+        q8: `
+            <div class="resolution-title">Gabarito: A</div>
+            <div class="resolution-content">
+                <p><strong>Análise Teórica:</strong> Funções do "SE".</p>
+                <p>Frase: <em>“Não <strong>se</strong> sabe se a mudança virá, mas espera-<strong>se</strong> que sim.”</em></p>
+                <ul>
+                    <li><strong>1º SE (Não se sabe):</strong> Verbo Saber (VTD) + SE + Oração = <strong>Partícula Apassivadora</strong> (Sabe-se algo).</li>
+                    <li><strong>2º SE (se a mudança virá):</strong> Introduz o objeto direto. Equivale a "ISSO". É uma <strong>Conjunção Integrante</strong>.</li>
+                    <li><strong>3º SE (espera-se):</strong> Verbo Esperar (VTD) + SE. <strong>Partícula Apassivadora</strong>.</li>
+                    <li>A alternativa A é a que mais se aproxima da estrutura clássica cobrada, focando principalmente na distinção entre apassivador e integrante.</li>
+                </ul>
+            </div>
+        `,
+        q9: `
+            <div class="resolution-title">Gabarito: C</div>
+            <div class="resolution-content">
+                <p><strong>Análise Teórica:</strong> Pontuação no deslocamento.</p>
+                <ul>
+                    <li>Frase: <em>"Quando os resultados saírem, saberemos quem foi aprovado."</em></li>
+                    <li>A oração <em>"Quando os resultados saírem"</em> é uma Subordinada Adverbial Temporal e está <strong>deslocada</strong> para o início do período.</li>
+                    <li>A vírgula é usada (e recomendada/obrigatória dependendo da extensão) para marcar esse deslocamento (ordem inversa).</li>
+                </ul>
+            </div>
+        `,
+        q10: `
+            <div class="resolution-title">Gabarito: B</div>
+            <div class="resolution-content">
+                <p><strong>Análise Teórica:</strong> Orações reduzidas.</p>
+                <ul>
+                    <li>Estrutura: <em>“Ao terminar a leitura...”</em></li>
+                    <li>A fórmula <strong>"Ao + Verbo no Infinitivo"</strong> indica <strong>Tempo</strong>.</li>
+                    <li>Equivale semanticamente a: "Quando terminou", "Assim que terminou".</li>
+                    <li>As outras opções indicam causa (porque), finalidade (para), concessão (embora) ou condição (caso), mudando o sentido original.</li>
+                </ul>
+            </div>
+        `
+    };
+
+    function submitQuiz() {
+        let score = 0;
+        const form = document.getElementById('quiz-form');
+        const formData = new FormData(form);
+        const resolutionContainer = document.getElementById('resolutions-container');
+        resolutionContainer.innerHTML = ''; // Limpa resoluções anteriores
+
+        // Verificar respostas
+        for (let i = 1; i <= 10; i++) {
+            const questionId = 'q' + i;
+            const userAnswer = formData.get(questionId);
+            const correctAnswer = correctAnswers[questionId];
+            
+            // Adicionar resolução ao final da página
+            const cardDiv = document.createElement('div');
+            cardDiv.className = 'resolution-card';
+            cardDiv.innerHTML = `<h4>Questão ${i}</h4>` + explanations[questionId];
+            resolutionContainer.appendChild(cardDiv);
+
+            // Feedback visual nas opções
+            const options = document.getElementsByName(questionId);
+            options.forEach(option => {
+                const label = option.parentElement;
+                
+                // Resetar classes
+                label.classList.remove('correct-answer', 'user-wrong');
+
+                // Marcar a correta
+                if (option.value === correctAnswer) {
+                    label.classList.add('correct-answer');
+                }
+
+                // Marcar erro do usuário se houver
+                if (userAnswer && userAnswer !== correctAnswer && option.value === userAnswer) {
+                    label.classList.add('user-wrong');
+                }
+            });
+
+            if (userAnswer === correctAnswer) {
+                score++;
+            }
+        }
+
+        // Exibir pontuação
+        document.getElementById('score-value').innerText = score;
+        const msgElement = document.getElementById('score-message');
+        
+        if (score === 10) msgElement.innerText = "Excelente! Você domina a sintaxe da FCM.";
+        else if (score >= 7) msgElement.innerText = "Muito bom! Alguns ajustes finos e você chega lá.";
+        else if (score >= 5) msgElement.innerText = "Bom começo, mas revise as resoluções com atenção.";
+        else msgElement.innerText = "Continue estudando. As resoluções abaixo ajudarão a entender a lógica da banca.";
+
+        // Mostrar seção de resultados
+        document.getElementById('results-section').style.display = 'block';
+        
+        // Rolar suavemente até o resultado
+        document.getElementById('results-section').scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>

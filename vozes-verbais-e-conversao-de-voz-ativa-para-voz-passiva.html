@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Vozes Verbais - IFSC / FAURGS</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #0f172a; /* Slate 900 para máximo conforto visual */
+            line-height: 1.7;
+        }
+
+        /* Estilo personalizado de grifo / destaque legível sem poluição visual */
+        .grifo {
+            background-color: #fef08a; /* Amarelo suave */
+            color: #0f172a;
+            padding: 0.15rem 0.35rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+            border-bottom: 2px solid #facc15;
+        }
+
+        .grifo-azul {
+            background-color: #e0f2fe; /* Azul suave */
+            color: #0369a1;
+            padding: 0.15rem 0.35rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+            border-bottom: 2px solid #38bdf8;
+        }
+
+        .grifo-alerta {
+            background-color: #fee2e2; /* Vermelho suave */
+            color: #991b1b;
+            padding: 0.15rem 0.35rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+            border-bottom: 2px solid #f87171;
+        }
+
+        /* Garantia absoluta de que tabelas não façam scroll horizontal */
+        .tabela-responsiva {
+            width: 100%;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+
+        .tabela-responsiva th, 
+        .tabela-responsiva td {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+        }
+    </style>
+</head>
+<body class="bg-white text-slate-900 min-h-screen">
+
+    <!-- Container Principal com espaçamento adequado -->
+    <main class="max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+
+        <!-- REPRODUTOR DE ÁUDIO MP3 NO TOPO -->
+        <section id="audio-player-container" class="mb-10 bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-6 shadow-sm">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center text-lg font-bold">
+                        <i class="fas fa-headphones"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base font-bold text-slate-800">Áudio da Aula / Resumo Guiado</h2>
+                        <p class="text-xs text-slate-500">Ouça o resumo completo em áudio enquanto acompanha o guia abaixo</p>
+                    </div>
+                </div>
+                <!-- Controls de Velocidade -->
+                <div class="flex items-center gap-1.5 self-end sm:self-center bg-white p-1 rounded-lg border border-slate-200 text-xs">
+                    <span class="text-slate-400 font-medium px-1">Velocidade:</span>
+                    <button onclick="setAudioSpeed(1.0)" class="speed-btn px-2 py-1 rounded font-medium bg-slate-200 text-slate-800" data-speed="1.0">1.0x</button>
+                    <button onclick="setAudioSpeed(1.25)" class="speed-btn px-2 py-1 rounded font-medium hover:bg-slate-100 text-slate-600" data-speed="1.25">1.25x</button>
+                    <button onclick="setAudioSpeed(1.5)" class="speed-btn px-2 py-1 rounded font-medium hover:bg-slate-100 text-slate-600" data-speed="1.5">1.5x</button>
+                    <button onclick="setAudioSpeed(2.0)" class="speed-btn px-2 py-1 rounded font-medium hover:bg-slate-100 text-slate-600" data-speed="2.0">2.0x</button>
+                </div>
+            </div>
+
+            <!-- ELEMENTO DE ÁUDIO MP3 -->
+            <!-- ========================================================================= -->
+            <!-- ESPAÇO PARA INSERIR SEU ARQUIVO MP3: Altere o atributo 'src' na tag abaixo -->
+            <!-- Exemplo: src="aula_vozes_verbais.mp3" ou o nome do seu arquivo local       -->
+            <!-- ========================================================================= -->
+            <audio id="main-audio-player" controls class="w-full h-11 focus:outline-none">
+                <source id="audio-source" src="audio_vozes_verbais.mp3" type="audio/mpeg">
+                Seu navegador não suporta o elemento de áudio HTML5.
+            </audio>
+            
+            <p class="text-xs text-slate-400 mt-2 italic flex items-center gap-1">
+                <i class="fas fa-info-circle"></i> Arquivo carregado: <span id="current-file-display" class="font-mono text-slate-600">audio_vozes_verbais.mp3</span> (Certifique-se de manter o arquivo MP3 na mesma pasta desta página).
+            </p>
+        </section>
+
+        <!-- CABEÇALHO DO GUIA -->
+        <header class="border-b border-slate-200 pb-8 mb-8 text-center sm:text-left">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold mb-3">
+                <i class="fas fa-graduation-cap"></i> IFSC • Banca FAURGS • EBTT
+            </div>
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
+                Guia de Memorização Rápida: Vozes Verbais e Transposição Sintática
+            </h1>
+            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                Material de alta retenção focado em conversão direta de questões objetivas. Estruturado em algoritmos sintáticos, tabelas comparativas e armadilhas da banca FAURGS.
+            </p>
+        </header>
+
+        <!-- SEÇÃO 1: MAPEAMENTO ESSENCIAL DAS VOZES VERBAIS -->
+        <section class="mb-12">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="w-8 h-8 rounded-lg bg-blue-600 text-white font-bold flex items-center justify-center text-sm shadow-sm">1</span>
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-900">Mapeamento Essencial das Vozes Verbais</h2>
+            </div>
+
+            <p class="text-slate-700 mb-6 leading-relaxed">
+                As vozes verbais indicam a relação sintático-semântica entre o sujeito gramatical e o processo verbal. Lembre-se de que a <mark class="grifo">passividade semântica</mark> (quando o sujeito sofre a ação sob o ponto de vista do significado) pode ocorrer na voz ativa formal, como em <em>"O carro furou o pneu"</em> ou <em>"A sociedade sofre com a pandemia"</em>. A <mark class="grifo-azul">voz passiva formal exige marcadores sintáticos rígidos</mark>.
+            </p>
+
+            <!-- Tabela 1: Sem Scroll Horizontal -->
+            <div class="border border-slate-200 rounded-xl overflow-hidden bg-white shadow-sm mb-6">
+                <table class="tabela-responsiva text-xs sm:text-sm">
+                    <thead>
+                        <tr class="bg-slate-100 border-b border-slate-200 text-slate-800 font-bold">
+                            <th class="p-2 sm:p-3 text-left w-1/5">Voz</th>
+                            <th class="p-2 sm:p-3 text-left w-2/5">Estrutura Sintática</th>
+                            <th class="p-2 sm:p-3 text-left w-2/5">Exemplo de Prova</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 text-slate-700">
+                        <tr>
+                            <td class="p-2 sm:p-3 font-bold text-slate-900">Ativa</td>
+                            <td class="p-2 sm:p-3"><mark class="grifo">Sujeito Agente</mark> + VTD/VTDI + Objeto Direto</td>
+                            <td class="p-2 sm:p-3 italic">"O candidato resolveu a prova."</td>
+                        </tr>
+                        <tr class="bg-slate-50/50">
+                            <td class="p-2 sm:p-3 font-bold text-slate-900">Passiva Analítica</td>
+                            <td class="p-2 sm:p-3">Sujeito Paciente + <mark class="grifo-azul">Verbo SER + Particípio</mark> + Agente da Passiva</td>
+                            <td class="p-2 sm:p-3 italic">"A prova <mark class="grifo-azul">foi resolvida</mark> pelo candidato."</td>
+                        </tr>
+                        <tr>
+                            <td class="p-2 sm:p-3 font-bold text-slate-900">Passiva Sintética</td>
+                            <td class="p-2 sm:p-3"><mark class="grifo">VTD/VTDI + SE (Pronome Apassivador)</mark> + Sujeito Paciente</td>
+                            <td class="p-2 sm:p-3 italic">"<mark class="grifo">Resolveu-se</mark> a prova."</td>
+                        </tr>
+                        <tr class="bg-slate-50/50">
+                            <td class="p-2 sm:p-3 font-bold text-slate-900">Reflexiva</td>
+                            <td class="p-2 sm:p-3">Sujeito Agente/Paciente + Pronome Reflexivo (mesma pessoa)</td>
+                            <td class="p-2 sm:p-3 italic">"O rapaz olhou-se no espelho."</td>
+                        </tr>
+                        <tr>
+                            <td class="p-2 sm:p-3 font-bold text-slate-900">Recíproca</td>
+                            <td class="p-2 sm:p-3">Dois ou mais agentes que realizam e sofrem a ação mutuamente</td>
+                            <td class="p-2 sm:p-3 italic">"Os candidatos cumprimentaram-se."</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 2: ALGORITMO DE TRANSPOSIÇÃO E CORRESPONDÊNCIA TEMPORAL -->
+        <section class="mb-12">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="w-8 h-8 rounded-lg bg-blue-600 text-white font-bold flex items-center justify-center text-sm shadow-sm">2</span>
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-900">O Algoritmo de Transposição e Correspondência Temporal</h2>
+            </div>
+
+            <p class="text-slate-700 mb-4 leading-relaxed">
+                A transposição da voz ativa para a passiva analítica exige obrigatoriamente a presença de um <mark class="grifo">Objeto Direto</mark> na oração ativa. Verbos transitivos indiretos (VTI) e intransitivos (VI) <mark class="grifo-alerta">não admitem esta conversão</mark>.
+            </p>
+
+            <!-- Caixa Regra N + 1 -->
+            <div class="bg-amber-50/60 border border-amber-200 rounded-xl p-4 sm:p-5 mb-6">
+                <h3 class="text-base font-bold text-amber-900 mb-2 flex items-center gap-2">
+                    <i class="fas fa-calculator text-amber-600"></i> Regra de Expansão Verbal ($N \to N+1$)
+                </h3>
+                <p class="text-sm text-slate-800 mb-3">
+                    Se a voz ativa possui <strong>N</strong> verbos, a voz passiva analítica correspondente terá obrigatoriamente <mark class="grifo">N + 1 verbos</mark>. O verbo auxiliar <strong>SER</strong> deve ser inserido herdando exatamente o <em>tempo, modo, aspecto e pessoa</em> do verbo principal da oração ativa original.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs sm:text-sm font-mono">
+                    <div class="bg-white p-3 rounded-lg border border-amber-200">
+                        <span class="text-slate-500 font-sans block text-xs font-semibold">Ativa ($N=2$ verbos):</span>
+                        "ela <span class="font-bold text-amber-800">está substituindo</span> os encontros"
+                    </div>
+                    <div class="bg-white p-3 rounded-lg border border-amber-200">
+                        <span class="text-slate-500 font-sans block text-xs font-semibold">Passiva ($N=3$ verbos):</span>
+                        "os encontros <span class="font-bold text-amber-800">estão sendo substituídos</span> por ela"
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-base font-bold text-slate-900 mb-3">Tabela de Equivalência Temporal para a Prova</h3>
+            <p class="text-xs sm:text-sm text-slate-600 mb-4">Use esta tabela para eliminar alternativas incorretas rapidamente por incompatibilidade de tempos verbais:</p>
+
+            <!-- Tabela 2: Equivalência Temporal Sem Scroll Horizontal -->
+            <div class="border border-slate-200 rounded-xl overflow-hidden bg-white shadow-sm mb-6">
+                <table class="tabela-responsiva text-xs sm:text-sm">
+                    <thead>
+                        <tr class="bg-slate-100 border-b border-slate-200 text-slate-800 font-bold">
+                            <th class="p-2 sm:p-3 text-left w-1/4">Tempo (Ativa)</th>
+                            <th class="p-2 sm:p-3 text-left w-1/4">Exemplo (Ativa)</th>
+                            <th class="p-2 sm:p-3 text-left w-1/4">Auxiliar SER</th>
+                            <th class="p-2 sm:p-3 text-left w-1/4">Exemplo (Passiva)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 text-slate-700">
+                        <tr>
+                            <td class="p-2 sm:p-3 font-semibold text-slate-900">Presente do Ind.</td>
+                            <td class="p-2 sm:p-3 italic">A fé estimula as pessoas.</td>
+                            <td class="p-2 sm:p-3 font-bold text-blue-700">Presente</td>
+                            <td class="p-2 sm:p-3 italic">As pessoas <mark class="grifo-azul">são estimuladas</mark> pela fé.</td>
+                        </tr>
+                        <tr class="bg-slate-50/50">
+                            <td class="p-2 sm:p-3 font-semibold text-slate-900">Pret. Perfeito</td>
+                            <td class="p-2 sm:p-3 italic">A Internet transformou o mundo.</td>
+                            <td class="p-2 sm:p-3 font-bold text-blue-700">Pret. Perfeito</td>
+                            <td class="p-2 sm:p-3 italic">O mundo <mark class="grifo-azul">foi transformado</mark> pela Internet.</td>
+                        </tr>
+                        <tr>
+                            <td class="p-2 sm:p-3 font-semibold text-slate-900">Pret. Imperfeito</td>
+                            <td class="p-2 sm:p-3 italic">O articulista conhecia o resultado.</td>
+                            <td class="p-2 sm:p-3 font-bold text-blue-700">Pret. Imperfeito</td>
+                            <td class="p-2 sm:p-3 italic">O resultado <mark class="grifo-azul">era conhecido</mark> pelo articulista.</td>
+                        </tr>
+                        <tr class="bg-slate-50/50">
+                            <td class="p-2 sm:p-3 font-semibold text-slate-900">Pret. M.-Q.-Perf.</td>
+                            <td class="p-2 sm:p-3 italic">O escritor inventara o enigma.</td>
+                            <td class="p-2 sm:p-3 font-bold text-blue-700">Pret. M.-Q.-Perf.</td>
+                            <td class="p-2 sm:p-3 italic">O enigma <mark class="grifo-azul">fora inventado</mark> pelo escritor.</td>
+                        </tr>
+                        <tr>
+                            <td class="p-2 sm:p-3 font-semibold text-slate-900">Futuro do Pres.</td>
+                            <td class="p-2 sm:p-3 italic">A construtora demolirá as casas.</td>
+                            <td class="p-2 sm:p-3 font-bold text-blue-700">Futuro do Pres.</td>
+                            <td class="p-2 sm:p-3 italic">As casas <mark class="grifo-azul">serão demolidas</mark> pela construtora.</td>
+                        </tr>
+                        <tr class="bg-slate-50/50">
+                            <td class="p-2 sm:p-3 font-semibold text-slate-900">Futuro do Pret.</td>
+                            <td class="p-2 sm:p-3 italic">Humoristas não criariam as piadas.</td>
+                            <td class="p-2 sm:p-3 font-bold text-blue-700">Futuro do Pret.</td>
+                            <td class="p-2 sm:p-3 italic">As piadas não <mark class="grifo-azul">seriam criadas</mark> por humoristas.</td>
+                        </tr>
+                        <tr>
+                            <td class="p-2 sm:p-3 font-semibold text-slate-900">Pres. Subjuntivo</td>
+                            <td class="p-2 sm:p-3 italic">Que nós amemos a ilha.</td>
+                            <td class="p-2 sm:p-3 font-bold text-blue-700">Pres. Subjuntivo</td>
+                            <td class="p-2 sm:p-3 italic">Que a ilha <mark class="grifo-azul">seja amada</mark> por nós.</td>
+                        </tr>
+                        <tr class="bg-slate-50/50">
+                            <td class="p-2 sm:p-3 font-semibold text-slate-900">Imp. Subjuntivo</td>
+                            <td class="p-2 sm:p-3 italic">Se ele resolvesse os problemas...</td>
+                            <td class="p-2 sm:p-3 font-bold text-blue-700">Imp. Subjuntivo</td>
+                            <td class="p-2 sm:p-3 italic">Se os problemas <mark class="grifo-azul">fossem resolvidos</mark> por ele...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 3: DECODIFICADOR RÁPIDO DA PARTÍCULA SE (PA vs. IIS) -->
+        <section class="mb-12">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="w-8 h-8 rounded-lg bg-blue-600 text-white font-bold flex items-center justify-center text-sm shadow-sm">3</span>
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-900">Decodificador Rápido da Partícula SE (PA vs. IIS)</h2>
+            </div>
+
+            <p class="text-slate-700 mb-6 leading-relaxed">
+                Determinar a função exata do marcador <mark class="grifo">SE</mark> resolve recorrentemente questões de vozes verbais e concordância gramatical da banca FAURGS.
+            </p>
+
+            <!-- Tabela 3: PA vs IIS Sem Scroll Horizontal -->
+            <div class="border border-slate-200 rounded-xl overflow-hidden bg-white shadow-sm mb-6">
+                <table class="tabela-responsiva text-xs sm:text-sm">
+                    <thead>
+                        <tr class="bg-slate-100 border-b border-slate-200 text-slate-800 font-bold">
+                            <th class="p-2 sm:p-3 text-left w-1/4">Critério</th>
+                            <th class="p-2 sm:p-3 text-left w-3/8">Pronome Apassivador (PA)</th>
+                            <th class="p-2 sm:p-3 text-left w-3/8">Índice de Indeterminação (IIS)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 text-slate-700">
+                        <tr>
+                            <td class="p-2 sm:p-3 font-bold text-slate-900">Transitividade</td>
+                            <td class="p-2 sm:p-3 font-semibold text-emerald-800 bg-emerald-50/50"><mark class="grifo">VTD</mark> ou <mark class="grifo">VTDI</mark></td>
+                            <td class="p-2 sm:p-3 font-semibold text-amber-800 bg-amber-50/50"><mark class="grifo-alerta">VTI</mark>, <mark class="grifo-alerta">VI</mark> ou <mark class="grifo-alerta">VL</mark></td>
+                        </tr>
+                        <tr class="bg-slate-50/50">
+                            <td class="p-2 sm:p-3 font-bold text-slate-900">Sujeito</td>
+                            <td class="p-2 sm:p-3">Paciente (Determinado)</td>
+                            <td class="p-2 sm:p-3">Indeterminado</td>
+                        </tr>
+                        <tr>
+                            <td class="p-2 sm:p-3 font-bold text-slate-900">Concordância</td>
+                            <td class="p-2 sm:p-3"><mark class="grifo">Verbo concorda</mark> com o sujeito paciente (Singular/Plural)</td>
+                            <td class="p-2 sm:p-3"><mark class="grifo-alerta">Verbo fixado</mark> na 3ª pessoa do singular</td>
+                        </tr>
+                        <tr class="bg-slate-50/50">
+                            <td class="p-2 sm:p-3 font-bold text-slate-900">Exemplo de Prova</td>
+                            <td class="p-2 sm:p-3 italic">"<mark class="grifo">Expõem-se</mark> ali todos." (Todos são expostos)</td>
+                            <td class="p-2 sm:p-3 italic">"<mark class="grifo-alerta">Tratava-se</mark> de um caso complexo."</td>
+                        </tr>
+                        <tr>
+                            <td class="p-2 sm:p-3 font-bold text-slate-900">Equivalência Analítica</td>
+                            <td class="p-2 sm:p-3 text-emerald-700 font-semibold"><i class="fas fa-check-circle"></i> Possível ("Todos são expostos")</td>
+                            <td class="p-2 sm:p-3 text-rose-700 font-semibold"><i class="fas fa-times-circle"></i> Impossível ("De um caso era tratado")</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 4: CHECKLIST DE ARMADILHAS RECORRENTES DA FAURGS -->
+        <section class="mb-12">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="w-8 h-8 rounded-lg bg-rose-600 text-white font-bold flex items-center justify-center text-sm shadow-sm">4</span>
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-900">Checklist de Armadilhas Recorrentes da FAURGS</h2>
+            </div>
+
+            <div class="space-y-4">
+                <!-- Armadilha 1 -->
+                <div class="p-4 sm:p-5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 transition-colors">
+                    <h3 class="text-base font-bold text-slate-900 mb-1 flex items-center gap-2">
+                        <i class="fas fa-exclamation-triangle text-amber-500"></i> Incompatibilidade de VTI / VI
+                    </h3>
+                    <p class="text-sm text-slate-700 leading-relaxed">
+                        Se a questão pedir a alternativa que <mark class="grifo-alerta">"não admite transposição para a voz passiva"</mark>, procure imediatamente o verbo acompanhado de preposição obrigatória (VTI) ou sem complemento direto (VI). <br>
+                        <span class="text-xs text-slate-500 italic font-mono block mt-1">Exemplo de impossibilidade: "O público gosta muito das novelas e assiste a elas diariamente" (gostar de / assistir a = VTIs) ou "tudo isso existe fora das ilhas" (existir = VI).</span>
+                    </p>
+                </div>
+
+                <!-- Armadilha 2 -->
+                <div class="p-4 sm:p-5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 transition-colors">
+                    <h3 class="text-base font-bold text-slate-900 mb-1 flex items-center gap-2">
+                        <i class="fas fa-exclamation-triangle text-amber-500"></i> O "Peguinha" do Verbo TER
+                    </h3>
+                    <p class="text-sm text-slate-700 leading-relaxed">
+                        O verbo <mark class="grifo">TER</mark> utilizado no sentido estrito de posse (ex: <em>"Maquiavel teve os vagares necessários..."</em>) <mark class="grifo-alerta">não admite transposição na norma-padrão</mark>. Construções como <em>"os vagares foram tidos"</em> são consideradas agramaticais em provas formais.
+                    </p>
+                </div>
+
+                <!-- Armadilha 3 -->
+                <div class="p-4 sm:p-5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 transition-colors">
+                    <h3 class="text-base font-bold text-slate-900 mb-1 flex items-center gap-2">
+                        <i class="fas fa-exclamation-triangle text-amber-500"></i> Falsa Passiva por Clivagem
+                    </h3>
+                    <p class="text-sm text-slate-700 leading-relaxed">
+                        Estruturas de realce como <em>"Foi Rubem Braga quem cunhou a expressão"</em> <mark class="grifo-alerta">não estão na voz passiva</mark>. Remova a expressão de realce (<em>"Foi... quem"</em>) para enxergar a estrutura ativa real: <em>"Rubem Braga cunhou a expressão"</em>.
+                    </p>
+                </div>
+
+                <!-- Armadilha 4 -->
+                <div class="p-4 sm:p-5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 transition-colors">
+                    <h3 class="text-base font-bold text-slate-900 mb-1 flex items-center gap-2">
+                        <i class="fas fa-exclamation-triangle text-amber-500"></i> Omissão do Agente da Passiva
+                    </h3>
+                    <p class="text-sm text-slate-700 leading-relaxed">
+                        A ausência do agente da passiva explícito <mark class="grifo">não descaracteriza a voz passiva analítica</mark>. Sentenças como <em>"as pessoas deveriam ser punidas"</em> estão perfeitamente na voz passiva analítica mesmo sem determinar quem executará a punição.
+                    </p>
+                </div>
+
+                <!-- Armadilha 5 -->
+                <div class="p-4 sm:p-5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 transition-colors">
+                    <h3 class="text-base font-bold text-slate-900 mb-1 flex items-center gap-2">
+                        <i class="fas fa-exclamation-triangle text-amber-500"></i> Duplo SE na Mesma Frase
+                    </h3>
+                    <p class="text-sm text-slate-700 leading-relaxed">
+                        Em frases do tipo <em>"Não se sabe se o sujeito está..."</em>, o primeiro <mark class="grifo">"se"</mark> é Pronome Apassivador (PA) referente à passiva sintética, e o segundo <mark class="grifo-azul">"se"</mark> é uma Conjunção Integrante introduzindo a oração subordinada.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- NAVEGAÇÃO / BOTÃO DE QUESTÕES NO FINAL DA PÁGINA -->
+        <footer class="mt-16 pt-8 border-t border-slate-200 text-center pb-12">
+            <p class="text-slate-600 text-sm mb-4">Pronto para testar a fixação teórica na prática?</p>
+            <a href="questoesvozes.html" class="inline-flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-4 rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 text-base sm:text-lg">
+                <span>Ir para as Questões de Fixação</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+            <p class="text-xs text-slate-400 mt-3">Redireciona para questões.html</p>
+        </footer>
+
+    </main>
+
+    <!-- SCRIPT DE SUPORTE PARA O REPRODUTOR DE ÁUDIO -->
+    <script>
+        // Função para alterar velocidade de reprodução do MP3
+        function setAudioSpeed(speed) {
+            const audio = document.getElementById('main-audio-player');
+            if (audio) {
+                audio.playbackRate = speed;
+            }
+
+            // Atualizar destaque visual dos botões de velocidade
+            const buttons = document.querySelectorAll('.speed-btn');
+            buttons.forEach(btn => {
+                if (parseFloat(btn.getAttribute('data-speed')) === speed) {
+                    btn.classList.remove('hover:bg-slate-100', 'text-slate-600');
+                    btn.classList.add('bg-slate-200', 'text-slate-800', 'font-bold');
+                } else {
+                    btn.classList.remove('bg-slate-200', 'text-slate-800', 'font-bold');
+                    btn.classList.add('hover:bg-slate-100', 'text-slate-600');
+                }
+            });
+        }
+
+        // Atualização dinâmica do nome do arquivo na interface caso alterado no DOM
+        document.addEventListener('DOMContentLoaded', () => {
+            const sourceElem = document.getElementById('audio-source');
+            const displayElem = document.getElementById('current-file-display');
+            if (sourceElem && displayElem) {
+                const currentSrc = sourceElem.getAttribute('src');
+                displayElem.textContent = currentSrc;
+            }
+        });
+    </script>
+</body>
+</html>

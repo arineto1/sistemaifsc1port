@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulado Interativo FAURGS - Pronomes Relativos e Regência</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Charis+SIL:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Comfort Light Palette */
+      --bg-color: #f7f6f2; /* Soft warm paper tone to reduce eye strain */
+      --card-bg: #ffffff;
+      --text-main: #1c2127; /* Dark slate for softer contrast than pure black */
+      --text-muted: #57606a;
+      --border-color: #e1e4e8;
+      
+      --primary: #1d4ed8;
+      --primary-hover: #1e40af;
+      --accent-soft: #eff6ff;
+      
+      --correct-bg: #f0fdf4;
+      --correct-border: #16a34a;
+      --correct-text: #14532d;
+      
+      --incorrect-bg: #fef2f2;
+      --incorrect-border: #dc2626;
+      --incorrect-text: #7f1d1d;
+      
+      --shadow-subtle: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+      --radius: 12px;
+      
+      /* Typography optimized for reading */
+      --font-body: 'Charis SIL', Georgia, serif;
+      --font-ui: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.75;
+      font-size: 1.08rem;
+      padding: 32px 16px 80px 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    header {
+      background: var(--card-bg);
+      padding: 32px 28px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-subtle);
+      margin-bottom: 32px;
+      font-family: var(--font-ui);
+    }
+
+    header h1 {
+      font-size: 1.65rem;
+      color: #0f172a;
+      margin-bottom: 8px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .stats-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-color);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .progress-bar-bg {
+      height: 6px;
+      background: #e2e8f0;
+      border-radius: 3px;
+      margin-top: 12px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    .question-card {
+      background: var(--card-bg);
+      padding: 32px 28px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-subtle);
+      margin-bottom: 28px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .question-card.unanswered {
+      border-left: 4px solid #f59e0b;
+    }
+
+    .question-number {
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .question-text {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      white-space: pre-line;
+      color: var(--text-main);
+    }
+
+    .question-items {
+      background-color: #f8fafc;
+      padding: 16px 20px;
+      border-radius: 8px;
+      border-left: 3px solid var(--primary);
+      margin-bottom: 20px;
+      font-size: 1.02rem;
+    }
+
+    .question-prompt {
+      font-family: var(--font-ui);
+      font-weight: 600;
+      margin-bottom: 16px;
+      font-size: 1rem;
+    }
+
+    .options-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-family: var(--font-ui);
+    }
+
+    .option-item {
+      display: flex;
+      align-items: flex-start;
+      padding: 14px 18px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background-color: #ffffff;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-size: 0.98rem;
+    }
+
+    .option-item:hover {
+      background-color: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    .option-item input[type="radio"] {
+      margin-top: 3px;
+      margin-right: 12px;
+      accent-color: var(--primary);
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .option-item.selected {
+      background-color: var(--accent-soft);
+      border-color: var(--primary);
+      font-weight: 500;
+    }
+
+    .resolution-box {
+      display: none;
+      margin-top: 24px;
+      padding: 20px 24px;
+      background-color: #f8fafc;
+      border-left: 4px solid #3b82f6;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+
+    .resolution-title {
+      font-family: var(--font-ui);
+      font-weight: 700;
+      color: #1e3a8a;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+    }
+
+    .resolution-box ul {
+      margin-left: 20px;
+      margin-top: 8px;
+    }
+
+    .resolution-box li {
+      margin-bottom: 6px;
+    }
+
+    /* Evaluation Styles for options after submitting */
+    .question-card.evaluated .option-item {
+      cursor: default;
+    }
+
+    .question-card.evaluated .option-item.correct-choice {
+      background-color: var(--correct-bg) !important;
+      border-color: var(--correct-border) !important;
+      color: var(--correct-text) !important;
+      font-weight: 600;
+    }
+
+    .question-card.evaluated .option-item.wrong-choice {
+      background-color: var(--incorrect-bg) !important;
+      border-color: var(--incorrect-border) !important;
+      color: var(--incorrect-text) !important;
+      text-decoration: line-through;
+    }
+
+    #score-summary {
+      display: none;
+      background: var(--card-bg);
+      border: 2px solid var(--primary);
+      padding: 32px;
+      border-radius: var(--radius);
+      text-align: center;
+      box-shadow: var(--shadow-subtle);
+      margin-bottom: 32px;
+      font-family: var(--font-ui);
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .score-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .score-number {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin: 8px 0;
+    }
+
+    .score-text {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .btn-container {
+      text-align: center;
+      margin-top: 36px;
+      font-family: var(--font-ui);
+    }
+
+    .btn {
+      background-color: var(--primary);
+      color: #ffffff;
+      border: none;
+      padding: 16px 36px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(29, 78, 216, 0.25);
+      transition: background-color 0.2s ease, transform 0.1s ease;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-secondary {
+      background-color: #475569;
+      box-shadow: none;
+      margin-left: 12px;
+    }
+
+    .btn-secondary:hover {
+      background-color: #334155;
+    }
+
+    .alert-banner {
+      display: none;
+      background-color: #fffbeb;
+      border: 1px solid #fcd34d;
+      color: #b45309;
+      padding: 14px 20px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      font-family: var(--font-ui);
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    .summary-table-card {
+      display: none;
+      background: var(--card-bg);
+      padding: 28px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+      margin-top: 40px;
+      font-family: var(--font-ui);
+      overflow-x: auto;
+    }
+
+    .summary-table-card h3 {
+      font-size: 1.1rem;
+      color: var(--text-main);
+      margin-bottom: 16px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+      background-color: #f8fafc;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    @media (max-width: 640px) {
+      body { padding: 16px 8px 60px 8px; }
+      header, .question-card, #score-summary { padding: 20px 16px; }
+      .btn { width: 100%; margin-left: 0 !important; margin-bottom: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <header>
+      <h1>Simulado FAURGS: Pronomes Relativos com Regência</h1>
+      <p>Exercícios no estilo de cobrança da banca FAURGS com comentários e justificativas analíticas.</p>
+      
+      <div class="stats-bar">
+        <span>Total: <strong>10 Questões</strong></span>
+        <span id="progress-text">Respondidas: <strong>0 / 10</strong></span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-bar"></div>
+      </div>
+    </header>
+
+    <div class="alert-banner" id="alert-banner">
+      ⚠️ Por favor, responda a todas as questões antes de finalizar o simulado.
+    </div>
+
+    <!-- SCORE SUMMARY SECTION -->
+    <div id="score-summary">
+      <div class="score-title">Resultado Final</div>
+      <div class="score-number" id="score-value">0 / 10</div>
+      <div class="score-text" id="score-msg">Confira abaixo a resolução comentada de cada questão.</div>
+    </div>
+
+    <!-- QUIZ CONTAINER -->
+    <form id="quiz-form">
+      <div id="questions-wrapper"></div>
+
+      <div class="btn-container">
+        <button type="button" class="btn" id="finish-btn" onclick="finishQuiz()">Finalizar Quiz e Ver Resoluções</button>
+        <button type="button" class="btn btn-secondary" id="restart-btn" onclick="restartQuiz()" style="display: none;">Refazer Simulado</button>
+      </div>
+    </form>
+
+    <!-- SYNTHETIC REFERENCE TABLE -->
+    <div class="summary-table-card" id="summary-table">
+      <h3>Sintese de Regência com Pronomes Relativos</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Pronome</th>
+            <th>Função / Relação Semântica</th>
+            <th>Regência (Verbal/Nominal)</th>
+            <th>Preposição Exigida</th>
+            <th>Estrutura Resultante</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Que</strong></td>
+            <td>Substituição de antecedente (coisas/pessoas)</td>
+            <td>Transitividade do verbo ou exigência do nome</td>
+            <td>a, de, em, com, por</td>
+            <td><em>em que, a que, de que, com que</em></td>
+          </tr>
+          <tr>
+            <td><strong>Quem</strong></td>
+            <td>Refere-se estritamente a pessoas</td>
+            <td>Exigência preposicional de verbos/nomes</td>
+            <td>a, de, com, por, para</td>
+            <td><em>a quem, de quem, com quem</em></td>
+          </tr>
+          <tr>
+            <td><strong>Cujo</strong></td>
+            <td>Relação de posse (concorda com o consequente)</td>
+            <td>Regência do termo complementar na oração</td>
+            <td>de, em, a, com (anteposta)</td>
+            <td><em>de cujos, em cuja, a cujas</em></td>
+          </tr>
+          <tr>
+            <td><strong>Onde</strong></td>
+            <td>Indica exclusivamente lugar físico</td>
+            <td>Dinâmica locativa de permanência ou movimento</td>
+            <td>em (onde), a (aonde), de (donde)</td>
+            <td><em>onde, aonde, donde</em></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <script>
+    const quizData = [
+      {
+        id: 1,
+        question: "Assinale a alternativa que preenche, correta e respectivamente, as lacunas da frase abaixo, atendendo às exigências de regência verbal e ao emprego de pronomes relativos de acordo com a norma-padrão:\n\nA cidade ________ eu vivia na infância é a mesma ________ eles estavam se referindo ontem de manhã.",
+        options: [
+          { letter: "A", text: "que – de que" },
+          { letter: "B", text: "onde – que" },
+          { letter: "C", text: "na qual – em que" },
+          { letter: "D", text: "em que – a que" },
+          { letter: "E", text: "que – que" }
+        ],
+        correct: "D",
+        resolution: "<strong>Gabarito: (D)</strong><br><br><strong>Análise de Regência e Relativização:</strong> A resolução desta questão requer a análise minuciosa de duas orações adjetivas distintas e a identificação das preposições exigidas pelos seus respectivos verbos regentes. Na primeira lacuna, o verbo da oração subordinada é 'vivia' (do verbo viver). O verbo viver, quando indica o espaço de residência, classifica-se como intransitivo acompanhado de adjunto adverbial de lugar, exigindo a preposição 'em' ('quem vive, vive <strong>em</strong> algum lugar'). Projetando essa exigência para antes do pronome relativo, obtém-se a forma <strong>em que</strong> ou, alternativamente, 'na qual'. Na segunda lacuna, o verbo regente é a locução 'estavam se referindo' (do verbo pronominal referir-se). A regência do verbo referir-se exige obrigatoriamente a preposição 'a' ('quem se refere, refere-se <strong>a</strong> algo'). Assim, o pronome relativo que introduz essa oração deve ser antecedido por essa preposição, consolidando a forma <strong>a que</strong>. A combinação exata das duas lacunas, portanto, encontra-se apenas na alternativa (D)."
+      },
+      {
+        id: 2,
+        question: "Considere as afirmações abaixo a respeito do emprego de preposições antes de pronomes relativos em virtude da regência verbal:",
+        items: [
+          "I - Na frase 'A série a que assistimos ontem durou seis temporadas', o emprego da preposição 'a' é obrigatório em razão da transitividade indireta do verbo 'assistir' no sentido de presenciar.",
+          "II - Na frase 'Este é o projeto com que o departamento se comprometeu', a preposição 'com' é motivada pela regência do verbo pronominal 'comprometer-se'.",
+          "III - Na frase 'O filme que fui obrigado a assistir exige reflexão', a omissão da preposição 'a' antes do pronome relativo 'que' está em conformidade com a norma gramatical culta, sendo facultativa nesse contexto."
+        ],
+        prompt: "Quais estão corretas?",
+        options: [
+          { letter: "A", text: "Apenas I." },
+          { letter: "B", text: "Apenas II." },
+          { letter: "C", text: "Apenas I e II." },
+          { letter: "D", text: "Apenas II e III." },
+          { letter: "E", text: "I, II e III." }
+        ],
+        correct: "C",
+        resolution: "<strong>Gabarito: (C)</strong><br><br><strong>Análise de Regência e Relativização:</strong> O item avalia o conhecimento prático e teórico sobre o deslocamento de preposições exigidas por verbos para a posição anterior aos pronomes relativos correspondentes.<ul><li><strong>Afirmação I (Correta):</strong> O verbo assistir, no sentido de presenciar, ver ou testemunhar, é transitivo indireto e exige a preposição 'a'. Logo, na variedade culta da Língua Portuguesa, o pronome relativo 'que' deve obrigatoriamente vir precedido de referida preposição, resultando em 'A série a que assistimos...'.</li><li><strong>Afirmação II (Correta):</strong> O verbo comprometer-se é pronominal e exige complemento regido pela preposição 'com' ('comprometer-se com alguma coisa'). Essa preposição é corretamente transposta para antes do relativo 'que', gerando a construção padrão 'com que o departamento se comprometeu'.</li><li><strong>Afirmação III (Incorreta):</strong> A locução passiva 'fui obrigado a assistir' traz o verbo 'assistir' na acepção de ver, presenciar. Como tal, a regência verbal impõe a preposição 'a' ('assistir ao filme'). A omissão dessa preposição antes do pronome relativo ('O filme que fui obrigado...') caracteriza uma inadequação sintática perante a norma gramatical culta, tornando o uso da preposição obrigatório ('O filme a que fui obrigado a assistir').</li></ul>"
+      },
+      {
+        id: 3,
+        question: "Considere as frases abaixo, adaptadas de textos de provas da banca FAURGS:",
+        items: [
+          "– Embora eu esteja convencido ________ as frequentes trocas de legenda em alguma medida corrompem a vontade da população expressa nas urnas, teria dúvida antes de estabelecer peremptoriamente que o mandato é do partido.",
+          "– Determinar de modo inequívoco ________ pertence o mandato significa alijar de significado o voto de parte dos eleitores.",
+          "– Embaralha-se a célebre repartição dos Poderes, ________ fundamentos teóricos foram lançados por Montesquieu no século 18."
+        ],
+        prompt: "Assinale a alternativa que preenche correta e respectivamente as lacunas das frases acima.",
+        options: [
+          { letter: "A", text: "que – a quem – cujos" },
+          { letter: "B", text: "de que – de quem – que os" },
+          { letter: "C", text: "que – de quem – que os" },
+          { letter: "D", text: "de que – a quem – cujos" },
+          { letter: "E", text: "que – a quem – que os" }
+        ],
+        correct: "D",
+        resolution: "<strong>Gabarito: (D)</strong><br><br><strong>Análise de Regência e Relativização:</strong> Esta questão examina a combinação de regência nominal, regência verbal e o uso de pronomes relativos de valor possessivo.<ul><li>Na primeira frase, o adjetivo 'convencido' rege a preposição 'de' ('quem está convencido, está convencido <strong>de</strong> alguma coisa'). Como a oração seguinte é uma subordinada substantiva objetiva indireta (ou completiva nominal) introduzida pela conjunção integrante 'que', a lacuna deve ser preenchida com a combinação <strong>de que</strong>.</li><li>Na segunda frase, o verbo 'pertence' classifica-se como transitivo indireto e rege a preposição 'a' ('algo pertence <strong>a</strong> alguém'). Sendo o elemento de referência uma pessoa (os eleitores), a lacuna é preenchida corretamente por <strong>a quem</strong>.</li><li>Na terceira frase, estabelece-se uma evidente relação de posse entre a 'repartição dos Poderes' e seus 'fundamentos teóricos' (os fundamentos teóricos da repartição). O pronome que indica posse e concorda com o termo possuído subsequente ('fundamentos', masculino plural) é <strong>cujos</strong>. É importante registrar que o uso de artigo após o pronome relativo cujo ('cujos os') constitui erro crasso.</li></ul>"
+      },
+      {
+        id: 4,
+        question: "No que se refere às funções sintáticas do pronome relativo nas orações subordinadas adjetivas, considere as afirmações abaixo:",
+        items: [
+          "I - Em 'A flor que plantei há meses floresceu', o pronome relativo exerce a função de predicativo do sujeito.",
+          "II - Em 'Este é o colega a quem emprestei a mala', o pronome relativo exerce a função de objeto indireto.",
+          "III - Em 'Este é o artista por quem a tela foi pintada', o pronome relativo exerce a função de agente da passiva."
+        ],
+        prompt: "Quais estão corretas?",
+        options: [
+          { letter: "A", text: "Apenas I." },
+          { letter: "B", text: "Apenas II." },
+          { letter: "C", text: "Apenas I e III." },
+          { letter: "D", text: "Apenas II e III." },
+          { letter: "E", text: "I, II e III." }
+        ],
+        correct: "D",
+        resolution: "<strong>Gabarito: (D)</strong><br><br><strong>Análise de Regência e Relativização:</strong> O foco deste exercício é a identificação das funções sintáticas desempenhadas pelos pronomes relativos dentro das orações subordinadas adjetivas.<ul><li><strong>Afirmação I (Incorreta):</strong> Na oração 'que plantei há meses', o verbo plantar é transitivo direto. O sujeito do verbo é desidencial ('eu', elíptico) e o pronome relativo 'que' retoma o substantivo antecedente 'flor', funcionando como <strong>objeto direto</strong> do verbo plantar ('plantei a flor'), e não como predicativo do sujeito.</li><li><strong>Afirmação II (Correta):</strong> Na oração 'a quem emprestei a mala', o verbo emprestar é transitivo direto e indireto. O objeto direto é 'a mala', enquanto o pronome relativo 'quem', precedido da preposição 'a' exigida pela regência verbal, funciona como <strong>objeto indireto</strong> ('emprestei a mala a ele/ao colega').</li><li><strong>Afirmação III (Correta):</strong> Na oração 'por quem a tela foi pintada', a voz verbal é passiva analítica. O pronome relativo 'quem', introduzido pela preposição 'por', representa o agente que realiza a ação de pintar, desempenhando legitimamente a função sintática de <strong>agente da passiva</strong>.</li></ul>"
+      },
+      {
+        id: 5,
+        question: "Assinale a alternativa INCORRETA quanto à regência verbal, em especial no que tange ao acoplamento de preposições antes de pronomes relativos na norma-padrão:",
+        options: [
+          { letter: "A", text: "O rapaz esqueceu-se do nome do autor que proferiu a palestra." },
+          { letter: "B", text: "O menino não simpatizou com ele durante o encontro de ontem." },
+          { letter: "C", text: "A série a que assistimos durou seis temporadas na televisão." },
+          { letter: "D", text: "Faltou-me completar as últimas questões da prova de língua portuguesa." },
+          { letter: "E", text: "A conclusão que chegamos após os debates é que o plano de contingência é ineficaz." }
+        ],
+        correct: "E",
+        resolution: "<strong>Gabarito: (E)</strong><br><br><strong>Análise de Regência e Relativização:</strong> O item demanda a identificação da frase em que ocorre erro de regência associado ao pronome relativo. Na alternativa (E), o verbo da oração adjetiva é 'chegar'. Na norma-padrão, o verbo chegar, quando indica o alcance de um estado, resultado ou decisão, exige a preposição 'a' ('quem chega, chega <strong>a</strong> algum lugar/resultado'). Logo, a redação correta da frase deve trazer a preposição antes do relativo 'que', resultando em: 'A conclusão <strong>a que</strong> chegamos...'. As demais opções estão em perfeita consonância com a gramática normativa: em (A), o verbo pronominal 'esquecer-se' rege corretamente a preposição 'do' (de + o); em (B), o verbo 'simpatizar' é transitivo indireto e exige a preposição 'com'; em (C), o verbo 'assistir' no sentido de presenciar exige a preposição 'a' ('a que assistimos'); e em (D), o verbo 'faltar' é empregado de forma impessoal e correta."
+      },
+      {
+        id: 6,
+        question: "A respeito de regência nominal e do emprego de pronomes relativos preposicionados, considere as orações abaixo:",
+        items: [
+          "I - O relatório de auditoria é passível de novas versões, de que os diretores já estão cientes.",
+          "II - Aquela servidora pública estava alheia em todas as situações debatidas no conselho.",
+          "III - Em qualquer país civilizado, é de extrema importância que os cidadãos tenham obediência as leis locais."
+        ],
+        prompt: "Quais estão corretas?",
+        options: [
+          { letter: "A", text: "Apenas I." },
+          { letter: "B", text: "Apenas II." },
+          { letter: "C", text: "Apenas III." },
+          { letter: "D", text: "Apenas I e III." },
+          { letter: "E", text: "I, II e III." }
+        ],
+        correct: "A",
+        resolution: "<strong>Gabarito: (A)</strong><br><br><strong>Análise de Regência e Relativização:</strong> Esta questão testa a sensibilidade do candidato para as exigências preposicionais de substantivos e adjetivos em períodos que contêm pronomes relativos.<ul><li><strong>Oração I (Correta):</strong> O adjetivo 'passível' rege a preposição 'de' ('passível de novas versões'). Na sequência, o adjetivo 'cientes' também rege a preposição 'de' ('cientes de alguma coisa'). A preposição 'de' exigida por 'cientes' foi transposta corretamente para antes do pronome relativo 'que' ('de que os diretores já estão cientes').</li><li><strong>Oração II (Incorreta):</strong> O adjetivo 'alheio' rege obrigatoriamente a preposição 'a' ('alheio a algo'). A construção proposta empregou erroneamente a preposição 'em' ('alheia em todas as situações'), gerando um desvio de regência nominal. O correto seria 'alheia <strong>a</strong> todas as situações'.</li><li><strong>Oração III (Incorreta):</strong> O substantivo abstrato 'obediência' exige complemento regido pela preposição 'a' ('obediência a algo'). Como o termo subsequente é o substantivo feminino plural 'leis' precedido de artigo definido feminino 'as', ocorre o fenômeno da crase. A omissão do acento grave indicativo de crase em 'as leis' ('obediência as leis') constitui erro de regência nominal e ortografia. A forma correta seria 'obediência <strong>às</strong> leis'.</li></ul>"
+      },
+      {
+        id: 7,
+        question: "Analise a construção 'Prestando atenção em cores / Que eu não sei o nome' sob a ótica das normas gramaticais de regência nominal e emprego de pronomes relativos e assinale a afirmação correta:",
+        options: [
+          { letter: "A", text: "A construção descrita é perfeitamente aceita pelas gramáticas normativas no processo de relativização culta." },
+          { letter: "B", text: "O trecho configura um desvio de regência nominal, denominado pelos linguistas como 'relativa copiadora', no qual o pronome copia o antecedente." },
+          { letter: "C", text: "A omissão da preposição regida pelo substantivo 'nome' ('saber o nome de algo') caracteriza o fenômeno conhecido como 'relativa cortadora', rejeitado pela norma-padrão." },
+          { letter: "D", text: "Para se adequar à norma culta, a estrutura deveria ser substituída por 'cores que eu não sei o nome delas', forma amplamente prestigiada pelos gramáticos tradicionais." },
+          { letter: "E", text: "O pronome relativo 'que' funciona como adjunto adnominal do substantivo 'nome', dispensando qualquer marca preposicional." }
+        ],
+        correct: "C",
+        resolution: "<strong>Gabarito: (C)</strong><br><br><strong>Análise de Regência e Relativização:</strong> O fragmento poético em análise 'cores / Que eu não sei o nome' apresenta uma estrutura comum na linguagem coloquial, mas proscrita pela gramática tradicional. O nome 'nome' exige a preposição 'de' para estabelecer a relação de posse ('eu não sei o nome <strong>das</strong> cores'). Na vertente culta, a ligação sintática deveria ser feita pelo pronome possessivo relativo cujo ('cores <strong>de cujas</strong> eu não sei o nome', ou de modo mais elegante, 'cores <strong>cujo</strong> nome não sei'). A omissão da preposição 'de' exigida pelo substantivo (apagando-a ou cortando-a na superfície da frase) caracteriza o processo de relativização conhecido scientifically na sociolinguística como <strong>relativa cortadora</strong>. A alternativa (B) está errada porque a 'relativa copiadora' exigiria a presença de um pronome pessoal com função de cópia na oração subordinada, como em 'cores que eu não sei o nome delas'. Esta última também é rejeitada pelas normas tradicionais, invalidando as opções (A) e (D)."
+      },
+      {
+        id: 8,
+        question: "Considerando-se a regência verbo-nominal da língua portuguesa e o emprego de pronomes relativos, assinale a alternativa que preenche, correta e respectivamente, as lacunas de um período elaborado conforme as normas do registro culto:\n\nA metodologia ________ trabalhamos baseia-se em princípios ________ discordamos veementemente, uma vez que as condutas adotadas procedem ________ diretrizes que resultam ________ prejuízo coletivo.",
+        options: [
+          { letter: "A", text: "com a qual – de que – procedem com – resulta em" },
+          { letter: "B", text: "por que – que – procedem a – resulta" },
+          { letter: "C", text: "cujo – que – procedem de – resulta" },
+          { letter: "D", text: "com a qual – de que – procedem de – em" },
+          { letter: "E", text: "pela qual – de que – procedem com – resulta" }
+        ],
+        correct: "D",
+        resolution: "<strong>Gabarito: (D)</strong><br><br><strong>Análise de Regência e Relativização:</strong> Esta questão envolve uma análise multifacetada de regências verbais e nominais aplicadas de forma concomitante.<ul><li>A primeira lacuna refere-se ao verbo 'trabalhamos'. Quem trabalha, trabalha <strong>com</strong> alguma ferramenta ou metodologia. Assim, o pronome relativo composto deve conter a preposição 'com', resultando em <strong>com a qual</strong>.</li><li>A segunda lacuna liga-se ao verbo 'discordamos'. O verbo discordar rege a preposição 'de' ('discordamos <strong>de</strong> alguma coisa'). Portanto, a forma correta que precede o pronome relativo 'que' é a preposição <strong>de</strong>, resultando em <strong>de que</strong>.</li><li>A terceira lacuna avalia o verbo 'procedem'. O verbo proceder, no sentido de ter origem ou derivar, exige a preposição 'de' ('as condutas procedem <strong>de</strong> diretrizes').</li><li>A quarta lacuna é regida pelo verbo 'resultam'. O verbo resultar, no sentido de culminar ou ter como consequência, exige a preposição <strong>em</strong> ('resultam <strong>em</strong> prejuízo'). Apenas a alternativa (D) agrupa de forma exata todos os preenchimentos em conformidade com as normas sintáticas vigentes.</li></ul>"
+      },
+      {
+        id: 9,
+        question: "Considere o seguinte período, prestando atenção nas normas de concordância e de regência verbal aplicadas aos pronomes relativos 'que' e 'quem':\n\n\"Fui eu que assisti ao debate ontem de manhã, mas fomos nós quem pagou aos fornecedores no período da tarde.\"",
+        items: [
+          "I - A concordância verbal da primeira oração está correta, visto que, com o pronome relativo 'que', o verbo deve concordar com o antecedente do pronome.",
+          "II - O emprego da preposição 'a' em 'ao debate' justifica-se pela regência do verbo 'assistir', transitivo indireto na acepção de ver.",
+          "III - Na segunda oração, a concordância verbal da forma 'pagou' está correta, pois, com o sujeito 'quem', admite-se a concordância na terceira pessoa do singular, e a regência de 'pagar' exige objeto indireto preposicionado quando se refere a pessoas."
+        ],
+        prompt: "Quais estão corretas?",
+        options: [
+          { letter: "A", text: "Apenas I." },
+          { letter: "B", text: "Apenas II." },
+          { letter: "C", text: "Apenas I e II." },
+          { letter: "D", text: "Apenas II e III." },
+          { letter: "E", text: "I, II e III." }
+        ],
+        correct: "E",
+        resolution: "<strong>Gabarito: (E)</strong><br><br><strong>Análise de Regência e Relativização:</strong> Esta questão abrange regras complexas de concordância e regência verbal correlacionadas aos pronomes relativos de papel de sujeito.<ul><li><strong>Afirmação I (Correta):</strong> Quando o sujeito da oração é o pronome relativo 'que', o verbo concorda obrigatoriamente em número e pessoa com o antecedente do pronome. No caso de 'Fui eu que assisti', o antecedente é o pronome pessoal de primeira pessoa do singular 'eu', o que exige a flexão do verbo na primeira pessoa do singular ('assisti').</li><li><strong>Afirmação II (Correta):</strong> O verbo 'assistir', empregado com o sentido de observar, ver ou presenciar, rege complemento indireto introduzido pela preposição 'a'. Portanto, a junção da preposição 'a' com o artigo masculino 'o' resulta na forma craseada/combinada 'ao', legitimando 'assisti ao debate'.</li><li><strong>Afirmação III (Correta):</strong> Quando o sujeito é o pronome relativo 'quem', o verbo pode concordar com o antecedente ou ficar, de maneira preferencial, na terceira pessoa do singular. Na estrutura 'fomos nós quem pagou', o verbo 'pagar' foi flexionado na terceira pessoa do singular ('pagou'), o que é plenamente aceito. No que se refere à regência, o verbo 'pagar' é transitivo direto para coisas e transitivo indireto para pessoas (rege a preposição 'a'). Como 'fornecedores' refere-se a pessoas, o complemento exige a preposição 'a' ('pagou <strong>aos</strong> fornecedores'), validando a sintaxe da frase.</li></ul>"
+      },
+      {
+        id: 10,
+        question: "Assinale a alternativa que atende integralmente à norma-padrão de regência (verbal e nominal) e ao emprego de pronomes relativos, evitando o uso inadequado de preposições:",
+        options: [
+          { letter: "A", text: "Os técnicos elaboraram rótulos para caracterizar aqueles a quem menosprezam, a quem discordam." },
+          { letter: "B", text: "Os diretores fizeram menção expressa àqueles a quem não estimam, de quem divergem." },
+          { letter: "C", text: "A banca de avaliadores catalogou aqueles de quem não toleram, a quem não combinam." },
+          { letter: "D", text: "O comitê de ética tendeu a tipificar aqueles de quem não suportam, a quem se opõem." },
+          { letter: "E", text: "O departamento jurídico identificou as pessoas de quem desconfiam e a quem se dirigem durante as investigações." }
+        ],
+        correct: "E",
+        resolution: "<strong>Gabarito: (E)</strong><br><br><strong>Análise de Regência e Relativização:</strong> A alternativa (E) representa a única frase em que todos os verbos e suas preposições correlatas foram corretamente empregados em relação aos pronomes relativos. O verbo 'desconfiar' exige a preposição 'de' ('quem desconfia, desconfia <strong>de</strong> alguém'). A preposição foi devidamente deslocada para antes do pronome relativo, resultando na estrutura 'de quem desconfiam'. Na sequência, o verbo 'dirigir-se' exige a preposição 'a' ('quem se dirige, dirige-se <strong>a</strong> alguém'), o que gerou com precisão a estrutura coordenada 'a quem se dirigem'.<br><br><strong>Análise das incorreções das demais alternativas:</strong><ul><li>Na alternativa (A), o verbo 'menosprezar' é transitivo direto (não admite preposição 'a'), enquanto o verbo 'discordar' exige a preposição 'de' (gerando 'de quem discordam'), inviabilizando a estrutura coordenada proposta.</li><li>Na alternativa (B), o verbo 'estimar' é transitivo direto, o que torna incorreto o uso da preposição 'a' ('aqueles a quem não estimam' deveria ser 'aqueles que não estimam').</li><li>Na alternativa (C), o verbo 'tolerar' é transitivo direto, logo repele a preposição 'de' ('aqueles de quem não toleram' deveria ser 'aqueles que não toleram'). Além disso, o verbo 'combinar', na acepção de harmonizar-se com alguém, exige a preposição 'com' ('com quem não combinam').</li><li>Na alternativa (D), o verbo 'suportar' é transitivo direto, rejeitando a preposição 'de' que antecede o pronome relativo ('aqueles de quem não suportam' deveria ser 'aqueles que não suportam').</li></ul>"
+      }
+    ];
+
+    const userAnswers = {};
+
+    function renderQuiz() {
+      const wrapper = document.getElementById("questions-wrapper");
+      wrapper.innerHTML = "";
+
+      quizData.forEach((item) => {
+        const card = document.createElement("div");
+        card.className = "question-card unanswered";
+        card.id = `q-card-${item.id}`;
+
+        let itemsHtml = "";
+        if (item.items && item.items.length > 0) {
+          itemsHtml = `<div class="question-items">` + item.items.map(i => `<p>${i}</p>`).join("") + `</div>`;
+        }
+
+        let promptHtml = "";
+        if (item.prompt) {
+          promptHtml = `<div class="question-prompt">${item.prompt}</div>`;
+        }
+
+        let optionsHtml = item.options.map((opt) => `
+          <label class="option-item" id="opt-label-${item.id}-${opt.letter}">
+            <input type="radio" name="q-${item.id}" value="${opt.letter}" onchange="selectOption(${item.id}, '${opt.letter}')">
+            <span><strong>(${opt.letter})</strong> ${opt.text}</span>
+          </label>
+        `).join("");
+
+        card.innerHTML = `
+          <div class="question-number">Questão ${item.id}</div>
+          <div class="question-text">${item.question}</div>
+          ${itemsHtml}
+          ${promptHtml}
+          <div class="options-container">${optionsHtml}</div>
+          
+          <div class="resolution-box" id="resolution-${item.id}">
+            <div class="resolution-title">Resolução Comentada</div>
+            <div>${item.resolution}</div>
+          </div>
+        `;
+
+        wrapper.appendChild(card);
+      });
+    }
+
+    function selectOption(questionId, optionLetter) {
+      userAnswers[questionId] = optionLetter;
+
+      const card = document.getElementById(`q-card-${questionId}`);
+      card.classList.remove("unanswered");
+
+      const labels = card.querySelectorAll(".option-item");
+      labels.forEach(lbl => lbl.classList.remove("selected"));
+
+      const selectedLbl = document.getElementById(`opt-label-${questionId}-${optionLetter}`);
+      if (selectedLbl) selectedLbl.classList.add("selected");
+
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const answeredCount = Object.keys(userAnswers).length;
+      const total = quizData.length;
+      
+      document.getElementById("progress-text").innerHTML = `Respondidas: <strong>${answeredCount} / ${total}</strong>`;
+      document.getElementById("progress-bar").style.width = `${(answeredCount / total) * 100}%`;
+
+      if (answeredCount === total) {
+        document.getElementById("alert-banner").style.display = "none";
+      }
+    }
+
+    function finishQuiz() {
+      const total = quizData.length;
+      const answeredCount = Object.keys(userAnswers).length;
+
+      if (answeredCount < total) {
+        const alertBox = document.getElementById("alert-banner");
+        alertBox.style.display = "block";
+        alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      let score = 0;
+
+      quizData.forEach((q) => {
+        const chosen = userAnswers[q.id];
+        const card = document.getElementById(`q-card-${q.id}`);
+        card.classList.add("evaluated");
+
+        if (chosen === q.correct) {
+          score++;
+        }
+
+        // Apply visual highlights to options
+        q.options.forEach((opt) => {
+          const label = document.getElementById(`opt-label-${q.id}-${opt.letter}`);
+          const input = label.querySelector("input");
+          input.disabled = true;
+
+          if (opt.letter === q.correct) {
+            label.classList.add("correct-choice");
+          } else if (opt.letter === chosen && chosen !== q.correct) {
+            label.classList.add("wrong-choice");
+          }
+        });
+
+        // Show inline resolution box
+        const resBox = document.getElementById(`resolution-${q.id}`);
+        resBox.style.display = "block";
+      });
+
+      // Update Summary Header
+      document.getElementById("score-value").innerText = `${score} / ${total}`;
+      const pct = (score / total) * 100;
+      
+      let msg = "";
+      if (pct === 100) msg = "Excelente! Você teve 100% de aproveitamento e domina as regras de regência da banca FAURGS.";
+      else if (pct >= 70) msg = "Ótimo resultado! Você demonstrou forte preparo sintático.";
+      else if (pct >= 50) msg = "Bom resultado. Aproveite para revisar as resoluções abaixo e sanar dúvidas.";
+      else msg = "Recomendamos atenta leitura das justificativas abaixo para fixar a regência dos pronomes relativos.";
+
+      document.getElementById("score-msg").innerText = msg;
+
+      // Reveal summary UI components
+      document.getElementById("score-summary").style.display = "block";
+      document.getElementById("summary-table").style.display = "block";
+      document.getElementById("finish-btn").style.display = "none";
+      document.getElementById("restart-btn").style.display = "inline-block";
+
+      // Smooth scroll to top score box
+      document.getElementById("score-summary").scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function restartQuiz() {
+      for (let key in userAnswers) delete userAnswers[key];
+
+      document.getElementById("quiz-form").reset();
+      document.getElementById("score-summary").style.display = "none";
+      document.getElementById("summary-table").style.display = "none";
+      document.getElementById("alert-banner").style.display = "none";
+      document.getElementById("finish-btn").style.display = "inline-block";
+      document.getElementById("restart-btn").style.display = "none";
+
+      renderQuiz();
+      updateProgress();
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Initialize application on load
+    window.addEventListener("DOMContentLoaded", () => {
+      renderQuiz();
+      updateProgress();
+    });
+  </script>
+</body>
+</html>
